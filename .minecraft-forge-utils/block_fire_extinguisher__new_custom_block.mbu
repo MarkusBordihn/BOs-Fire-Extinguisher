@@ -1,0 +1,35 @@
+{
+  "attributes": {
+    "soundType": "SoundType.METAL"
+  },
+  "bedrock": {
+    "formatVersion": "1.16.1"
+  },
+  "blockName": "new_custom_block",
+  "component": "block",
+  "configVersion": "1.0.0",
+  "description": "",
+  "events": {},
+  "forge": {
+    "className": "NewCustomBlock"
+  },
+  "icon": "new_custom_block",
+  "id": "fire_extinguisher:new_custom_block",
+  "misc": {},
+  "name": "New custom block",
+  "namespace": "fire_extinguisher",
+  "placeholder": {
+    "BlockClassName": "NewCustomBlock",
+    "BLOCKNAME": "NEWCUSTOMBLOCK",
+    "BLOCK_NAME": "NEW_CUSTOM_BLOCK",
+    "BlockName": "Newcustomblock",
+    "blockName": "newcustomblock",
+    "block_name": "new_custom_block",
+    "blockname": "newcustomblock",
+    "CreativeTab": "TAB_MISC",
+    "SoundType": "SoundType.METAL"
+  },
+  "template": "",
+  "type": "custom",
+  "variation": ""
+}

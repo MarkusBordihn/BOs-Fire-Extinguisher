@@ -1,0 +1,10 @@
+{
+  "block.fire_extinguisher.fire_extinguisher": "Fire Extinguisher",
+
+  "block.placeholder.text": "Template placeholder do not remove!",
+  "item.placeholder.text": "Template placeholder do not remove!",
+
+  "text.fire_extinguisher.fire_extinguisher_description": "The fire exstinguisher is able to remove fire from smaller areas and can freeze mobs for a small amount of time.",
+  "text.fire_extinguisher.fire_extinguisher_use": "► To use the fire extinguisher target a block which is on (or next to the) fire and press the right mouse button.",
+  "text.fire_extinguisher.fire_extinguisher_place": "► To place the fire extinguisher, sneak and press the right mouse button."
+}

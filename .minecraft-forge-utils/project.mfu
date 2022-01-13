@@ -1,0 +1,45 @@
+{
+  "author": "Markus Bordihn",
+  "bedrock": {
+    "behaviorPack": {
+      "description": "Behavior Pack for New cool items"
+    },
+    "resourcePack": {
+      "description": "Resource Pack for New cool items"
+    },
+    "skinPack": {
+      "description": "Skin Pack for New cool skins"
+    },
+    "folderName": "New_cool_items"
+  },
+  "component": "project",
+  "configVersion": "0.0.1",
+  "forge": {
+    "assetsPath": "src\\main\\resources\\assets\\fire_extinguisher",
+    "className": "FireExtinguisher",
+    "classPath": "src\\main\\java\\de\\markusbordihn\\fireextinguisher",
+    "dataPath": "src\\main\\resources\\data",
+    "description": "This mod provides a fire exstinguisher together with a wand holder.",
+    "namespace": "de.markusbordihn.fireextinguisher",
+    "templatePath": "node_modules\\minecraft-forge-utils\\third_party\\minecraft-forge-template-1.18.1",
+    "templatesPath": "node_modules\\minecraft-forge-utils\\third_party\\minecraft-forge-template-1.18.1\\templates",
+    "vendorName": "markusbordihn"
+  },
+  "gameType": "forge",
+  "id": "fire_extinguisher",
+  "license": "MIT",
+  "minEngineVersion": "1.18.1",
+  "misc": {},
+  "name": "Fire Extinguisher",
+  "placeholder": {
+    "Author": "Markus Bordihn",
+    "ModId": "fire_extinguisher",
+    "ModName": "Fire Extinguisher",
+    "assetsPath": "src\\main\\resources\\assets\\fire_extinguisher",
+    "classPath": "src\\main\\java\\de\\markusbordihn\\fireextinguisher",
+    "dataPath": "src\\main\\resources\\data",
+    "packageNamespace": "de.markusbordihn.fireextinguisher"
+  },
+  "type": "unknown",
+  "version": "0.0.0"
+}

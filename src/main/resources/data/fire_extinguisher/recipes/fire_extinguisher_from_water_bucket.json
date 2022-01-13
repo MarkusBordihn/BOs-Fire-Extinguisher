@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "-O#",
+    "R# ",
+    "#W "],
+  "key": {
+    "#": {
+      "item": "minecraft:iron_ingot"
+    },
+    "W": {
+      "item": "minecraft:water_bucket"
+    },
+    "O": {
+      "item": "minecraft:gold_ingot"
+    },
+    "-": {
+      "item": "minecraft:lever"
+    },
+    "R": {
+      "item": "minecraft:red_dye"
+    }
+  },
+  "result": {
+    "item": "fire_extinguisher:fire_extinguisher"
+  }
+}
