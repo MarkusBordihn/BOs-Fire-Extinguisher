@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "fire_extinguisher:fire_extinguisher_sign_left"
+    }
+  ],
+  "result": {
+    "item": "fire_extinguisher:fire_extinguisher_sign_right",
+    "count": 1
+  }
+}

@@ -33,15 +33,16 @@ import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class FireExtinguisherBlock extends Block {
-
-  public static final String NAME = "fire_extinguisher";
+public class FireExtinguisherSignPosition extends Block {
 
   public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 
-  protected static final VoxelShape SHAPE = Block.box(5.5D, 0D, 5.5D, 10.5D, 9D, 10.5D);
+  protected static final VoxelShape SHAPE_NORTH_AABB = Block.box(0D, 4D, 14.75D, 16D, 12D, 16D);
+  protected static final VoxelShape SHAPE_EAST_AABB = Block.box(0D, 4D, 0D, 1.25D, 12D, 16D);
+  protected static final VoxelShape SHAPE_SOUTH_AABB = Block.box(0D, 4D, 0D, 16D, 12D, 1.25D);
+  protected static final VoxelShape SHAPE_WEST_AABB = Block.box(14.75D, 4D, 0D, 16D, 12D, 16D);
 
-  public FireExtinguisherBlock(Properties properties) {
+  public FireExtinguisherSignPosition(Properties properties) {
     super(properties);
     this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
   }
@@ -49,7 +50,19 @@ public class FireExtinguisherBlock extends Block {
   @Override
   public VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos,
       CollisionContext collisionContext) {
-    return SHAPE;
+    Direction facing = blockState.getValue(FireExtinguisherSignPosition.FACING);
+    switch (facing) {
+      case NORTH:
+        return SHAPE_NORTH_AABB;
+      case EAST:
+        return SHAPE_EAST_AABB;
+      case SOUTH:
+        return SHAPE_SOUTH_AABB;
+      case WEST:
+        return SHAPE_WEST_AABB;
+      default:
+        return SHAPE_NORTH_AABB;
+    }
   }
 
   @Override

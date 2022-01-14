@@ -1,0 +1,35 @@
+{
+  "attributes": {
+    "soundType": "SoundType.METAL"
+  },
+  "bedrock": {
+    "formatVersion": "1.16.1"
+  },
+  "blockName": "fire_extinguisher_sign",
+  "component": "block",
+  "configVersion": "1.0.0",
+  "description": "",
+  "events": {},
+  "forge": {
+    "className": "FireExtinguisherSign"
+  },
+  "icon": "fire_extinguisher_sign",
+  "id": "fire_extinguisher:fire_extinguisher_sign",
+  "misc": {},
+  "name": "Fire Extinguisher Sign",
+  "namespace": "fire_extinguisher",
+  "placeholder": {
+    "BlockClassName": "FireExtinguisherSign",
+    "BLOCKNAME": "FIREEXTINGUISHERSIGN",
+    "BLOCK_NAME": "FIRE_EXTINGUISHER_SIGN",
+    "BlockName": "FireExtinguisherSign",
+    "blockName": "fireExtinguisherSign",
+    "block_name": "fire_extinguisher_sign",
+    "blockname": "fireextinguishersign",
+    "CreativeTab": "TAB_MISC",
+    "SoundType": "SoundType.METAL"
+  },
+  "template": "",
+  "type": "custom",
+  "variation": ""
+}

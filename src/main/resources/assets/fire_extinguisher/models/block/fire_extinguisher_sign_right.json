@@ -1,0 +1,6 @@
+{
+  "parent": "fire_extinguisher:block/template/fire_extinguisher_sign",
+  "textures": {
+    "sign": "fire_extinguisher:block/fire_extinguisher_sign_right"
+  }
+}

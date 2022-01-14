@@ -1,6 +1,10 @@
 {
   "block.fire_extinguisher.fire_extinguisher": "Fire Extinguisher",
 
+  "block.fire_extinguisher.fire_extinguisher_sign": "Fire Extinguisher Sign",
+  "block.fire_extinguisher.fire_extinguisher_sign_left": "Fire Extinguisher Sign (left)",
+  "block.fire_extinguisher.fire_extinguisher_sign_right": "Fire Extinguisher Sign (right)",
+
   "block.placeholder.text": "Template placeholder do not remove!",
   "item.placeholder.text": "Template placeholder do not remove!",
 
