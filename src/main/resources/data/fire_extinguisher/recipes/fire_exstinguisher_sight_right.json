@@ -10,6 +10,7 @@
     }
   },
   "result": {
-    "item": "fire_extinguisher:fire_extinguisher_sign_right"
+    "item": "fire_extinguisher:fire_extinguisher_sign_right",
+    "count": 5
   }
 }
