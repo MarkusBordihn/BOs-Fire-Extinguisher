@@ -63,7 +63,7 @@ public class FireExtinguisherItem extends BlockItem implements Vanishable {
   private static final double Y_SHIFT = 1.6;
   private static final double Z_SHIFT = 0.0;
   private static final int PARTICLE_FRAMES = 8;
-  private static final int FIRE_STOP_RADIUS = 1;
+  private static final int FIRE_STOP_RADIUS = 2;
 
   private static final int ATTACK_EFFECT_DURATION = 200;
 
@@ -122,7 +122,7 @@ public class FireExtinguisherItem extends BlockItem implements Vanishable {
       }
     }
     if (!level.isClientSide && hasStoppedFire) {
-      itemStack.hurtAndBreak(1, player, (serverPlayer) -> {
+      itemStack.hurtAndBreak(1, player, serverPlayer -> {
         serverPlayer.broadcastBreakEvent(hand);
       });
     }
@@ -185,7 +185,7 @@ public class FireExtinguisherItem extends BlockItem implements Vanishable {
       livingEntity.hurt(DamageSource.MAGIC, attackDamage);
 
       // Damage item
-      itemStack.hurtAndBreak(1, player, (serverPlayer) -> {
+      itemStack.hurtAndBreak(1, player, serverPlayer -> {
         serverPlayer.broadcastBreakEvent(hand);
       });
     }
@@ -195,6 +195,11 @@ public class FireExtinguisherItem extends BlockItem implements Vanishable {
   @Override
   public int getUseDuration(ItemStack itemStack) {
     return 10;
+  }
+
+  @Override
+  public boolean isFireResistant() {
+    return true;
   }
 
   @Override
