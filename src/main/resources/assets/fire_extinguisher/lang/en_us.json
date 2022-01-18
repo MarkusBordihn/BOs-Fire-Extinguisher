@@ -5,6 +5,10 @@
   "block.fire_extinguisher.fire_extinguisher_sign_left": "Fire Extinguisher Sign (left)",
   "block.fire_extinguisher.fire_extinguisher_sign_right": "Fire Extinguisher Sign (right)",
 
+  "block.fire_extinguisher.exit_sign": "Exit Sign",
+  "block.fire_extinguisher.exit_sign_left": "Exit Sign (left)",
+  "block.fire_extinguisher.exit_sign_right": "Exit Sign (right)",
+
   "block.placeholder.text": "Template placeholder do not remove!",
 
   "item.fire_extinguisher.fire_axe": "Fire Axe",
@@ -19,5 +23,7 @@
   "text.fire_extinguisher.fire_axe_description": "The fire axe is able to remove fire within 1-2 blocks around a destroyed block.",
   "text.fire_extinguisher.fire_axe_use": "► To use the fire axe target a block which is on fire and destroy the block.",
 
-  "text.fire_extinguisher.fire_helmet_description": "The fire helmet protects you a little from fire, but your are not fire proofed."
+  "text.fire_extinguisher.fire_helmet_description": "The fire helmet protects you a little from fire, but your are not fire proofed.",
+
+  "itemGroup.fire_extinguisher": "Fire Extinguisher and more"
 }

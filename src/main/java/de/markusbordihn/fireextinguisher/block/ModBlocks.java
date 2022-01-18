@@ -42,22 +42,30 @@ public class ModBlocks {
 
   @TemplateEntryPoint("Register Blocks")
 
-  // Signs
-  public static final RegistryObject<Block> FIRE_EXTINGUISHER_SIGN_LEFT =
-      BLOCKS.register("fire_extinguisher_sign_left",
-          () -> new FireExtinguisherSignPosition(
-              BlockBehaviour.Properties.of(Material.STONE).requiresCorrectToolForDrops()
-                  .strength(3.0F, 6.0F).lightLevel(blockState -> 10).sound(SoundType.GLASS)));
-  public static final RegistryObject<Block> FIRE_EXTINGUISHER_SIGN_RIGHT =
-      BLOCKS.register("fire_extinguisher_sign_right",
-          () -> new FireExtinguisherSignPosition(
-              BlockBehaviour.Properties.of(Material.STONE).requiresCorrectToolForDrops()
-                  .strength(3.0F, 6.0F).lightLevel(blockState -> 10).sound(SoundType.GLASS)));
+  // Exit Signs
+  public static final RegistryObject<Block> EXIT_SIGN =
+      BLOCKS.register(ExitSign.NAME, () -> new ExitSign(BlockBehaviour.Properties.of(Material.STONE)
+          .requiresCorrectToolForDrops().strength(3.0F, 6.0F).sound(SoundType.METAL)));
+  public static final RegistryObject<Block> EXIT_SIGN_LEFT = BLOCKS.register(
+      ExitSign.NAME + "_left", () -> new ExitSign(BlockBehaviour.Properties.of(Material.STONE)
+          .requiresCorrectToolForDrops().strength(3.0F, 6.0F).sound(SoundType.METAL)));
+  public static final RegistryObject<Block> EXIT_SIGN_RIGHT = BLOCKS.register(
+      ExitSign.NAME + "_right", () -> new ExitSign(BlockBehaviour.Properties.of(Material.STONE)
+          .requiresCorrectToolForDrops().strength(3.0F, 6.0F).sound(SoundType.METAL)));
+
+  // Fire Extinguisher Signs
   public static final RegistryObject<Block> FIRE_EXTINGUISHER_SIGN =
       BLOCKS.register(FireExtinguisherSign.NAME,
-          () -> new FireExtinguisherSign(
-              BlockBehaviour.Properties.of(Material.STONE).requiresCorrectToolForDrops()
-                  .strength(3.0F, 6.0F).lightLevel(blockState -> 10).sound(SoundType.GLASS)));
+          () -> new FireExtinguisherSign(BlockBehaviour.Properties.of(Material.STONE)
+              .requiresCorrectToolForDrops().strength(3.0F, 6.0F).sound(SoundType.GLASS)));
+  public static final RegistryObject<Block> FIRE_EXTINGUISHER_SIGN_LEFT =
+      BLOCKS.register(FireExtinguisherSign.NAME + "_left",
+          () -> new FireExtinguisherSignPosition(BlockBehaviour.Properties.of(Material.STONE)
+              .requiresCorrectToolForDrops().strength(3.0F, 6.0F).sound(SoundType.GLASS)));
+  public static final RegistryObject<Block> FIRE_EXTINGUISHER_SIGN_RIGHT =
+      BLOCKS.register(FireExtinguisherSign.NAME + "_right",
+          () -> new FireExtinguisherSignPosition(BlockBehaviour.Properties.of(Material.STONE)
+              .requiresCorrectToolForDrops().strength(3.0F, 6.0F).sound(SoundType.GLASS)));
 
   // Fire Extinguisher
   public static final RegistryObject<Block> FIRE_EXTINGUISHER = BLOCKS.register(

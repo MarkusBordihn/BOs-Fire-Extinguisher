@@ -45,7 +45,7 @@ public class FireExtinguisherSign extends Block {
   protected static final VoxelShape SHAPE_WEST_AABB = Block.box(14.75D, 0D, 0D, 16D, 16D, 16D);
 
   public FireExtinguisherSign(Properties properties) {
-    super(properties);
+    super(properties.lightLevel(blockState -> 10));
     this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
   }
 

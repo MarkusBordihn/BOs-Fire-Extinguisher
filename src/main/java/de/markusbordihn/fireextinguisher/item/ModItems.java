@@ -21,7 +21,6 @@ package de.markusbordihn.fireextinguisher.item;
 
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Tiers;
 
@@ -30,8 +29,10 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import de.markusbordihn.fireextinguisher.Constants;
+import de.markusbordihn.fireextinguisher.block.ExitSign;
 import de.markusbordihn.fireextinguisher.block.FireExtinguisherSign;
 import de.markusbordihn.fireextinguisher.block.ModBlocks;
+import de.markusbordihn.fireextinguisher.tabs.FireExtinguisherTab;
 import de.markusbordihn.fireextinguisher.Annotations.TemplateEntryPoint;
 
 public class ModItems {
@@ -44,27 +45,46 @@ public class ModItems {
       DeferredRegister.create(ForgeRegistries.ITEMS, Constants.MOD_ID);
 
   @TemplateEntryPoint("Register Items")
+
+  // Fire fight weapons
   public static final RegistryObject<Item> FIRE_AXE =
       ITEMS.register(FireAxeItem.NAME, () -> new FireAxeItem(Tiers.IRON, 6.0F, -3.1F,
-          new Item.Properties().tab(CreativeModeTab.TAB_MISC)));
-  public static final RegistryObject<Item> FIRE_HELMET =
-      ITEMS.register(FireHelmetItem.NAME, () -> new FireHelmetItem(ModArmorMaterials.IRON,
-          EquipmentSlot.HEAD, new Item.Properties().tab(CreativeModeTab.TAB_COMBAT)));
+          new Item.Properties().tab(FireExtinguisherTab.TAB_FIRE_EXTINGUISHER)));
+
+  // Fire fight armor
+  public static final RegistryObject<Item> FIRE_HELMET = ITEMS.register(FireHelmetItem.NAME,
+      () -> new FireHelmetItem(ModArmorMaterials.IRON, EquipmentSlot.HEAD,
+          new Item.Properties().tab(FireExtinguisherTab.TAB_FIRE_EXTINGUISHER)));
 
   @TemplateEntryPoint("Register Block Items")
-  public static final RegistryObject<Item> FIRE_EXTINGUISHER_SIGN_LEFT =
-      ITEMS.register("fire_extinguisher_sign_left",
-          () -> new BlockItem(ModBlocks.FIRE_EXTINGUISHER_SIGN_LEFT.get(),
-              new Item.Properties().tab(CreativeModeTab.TAB_BUILDING_BLOCKS)));
-  public static final RegistryObject<Item> FIRE_EXTINGUISHER_SIGN_RIGHT =
-      ITEMS.register("fire_extinguisher_sign_right",
-          () -> new BlockItem(ModBlocks.FIRE_EXTINGUISHER_SIGN_RIGHT.get(),
-              new Item.Properties().tab(CreativeModeTab.TAB_BUILDING_BLOCKS)));
+
+  // Exit Signs
+  public static final RegistryObject<Item> EXIT_SIGN =
+      ITEMS.register(ExitSign.NAME, () -> new BlockItem(ModBlocks.EXIT_SIGN.get(),
+          new Item.Properties().tab(FireExtinguisherTab.TAB_FIRE_EXTINGUISHER)));
+  public static final RegistryObject<Item> EXIT_SIGN_LEFT =
+      ITEMS.register(ExitSign.NAME + "_left", () -> new BlockItem(ModBlocks.EXIT_SIGN_LEFT.get(),
+          new Item.Properties().tab(FireExtinguisherTab.TAB_FIRE_EXTINGUISHER)));
+  public static final RegistryObject<Item> EXIT_SIGN_RIGHT =
+      ITEMS.register(ExitSign.NAME + "_right", () -> new BlockItem(ModBlocks.EXIT_SIGN_RIGHT.get(),
+          new Item.Properties().tab(FireExtinguisherTab.TAB_FIRE_EXTINGUISHER)));
+
+  // Fire Extinguisher Signs
   public static final RegistryObject<Item> FIRE_EXTINGUISHER_SIGN = ITEMS.register(
       FireExtinguisherSign.NAME, () -> new BlockItem(ModBlocks.FIRE_EXTINGUISHER_SIGN.get(),
-          new Item.Properties().tab(CreativeModeTab.TAB_BUILDING_BLOCKS)));
+          new Item.Properties().tab(FireExtinguisherTab.TAB_FIRE_EXTINGUISHER)));
+  public static final RegistryObject<Item> FIRE_EXTINGUISHER_SIGN_LEFT =
+      ITEMS.register(FireExtinguisherSign.NAME + "_left",
+          () -> new BlockItem(ModBlocks.FIRE_EXTINGUISHER_SIGN_LEFT.get(),
+              new Item.Properties().tab(FireExtinguisherTab.TAB_FIRE_EXTINGUISHER)));
+  public static final RegistryObject<Item> FIRE_EXTINGUISHER_SIGN_RIGHT =
+      ITEMS.register(FireExtinguisherSign.NAME + "_right",
+          () -> new BlockItem(ModBlocks.FIRE_EXTINGUISHER_SIGN_RIGHT.get(),
+              new Item.Properties().tab(FireExtinguisherTab.TAB_FIRE_EXTINGUISHER)));
+
+  // Fire Extinguisher
   public static final RegistryObject<Item> FIRE_EXTINGUISHER =
       ITEMS.register(FireExtinguisherItem.NAME,
           () -> new FireExtinguisherItem(ModBlocks.FIRE_EXTINGUISHER.get(), new Item.Properties()
-              .stacksTo(1).durability(128).tab(CreativeModeTab.TAB_BUILDING_BLOCKS)));
+              .stacksTo(1).durability(128).tab(FireExtinguisherTab.TAB_FIRE_EXTINGUISHER)));
 }
