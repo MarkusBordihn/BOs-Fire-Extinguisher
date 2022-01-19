@@ -14,6 +14,7 @@ A simple fire extinguisher mod which includes items to fight the fire.
 - Fire protecting Armor
 - Fire Extinguisher Location Signs
 - Exit Location Signs
+- Configuration for most settings
 
 ## Fire Extinguisher
 

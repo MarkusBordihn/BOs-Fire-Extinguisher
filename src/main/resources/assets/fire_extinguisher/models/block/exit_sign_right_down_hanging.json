@@ -1,0 +1,6 @@
+{
+  "parent": "fire_extinguisher:block/template/exit_sign_hanging",
+  "textures": {
+    "sign": "fire_extinguisher:block/exit_sign_right_down"
+  }
+}

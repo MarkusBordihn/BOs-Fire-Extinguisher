@@ -42,7 +42,15 @@ public class ClientSetup {
       ItemBlockRenderTypes.setRenderLayer(ModBlocks.EXIT_SIGN.get(), RenderType.cutoutMipped());
       ItemBlockRenderTypes.setRenderLayer(ModBlocks.EXIT_SIGN_LEFT.get(),
           RenderType.cutoutMipped());
+      ItemBlockRenderTypes.setRenderLayer(ModBlocks.EXIT_SIGN_LEFT_DOWN.get(),
+          RenderType.cutoutMipped());
+      ItemBlockRenderTypes.setRenderLayer(ModBlocks.EXIT_SIGN_LEFT_UP.get(),
+          RenderType.cutoutMipped());
       ItemBlockRenderTypes.setRenderLayer(ModBlocks.EXIT_SIGN_RIGHT.get(),
+          RenderType.cutoutMipped());
+      ItemBlockRenderTypes.setRenderLayer(ModBlocks.EXIT_SIGN_RIGHT_DOWN.get(),
+          RenderType.cutoutMipped());
+      ItemBlockRenderTypes.setRenderLayer(ModBlocks.EXIT_SIGN_RIGHT_UP.get(),
           RenderType.cutoutMipped());
     });
   }

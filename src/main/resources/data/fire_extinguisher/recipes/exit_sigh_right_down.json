@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [" G ", " # ", "  E"],
+  "key": {
+    "G": {
+      "item": "minecraft:green_dye"
+    },
+    "E": {
+      "tag": "minecraft:doors"
+    },
+    "#": {
+      "tag": "minecraft:signs"
+    }
+  },
+  "result": {
+    "item": "fire_extinguisher:exit_sign_right_down",
+    "count": 3
+  }
+}

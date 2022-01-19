@@ -1,0 +1,54 @@
+{
+  "variants": {
+    "face=floor,facing=north": {
+      "model": "fire_extinguisher:block/exit_sign_right_down_floor",
+      "y": 0
+    },
+    "face=floor,facing=east": {
+      "model": "fire_extinguisher:block/exit_sign_right_down_floor",
+      "y": 90
+    },
+    "face=floor,facing=south": {
+      "model": "fire_extinguisher:block/exit_sign_right_down_floor",
+      "y": 180
+    },
+    "face=floor,facing=west": {
+      "model": "fire_extinguisher:block/exit_sign_right_down_floor",
+      "y": 270
+    },
+
+    "face=wall,facing=north": {
+      "model": "fire_extinguisher:block/exit_sign_right_down",
+      "y": 0
+    },
+    "face=wall,facing=east": {
+      "model": "fire_extinguisher:block/exit_sign_right_down",
+      "y": 90
+    },
+    "face=wall,facing=south": {
+      "model": "fire_extinguisher:block/exit_sign_right_down",
+      "y": 180
+    },
+    "face=wall,facing=west": {
+      "model": "fire_extinguisher:block/exit_sign_right_down",
+      "y": 270
+    },
+
+    "face=ceiling,facing=north": {
+      "model": "fire_extinguisher:block/exit_sign_right_down_hanging",
+      "y": 0
+    },
+    "face=ceiling,facing=east": {
+      "model": "fire_extinguisher:block/exit_sign_right_down_hanging",
+      "y": 90
+    },
+    "face=ceiling,facing=south": {
+      "model": "fire_extinguisher:block/exit_sign_right_down_hanging",
+      "y": 180
+    },
+    "face=ceiling,facing=west": {
+      "model": "fire_extinguisher:block/exit_sign_right_down_hanging",
+      "y": 270
+    }
+  }
+}

@@ -7,7 +7,11 @@
 
   "block.fire_extinguisher.exit_sign": "Exit Sign",
   "block.fire_extinguisher.exit_sign_left": "Exit Sign (left)",
+  "block.fire_extinguisher.exit_sign_left_down": "Exit Sign (left down)",
+  "block.fire_extinguisher.exit_sign_left_up": "Exit Sign (left up)",
   "block.fire_extinguisher.exit_sign_right": "Exit Sign (right)",
+  "block.fire_extinguisher.exit_sign_right_down": "Exit Sign (right down)",
+  "block.fire_extinguisher.exit_sign_right_up": "Exit Sign (right up)",
 
   "block.placeholder.text": "Template placeholder do not remove!",
 
@@ -16,14 +20,15 @@
   "item.fire_extinguisher.fire_helmet": "Fire Helmet",
   "item.placeholder.text": "Template placeholder do not remove!",
 
-  "text.fire_extinguisher.fire_extinguisher_description": "The fire exstinguisher is able to remove fire from smaller areas and can freeze mobs for a small amount of time.",
+  "text.fire_extinguisher.fire_extinguisher_description": "The fire exstinguisher is able to remove fire from a %1$s block radius and can freeze mobs for a small amount of time.",
   "text.fire_extinguisher.fire_extinguisher_use": "► To use the fire extinguisher target a block which is on (or next to the) fire and press the right mouse button.",
   "text.fire_extinguisher.fire_extinguisher_place": "► To place the fire extinguisher, sneak and press the right mouse button.",
 
-  "text.fire_extinguisher.fire_axe_description": "The fire axe is able to remove fire within 1-2 blocks around a destroyed block.",
+  "text.fire_extinguisher.fire_axe_description": "The fire axe is able to remove fire within %1$s blocks around a destroyed block.",
   "text.fire_extinguisher.fire_axe_use": "► To use the fire axe target a block which is on fire and destroy the block.",
 
   "text.fire_extinguisher.fire_helmet_description": "The fire helmet protects you a little from fire, but your are not fire proofed.",
+  "text.fire_extinguisher.fire_helmet_config": "The fire protection will be renewed every %1$s secs for %2$s secs.",
 
   "itemGroup.fire_extinguisher": "Fire Extinguisher and more"
 }

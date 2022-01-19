@@ -49,8 +49,20 @@ public class ModBlocks {
   public static final RegistryObject<Block> EXIT_SIGN_LEFT = BLOCKS.register(
       ExitSign.NAME + "_left", () -> new ExitSign(BlockBehaviour.Properties.of(Material.STONE)
           .requiresCorrectToolForDrops().strength(3.0F, 6.0F).sound(SoundType.METAL)));
+  public static final RegistryObject<Block> EXIT_SIGN_LEFT_DOWN = BLOCKS.register(
+      ExitSign.NAME + "_left_down", () -> new ExitSign(BlockBehaviour.Properties.of(Material.STONE)
+          .requiresCorrectToolForDrops().strength(3.0F, 6.0F).sound(SoundType.METAL)));
+  public static final RegistryObject<Block> EXIT_SIGN_LEFT_UP = BLOCKS.register(
+      ExitSign.NAME + "_left_up", () -> new ExitSign(BlockBehaviour.Properties.of(Material.STONE)
+          .requiresCorrectToolForDrops().strength(3.0F, 6.0F).sound(SoundType.METAL)));
   public static final RegistryObject<Block> EXIT_SIGN_RIGHT = BLOCKS.register(
       ExitSign.NAME + "_right", () -> new ExitSign(BlockBehaviour.Properties.of(Material.STONE)
+          .requiresCorrectToolForDrops().strength(3.0F, 6.0F).sound(SoundType.METAL)));
+  public static final RegistryObject<Block> EXIT_SIGN_RIGHT_DOWN = BLOCKS.register(
+      ExitSign.NAME + "_right_down", () -> new ExitSign(BlockBehaviour.Properties.of(Material.STONE)
+          .requiresCorrectToolForDrops().strength(3.0F, 6.0F).sound(SoundType.METAL)));
+  public static final RegistryObject<Block> EXIT_SIGN_RIGHT_UP = BLOCKS.register(
+      ExitSign.NAME + "_right_up", () -> new ExitSign(BlockBehaviour.Properties.of(Material.STONE)
           .requiresCorrectToolForDrops().strength(3.0F, 6.0F).sound(SoundType.METAL)));
 
   // Fire Extinguisher Signs

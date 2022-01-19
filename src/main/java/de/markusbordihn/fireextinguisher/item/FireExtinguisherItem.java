@@ -50,25 +50,39 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 
+import net.minecraftforge.event.server.ServerAboutToStartEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+
 import de.markusbordihn.fireextinguisher.Constants;
 import de.markusbordihn.fireextinguisher.block.FireExtinguisherBlock;
+import de.markusbordihn.fireextinguisher.config.CommonConfig;
 
+@EventBusSubscriber
 public class FireExtinguisherItem extends BlockItem implements Vanishable {
 
   protected static final Logger log = LogManager.getLogger(Constants.LOG_NAME);
 
   public static final String NAME = "fire_extinguisher";
 
+  private static final CommonConfig.Config COMMON = CommonConfig.COMMON;
+
+  private static int fireExtinguisherRadius = COMMON.fireExtinguisherRadius.get();
+
   private static final double X_SHIFT = 0.0;
   private static final double Y_SHIFT = 1.6;
   private static final double Z_SHIFT = 0.0;
   private static final int PARTICLE_FRAMES = 8;
-  private static final int FIRE_STOP_RADIUS = 2;
 
   private static final int ATTACK_EFFECT_DURATION = 200;
 
   public FireExtinguisherItem(Block block, Properties properties) {
     super(block, properties);
+  }
+
+  @SubscribeEvent
+  public static void handleServerAboutToStartEvent(ServerAboutToStartEvent event) {
+    fireExtinguisherRadius = COMMON.fireExtinguisherRadius.get();
   }
 
   public void stopFireAnimation(Player player, Level level, BlockPos blockPos) {
@@ -106,7 +120,7 @@ public class FireExtinguisherItem extends BlockItem implements Vanishable {
   public void stopFire(Level level, Player player, InteractionHand hand, BlockPos targetBlockPos,
       ItemStack itemStack) {
     Iterable<BlockPos> blockPositions = BlockPos.withinManhattan(targetBlockPos.above(),
-        FIRE_STOP_RADIUS, FIRE_STOP_RADIUS, FIRE_STOP_RADIUS);
+        fireExtinguisherRadius, fireExtinguisherRadius, fireExtinguisherRadius);
     boolean hasStoppedFire = false;
     for (BlockPos blockPos : blockPositions) {
       BlockState blockState = level.getBlockState(blockPos);
@@ -121,7 +135,13 @@ public class FireExtinguisherItem extends BlockItem implements Vanishable {
         hasStoppedFire = true;
       }
     }
-    if (!level.isClientSide && hasStoppedFire) {
+    if (hasStoppedFire) {
+      hurtAndBreak(level, itemStack, player, hand);
+    }
+  }
+
+  public void hurtAndBreak(Level level, ItemStack itemStack, Player player, InteractionHand hand) {
+    if (!level.isClientSide) {
       itemStack.hurtAndBreak(1, player, serverPlayer -> {
         serverPlayer.broadcastBreakEvent(hand);
       });
@@ -157,7 +177,17 @@ public class FireExtinguisherItem extends BlockItem implements Vanishable {
 
   @Override
   public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
-    return InteractionResultHolder.pass(player.getItemInHand(hand));
+    ItemStack itemStack = player.getItemInHand(hand);
+
+    // Let player to stop fire on them self, if he is not targeting any block.
+    if (player.isOnFire()) {
+      if (player.getRemainingFireTicks() > 2) {
+        player.setRemainingFireTicks(2);
+      }
+      stopFireAnimation(player, level, player.blockPosition());
+      hurtAndBreak(level, itemStack, player, hand);
+    }
+    return InteractionResultHolder.pass(itemStack);
   }
 
   @Override
@@ -170,6 +200,11 @@ public class FireExtinguisherItem extends BlockItem implements Vanishable {
     // Set frozen
     livingEntity.setTicksFrozen(ATTACK_EFFECT_DURATION * 5);
 
+    // Remove fire if needed
+    if (livingEntity.isOnFire()) {
+      livingEntity.setRemainingFireTicks(2);
+    }
+
     if (!level.isClientSide) {
       // Add slowness effect for movement and jump
       livingEntity.addEffect(
@@ -177,17 +212,17 @@ public class FireExtinguisherItem extends BlockItem implements Vanishable {
       livingEntity
           .addEffect(new MobEffectInstance(MobEffects.SLOW_FALLING, ATTACK_EFFECT_DURATION, 10));
 
-      // Hurt Entity
-      float attackDamage = 0.5F;
-      if (livingEntity instanceof Blaze) {
-        attackDamage = 3.0F;
+      // Hurt Mob Entity
+      if (!(livingEntity instanceof Player)) {
+        float attackDamage = 0.5F;
+        if (livingEntity instanceof Blaze) {
+          attackDamage = 3.0F;
+        }
+        livingEntity.hurt(DamageSource.MAGIC, attackDamage);
       }
-      livingEntity.hurt(DamageSource.MAGIC, attackDamage);
 
       // Damage item
-      itemStack.hurtAndBreak(1, player, serverPlayer -> {
-        serverPlayer.broadcastBreakEvent(hand);
-      });
+      hurtAndBreak(level, itemStack, player, hand);
     }
     return InteractionResult.PASS;
   }
@@ -205,7 +240,8 @@ public class FireExtinguisherItem extends BlockItem implements Vanishable {
   @Override
   public void appendHoverText(ItemStack itemStack, @Nullable Level level,
       List<Component> tooltipList, TooltipFlag tooltipFlag) {
-    tooltipList.add(new TranslatableComponent(Constants.TEXT_PREFIX + NAME + "_description"));
+    tooltipList.add(new TranslatableComponent(Constants.TEXT_PREFIX + NAME + "_description",
+        fireExtinguisherRadius));
     tooltipList.add(new TranslatableComponent(Constants.TEXT_PREFIX + NAME + "_use")
         .withStyle(ChatFormatting.GREEN));
     tooltipList.add(new TranslatableComponent(Constants.TEXT_PREFIX + NAME + "_place")
