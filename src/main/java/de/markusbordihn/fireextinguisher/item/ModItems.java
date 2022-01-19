@@ -55,6 +55,15 @@ public class ModItems {
   public static final RegistryObject<Item> FIRE_HELMET = ITEMS.register(FireHelmetItem.NAME,
       () -> new FireHelmetItem(ModArmorMaterials.IRON, EquipmentSlot.HEAD,
           new Item.Properties().tab(FireExtinguisherTab.TAB_FIRE_EXTINGUISHER)));
+  public static final RegistryObject<Item> FIRE_CHESTPLATE = ITEMS.register(FireChestplateItem.NAME,
+      () -> new FireChestplateItem(ModArmorMaterials.IRON, EquipmentSlot.CHEST,
+          new Item.Properties().tab(FireExtinguisherTab.TAB_FIRE_EXTINGUISHER)));
+  public static final RegistryObject<Item> FIRE_LEGGINGS = ITEMS.register(FireLeggingsItem.NAME,
+      () -> new FireLeggingsItem(ModArmorMaterials.IRON, EquipmentSlot.LEGS,
+          new Item.Properties().tab(FireExtinguisherTab.TAB_FIRE_EXTINGUISHER)));
+  public static final RegistryObject<Item> FIRE_BOOTS = ITEMS.register(FireBootsItem.NAME,
+      () -> new FireBootsItem(ModArmorMaterials.IRON, EquipmentSlot.FEET,
+          new Item.Properties().tab(FireExtinguisherTab.TAB_FIRE_EXTINGUISHER)));
 
   @TemplateEntryPoint("Register Block Items")
 
@@ -65,20 +74,20 @@ public class ModItems {
   public static final RegistryObject<Item> EXIT_SIGN_LEFT =
       ITEMS.register(ExitSign.NAME + "_left", () -> new BlockItem(ModBlocks.EXIT_SIGN_LEFT.get(),
           new Item.Properties().tab(FireExtinguisherTab.TAB_FIRE_EXTINGUISHER)));
-  public static final RegistryObject<Item> EXIT_SIGN_LEFT_DOWN =
-      ITEMS.register(ExitSign.NAME + "_left_down", () -> new BlockItem(ModBlocks.EXIT_SIGN_LEFT_DOWN.get(),
+  public static final RegistryObject<Item> EXIT_SIGN_LEFT_DOWN = ITEMS.register(
+      ExitSign.NAME + "_left_down", () -> new BlockItem(ModBlocks.EXIT_SIGN_LEFT_DOWN.get(),
           new Item.Properties().tab(FireExtinguisherTab.TAB_FIRE_EXTINGUISHER)));
-          public static final RegistryObject<Item> EXIT_SIGN_LEFT_UP =
-      ITEMS.register(ExitSign.NAME + "_left_up", () -> new BlockItem(ModBlocks.EXIT_SIGN_LEFT_UP.get(),
+  public static final RegistryObject<Item> EXIT_SIGN_LEFT_UP = ITEMS
+      .register(ExitSign.NAME + "_left_up", () -> new BlockItem(ModBlocks.EXIT_SIGN_LEFT_UP.get(),
           new Item.Properties().tab(FireExtinguisherTab.TAB_FIRE_EXTINGUISHER)));
   public static final RegistryObject<Item> EXIT_SIGN_RIGHT =
       ITEMS.register(ExitSign.NAME + "_right", () -> new BlockItem(ModBlocks.EXIT_SIGN_RIGHT.get(),
           new Item.Properties().tab(FireExtinguisherTab.TAB_FIRE_EXTINGUISHER)));
-  public static final RegistryObject<Item> EXIT_SIGN_RIGHT_DOWN =
-      ITEMS.register(ExitSign.NAME + "_right_down", () -> new BlockItem(ModBlocks.EXIT_SIGN_RIGHT_DOWN.get(),
+  public static final RegistryObject<Item> EXIT_SIGN_RIGHT_DOWN = ITEMS.register(
+      ExitSign.NAME + "_right_down", () -> new BlockItem(ModBlocks.EXIT_SIGN_RIGHT_DOWN.get(),
           new Item.Properties().tab(FireExtinguisherTab.TAB_FIRE_EXTINGUISHER)));
-          public static final RegistryObject<Item> EXIT_SIGN_RIGHT_UP =
-      ITEMS.register(ExitSign.NAME + "_right_up", () -> new BlockItem(ModBlocks.EXIT_SIGN_RIGHT_UP.get(),
+  public static final RegistryObject<Item> EXIT_SIGN_RIGHT_UP = ITEMS
+      .register(ExitSign.NAME + "_right_up", () -> new BlockItem(ModBlocks.EXIT_SIGN_RIGHT_UP.get(),
           new Item.Properties().tab(FireExtinguisherTab.TAB_FIRE_EXTINGUISHER)));
 
   // Fire Extinguisher Signs
