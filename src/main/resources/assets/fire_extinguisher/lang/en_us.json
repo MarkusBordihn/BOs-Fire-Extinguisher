@@ -30,8 +30,13 @@
   "text.fire_extinguisher.fire_axe_description": "The fire axe is able to remove fire within %1$s blocks around a destroyed block.",
   "text.fire_extinguisher.fire_axe_use": "► To use the fire axe target a block which is on fire and destroy the block.",
 
+  "text.fire_extinguisher.fire_boots_description": "The heavy fire boots protects you a little from fire, but your are not fire proofed.",
+  "text.fire_extinguisher.fire_chestplate_description": "The heavy fire chestplate protects you a little from fire, but your are not fire proofed.",
   "text.fire_extinguisher.fire_helmet_description": "The fire helmet protects you a little from fire, but your are not fire proofed.",
-  "text.fire_extinguisher.fire_helmet_config": "The fire protection will be renewed every %1$s secs for %2$s secs.",
+  "text.fire_extinguisher.fire_leggings_description": "The heavy fire leggings protects you a little from fire, but your are not fire proofed.",
+
+  "text.fire_extinguisher.fire_armor_config": "The fire protection will be renewed every %1$s secs for %2$s secs.",
+  "text.fire_extinguisher.fire_armor_slow_down": "Wearing this heavy fire protective armor will slow down your movements.",
 
   "itemGroup.fire_extinguisher": "Fire Extinguisher and more"
 }

@@ -62,6 +62,10 @@ public class CommonConfig {
     public final ForgeConfigSpec.IntValue fireProtectionDuration;
     public final ForgeConfigSpec.IntValue fireProtectionRenew;
 
+    public final ForgeConfigSpec.BooleanValue fireBootsSlowDownEnabled;
+    public final ForgeConfigSpec.BooleanValue fireChestplateSlowDownEnabled;
+    public final ForgeConfigSpec.BooleanValue fireLeggingsSlowDownEnabled;
+
     Config(ForgeConfigSpec.Builder builder) {
       builder.comment(Constants.MOD_NAME);
 
@@ -88,6 +92,24 @@ public class CommonConfig {
       fireProtectionDuration =
           builder.comment("Defines the amount of ticks how long the fire protection is enabled.")
               .defineInRange("fireProtectionDuration", 20, 10, 6000);
+      builder.pop();
+
+      builder.push("Fire Boots");
+      fireBootsSlowDownEnabled =
+          builder.comment("Enable/Disable slow down effect of wearing the fire boots.")
+              .define("fireBootsSlowDownEnabled", true);
+      builder.pop();
+
+      builder.push("Fire Chestplate");
+      fireChestplateSlowDownEnabled =
+          builder.comment("Enable/Disable slow down effect of wearing the fire chestplate.")
+              .define("fireChestplateSlowDownEnabled", true);
+      builder.pop();
+
+      builder.push("Fire Leggings");
+      fireLeggingsSlowDownEnabled =
+          builder.comment("Enable/Disable slow down effect of wearing the fire leggings.")
+              .define("fireLeggingsSlowDownEnabled", true);
       builder.pop();
     }
   }

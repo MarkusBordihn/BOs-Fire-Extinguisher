@@ -92,7 +92,7 @@ public class FireHelmetItem extends ArmorItem {
       List<Component> tooltipList, TooltipFlag tooltipFlag) {
     tooltipList.add(new TranslatableComponent(Constants.TEXT_PREFIX + NAME + "_description"));
     if (fireProtectionEnabled) {
-      tooltipList.add(new TranslatableComponent(Constants.TEXT_PREFIX + NAME + "_config",
+      tooltipList.add(new TranslatableComponent(Constants.TEXT_PREFIX + "fire_armor_config",
           Math.round((fireProtectionRenew / 20.0) * 10) / 10.0,
           Math.round((fireProtectionDuration / 20.0) * 10) / 10.0).withStyle(ChatFormatting.GREEN));
     }
