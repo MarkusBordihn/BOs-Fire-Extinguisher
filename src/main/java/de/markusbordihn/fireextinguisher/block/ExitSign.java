@@ -70,21 +70,19 @@ public class ExitSign extends Block {
 
     // Handle ceiling positions
     if (attachFace == AttachFace.CEILING) {
-      switch (facing) {
-        case NORTH, SOUTH:
-          return CEILING_NORTH_SOUTH_AABB;
-        case EAST, WEST:
-          return CEILING_EAST_WEST_AABB;
+      if (facing == Direction.NORTH || facing == Direction.SOUTH) {
+        return CEILING_NORTH_SOUTH_AABB;
+      } else if (facing == Direction.EAST || facing == Direction.WEST) {
+        return CEILING_EAST_WEST_AABB;
       }
     }
 
     // Handle floor positions
     if (attachFace == AttachFace.FLOOR) {
-      switch (facing) {
-        case NORTH, SOUTH:
-          return FLOOR_NORTH_SOUTH_AABB;
-        case EAST, WEST:
-          return FLOOR_EAST_WEST_AABB;
+      if (facing == Direction.NORTH || facing == Direction.SOUTH) {
+        return FLOOR_NORTH_SOUTH_AABB;
+      } else if (facing == Direction.EAST || facing == Direction.WEST) {
+        return FLOOR_EAST_WEST_AABB;
       }
     }
 

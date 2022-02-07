@@ -20,6 +20,7 @@
 package de.markusbordihn.fireextinguisher.block;
 
 import javax.annotation.Nullable;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;

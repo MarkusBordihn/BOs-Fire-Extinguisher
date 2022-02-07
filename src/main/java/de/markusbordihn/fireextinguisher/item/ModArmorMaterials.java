@@ -48,16 +48,18 @@ public enum ModArmorMaterials implements ArmorMaterial {
   private final float knockbackResistance;
   private final LazyLoadedValue<Ingredient> repairIngredient;
 
-  private ModArmorMaterials(String name, int p_40475_, int[] p_40476_, int p_40477_, SoundEvent soundEvent, float p_40479_, float p_40480_, Supplier<Ingredient> p_40481_) {
-      this.name = name;
-      this.durabilityMultiplier = p_40475_;
-      this.slotProtections = p_40476_;
-      this.enchantmentValue = p_40477_;
-      this.sound = soundEvent;
-      this.toughness = p_40479_;
-      this.knockbackResistance = p_40480_;
-      this.repairIngredient = new LazyLoadedValue<>(p_40481_);
-   }
+  private ModArmorMaterials(String name, int durabilityMultiplier, int[] slotProtections,
+      int enchantmentValue, SoundEvent soundEvent, float toughness, float knockbackResistance,
+      Supplier<Ingredient> repairIngredient) {
+    this.name = name;
+    this.durabilityMultiplier = durabilityMultiplier;
+    this.slotProtections = slotProtections;
+    this.enchantmentValue = enchantmentValue;
+    this.sound = soundEvent;
+    this.toughness = toughness;
+    this.knockbackResistance = knockbackResistance;
+    this.repairIngredient = new LazyLoadedValue<>(repairIngredient);
+  }
 
   public int getDurabilityForSlot(EquipmentSlot equipmentSlot) {
     return HEALTH_PER_SLOT[equipmentSlot.getIndex()] * this.durabilityMultiplier;
