@@ -99,6 +99,16 @@ There are three additional signs to mark the location of the nearest exit.
 
 ![Fire exit signs][exit_signs]
 
+## Version Status Overview 🛠️
+
+| Version        | Status                |
+| -------------- | --------------------- |
+| Fabric Version | ❌ Not planned        |
+| Forge 1.16.5   | ❌ Not planned        |
+| Forge 1.17.1   | ❌ Not planned        |
+| Forge 1.18.1   | ⚠️ Maintenance only   |
+| Forge 1.18.2   | ✔️ Active development |
+
 ## Note
 
 Please only download the mod from the official CurseForge page or with the official CurseForge launcher like:
