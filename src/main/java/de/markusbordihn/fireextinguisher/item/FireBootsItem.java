@@ -25,22 +25,25 @@ import javax.annotation.Nullable;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import net.minecraft.ChatFormatting;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.ArmorMaterial;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.level.Level;
+import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.item.ArmorItem;
+import net.minecraft.item.IArmorMaterial;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.Effects;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.world.World;
 
-import net.minecraftforge.event.server.ServerAboutToStartEvent;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.minecraftforge.fml.event.server.FMLServerAboutToStartEvent;
 
 import de.markusbordihn.fireextinguisher.Constants;
 import de.markusbordihn.fireextinguisher.config.CommonConfig;
@@ -61,12 +64,13 @@ public class FireBootsItem extends ArmorItem {
 
   private int ticker = 0;
 
-  public FireBootsItem(ArmorMaterial material, EquipmentSlot slot, Properties properties) {
+  public FireBootsItem(IArmorMaterial material, EquipmentSlotType slot,
+      Item.Properties properties) {
     super(material, slot, properties);
   }
 
   @SubscribeEvent
-  public static void handleServerAboutToStartEvent(ServerAboutToStartEvent event) {
+  public static void handleServerAboutToStartEvent(FMLServerAboutToStartEvent event) {
     fireBootsSlowDownEnabled = COMMON.fireBootsSlowDownEnabled.get();
     fireProtectionEnabled = COMMON.fireProtectionEnabled.get();
     fireProtectionRenew = COMMON.fireProtectionRenew.get();
@@ -79,32 +83,32 @@ public class FireBootsItem extends ArmorItem {
   }
 
   @Override
-  public void onArmorTick(ItemStack stack, Level level, Player player) {
+  public void onArmorTick(ItemStack stack, World level, PlayerEntity player) {
     // Add an delay where the player is not protected to make sure the item is not over powered.
     if (fireProtectionEnabled && !level.isClientSide && ticker++ > fireProtectionRenew
-        && !player.hasEffect(MobEffects.FIRE_RESISTANCE)) {
-      player.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, fireProtectionDuration));
+        && !player.hasEffect(Effects.FIRE_RESISTANCE)) {
+      player.addEffect(new EffectInstance(Effects.FIRE_RESISTANCE, fireProtectionDuration));
       if (fireBootsSlowDownEnabled) {
-        player
-            .addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, fireProtectionDuration));
+        player.addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, fireProtectionDuration));
       }
       ticker = 0;
     }
     super.onArmorTick(stack, level, player);
   }
 
+  @OnlyIn(Dist.CLIENT)
   @Override
-  public void appendHoverText(ItemStack itemStack, @Nullable Level level,
-      List<Component> tooltipList, TooltipFlag tooltipFlag) {
-    tooltipList.add(new TranslatableComponent(Constants.TEXT_PREFIX + NAME + "_description"));
+  public void appendHoverText(ItemStack itemStack, @Nullable World level,
+      List<ITextComponent> tooltipList, ITooltipFlag tooltipFlag) {
+    tooltipList.add(new TranslationTextComponent(Constants.TEXT_PREFIX + NAME + "_description"));
     if (fireProtectionEnabled) {
-      tooltipList.add(new TranslatableComponent(Constants.TEXT_PREFIX + "fire_armor_config",
+      tooltipList.add(new TranslationTextComponent(Constants.TEXT_PREFIX + "fire_armor_config",
           Math.round((fireProtectionRenew / 20.0) * 10) / 10.0,
-          Math.round((fireProtectionDuration / 20.0) * 10) / 10.0).withStyle(ChatFormatting.GREEN));
+          Math.round((fireProtectionDuration / 20.0) * 10) / 10.0).withStyle(TextFormatting.GREEN));
     }
     if (fireBootsSlowDownEnabled) {
-      tooltipList.add(new TranslatableComponent(Constants.TEXT_PREFIX + "fire_armor_slow_down")
-          .withStyle(ChatFormatting.DARK_RED));
+      tooltipList.add(new TranslationTextComponent(Constants.TEXT_PREFIX + "fire_armor_slow_down")
+          .withStyle(TextFormatting.DARK_RED));
     }
   }
 

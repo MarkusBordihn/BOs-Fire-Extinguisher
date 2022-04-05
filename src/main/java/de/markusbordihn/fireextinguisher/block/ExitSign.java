@@ -21,27 +21,27 @@ package de.markusbordihn.fireextinguisher.block;
 
 import javax.annotation.Nullable;
 
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.HorizontalDirectionalBlock;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.AttachFace;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
-import net.minecraft.world.level.block.state.properties.EnumProperty;
-import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.HorizontalBlock;
+import net.minecraft.item.BlockItemUseContext;
+import net.minecraft.state.DirectionProperty;
+import net.minecraft.state.EnumProperty;
+import net.minecraft.state.StateContainer;
+import net.minecraft.state.properties.AttachFace;
+import net.minecraft.state.properties.BlockStateProperties;
+import net.minecraft.util.Direction;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.shapes.ISelectionContext;
+import net.minecraft.util.math.shapes.VoxelShape;
+import net.minecraft.world.IBlockReader;
 
 public class ExitSign extends Block {
 
   public static final String NAME = "exit_sign";
 
   // Defines if we need to rotate the Object based on the click position and player pov
-  public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
+  public static final DirectionProperty FACING = HorizontalBlock.FACING;
   public static final EnumProperty<AttachFace> ATTACH_FACE = BlockStateProperties.ATTACH_FACE;
 
   // We need a VoxelShape for each side to cover all faces and possibilities
@@ -63,8 +63,8 @@ public class ExitSign extends Block {
   }
 
   @Override
-  public VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos,
-      CollisionContext collisionContext) {
+  public VoxelShape getShape(BlockState blockState, IBlockReader worldIn, BlockPos blockPos,
+      ISelectionContext context) {
     AttachFace attachFace = blockState.getValue(ATTACH_FACE);
     Direction facing = blockState.getValue(FireExtinguisherSignPosition.FACING);
 
@@ -102,13 +102,13 @@ public class ExitSign extends Block {
   }
 
   @Override
-  protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> blockState) {
+  protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> blockState) {
     blockState.add(ATTACH_FACE, FACING);
   }
 
   @Override
   @Nullable
-  public BlockState getStateForPlacement(BlockPlaceContext context) {
+  public BlockState getStateForPlacement(BlockItemUseContext context) {
     Direction direction = context.getClickedFace();
     BlockState blockState =
         context.getLevel().getBlockState(context.getClickedPos().relative(direction.getOpposite()));

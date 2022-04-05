@@ -25,41 +25,43 @@ import javax.annotation.Nullable;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import net.minecraft.ChatFormatting;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.InteractionResultHolder;
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.monster.Blaze;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.item.Vanishable;
-import net.minecraft.world.item.context.UseOnContext;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.enchantment.IVanishable;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.monster.BlazeEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.BlockItem;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemUseContext;
+import net.minecraft.particles.ParticleTypes;
+import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.Effects;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.ActionResultType;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.Hand;
+import net.minecraft.util.SoundEvents;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.world.World;
 
-import net.minecraftforge.event.server.ServerAboutToStartEvent;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.minecraftforge.fml.event.server.FMLServerAboutToStartEvent;
 
 import de.markusbordihn.fireextinguisher.Constants;
 import de.markusbordihn.fireextinguisher.block.FireExtinguisherBlock;
 import de.markusbordihn.fireextinguisher.config.CommonConfig;
 
 @EventBusSubscriber
-public class FireExtinguisherItem extends BlockItem implements Vanishable {
+public class FireExtinguisherItem extends BlockItem implements IVanishable {
 
   protected static final Logger log = LogManager.getLogger(Constants.LOG_NAME);
 
@@ -81,11 +83,11 @@ public class FireExtinguisherItem extends BlockItem implements Vanishable {
   }
 
   @SubscribeEvent
-  public static void handleServerAboutToStartEvent(ServerAboutToStartEvent event) {
+  public static void handleServerAboutToStartEvent(FMLServerAboutToStartEvent event) {
     fireExtinguisherRadius = COMMON.fireExtinguisherRadius.get();
   }
 
-  public void stopFireAnimation(Player player, Level level, BlockPos blockPos) {
+  public void stopFireAnimation(PlayerEntity player, World level, BlockPos blockPos) {
     if (!level.isClientSide) {
       return;
     }
@@ -117,7 +119,7 @@ public class FireExtinguisherItem extends BlockItem implements Vanishable {
     }
   }
 
-  public void stopFire(Level level, Player player, InteractionHand hand, BlockPos targetBlockPos,
+  public void stopFire(World level, PlayerEntity player, Hand hand, BlockPos targetBlockPos,
       ItemStack itemStack) {
     Iterable<BlockPos> blockPositions = BlockPos.withinManhattan(targetBlockPos.above(),
         fireExtinguisherRadius, fireExtinguisherRadius, fireExtinguisherRadius);
@@ -129,9 +131,8 @@ public class FireExtinguisherItem extends BlockItem implements Vanishable {
         level.removeBlock(blockPos, false);
 
         // Play fire extinguish sound on the client
-        if (level.isClientSide) {
-          player.playSound(SoundEvents.FIRE_EXTINGUISH, 1.0F, 1.0F);
-        }
+        stopFireSound(level, player);
+
         hasStoppedFire = true;
       }
     }
@@ -140,7 +141,13 @@ public class FireExtinguisherItem extends BlockItem implements Vanishable {
     }
   }
 
-  public void hurtAndBreak(Level level, ItemStack itemStack, Player player, InteractionHand hand) {
+  public void stopFireSound(World level, PlayerEntity player) {
+    if (level.isClientSide) {
+      player.playSound(SoundEvents.FIRE_EXTINGUISH, 1.0F, 1.0F);
+    }
+  }
+
+  public void hurtAndBreak(World level, ItemStack itemStack, PlayerEntity player, Hand hand) {
     if (!level.isClientSide) {
       itemStack.hurtAndBreak(1, player, serverPlayer -> {
         serverPlayer.broadcastBreakEvent(hand);
@@ -149,8 +156,8 @@ public class FireExtinguisherItem extends BlockItem implements Vanishable {
   }
 
   @Override
-  public boolean canAttackBlock(BlockState blockState, Level level, BlockPos blockPos,
-      Player player) {
+  public boolean canAttackBlock(BlockState blockState, World level, BlockPos blockPos,
+      PlayerEntity player) {
     if (blockState.getBlock() instanceof FireExtinguisherBlock) {
       return true;
     }
@@ -158,25 +165,26 @@ public class FireExtinguisherItem extends BlockItem implements Vanishable {
   }
 
   @Override
-  public InteractionResult useOn(UseOnContext context) {
-    Level level = context.getLevel();
+  public ActionResultType useOn(ItemUseContext context) {
+    World level = context.getLevel();
     BlockPos blockPos = context.getClickedPos();
-    Player player = context.getPlayer();
+    PlayerEntity player = context.getPlayer();
     ItemStack itemStack = context.getItemInHand();
-    InteractionHand interactionHand = context.getHand();
+    Hand hand = context.getHand();
 
     // Place block if shift key is down.
     if (player.isShiftKeyDown()) {
       return super.useOn(context);
     }
-    stopFireAnimation(player, level, blockPos);
-    stopFire(level, player, interactionHand, blockPos, itemStack);
 
-    return InteractionResult.FAIL;
+    stopFireAnimation(player, level, blockPos);
+    stopFire(level, player, hand, blockPos, itemStack);
+
+    return ActionResultType.FAIL;
   }
 
   @Override
-  public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+  public ActionResult<ItemStack> use(World level, PlayerEntity player, Hand hand) {
     ItemStack itemStack = player.getItemInHand(hand);
 
     // Let player to stop fire on them self, if he is not targeting any block.
@@ -185,20 +193,18 @@ public class FireExtinguisherItem extends BlockItem implements Vanishable {
         player.setRemainingFireTicks(2);
       }
       stopFireAnimation(player, level, player.blockPosition());
+      stopFireSound(level, player);
       hurtAndBreak(level, itemStack, player, hand);
     }
-    return InteractionResultHolder.pass(itemStack);
+    return ActionResult.pass(itemStack);
   }
 
   @Override
-  public InteractionResult interactLivingEntity(ItemStack itemStack, Player player,
-      LivingEntity livingEntity, InteractionHand hand) {
-    BlockPos blockPos = livingEntity.getOnPos();
-    Level level = player.getLevel();
-    stopFireAnimation(player, player.getLevel(), blockPos.above());
-
-    // Set frozen
-    livingEntity.setTicksFrozen(ATTACK_EFFECT_DURATION * 5);
+  public ActionResultType interactLivingEntity(ItemStack itemStack, PlayerEntity player,
+      LivingEntity livingEntity, Hand hand) {
+    BlockPos blockPos = livingEntity.blockPosition();
+    World level = player.level;
+    stopFireAnimation(player, level, blockPos.above());
 
     // Remove fire if needed
     if (livingEntity.isOnFire()) {
@@ -208,14 +214,14 @@ public class FireExtinguisherItem extends BlockItem implements Vanishable {
     if (!level.isClientSide) {
       // Add slowness effect for movement and jump
       livingEntity.addEffect(
-          new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, ATTACK_EFFECT_DURATION, 10));
+          new EffectInstance(Effects.MOVEMENT_SLOWDOWN, ATTACK_EFFECT_DURATION, 10));
       livingEntity
-          .addEffect(new MobEffectInstance(MobEffects.SLOW_FALLING, ATTACK_EFFECT_DURATION, 10));
+          .addEffect(new EffectInstance(Effects.SLOW_FALLING, ATTACK_EFFECT_DURATION, 10));
 
       // Hurt Mob Entity
-      if (!(livingEntity instanceof Player)) {
+      if (!(livingEntity instanceof PlayerEntity)) {
         float attackDamage = 0.5F;
-        if (livingEntity instanceof Blaze) {
+        if (livingEntity instanceof BlazeEntity) {
           attackDamage = 3.0F;
         }
         livingEntity.hurt(DamageSource.MAGIC, attackDamage);
@@ -223,8 +229,10 @@ public class FireExtinguisherItem extends BlockItem implements Vanishable {
 
       // Damage item
       hurtAndBreak(level, itemStack, player, hand);
+    } else {
+      stopFireSound(level, player);
     }
-    return InteractionResult.PASS;
+    return ActionResultType.PASS;
   }
 
   @Override
@@ -237,14 +245,15 @@ public class FireExtinguisherItem extends BlockItem implements Vanishable {
     return true;
   }
 
+  @OnlyIn(Dist.CLIENT)
   @Override
-  public void appendHoverText(ItemStack itemStack, @Nullable Level level,
-      List<Component> tooltipList, TooltipFlag tooltipFlag) {
-    tooltipList.add(new TranslatableComponent(Constants.TEXT_PREFIX + NAME + "_description",
+  public void appendHoverText(ItemStack itemStack, @Nullable World level,
+      List<ITextComponent> tooltipList, ITooltipFlag tooltipFlag) {
+    tooltipList.add(new TranslationTextComponent(Constants.TEXT_PREFIX + NAME + "_description",
         fireExtinguisherRadius));
-    tooltipList.add(new TranslatableComponent(Constants.TEXT_PREFIX + NAME + "_use")
-        .withStyle(ChatFormatting.GREEN));
-    tooltipList.add(new TranslatableComponent(Constants.TEXT_PREFIX + NAME + "_place")
-        .withStyle(ChatFormatting.GRAY));
+    tooltipList.add(new TranslationTextComponent(Constants.TEXT_PREFIX + NAME + "_use")
+        .withStyle(TextFormatting.GREEN));
+    tooltipList.add(new TranslationTextComponent(Constants.TEXT_PREFIX + NAME + "_place")
+        .withStyle(TextFormatting.GRAY));
   }
 }

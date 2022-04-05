@@ -22,7 +22,7 @@ package de.markusbordihn.fireextinguisher;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.client.renderer.RenderType;
 
 import net.minecraftforge.api.distmarker.Dist;
@@ -40,18 +40,15 @@ public class ClientSetup {
     log.info("{} Client Setup ...", Constants.LOG_REGISTER_PREFIX);
 
     event.enqueueWork(() -> {
-      ItemBlockRenderTypes.setRenderLayer(ModBlocks.EXIT_SIGN.get(), RenderType.cutoutMipped());
-      ItemBlockRenderTypes.setRenderLayer(ModBlocks.EXIT_SIGN_LEFT.get(),
+      RenderTypeLookup.setRenderLayer(ModBlocks.EXIT_SIGN.get(), RenderType.cutoutMipped());
+      RenderTypeLookup.setRenderLayer(ModBlocks.EXIT_SIGN_LEFT.get(), RenderType.cutoutMipped());
+      RenderTypeLookup.setRenderLayer(ModBlocks.EXIT_SIGN_LEFT_DOWN.get(),
           RenderType.cutoutMipped());
-      ItemBlockRenderTypes.setRenderLayer(ModBlocks.EXIT_SIGN_LEFT_DOWN.get(),
+      RenderTypeLookup.setRenderLayer(ModBlocks.EXIT_SIGN_LEFT_UP.get(), RenderType.cutoutMipped());
+      RenderTypeLookup.setRenderLayer(ModBlocks.EXIT_SIGN_RIGHT.get(), RenderType.cutoutMipped());
+      RenderTypeLookup.setRenderLayer(ModBlocks.EXIT_SIGN_RIGHT_DOWN.get(),
           RenderType.cutoutMipped());
-      ItemBlockRenderTypes.setRenderLayer(ModBlocks.EXIT_SIGN_LEFT_UP.get(),
-          RenderType.cutoutMipped());
-      ItemBlockRenderTypes.setRenderLayer(ModBlocks.EXIT_SIGN_RIGHT.get(),
-          RenderType.cutoutMipped());
-      ItemBlockRenderTypes.setRenderLayer(ModBlocks.EXIT_SIGN_RIGHT_DOWN.get(),
-          RenderType.cutoutMipped());
-      ItemBlockRenderTypes.setRenderLayer(ModBlocks.EXIT_SIGN_RIGHT_UP.get(),
+      RenderTypeLookup.setRenderLayer(ModBlocks.EXIT_SIGN_RIGHT_UP.get(),
           RenderType.cutoutMipped());
     });
   }

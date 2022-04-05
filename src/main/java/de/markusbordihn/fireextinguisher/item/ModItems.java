@@ -19,12 +19,12 @@
 
 package de.markusbordihn.fireextinguisher.item;
 
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Tiers;
+import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.item.BlockItem;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemTier;
 
-import net.minecraftforge.registries.RegistryObject;
+import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -48,21 +48,21 @@ public class ModItems {
 
   // Fire fight weapons
   public static final RegistryObject<Item> FIRE_AXE =
-      ITEMS.register(FireAxeItem.NAME, () -> new FireAxeItem(Tiers.IRON, 6.0F, -3.1F,
+      ITEMS.register(FireAxeItem.NAME, () -> new FireAxeItem(ItemTier.IRON, 6.0F, -3.1F,
           new Item.Properties().tab(FireExtinguisherTab.TAB_FIRE_EXTINGUISHER)));
 
   // Fire fight armor
   public static final RegistryObject<Item> FIRE_HELMET = ITEMS.register(FireHelmetItem.NAME,
-      () -> new FireHelmetItem(ModArmorMaterials.IRON, EquipmentSlot.HEAD,
+      () -> new FireHelmetItem(ModArmorMaterials.IRON, EquipmentSlotType.HEAD,
           new Item.Properties().tab(FireExtinguisherTab.TAB_FIRE_EXTINGUISHER)));
   public static final RegistryObject<Item> FIRE_CHESTPLATE = ITEMS.register(FireChestplateItem.NAME,
-      () -> new FireChestplateItem(ModArmorMaterials.IRON, EquipmentSlot.CHEST,
+      () -> new FireChestplateItem(ModArmorMaterials.IRON, EquipmentSlotType.CHEST,
           new Item.Properties().tab(FireExtinguisherTab.TAB_FIRE_EXTINGUISHER)));
   public static final RegistryObject<Item> FIRE_LEGGINGS = ITEMS.register(FireLeggingsItem.NAME,
-      () -> new FireLeggingsItem(ModArmorMaterials.IRON, EquipmentSlot.LEGS,
+      () -> new FireLeggingsItem(ModArmorMaterials.IRON, EquipmentSlotType.LEGS,
           new Item.Properties().tab(FireExtinguisherTab.TAB_FIRE_EXTINGUISHER)));
   public static final RegistryObject<Item> FIRE_BOOTS = ITEMS.register(FireBootsItem.NAME,
-      () -> new FireBootsItem(ModArmorMaterials.IRON, EquipmentSlot.FEET,
+      () -> new FireBootsItem(ModArmorMaterials.IRON, EquipmentSlotType.FEET,
           new Item.Properties().tab(FireExtinguisherTab.TAB_FIRE_EXTINGUISHER)));
 
   @TemplateEntryPoint("Register Block Items")

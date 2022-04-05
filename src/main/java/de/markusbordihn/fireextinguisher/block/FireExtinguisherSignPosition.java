@@ -21,21 +21,21 @@ package de.markusbordihn.fireextinguisher.block;
 
 import javax.annotation.Nullable;
 
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.HorizontalDirectionalBlock;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
-import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.HorizontalBlock;
+import net.minecraft.item.BlockItemUseContext;
+import net.minecraft.state.DirectionProperty;
+import net.minecraft.state.StateContainer;
+import net.minecraft.util.Direction;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.shapes.ISelectionContext;
+import net.minecraft.util.math.shapes.VoxelShape;
+import net.minecraft.world.IBlockReader;
 
 public class FireExtinguisherSignPosition extends Block {
 
-  public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
+  public static final DirectionProperty FACING = HorizontalBlock.FACING;
 
   protected static final VoxelShape SHAPE_NORTH_AABB = Block.box(0D, 4D, 14.75D, 16D, 12D, 16D);
   protected static final VoxelShape SHAPE_EAST_AABB = Block.box(0D, 4D, 0D, 1.25D, 12D, 16D);
@@ -48,8 +48,8 @@ public class FireExtinguisherSignPosition extends Block {
   }
 
   @Override
-  public VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos,
-      CollisionContext collisionContext) {
+  public VoxelShape getShape(BlockState blockState, IBlockReader worldIn, BlockPos blockPos,
+      ISelectionContext context) {
     Direction facing = blockState.getValue(FireExtinguisherSignPosition.FACING);
     switch (facing) {
       case NORTH:
@@ -66,13 +66,13 @@ public class FireExtinguisherSignPosition extends Block {
   }
 
   @Override
-  protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> blockState) {
+  protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> blockState) {
     blockState.add(FACING);
   }
 
   @Override
   @Nullable
-  public BlockState getStateForPlacement(BlockPlaceContext context) {
+  public BlockState getStateForPlacement(BlockItemUseContext context) {
     return this.defaultBlockState().setValue(FACING,
         context.getHorizontalDirection().getOpposite());
   }

@@ -25,25 +25,27 @@ import javax.annotation.Nullable;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import net.minecraft.ChatFormatting;
-import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.AxeItem;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Tier;
-import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.AxeItem;
+import net.minecraft.item.IItemTier;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.Hand;
+import net.minecraft.util.SoundEvents;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.world.World;
 
-import net.minecraftforge.event.server.ServerAboutToStartEvent;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.minecraftforge.fml.event.server.FMLServerAboutToStartEvent;
 
 import de.markusbordihn.fireextinguisher.Constants;
 import de.markusbordihn.fireextinguisher.config.CommonConfig;
@@ -59,16 +61,16 @@ public class FireAxeItem extends AxeItem {
 
   private static int fireAxtRadius = COMMON.fireAxtRadius.get();
 
-  public FireAxeItem(Tier tier, float attackBase, float attackSpeed, Properties properties) {
+  public FireAxeItem(IItemTier tier, float attackBase, float attackSpeed, Properties properties) {
     super(tier, attackBase, attackSpeed, properties);
   }
 
   @SubscribeEvent
-  public static void handleServerAboutToStartEvent(ServerAboutToStartEvent event) {
+  public static void handleServerAboutToStartEvent(FMLServerAboutToStartEvent event) {
     fireAxtRadius = COMMON.fireAxtRadius.get();
   }
 
-  public void stopFire(Level level, Player player, InteractionHand hand, BlockPos targetBlockPos,
+  public void stopFire(World level, PlayerEntity player, Hand hand, BlockPos targetBlockPos,
       ItemStack itemStack) {
     Iterable<BlockPos> blockPositions = BlockPos.withinManhattan(targetBlockPos.above(),
         fireAxtRadius, fireAxtRadius, fireAxtRadius);
@@ -94,9 +96,10 @@ public class FireAxeItem extends AxeItem {
   }
 
   @Override
-  public boolean mineBlock(ItemStack itemStack, Level level, BlockState blockState,
+  public boolean mineBlock(ItemStack itemStack, World level, BlockState blockState,
       BlockPos blockPos, LivingEntity livingEntity) {
-    if (livingEntity instanceof Player player) {
+    if (livingEntity instanceof PlayerEntity) {
+      PlayerEntity player = (PlayerEntity) livingEntity;
       stopFire(level, player, player.getUsedItemHand(), blockPos, itemStack);
     }
     return super.mineBlock(itemStack, level, blockState, blockPos, livingEntity);
@@ -107,13 +110,14 @@ public class FireAxeItem extends AxeItem {
     return true;
   }
 
+  @OnlyIn(Dist.CLIENT)
   @Override
-  public void appendHoverText(ItemStack itemStack, @Nullable Level level,
-      List<Component> tooltipList, TooltipFlag tooltipFlag) {
-    tooltipList.add(new TranslatableComponent(Constants.TEXT_PREFIX + NAME + "_description",
+  public void appendHoverText(ItemStack itemStack, @Nullable World level,
+      List<ITextComponent> tooltipList, ITooltipFlag tooltipFlag) {
+    tooltipList.add(new TranslationTextComponent(Constants.TEXT_PREFIX + NAME + "_description",
         fireAxtRadius));
-    tooltipList.add(new TranslatableComponent(Constants.TEXT_PREFIX + NAME + "_use")
-        .withStyle(ChatFormatting.GREEN));
+    tooltipList.add(new TranslationTextComponent(Constants.TEXT_PREFIX + NAME + "_use")
+        .withStyle(TextFormatting.GREEN));
   }
 
 }

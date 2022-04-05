@@ -19,8 +19,8 @@
 
 package de.markusbordihn.fireextinguisher.tabs;
 
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemStack;
 
 import de.markusbordihn.fireextinguisher.item.ModItems;
 
@@ -28,11 +28,9 @@ public class FireExtinguisherTab {
 
   protected FireExtinguisherTab() {}
 
-  public static final CreativeModeTab TAB_FIRE_EXTINGUISHER =
-      new CreativeModeTab("fire_extinguisher") {
-        public ItemStack makeIcon() {
-          return new ItemStack(ModItems.FIRE_EXTINGUISHER.get());
-        }
-      };
-
+  public static final ItemGroup TAB_FIRE_EXTINGUISHER = new ItemGroup("fire_extinguisher") {
+    public ItemStack makeIcon() {
+      return new ItemStack(ModItems.FIRE_EXTINGUISHER.get());
+    }
+  };
 }
