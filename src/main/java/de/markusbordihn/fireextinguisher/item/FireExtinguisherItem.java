@@ -129,9 +129,8 @@ public class FireExtinguisherItem extends BlockItem implements Vanishable {
         level.removeBlock(blockPos, false);
 
         // Play fire extinguish sound on the client
-        if (level.isClientSide) {
-          player.playSound(SoundEvents.FIRE_EXTINGUISH, 1.0F, 1.0F);
-        }
+        stopFireSound(level, player);
+
         hasStoppedFire = true;
       }
     }
@@ -140,11 +139,15 @@ public class FireExtinguisherItem extends BlockItem implements Vanishable {
     }
   }
 
+  public void stopFireSound(Level level, Player player) {
+    if (level.isClientSide) {
+      player.playSound(SoundEvents.FIRE_EXTINGUISH, 1.0F, 1.0F);
+    }
+  }
+
   public void hurtAndBreak(Level level, ItemStack itemStack, Player player, InteractionHand hand) {
     if (!level.isClientSide) {
-      itemStack.hurtAndBreak(1, player, serverPlayer -> {
-        serverPlayer.broadcastBreakEvent(hand);
-      });
+      itemStack.hurtAndBreak(1, player, serverPlayer -> serverPlayer.broadcastBreakEvent(hand));
     }
   }
 
@@ -185,6 +188,7 @@ public class FireExtinguisherItem extends BlockItem implements Vanishable {
         player.setRemainingFireTicks(2);
       }
       stopFireAnimation(player, level, player.blockPosition());
+      stopFireSound(level, player);
       hurtAndBreak(level, itemStack, player, hand);
     }
     return InteractionResultHolder.pass(itemStack);
@@ -223,6 +227,8 @@ public class FireExtinguisherItem extends BlockItem implements Vanishable {
 
       // Damage item
       hurtAndBreak(level, itemStack, player, hand);
+    } else {
+      stopFireSound(level, player);
     }
     return InteractionResult.PASS;
   }

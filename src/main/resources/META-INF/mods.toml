@@ -18,33 +18,27 @@ license="MIT"
 
 # A list of mods - how many allowed here is determined by the individual mod loader
 [[mods]] #mandatory
-    modId="fire_extinguisher"
-    version="${file.jarVersion}"
-    displayName="Fire Extinguisher"
-    # A URL to query for updates for this mod. See the JSON update specification https://mcforge.readthedocs.io/en/latest/gettingstarted/autoupdate/
-    #updateJSONURL="https://change.me.example.invalid/updates.json" #optional
-    displayURL="https://www.curseforge.com/minecraft/mc-mods/fire-extinguisher"
-    logoFile="logo.png"
-    credits=""
-    authors="Markus Bordihn"
-    description='''A simple fire extinguisher mod which includes items to fight the fire.'''
-
-[[dependencies.fire_extinguisher]] #optional
-    # the modid of the dependency
-    modId="forge" #mandatory
-    # Does this dependency have to exist - if not, ordering below must be specified
-    mandatory=true #mandatory
-    # The version range of the dependency
-    versionRange="[39,)" #mandatory
-    # An ordering relationship for the dependency - BEFORE or AFTER required if the relationship is not mandatory
-    ordering="NONE"
-    # Side this dependency is applied on - BOTH, CLIENT or SERVER
-    side="BOTH"
+  modId="fire_extinguisher"
+  version="${file.jarVersion}"
+  displayName="Fire Extinguisher"
+  # A URL to query for updates for this mod. See the JSON update specification https://mcforge.readthedocs.io/en/latest/gettingstarted/autoupdate/
+  #updateJSONURL="https://change.me.example.invalid/updates.json" #optional
+  displayURL="https://www.curseforge.com/minecraft/mc-mods/fire-extinguisher"
+  logoFile="logo.png"
+  credits=""
+  authors="Markus Bordihn"
+  description='''A simple fire extinguisher mod which includes items to fight the fire.'''
 
 [[dependencies.fire_extinguisher]]
-    modId="minecraft"
-    mandatory=true
-    # This version range declares a minimum of the current minecraft version up to but not including the next major version
-    versionRange="[1.18.1,1.19)"
-    ordering="NONE"
-    side="BOTH"
+  modId="forge"
+  mandatory=true
+  versionRange="[39,)"
+  ordering="NONE"
+  side="BOTH"
+
+[[dependencies.fire_extinguisher]]
+  modId="minecraft"
+  mandatory=true
+  versionRange="[1.18.1,1.19)"
+  ordering="NONE"
+  side="BOTH"
