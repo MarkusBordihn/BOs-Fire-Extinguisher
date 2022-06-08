@@ -77,14 +77,14 @@ public class FireHelmetItem extends ArmorItem {
   }
 
   @Override
-  public void onArmorTick(ItemStack stack, Level level, Player player) {
+  public void onArmorTick(ItemStack itemStack, Level level, Player player) {
     // Add an delay where the player is not protected to make sure the item is not over powered.
     if (fireProtectionEnabled && !level.isClientSide && ticker++ > fireProtectionRenew
         && !player.hasEffect(MobEffects.FIRE_RESISTANCE)) {
       player.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, fireProtectionDuration));
       ticker = 0;
     }
-    super.onArmorTick(stack, level, player);
+    super.onArmorTick(itemStack, level, player);
   }
 
   @Override
