@@ -29,7 +29,6 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -246,11 +245,11 @@ public class FireExtinguisherItem extends BlockItem implements Vanishable {
   @Override
   public void appendHoverText(ItemStack itemStack, @Nullable Level level,
       List<Component> tooltipList, TooltipFlag tooltipFlag) {
-    tooltipList.add(new TranslatableComponent(Constants.TEXT_PREFIX + NAME + "_description",
+    tooltipList.add(Component.translatable(Constants.TEXT_PREFIX + NAME + "_description",
         fireExtinguisherRadius));
-    tooltipList.add(new TranslatableComponent(Constants.TEXT_PREFIX + NAME + "_use")
+    tooltipList.add(Component.translatable(Constants.TEXT_PREFIX + NAME + "_use")
         .withStyle(ChatFormatting.GREEN));
-    tooltipList.add(new TranslatableComponent(Constants.TEXT_PREFIX + NAME + "_place")
+    tooltipList.add(Component.translatable(Constants.TEXT_PREFIX + NAME + "_place")
         .withStyle(ChatFormatting.GRAY));
   }
 }

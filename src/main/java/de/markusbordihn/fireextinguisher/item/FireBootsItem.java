@@ -27,7 +27,6 @@ import org.apache.logging.log4j.Logger;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -96,14 +95,14 @@ public class FireBootsItem extends ArmorItem {
   @Override
   public void appendHoverText(ItemStack itemStack, @Nullable Level level,
       List<Component> tooltipList, TooltipFlag tooltipFlag) {
-    tooltipList.add(new TranslatableComponent(Constants.TEXT_PREFIX + NAME + "_description"));
+    tooltipList.add(Component.translatable(Constants.TEXT_PREFIX + NAME + "_description"));
     if (fireProtectionEnabled) {
-      tooltipList.add(new TranslatableComponent(Constants.TEXT_PREFIX + "fire_armor_config",
+      tooltipList.add(Component.translatable(Constants.TEXT_PREFIX + "fire_armor_config",
           Math.round((fireProtectionRenew / 20.0) * 10) / 10.0,
           Math.round((fireProtectionDuration / 20.0) * 10) / 10.0).withStyle(ChatFormatting.GREEN));
     }
     if (fireBootsSlowDownEnabled) {
-      tooltipList.add(new TranslatableComponent(Constants.TEXT_PREFIX + "fire_armor_slow_down")
+      tooltipList.add(Component.translatable(Constants.TEXT_PREFIX + "fire_armor_slow_down")
           .withStyle(ChatFormatting.DARK_RED));
     }
   }
