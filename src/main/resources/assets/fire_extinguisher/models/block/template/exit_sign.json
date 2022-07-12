@@ -1,6 +1,7 @@
 {
 	"credit": "Made with Blockbench by Markus Bordihn",
 	"texture_size": [32, 16],
+  "render_type": "cutout_mipped",
 	"textures": {
 		"particle": "fire_extinguisher:block/exit_sign",
 		"sign": "fire_extinguisher:block/exit_sign",

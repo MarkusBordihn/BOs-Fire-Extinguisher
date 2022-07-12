@@ -22,9 +22,7 @@ package de.markusbordihn.fireextinguisher;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
@@ -44,9 +42,5 @@ public class FireExtinguisher {
 
     log.info("{} Blocks ...", Constants.LOG_REGISTER_PREFIX);
     ModBlocks.BLOCKS.register(modEventBus);
-
-    DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
-      modEventBus.addListener(ClientSetup::new);
-    });
   }
 }

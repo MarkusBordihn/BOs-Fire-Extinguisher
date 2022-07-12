@@ -1,5 +1,6 @@
 {
   "variants": {
+
     "face=floor,facing=north": {
       "model": "fire_extinguisher:block/exit_sign_right_down_floor",
       "y": 0

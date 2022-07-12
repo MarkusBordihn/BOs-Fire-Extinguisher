@@ -37,14 +37,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 
-import net.minecraftforge.event.server.ServerAboutToStartEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
-
 import de.markusbordihn.fireextinguisher.Constants;
 import de.markusbordihn.fireextinguisher.config.CommonConfig;
 
-@EventBusSubscriber
 public class FireLeggingsItem extends ArmorItem {
 
   protected static final Logger log = LogManager.getLogger(Constants.LOG_NAME);
@@ -53,23 +48,11 @@ public class FireLeggingsItem extends ArmorItem {
 
   private static final CommonConfig.Config COMMON = CommonConfig.COMMON;
 
-  private static boolean fireLeggingsSlowDownEnabled = COMMON.fireLeggingsSlowDownEnabled.get();
-  private static boolean fireProtectionEnabled = COMMON.fireProtectionEnabled.get();
-  private static int fireProtectionRenew = COMMON.fireProtectionRenew.get();
-  private static int fireProtectionDuration = COMMON.fireProtectionDuration.get();
 
   private int ticker = 0;
 
   public FireLeggingsItem(ArmorMaterial material, EquipmentSlot slot, Properties properties) {
     super(material, slot, properties);
-  }
-
-  @SubscribeEvent
-  public static void handleServerAboutToStartEvent(ServerAboutToStartEvent event) {
-    fireLeggingsSlowDownEnabled = COMMON.fireLeggingsSlowDownEnabled.get();
-    fireProtectionEnabled = COMMON.fireProtectionEnabled.get();
-    fireProtectionRenew = COMMON.fireProtectionRenew.get();
-    fireProtectionDuration = COMMON.fireProtectionDuration.get();
   }
 
   @Override
@@ -80,12 +63,14 @@ public class FireLeggingsItem extends ArmorItem {
   @Override
   public void onArmorTick(ItemStack stack, Level level, Player player) {
     // Add an delay where the player is not protected to make sure the item is not over powered.
-    if (fireProtectionEnabled && !level.isClientSide && ticker++ > fireProtectionRenew
+    if (Boolean.TRUE.equals(COMMON.fireProtectionEnabled.get() && !level.isClientSide
+        && ticker++ > COMMON.fireProtectionRenew.get())
         && !player.hasEffect(MobEffects.FIRE_RESISTANCE)) {
-      player.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, fireProtectionDuration));
-      if (fireLeggingsSlowDownEnabled) {
-        player
-            .addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, fireProtectionDuration));
+      player.addEffect(
+          new MobEffectInstance(MobEffects.FIRE_RESISTANCE, COMMON.fireProtectionDuration.get()));
+      if (Boolean.TRUE.equals(COMMON.fireLeggingsSlowDownEnabled.get())) {
+        player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN,
+            COMMON.fireProtectionDuration.get()));
       }
       ticker = 0;
     }
@@ -96,12 +81,14 @@ public class FireLeggingsItem extends ArmorItem {
   public void appendHoverText(ItemStack itemStack, @Nullable Level level,
       List<Component> tooltipList, TooltipFlag tooltipFlag) {
     tooltipList.add(Component.translatable(Constants.TEXT_PREFIX + NAME + "_description"));
-    if (fireProtectionEnabled) {
-      tooltipList.add(Component.translatable(Constants.TEXT_PREFIX + "fire_armor_config",
-          Math.round((fireProtectionRenew / 20.0) * 10) / 10.0,
-          Math.round((fireProtectionDuration / 20.0) * 10) / 10.0).withStyle(ChatFormatting.GREEN));
+    if (Boolean.TRUE.equals(COMMON.fireProtectionEnabled.get())) {
+      tooltipList.add(Component
+          .translatable(Constants.TEXT_PREFIX + "fire_armor_config",
+              Math.round((COMMON.fireProtectionRenew.get() / 20.0) * 10) / 10.0,
+              Math.round((COMMON.fireProtectionDuration.get() / 20.0) * 10) / 10.0)
+          .withStyle(ChatFormatting.GREEN));
     }
-    if (fireLeggingsSlowDownEnabled) {
+    if (Boolean.TRUE.equals(COMMON.fireLeggingsSlowDownEnabled.get())) {
       tooltipList.add(Component.translatable(Constants.TEXT_PREFIX + "fire_armor_slow_down")
           .withStyle(ChatFormatting.DARK_RED));
     }

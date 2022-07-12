@@ -49,15 +49,10 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 
-import net.minecraftforge.event.server.ServerAboutToStartEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
-
 import de.markusbordihn.fireextinguisher.Constants;
 import de.markusbordihn.fireextinguisher.block.FireExtinguisherBlock;
 import de.markusbordihn.fireextinguisher.config.CommonConfig;
 
-@EventBusSubscriber
 public class FireExtinguisherItem extends BlockItem implements Vanishable {
 
   protected static final Logger log = LogManager.getLogger(Constants.LOG_NAME);
@@ -65,8 +60,6 @@ public class FireExtinguisherItem extends BlockItem implements Vanishable {
   public static final String NAME = "fire_extinguisher";
 
   private static final CommonConfig.Config COMMON = CommonConfig.COMMON;
-
-  private static int fireExtinguisherRadius = COMMON.fireExtinguisherRadius.get();
 
   private static final double X_SHIFT = 0.0;
   private static final double Y_SHIFT = 1.6;
@@ -77,11 +70,6 @@ public class FireExtinguisherItem extends BlockItem implements Vanishable {
 
   public FireExtinguisherItem(Block block, Properties properties) {
     super(block, properties);
-  }
-
-  @SubscribeEvent
-  public static void handleServerAboutToStartEvent(ServerAboutToStartEvent event) {
-    fireExtinguisherRadius = COMMON.fireExtinguisherRadius.get();
   }
 
   public void stopFireAnimation(Player player, Level level, BlockPos blockPos) {
@@ -118,8 +106,9 @@ public class FireExtinguisherItem extends BlockItem implements Vanishable {
 
   public void stopFire(Level level, Player player, InteractionHand hand, BlockPos targetBlockPos,
       ItemStack itemStack) {
-    Iterable<BlockPos> blockPositions = BlockPos.withinManhattan(targetBlockPos.above(),
-        fireExtinguisherRadius, fireExtinguisherRadius, fireExtinguisherRadius);
+    Iterable<BlockPos> blockPositions =
+        BlockPos.withinManhattan(targetBlockPos.above(), COMMON.fireExtinguisherRadius.get(),
+            COMMON.fireExtinguisherRadius.get(), COMMON.fireExtinguisherRadius.get());
     boolean hasStoppedFire = false;
     for (BlockPos blockPos : blockPositions) {
       BlockState blockState = level.getBlockState(blockPos);
@@ -246,7 +235,7 @@ public class FireExtinguisherItem extends BlockItem implements Vanishable {
   public void appendHoverText(ItemStack itemStack, @Nullable Level level,
       List<Component> tooltipList, TooltipFlag tooltipFlag) {
     tooltipList.add(Component.translatable(Constants.TEXT_PREFIX + NAME + "_description",
-        fireExtinguisherRadius));
+        COMMON.fireExtinguisherRadius.get()));
     tooltipList.add(Component.translatable(Constants.TEXT_PREFIX + NAME + "_use")
         .withStyle(ChatFormatting.GREEN));
     tooltipList.add(Component.translatable(Constants.TEXT_PREFIX + NAME + "_place")

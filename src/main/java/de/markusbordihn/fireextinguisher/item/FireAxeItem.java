@@ -40,14 +40,9 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 
-import net.minecraftforge.event.server.ServerAboutToStartEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
-
 import de.markusbordihn.fireextinguisher.Constants;
 import de.markusbordihn.fireextinguisher.config.CommonConfig;
 
-@EventBusSubscriber
 public class FireAxeItem extends AxeItem {
 
   protected static final Logger log = LogManager.getLogger(Constants.LOG_NAME);
@@ -56,21 +51,14 @@ public class FireAxeItem extends AxeItem {
 
   private static final CommonConfig.Config COMMON = CommonConfig.COMMON;
 
-  private static int fireAxtRadius = COMMON.fireAxtRadius.get();
-
   public FireAxeItem(Tier tier, float attackBase, float attackSpeed, Properties properties) {
     super(tier, attackBase, attackSpeed, properties);
-  }
-
-  @SubscribeEvent
-  public static void handleServerAboutToStartEvent(ServerAboutToStartEvent event) {
-    fireAxtRadius = COMMON.fireAxtRadius.get();
   }
 
   public void stopFire(Level level, Player player, InteractionHand hand, BlockPos targetBlockPos,
       ItemStack itemStack) {
     Iterable<BlockPos> blockPositions = BlockPos.withinManhattan(targetBlockPos.above(),
-        fireAxtRadius, fireAxtRadius, fireAxtRadius);
+        COMMON.fireAxtRadius.get(), COMMON.fireAxtRadius.get(), COMMON.fireAxtRadius.get());
     boolean hasStoppedFire = false;
     for (BlockPos blockPos : blockPositions) {
       BlockState blockState = level.getBlockState(blockPos);
@@ -108,7 +96,8 @@ public class FireAxeItem extends AxeItem {
   public void appendHoverText(ItemStack itemStack, @Nullable Level level,
       List<Component> tooltipList, TooltipFlag tooltipFlag) {
     tooltipList
-        .add(Component.translatable(Constants.TEXT_PREFIX + NAME + "_description", fireAxtRadius));
+        .add(Component.translatable(Constants.TEXT_PREFIX + NAME + "_description",
+            COMMON.fireAxtRadius.get()));
     tooltipList.add(Component.translatable(Constants.TEXT_PREFIX + NAME + "_use")
         .withStyle(ChatFormatting.GREEN));
   }
