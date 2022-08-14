@@ -30,6 +30,8 @@ public final class Constants {
   public static final String MOD_COMMAND = "fire_extinguisher";
   public static final String MOD_ID = "fire_extinguisher";
   public static final String MOD_NAME = "Fire Extinguisher";
+  public static final String MOD_URL =
+      "https://www.curseforge.com/minecraft/mc-mods/fire-extinguisher";
 
   // Prefixes
   public static final String TEXT_PREFIX = "text.fire_extinguisher.";

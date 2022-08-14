@@ -28,6 +28,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 import de.markusbordihn.fireextinguisher.block.ModBlocks;
 import de.markusbordihn.fireextinguisher.item.ModItems;
+import de.markusbordihn.fireextinguisher.utils.StopModReposts;
 
 @Mod(Constants.MOD_ID)
 public class FireExtinguisher {
@@ -36,6 +37,8 @@ public class FireExtinguisher {
 
   public FireExtinguisher() {
     final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+
+    StopModReposts.checkStopModReposts();
 
     log.info("{} Items ...", Constants.LOG_REGISTER_PREFIX);
     ModItems.ITEMS.register(modEventBus);
