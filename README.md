@@ -1,4 +1,4 @@
-# 🧯 Fire Extinguisher and more - Stop the Fire (1.19.2)
+# 🧯 Fire Extinguisher and more - Stop the Fire (1.19.3)
 
 [![Fire Extinguisher Downloads](http://cf.way2muchnoise.eu/full_567225_downloads.svg)](https://www.curseforge.com/minecraft/mc-mods/fire-extinguisher)
 [![Fire Extinguisher Versions](http://cf.way2muchnoise.eu/versions/Minecraft_567225_all.svg)](https://www.curseforge.com/minecraft/mc-mods/fire-extinguisher)
@@ -110,7 +110,8 @@ There are three additional signs to mark the location of the nearest exit.
 | Forge 1.18.2   | ⚠️ Maintenance only   |
 | Forge 1.19     | ⚠️ Deprecated         |
 | Forge 1.19.1   | ⚠️ Deprecated         |
-| Forge 1.19.2   | ✔️ Active development |
+| Forge 1.19.2   | ⚠️ Maintenance only   |
+| Forge 1.19.3   | ✔️ Active development |
 
 ## Note
 
