@@ -153,15 +153,18 @@ public class FireExtinguisherItem extends BlockItem implements Vanishable {
     Level level = context.getLevel();
     BlockPos blockPos = context.getClickedPos();
     Player player = context.getPlayer();
-    ItemStack itemStack = context.getItemInHand();
-    InteractionHand interactionHand = context.getHand();
 
-    // Place block if shift key is down.
-    if (player.isShiftKeyDown()) {
-      return super.useOn(context);
+    if (player != null) {
+      ItemStack itemStack = context.getItemInHand();
+      InteractionHand interactionHand = context.getHand();
+
+      // Place block if shift key is down.
+      if (player.isShiftKeyDown()) {
+        return super.useOn(context);
+      }
+      stopFireAnimation(player, level, blockPos);
+      stopFire(level, player, interactionHand, blockPos, itemStack);
     }
-    stopFireAnimation(player, level, blockPos);
-    stopFire(level, player, interactionHand, blockPos, itemStack);
 
     return InteractionResult.FAIL;
   }
