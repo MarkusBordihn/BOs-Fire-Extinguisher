@@ -74,12 +74,12 @@ public class CommonConfig {
 
       builder.push("Fire Extinguisher");
       fireExtinguisherRadius = builder.comment("The radius around the target block to stop fire.")
-          .defineInRange("fireExtinguisherRadius", 2, 0, 4);
+          .defineInRange("fireExtinguisherRadius", 2, 0, 8);
       builder.pop();
 
       builder.push("Fire Axt");
       fireAxtRadius = builder.comment("The radius around the target block to stop fire.")
-          .defineInRange("fireAxtRadius", 1, 0, 4);
+          .defineInRange("fireAxtRadius", 1, 0, 8);
       builder.pop();
 
       builder.push("Fire Protection");

@@ -78,7 +78,7 @@ public class StopModReposts {
       log.error("=                                             =");
       log.error("===============================================");
       log.error("");
-      log.error("It's seems that the mod file you are using was modified!");
+      log.error("It's seems that the mod file {} you are using was modified!", jarFilePath);
       log.error(
           "Please make sure to download the latest {} mod only from the original source at {}",
           Constants.MOD_NAME, Constants.MOD_URL);

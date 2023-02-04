@@ -30,12 +30,14 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
@@ -55,27 +57,58 @@ public class FireAxeItem extends AxeItem {
     super(tier, attackBase, attackSpeed, properties);
   }
 
-  public void stopFire(Level level, Player player, InteractionHand hand, BlockPos targetBlockPos,
+  public static void stopFire(Level level, Player player, InteractionHand hand, BlockPos targetBlockPos,
       ItemStack itemStack) {
     Iterable<BlockPos> blockPositions = BlockPos.withinManhattan(targetBlockPos.above(),
         COMMON.fireAxtRadius.get(), COMMON.fireAxtRadius.get(), COMMON.fireAxtRadius.get());
     boolean hasStoppedFire = false;
+
     for (BlockPos blockPos : blockPositions) {
       BlockState blockState = level.getBlockState(blockPos);
       if (blockState.is(Blocks.FIRE)) {
-        // Remove block on server and client
-        level.removeBlock(blockPos, false);
 
-        // Play fire extinguish sound on the client
-        if (level.isClientSide) {
-          player.playSound(SoundEvents.FIRE_EXTINGUISH, 1.0F, 1.0F);
+        // Remove block on server only.
+        if (!level.isClientSide) {
+          log.debug("[FireAxe] Removing Fire Block {} at {}", blockState, blockPos);
+          level.removeBlock(blockPos, false);
         }
+
+        // Play fire extinguish sound on the client.
+        if (level.isClientSide) {
+          stopFireSound(level, player);
+        }
+
         hasStoppedFire = true;
       }
     }
-    if (!level.isClientSide && hasStoppedFire) {
+    if (hasStoppedFire) {
+      hurtAndBreak(level, itemStack, player, hand);
+    }
+  }
+
+  public static void stopFireSound(Level level, Player player) {
+    if (level.isClientSide) {
+      player.playSound(SoundEvents.FIRE_EXTINGUISH, 1.0F, 1.0F);
+    }
+  }
+
+  public static void hurtAndBreak(Level level, ItemStack itemStack, Player player, InteractionHand hand) {
+    if (!level.isClientSide) {
       itemStack.hurtAndBreak(1, player, serverPlayer -> serverPlayer.broadcastBreakEvent(hand));
     }
+  }
+
+  @Override
+  public InteractionResult useOn(UseOnContext context) {
+    Level level = context.getLevel();
+    BlockPos blockPos = context.getClickedPos();
+    Player player = context.getPlayer();
+    ItemStack itemStack = context.getItemInHand();
+    InteractionHand interactionHand = context.getHand();
+
+    stopFire(level, player, interactionHand, blockPos, itemStack);
+
+    return InteractionResult.sidedSuccess(context.getLevel().isClientSide());
   }
 
   @Override
@@ -95,9 +128,8 @@ public class FireAxeItem extends AxeItem {
   @Override
   public void appendHoverText(ItemStack itemStack, @Nullable Level level,
       List<Component> tooltipList, TooltipFlag tooltipFlag) {
-    tooltipList
-        .add(Component.translatable(Constants.TEXT_PREFIX + NAME + "_description",
-            COMMON.fireAxtRadius.get()));
+    tooltipList.add(Component.translatable(Constants.TEXT_PREFIX + NAME + "_description",
+        COMMON.fireAxtRadius.get()));
     tooltipList.add(Component.translatable(Constants.TEXT_PREFIX + NAME + "_use")
         .withStyle(ChatFormatting.GREEN));
   }
