@@ -13,15 +13,12 @@
   "block.fire_extinguisher.exit_sign_right_down": "Exit Sign (right down)",
   "block.fire_extinguisher.exit_sign_right_up": "Exit Sign (right up)",
 
-  "block.placeholder.text": "Template placeholder do not remove!",
-
   "item.fire_extinguisher.fire_axe": "Fire Axe",
 
   "item.fire_extinguisher.fire_helmet": "Fire Helmet",
   "item.fire_extinguisher.fire_chestplate": "Fire Chestplate",
   "item.fire_extinguisher.fire_leggings": "Fire Leggings",
   "item.fire_extinguisher.fire_boots": "Fire Boots",
-  "item.placeholder.text": "Template placeholder do not remove!",
 
   "text.fire_extinguisher.fire_extinguisher_description": "The fire exstinguisher is able to remove fire from a %1$s block radius and can freeze mobs for a small amount of time.",
   "text.fire_extinguisher.fire_extinguisher_use": "► To use the fire extinguisher target a block which is on (or next to the) fire and press the right mouse button.",

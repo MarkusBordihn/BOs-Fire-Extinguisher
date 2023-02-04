@@ -72,7 +72,7 @@ public class FireExtinguisherItem extends BlockItem implements Vanishable {
     super(block, properties);
   }
 
-  public void stopFireAnimation(Player player, Level level, BlockPos blockPos) {
+  public static void stopFireAnimation(Player player, Level level, BlockPos blockPos) {
     if (!level.isClientSide) {
       return;
     }
@@ -104,20 +104,27 @@ public class FireExtinguisherItem extends BlockItem implements Vanishable {
     }
   }
 
-  public void stopFire(Level level, Player player, InteractionHand hand, BlockPos targetBlockPos,
+  public static void stopFire(Level level, Player player, InteractionHand hand, BlockPos targetBlockPos,
       ItemStack itemStack) {
     Iterable<BlockPos> blockPositions =
         BlockPos.withinManhattan(targetBlockPos.above(), COMMON.fireExtinguisherRadius.get(),
             COMMON.fireExtinguisherRadius.get(), COMMON.fireExtinguisherRadius.get());
     boolean hasStoppedFire = false;
+
     for (BlockPos blockPos : blockPositions) {
       BlockState blockState = level.getBlockState(blockPos);
       if (blockState.is(Blocks.FIRE)) {
-        // Remove block on server and client
-        level.removeBlock(blockPos, false);
 
-        // Play fire extinguish sound on the client
-        stopFireSound(level, player);
+        // Remove block on server only.
+        if (!level.isClientSide) {
+          log.debug("[FireExtinguisher] Removing Fire Block {} at {}", blockState, blockPos);
+          level.removeBlock(blockPos, false);
+        }
+
+        // Play fire extinguish sound on the client.
+        if (level.isClientSide) {
+          stopFireSound(level, player);
+        }
 
         hasStoppedFire = true;
       }
@@ -127,13 +134,13 @@ public class FireExtinguisherItem extends BlockItem implements Vanishable {
     }
   }
 
-  public void stopFireSound(Level level, Player player) {
+  public static void stopFireSound(Level level, Player player) {
     if (level.isClientSide) {
       player.playSound(SoundEvents.FIRE_EXTINGUISH, 1.0F, 1.0F);
     }
   }
 
-  public void hurtAndBreak(Level level, ItemStack itemStack, Player player, InteractionHand hand) {
+  public static void hurtAndBreak(Level level, ItemStack itemStack, Player player, InteractionHand hand) {
     if (!level.isClientSide) {
       itemStack.hurtAndBreak(1, player, serverPlayer -> serverPlayer.broadcastBreakEvent(hand));
     }
@@ -153,20 +160,18 @@ public class FireExtinguisherItem extends BlockItem implements Vanishable {
     Level level = context.getLevel();
     BlockPos blockPos = context.getClickedPos();
     Player player = context.getPlayer();
+    ItemStack itemStack = context.getItemInHand();
+    InteractionHand interactionHand = context.getHand();
 
-    if (player != null) {
-      ItemStack itemStack = context.getItemInHand();
-      InteractionHand interactionHand = context.getHand();
-
-      // Place block if shift key is down.
-      if (player.isShiftKeyDown()) {
-        return super.useOn(context);
-      }
-      stopFireAnimation(player, level, blockPos);
-      stopFire(level, player, interactionHand, blockPos, itemStack);
+    // Place block if shift key is down.
+    if (player != null && player.isShiftKeyDown()) {
+      return super.useOn(context);
     }
 
-    return InteractionResult.FAIL;
+    stopFireAnimation(player, level, blockPos);
+    stopFire(level, player, interactionHand, blockPos, itemStack);
+
+    return InteractionResult.sidedSuccess(context.getLevel().isClientSide());
   }
 
   @Override
