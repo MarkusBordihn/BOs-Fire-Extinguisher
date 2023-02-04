@@ -85,7 +85,7 @@ public class FireExtinguisherItem extends BlockItem implements Vanishable {
     fireExtinguisherRadius = COMMON.fireExtinguisherRadius.get();
   }
 
-  public void stopFireAnimation(Player player, Level level, BlockPos blockPos) {
+  public static void stopFireAnimation(Player player, Level level, BlockPos blockPos) {
     if (!level.isClientSide) {
       return;
     }
@@ -117,15 +117,17 @@ public class FireExtinguisherItem extends BlockItem implements Vanishable {
     }
   }
 
-  public void stopFire(Level level, Player player, InteractionHand hand, BlockPos targetBlockPos,
-      ItemStack itemStack) {
+  public static void stopFire(Level level, Player player, InteractionHand hand,
+      BlockPos targetBlockPos, ItemStack itemStack) {
     Iterable<BlockPos> blockPositions = BlockPos.withinManhattan(targetBlockPos.above(),
         fireExtinguisherRadius, fireExtinguisherRadius, fireExtinguisherRadius);
     boolean hasStoppedFire = false;
     for (BlockPos blockPos : blockPositions) {
       BlockState blockState = level.getBlockState(blockPos);
       if (blockState.is(Blocks.FIRE)) {
-        // Remove block on server and client
+
+        // Remove block on client and server.
+        log.debug("[FireExtinguisher] Removing Fire Block {} at {}", blockState, blockPos);
         level.removeBlock(blockPos, false);
 
         // Play fire extinguish sound on the client
@@ -139,13 +141,14 @@ public class FireExtinguisherItem extends BlockItem implements Vanishable {
     }
   }
 
-  public void stopFireSound(Level level, Player player) {
+  public static void stopFireSound(Level level, Player player) {
     if (level.isClientSide) {
       player.playSound(SoundEvents.FIRE_EXTINGUISH, 1.0F, 1.0F);
     }
   }
 
-  public void hurtAndBreak(Level level, ItemStack itemStack, Player player, InteractionHand hand) {
+  public static void hurtAndBreak(Level level, ItemStack itemStack, Player player,
+      InteractionHand hand) {
     if (!level.isClientSide) {
       itemStack.hurtAndBreak(1, player, serverPlayer -> serverPlayer.broadcastBreakEvent(hand));
     }
