@@ -87,7 +87,7 @@ public class FireExtinguisherItem extends BlockItem implements IVanishable {
     fireExtinguisherRadius = COMMON.fireExtinguisherRadius.get();
   }
 
-  public void stopFireAnimation(PlayerEntity player, World level, BlockPos blockPos) {
+  public static void stopFireAnimation(PlayerEntity player, World level, BlockPos blockPos) {
     if (!level.isClientSide) {
       return;
     }
@@ -119,7 +119,7 @@ public class FireExtinguisherItem extends BlockItem implements IVanishable {
     }
   }
 
-  public void stopFire(World level, PlayerEntity player, Hand hand, BlockPos targetBlockPos,
+  public static void stopFire(World level, PlayerEntity player, Hand hand, BlockPos targetBlockPos,
       ItemStack itemStack) {
     Iterable<BlockPos> blockPositions = BlockPos.withinManhattan(targetBlockPos.above(),
         fireExtinguisherRadius, fireExtinguisherRadius, fireExtinguisherRadius);
@@ -127,7 +127,9 @@ public class FireExtinguisherItem extends BlockItem implements IVanishable {
     for (BlockPos blockPos : blockPositions) {
       BlockState blockState = level.getBlockState(blockPos);
       if (blockState.is(Blocks.FIRE)) {
+
         // Remove block on server and client
+        log.debug("[FireExtinguisher] Removing Fire Block {} at {}", blockState, blockPos);
         level.removeBlock(blockPos, false);
 
         // Play fire extinguish sound on the client
@@ -141,13 +143,14 @@ public class FireExtinguisherItem extends BlockItem implements IVanishable {
     }
   }
 
-  public void stopFireSound(World level, PlayerEntity player) {
+  public static void stopFireSound(World level, PlayerEntity player) {
     if (level.isClientSide) {
       player.playSound(SoundEvents.FIRE_EXTINGUISH, 1.0F, 1.0F);
     }
   }
 
-  public void hurtAndBreak(World level, ItemStack itemStack, PlayerEntity player, Hand hand) {
+  public static void hurtAndBreak(World level, ItemStack itemStack, PlayerEntity player,
+      Hand hand) {
     if (!level.isClientSide) {
       itemStack.hurtAndBreak(1, player, serverPlayer -> {
         serverPlayer.broadcastBreakEvent(hand);
@@ -173,7 +176,7 @@ public class FireExtinguisherItem extends BlockItem implements IVanishable {
     Hand hand = context.getHand();
 
     // Place block if shift key is down.
-    if (player.isShiftKeyDown()) {
+    if (player != null && player.isShiftKeyDown()) {
       return super.useOn(context);
     }
 
@@ -213,10 +216,9 @@ public class FireExtinguisherItem extends BlockItem implements IVanishable {
 
     if (!level.isClientSide) {
       // Add slowness effect for movement and jump
-      livingEntity.addEffect(
-          new EffectInstance(Effects.MOVEMENT_SLOWDOWN, ATTACK_EFFECT_DURATION, 10));
       livingEntity
-          .addEffect(new EffectInstance(Effects.SLOW_FALLING, ATTACK_EFFECT_DURATION, 10));
+          .addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, ATTACK_EFFECT_DURATION, 10));
+      livingEntity.addEffect(new EffectInstance(Effects.SLOW_FALLING, ATTACK_EFFECT_DURATION, 10));
 
       // Hurt Mob Entity
       if (!(livingEntity instanceof PlayerEntity)) {

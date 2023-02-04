@@ -1,11 +1,11 @@
+# 🧯 Fire Extinguisher and more - Stop the Fire
+
 [![Fire Extinguisher Downloads](http://cf.way2muchnoise.eu/full_567225_downloads.svg)](https://www.curseforge.com/minecraft/mc-mods/fire-extinguisher)
 [![Fire Extinguisher Versions](http://cf.way2muchnoise.eu/versions/Minecraft_567225_all.svg)](https://www.curseforge.com/minecraft/mc-mods/fire-extinguisher)
 
-# 🧯 Fire Extinguisher and more - Stop the Fire
-
 A simple fire extinguisher mod which includes items to fight the fire.
 
-![Fire Extinguisher][logo]
+![Fire Extinguisher][logo] (1.16.5)
 
 ## Features
 

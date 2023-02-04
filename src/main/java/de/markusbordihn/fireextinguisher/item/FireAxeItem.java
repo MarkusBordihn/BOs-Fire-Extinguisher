@@ -33,6 +33,8 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.AxeItem;
 import net.minecraft.item.IItemTier;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemUseContext;
+import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
@@ -70,7 +72,7 @@ public class FireAxeItem extends AxeItem {
     fireAxtRadius = COMMON.fireAxtRadius.get();
   }
 
-  public void stopFire(World level, PlayerEntity player, Hand hand, BlockPos targetBlockPos,
+  public static void stopFire(World level, PlayerEntity player, Hand hand, BlockPos targetBlockPos,
       ItemStack itemStack) {
     Iterable<BlockPos> blockPositions = BlockPos.withinManhattan(targetBlockPos.above(),
         fireAxtRadius, fireAxtRadius, fireAxtRadius);
@@ -79,20 +81,46 @@ public class FireAxeItem extends AxeItem {
       BlockState blockState = level.getBlockState(blockPos);
       if (blockState.is(Blocks.FIRE)) {
         // Remove block on server and client
+        log.debug("[FireAxe] Removing Fire Block {} at {}", blockState, blockPos);
         level.removeBlock(blockPos, false);
 
         // Play fire extinguish sound on the client
-        if (level.isClientSide) {
-          player.playSound(SoundEvents.FIRE_EXTINGUISH, 1.0F, 1.0F);
-        }
+        stopFireSound(level, player);
+
         hasStoppedFire = true;
       }
     }
-    if (!level.isClientSide && hasStoppedFire) {
+    if (hasStoppedFire) {
+      hurtAndBreak(level, itemStack, player, hand);
+    }
+  }
+
+  public static void stopFireSound(World level, PlayerEntity player) {
+    if (level.isClientSide) {
+      player.playSound(SoundEvents.FIRE_EXTINGUISH, 1.0F, 1.0F);
+    }
+  }
+
+  public static void hurtAndBreak(World level, ItemStack itemStack, PlayerEntity player,
+      Hand hand) {
+    if (!level.isClientSide) {
       itemStack.hurtAndBreak(1, player, serverPlayer -> {
         serverPlayer.broadcastBreakEvent(hand);
       });
     }
+  }
+
+  @Override
+  public ActionResultType useOn(ItemUseContext context) {
+    World level = context.getLevel();
+    BlockPos blockPos = context.getClickedPos();
+    PlayerEntity player = context.getPlayer();
+    ItemStack itemStack = context.getItemInHand();
+    Hand interactionHand = context.getHand();
+
+    stopFire(level, player, interactionHand, blockPos, itemStack);
+
+    return ActionResultType.sidedSuccess(context.getLevel().isClientSide());
   }
 
   @Override
@@ -114,8 +142,8 @@ public class FireAxeItem extends AxeItem {
   @Override
   public void appendHoverText(ItemStack itemStack, @Nullable World level,
       List<ITextComponent> tooltipList, ITooltipFlag tooltipFlag) {
-    tooltipList.add(new TranslationTextComponent(Constants.TEXT_PREFIX + NAME + "_description",
-        fireAxtRadius));
+    tooltipList.add(
+        new TranslationTextComponent(Constants.TEXT_PREFIX + NAME + "_description", fireAxtRadius));
     tooltipList.add(new TranslationTextComponent(Constants.TEXT_PREFIX + NAME + "_use")
         .withStyle(TextFormatting.GREEN));
   }
