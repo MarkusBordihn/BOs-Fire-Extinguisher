@@ -169,7 +169,7 @@ public class FireExtinguisherItem extends BlockItem implements Vanishable {
     InteractionHand interactionHand = context.getHand();
 
     // Place block if shift key is down.
-    if (player.isShiftKeyDown()) {
+    if (player != null && player.isShiftKeyDown()) {
       return super.useOn(context);
     }
     stopFireAnimation(player, level, blockPos);
