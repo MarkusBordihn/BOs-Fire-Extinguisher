@@ -24,10 +24,8 @@ import org.apache.logging.log4j.Logger;
 
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.CreativeModeTab.Output;
 
 import net.minecraftforge.event.CreativeModeTabEvent;
 
@@ -49,39 +47,10 @@ public class FireExtinguisherTab {
     FIRE_EXTINGUISHER_TAB =
         event.registerCreativeModeTab(new ResourceLocation(Constants.MOD_ID), builder -> {
           builder.icon(() -> new ItemStack(ModItems.FIRE_EXTINGUISHER.get()))
-              .displayItems(FireExtinguisherTab::addFireExtinguisherTabItems)
+              .displayItems(new FireExtinguisherItems())
               .title(Component.translatable("itemGroup.fire_extinguisher")).build();
         });
 
-  }
-
-  private static void addFireExtinguisherTabItems(FeatureFlagSet featureFlagSet, Output outputTab,
-      boolean hasPermissions) {
-    // Fire fight weapons
-    outputTab.accept(ModItems.FIRE_AXE.get());
-
-    // Fire fight armor
-    outputTab.accept(ModItems.FIRE_HELMET.get());
-    outputTab.accept(ModItems.FIRE_CHESTPLATE.get());
-    outputTab.accept(ModItems.FIRE_LEGGINGS.get());
-    outputTab.accept(ModItems.FIRE_BOOTS.get());
-
-    // Exit Signs
-    outputTab.accept(ModItems.EXIT_SIGN.get());
-    outputTab.accept(ModItems.EXIT_SIGN_LEFT.get());
-    outputTab.accept(ModItems.EXIT_SIGN_LEFT_DOWN.get());
-    outputTab.accept(ModItems.EXIT_SIGN_LEFT_UP.get());
-    outputTab.accept(ModItems.EXIT_SIGN_RIGHT.get());
-    outputTab.accept(ModItems.EXIT_SIGN_RIGHT_DOWN.get());
-    outputTab.accept(ModItems.EXIT_SIGN_RIGHT_UP.get());
-
-    // Fire Extinguisher Signs
-    outputTab.accept(ModItems.FIRE_EXTINGUISHER_SIGN.get());
-    outputTab.accept(ModItems.FIRE_EXTINGUISHER_SIGN_LEFT.get());
-    outputTab.accept(ModItems.FIRE_EXTINGUISHER_SIGN_RIGHT.get());
-
-    // Fire Extinguisher
-    outputTab.accept(ModItems.FIRE_EXTINGUISHER.get());
   }
 
 }

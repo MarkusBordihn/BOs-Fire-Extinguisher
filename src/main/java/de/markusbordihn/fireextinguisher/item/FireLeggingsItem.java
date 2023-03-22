@@ -29,7 +29,6 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
@@ -51,8 +50,8 @@ public class FireLeggingsItem extends ArmorItem {
 
   private int ticker = 0;
 
-  public FireLeggingsItem(ArmorMaterial material, EquipmentSlot slot, Properties properties) {
-    super(material, slot, properties);
+  public FireLeggingsItem(ArmorMaterial material, ArmorItem.Type type, Properties properties) {
+    super(material, type, properties);
   }
 
   @Override

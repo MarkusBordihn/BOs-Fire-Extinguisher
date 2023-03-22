@@ -19,7 +19,7 @@
 
 package de.markusbordihn.fireextinguisher.item;
 
-import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Tiers;
@@ -47,16 +47,17 @@ public class ModItems {
       () -> new FireAxeItem(Tiers.IRON, 6.0F, -3.1F, new Item.Properties()));
 
   // Fire fight armor
-  public static final RegistryObject<Item> FIRE_HELMET = ITEMS.register(FireHelmetItem.NAME,
-      () -> new FireHelmetItem(ModArmorMaterials.IRON, EquipmentSlot.HEAD, new Item.Properties()));
+  public static final RegistryObject<Item> FIRE_HELMET =
+      ITEMS.register(FireHelmetItem.NAME, () -> new FireHelmetItem(ModArmorMaterials.IRON,
+          ArmorItem.Type.HELMET, new Item.Properties()));
   public static final RegistryObject<Item> FIRE_CHESTPLATE =
       ITEMS.register(FireChestplateItem.NAME, () -> new FireChestplateItem(ModArmorMaterials.IRON,
-          EquipmentSlot.CHEST, new Item.Properties()));
+          ArmorItem.Type.CHESTPLATE, new Item.Properties()));
   public static final RegistryObject<Item> FIRE_LEGGINGS =
       ITEMS.register(FireLeggingsItem.NAME, () -> new FireLeggingsItem(ModArmorMaterials.IRON,
-          EquipmentSlot.LEGS, new Item.Properties()));
+          ArmorItem.Type.LEGGINGS, new Item.Properties()));
   public static final RegistryObject<Item> FIRE_BOOTS = ITEMS.register(FireBootsItem.NAME,
-      () -> new FireBootsItem(ModArmorMaterials.IRON, EquipmentSlot.FEET, new Item.Properties()));
+      () -> new FireBootsItem(ModArmorMaterials.IRON, ArmorItem.Type.BOOTS, new Item.Properties()));
 
   // Exit Signs
   public static final RegistryObject<Item> EXIT_SIGN = ITEMS.register(ExitSign.NAME,

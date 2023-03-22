@@ -218,7 +218,7 @@ public class FireExtinguisherItem extends BlockItem implements Vanishable {
         if (livingEntity instanceof Blaze) {
           attackDamage = 3.0F;
         }
-        livingEntity.hurt(DamageSource.MAGIC, attackDamage);
+        livingEntity.hurt(level.damageSources().magic(), attackDamage);
       }
 
       // Damage item
