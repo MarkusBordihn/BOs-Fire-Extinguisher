@@ -69,7 +69,6 @@ public class FireAxeItem extends AxeItem {
 
         // Remove block on server only.
         if (!level.isClientSide) {
-          log.debug("[FireAxe] Removing Fire Block {} at {}", blockState, blockPos);
           level.removeBlock(blockPos, false);
         }
 

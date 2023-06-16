@@ -22,12 +22,12 @@ package de.markusbordihn.fireextinguisher.tabs;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.ItemStack;
 
-import net.minecraftforge.event.CreativeModeTabEvent;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.RegistryObject;
 
 import de.markusbordihn.fireextinguisher.Constants;
 import de.markusbordihn.fireextinguisher.item.ModItems;
@@ -38,19 +38,14 @@ public class FireExtinguisherTab {
 
   protected FireExtinguisherTab() {}
 
-  public static CreativeModeTab FIRE_EXTINGUISHER_TAB;
+  public static final DeferredRegister<CreativeModeTab> CREATIVE_TABS =
+      DeferredRegister.create(Registries.CREATIVE_MODE_TAB, Constants.MOD_ID);
 
-  public static void handleCreativeModeTabRegister(CreativeModeTabEvent.Register event) {
-
-    log.info("{} creative mod tabs ...", Constants.LOG_REGISTER_PREFIX);
-
-    FIRE_EXTINGUISHER_TAB =
-        event.registerCreativeModeTab(new ResourceLocation(Constants.MOD_ID), builder -> {
-          builder.icon(() -> new ItemStack(ModItems.FIRE_EXTINGUISHER.get()))
+  public static final RegistryObject<CreativeModeTab> FIRE_EXTINGUISHER_TAB =
+      CREATIVE_TABS.register(Constants.MOD_ID,
+          () -> CreativeModeTab.builder()
+              .title(Component.translatable("itemGroup.fire_extinguisher"))
               .displayItems(new FireExtinguisherItems())
-              .title(Component.translatable("itemGroup.fire_extinguisher")).build();
-        });
-
-  }
+              .icon(() -> ModItems.FIRE_EXTINGUISHER.get().getDefaultInstance()).build());
 
 }

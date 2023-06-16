@@ -33,7 +33,6 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
@@ -104,8 +103,8 @@ public class FireExtinguisherItem extends BlockItem implements Vanishable {
     }
   }
 
-  public static void stopFire(Level level, Player player, InteractionHand hand, BlockPos targetBlockPos,
-      ItemStack itemStack) {
+  public static void stopFire(Level level, Player player, InteractionHand hand,
+      BlockPos targetBlockPos, ItemStack itemStack) {
     Iterable<BlockPos> blockPositions =
         BlockPos.withinManhattan(targetBlockPos.above(), COMMON.fireExtinguisherRadius.get(),
             COMMON.fireExtinguisherRadius.get(), COMMON.fireExtinguisherRadius.get());
@@ -117,7 +116,6 @@ public class FireExtinguisherItem extends BlockItem implements Vanishable {
 
         // Remove block on server only.
         if (!level.isClientSide) {
-          log.debug("[FireExtinguisher] Removing Fire Block {} at {}", blockState, blockPos);
           level.removeBlock(blockPos, false);
         }
 
@@ -140,7 +138,8 @@ public class FireExtinguisherItem extends BlockItem implements Vanishable {
     }
   }
 
-  public static void hurtAndBreak(Level level, ItemStack itemStack, Player player, InteractionHand hand) {
+  public static void hurtAndBreak(Level level, ItemStack itemStack, Player player,
+      InteractionHand hand) {
     if (!level.isClientSide) {
       itemStack.hurtAndBreak(1, player, serverPlayer -> serverPlayer.broadcastBreakEvent(hand));
     }
@@ -194,8 +193,8 @@ public class FireExtinguisherItem extends BlockItem implements Vanishable {
   public InteractionResult interactLivingEntity(ItemStack itemStack, Player player,
       LivingEntity livingEntity, InteractionHand hand) {
     BlockPos blockPos = livingEntity.getOnPos();
-    Level level = player.getLevel();
-    stopFireAnimation(player, player.getLevel(), blockPos.above());
+    Level level = player.level();
+    stopFireAnimation(player, level, blockPos.above());
 
     // Set frozen
     livingEntity.setTicksFrozen(ATTACK_EFFECT_DURATION * 5);

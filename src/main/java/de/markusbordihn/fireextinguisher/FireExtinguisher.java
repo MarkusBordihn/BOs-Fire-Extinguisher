@@ -49,7 +49,9 @@ public class FireExtinguisher {
     log.info("{} Blocks ...", Constants.LOG_REGISTER_PREFIX);
     ModBlocks.BLOCKS.register(modEventBus);
 
-    DistExecutor.unsafeRunWhenOn(Dist.CLIENT,
-        () -> () -> modEventBus.addListener(FireExtinguisherTab::handleCreativeModeTabRegister));
+    DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
+      log.info("{} Tabs ...", Constants.LOG_REGISTER_PREFIX);
+      FireExtinguisherTab.CREATIVE_TABS.register(modEventBus);
+    });
   }
 }
