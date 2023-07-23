@@ -1,4 +1,4 @@
-# 🧯 Fire Extinguisher and more - Stop the Fire (1.19.4)
+# 🧯 Fire Extinguisher and more - Stop the Fire (1.20.1)
 
 [![Fire Extinguisher Downloads](http://cf.way2muchnoise.eu/full_567225_downloads.svg)](https://www.curseforge.com/minecraft/mc-mods/fire-extinguisher)
 [![Fire Extinguisher Versions](http://cf.way2muchnoise.eu/versions/Minecraft_567225_all.svg)](https://www.curseforge.com/minecraft/mc-mods/fire-extinguisher)
@@ -121,15 +121,15 @@ Please only download the mod from the official CurseForge page or with the offic
 If you are downloading this mod from other sources we could not make sure that it works as expected or does not includes any unwanted modification (e.g. adware, malware, ...).
 
 [mod_page]: https://www.curseforge.com/minecraft/mc-mods/fire-extinguisher
-[crafting]: https://raw.githubusercontent.com/MarkusBordihn/BOs-Fire-Extinguisher/main/examples/crafting.png
-[crafting_axe]: https://raw.githubusercontent.com/MarkusBordihn/BOs-Fire-Extinguisher/main/examples/crafting_axe.png
-[crafting_boots]: https://raw.githubusercontent.com/MarkusBordihn/BOs-Fire-Extinguisher/main/examples/crafting_boots.png
-[crafting_chestplate]: https://raw.githubusercontent.com/MarkusBordihn/BOs-Fire-Extinguisher/main/examples/crafting_chestplate.png
-[crafting_helmet]: https://raw.githubusercontent.com/MarkusBordihn/BOs-Fire-Extinguisher/main/examples/crafting_helmet.png
-[crafting_leggings]: https://raw.githubusercontent.com/MarkusBordihn/BOs-Fire-Extinguisher/main/examples/crafting_leggings.png
-[exit_signs]: https://raw.githubusercontent.com/MarkusBordihn/BOs-Fire-Extinguisher/main/examples/exit_signs.png
-[fire_armor]: https://raw.githubusercontent.com/MarkusBordihn/BOs-Fire-Extinguisher/main/examples/fire_armor.png
-[in_action]: https://raw.githubusercontent.com/MarkusBordihn/BOs-Fire-Extinguisher/main/examples/in_action.png
-[logo]: https://raw.githubusercontent.com/MarkusBordihn/BOs-Fire-Extinguisher/main/logo.png
-[placed_on_floor]: https://raw.githubusercontent.com/MarkusBordihn/BOs-Fire-Extinguisher/main/examples/placed_on_floor.png
-[signs]: https://raw.githubusercontent.com/MarkusBordihn/BOs-Fire-Extinguisher/main/examples/signs.png
+[crafting]: https://raw.githubusercontent.com/MarkusBordihn/BOs-Fire-Extinguisher/1.20.1/examples/crafting.png
+[crafting_axe]: https://raw.githubusercontent.com/MarkusBordihn/BOs-Fire-Extinguisher/1.20.1/examples/crafting_axe.png
+[crafting_boots]: https://raw.githubusercontent.com/MarkusBordihn/BOs-Fire-Extinguisher/1.20.1/examples/crafting_boots.png
+[crafting_chestplate]: https://raw.githubusercontent.com/MarkusBordihn/BOs-Fire-Extinguisher/1.20.1/examples/crafting_chestplate.png
+[crafting_helmet]: https://raw.githubusercontent.com/MarkusBordihn/BOs-Fire-Extinguisher/1.20.1/examples/crafting_helmet.png
+[crafting_leggings]: https://raw.githubusercontent.com/MarkusBordihn/BOs-Fire-Extinguisher/1.20.1/examples/crafting_leggings.png
+[exit_signs]: https://raw.githubusercontent.com/MarkusBordihn/BOs-Fire-Extinguisher/1.20.1/examples/exit_signs.png
+[fire_armor]: https://raw.githubusercontent.com/MarkusBordihn/BOs-Fire-Extinguisher/1.20.1/examples/fire_armor.png
+[in_action]: https://raw.githubusercontent.com/MarkusBordihn/BOs-Fire-Extinguisher/1.20.1/examples/in_action.png
+[logo]: https://raw.githubusercontent.com/MarkusBordihn/BOs-Fire-Extinguisher/1.20.1/logo.png
+[placed_on_floor]: https://raw.githubusercontent.com/MarkusBordihn/BOs-Fire-Extinguisher/1.20.1/examples/placed_on_floor.png
+[signs]: https://raw.githubusercontent.com/MarkusBordihn/BOs-Fire-Extinguisher/1.20.1/examples/signs.png
