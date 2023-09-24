@@ -1,4 +1,4 @@
-# 🧯 Fire Extinguisher and more - Stop the Fire (1.20.1)
+# 🧯 Fire Extinguisher and more - Stop the Fire (1.20.2)
 
 [![Fire Extinguisher Downloads](http://cf.way2muchnoise.eu/full_567225_downloads.svg)](https://www.curseforge.com/minecraft/mc-mods/fire-extinguisher)
 [![Fire Extinguisher Versions](http://cf.way2muchnoise.eu/versions/Minecraft_567225_all.svg)](https://www.curseforge.com/minecraft/mc-mods/fire-extinguisher)
@@ -123,7 +123,7 @@ If you are downloading this mod from other sources we could not make sure that i
 [mod_page]: https://www.curseforge.com/minecraft/mc-mods/fire-extinguisher
 [crafting]: https://raw.githubusercontent.com/MarkusBordihn/BOs-Fire-Extinguisher/1.20.1/examples/crafting.png
 [crafting_axe]: https://raw.githubusercontent.com/MarkusBordihn/BOs-Fire-Extinguisher/1.20.1/examples/crafting_axe.png
-[crafting_boots]: https://raw.githubusercontent.com/MarkusBordihn/BOs-Fire-Extinguisher/1.20.1/examples/crafting_boots.png
+[crafting_boots]: https://raw.githubusercontent.com/MarkusBordihn/BOs-Fire-Extinguisher/1.20.2/examples/crafting_boots.png
 [crafting_chestplate]: https://raw.githubusercontent.com/MarkusBordihn/BOs-Fire-Extinguisher/1.20.1/examples/crafting_chestplate.png
 [crafting_helmet]: https://raw.githubusercontent.com/MarkusBordihn/BOs-Fire-Extinguisher/1.20.1/examples/crafting_helmet.png
 [crafting_leggings]: https://raw.githubusercontent.com/MarkusBordihn/BOs-Fire-Extinguisher/1.20.1/examples/crafting_leggings.png
