@@ -44,5 +44,6 @@ public class FireExtinguisherSignBlocks {
               .requiresCorrectToolForDrops()
               .strength(3.0F, 6.0F)
               .sound(SoundType.GLASS));
+
   protected FireExtinguisherSignBlocks() {}
 }

@@ -41,6 +41,13 @@ public class CommonConfig {
   public static class Config {
 
     public final ForgeConfigSpec.IntValue fireExtinguisherRadius;
+    public final ForgeConfigSpec.IntValue fireSprinklerRadiusX;
+    public final ForgeConfigSpec.IntValue fireSprinklerRadiusY;
+    public final ForgeConfigSpec.IntValue fireSprinklerRadiusZ;
+
+    public final ForgeConfigSpec.IntValue smokeDetectorRadiusX;
+    public final ForgeConfigSpec.IntValue smokeDetectorRadiusY;
+    public final ForgeConfigSpec.IntValue smokeDetectorRadiusZ;
 
     public final ForgeConfigSpec.IntValue fireAxtRadius;
 
@@ -70,6 +77,42 @@ public class CommonConfig {
           builder
               .comment("The radius around the target block to stop fire.")
               .defineInRange("fireAxtRadius", 1, 0, 8);
+      builder.pop();
+
+      builder.push("Fire Sprinkler");
+      fireSprinklerRadiusX =
+          builder
+              .comment(
+                  "The Manhattan distance around the target block to spread water in X direction.")
+              .defineInRange("fireSprinklerRadiusX", 2, 0, 8);
+      fireSprinklerRadiusY =
+          builder
+              .comment(
+                  "The Manhattan distance around the target block to spread water in Y direction.")
+              .defineInRange("fireSprinklerRadiusY", 3, 0, 8);
+      fireSprinklerRadiusZ =
+          builder
+              .comment(
+                  "The Manhattan distance around the target block to spread water in Z direction.")
+              .defineInRange("fireSprinklerRadiusZ", 2, 0, 8);
+      builder.pop();
+
+      builder.push("Smoke Detector");
+      smokeDetectorRadiusX =
+          builder
+              .comment(
+                  "The Manhattan distance around the target block to detect fire in X direction.")
+              .defineInRange("smokeDetectorRadiusX", 3, 0, 8);
+      smokeDetectorRadiusY =
+          builder
+              .comment(
+                  "The Manhattan distance around the target block to detect fire in Y direction.")
+              .defineInRange("smokeDetectorRadiusY", 5, 0, 8);
+      smokeDetectorRadiusZ =
+          builder
+              .comment(
+                  "The Manhattan distance around the target block to detect fire in Z direction.")
+              .defineInRange("smokeDetectorRadiusZ", 3, 0, 8);
       builder.pop();
 
       builder.push("Fire Protection");

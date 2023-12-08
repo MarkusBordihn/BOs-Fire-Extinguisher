@@ -24,6 +24,7 @@ import de.markusbordihn.fireextinguisher.config.CommonConfig;
 import de.markusbordihn.fireextinguisher.config.ForgeConfigHelperForge;
 import de.markusbordihn.fireextinguisher.item.ModBlockItems;
 import de.markusbordihn.fireextinguisher.item.ModItems;
+import de.markusbordihn.fireextinguisher.sounds.ModSoundEvents;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
@@ -54,11 +55,14 @@ public class FireExtinguisher {
     log.info("{} Items ...", Constants.LOG_REGISTER_PREFIX);
     ModItems.ITEMS.register(modEventBus);
 
+    Constants.LOG.info("{} Sound Events ...", Constants.LOG_REGISTER_PREFIX);
+    ModSoundEvents.SOUNDS.register(modEventBus);
+
     DistExecutor.unsafeRunWhenOn(
         Dist.CLIENT,
         () ->
             () -> {
-              modEventBus.addListener(ClientSetup::new);
+              modEventBus.addListener(FireExtinguisherClient::new);
               MinecraftForge.EVENT_BUS.addListener(this::onItemTooltip);
             });
   }

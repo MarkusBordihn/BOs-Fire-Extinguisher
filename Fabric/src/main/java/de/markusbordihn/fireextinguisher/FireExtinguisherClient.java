@@ -19,22 +19,57 @@
 
 package de.markusbordihn.fireextinguisher;
 
+import de.markusbordihn.fireextinguisher.block.ExitSignBlocks;
+import de.markusbordihn.fireextinguisher.block.FireAlarmBlocks;
+import de.markusbordihn.fireextinguisher.block.FireExtinguisherBlocks;
 import de.markusbordihn.fireextinguisher.tabs.ModTabs;
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
+import net.minecraft.client.renderer.RenderType;
 
 public class FireExtinguisherClient implements ClientModInitializer {
 
   @Override
   public void onInitializeClient() {
     // Use Fabric to bootstrap the Common mod.
-    de.markusbordihn.fireextinguisher.Constants.LOG.info(
-        "Initializing {} (Fabric-Client) ...",
-        de.markusbordihn.fireextinguisher.Constants.MOD_NAME);
-    de.markusbordihn.fireextinguisher.CommonClass.init();
+    Constants.LOG.info("Initializing {} (Fabric-Client) ...", Constants.MOD_NAME);
+    CommonClass.init();
 
     Constants.LOG.info("{} Tabs ...", Constants.LOG_REGISTER_PREFIX);
     ModTabs.registerModTabs();
+
+    Constants.LOG.info("{} Block Layers ...", Constants.LOG_REGISTER_PREFIX);
+    BlockRenderLayerMap.INSTANCE.putBlock(
+        FireExtinguisherBlocks.FIRE_EXTINGUISHER, RenderType.cutoutMipped());
+    BlockRenderLayerMap.INSTANCE.putBlock(
+        FireExtinguisherBlocks.FIRE_EXTINGUISHER_COPPER, RenderType.cutoutMipped());
+
+    BlockRenderLayerMap.INSTANCE.putBlock(
+        FireAlarmBlocks.FIRE_SPRINKLER, RenderType.cutoutMipped());
+    BlockRenderLayerMap.INSTANCE.putBlock(
+        FireAlarmBlocks.FIRE_ALARM_SWITCH, RenderType.cutoutMipped());
+    BlockRenderLayerMap.INSTANCE.putBlock(
+        FireAlarmBlocks.FIRE_ALARM_BELL, RenderType.cutoutMipped());
+    BlockRenderLayerMap.INSTANCE.putBlock(
+        FireAlarmBlocks.FIRE_ALARM_SIREN, RenderType.cutoutMipped());
+    BlockRenderLayerMap.INSTANCE.putBlock(
+        FireAlarmBlocks.FIRE_ALARM_SMOKE_DETECTOR, RenderType.cutoutMipped());
+    BlockRenderLayerMap.INSTANCE.putBlock(
+        FireAlarmBlocks.FIRE_ALARM_SMOKE_DETECTOR_SILENT, RenderType.cutoutMipped());
+
+    BlockRenderLayerMap.INSTANCE.putBlock(ExitSignBlocks.EXIT_SIGN, RenderType.cutoutMipped());
+    BlockRenderLayerMap.INSTANCE.putBlock(ExitSignBlocks.EXIT_SIGN_LEFT, RenderType.cutoutMipped());
+    BlockRenderLayerMap.INSTANCE.putBlock(
+        ExitSignBlocks.EXIT_SIGN_LEFT_DOWN, RenderType.cutoutMipped());
+    BlockRenderLayerMap.INSTANCE.putBlock(
+        ExitSignBlocks.EXIT_SIGN_LEFT_UP, RenderType.cutoutMipped());
+    BlockRenderLayerMap.INSTANCE.putBlock(
+        ExitSignBlocks.EXIT_SIGN_RIGHT, RenderType.cutoutMipped());
+    BlockRenderLayerMap.INSTANCE.putBlock(
+        ExitSignBlocks.EXIT_SIGN_RIGHT_DOWN, RenderType.cutoutMipped());
+    BlockRenderLayerMap.INSTANCE.putBlock(
+        ExitSignBlocks.EXIT_SIGN_RIGHT_UP, RenderType.cutoutMipped());
 
     // Some code like events require special initialization from the
     // loader specific code.

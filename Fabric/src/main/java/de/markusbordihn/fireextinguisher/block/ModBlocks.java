@@ -21,18 +21,47 @@ package de.markusbordihn.fireextinguisher.block;
 
 import de.markusbordihn.fireextinguisher.Constants;
 import net.minecraft.core.Registry;
-import net.minecraft.world.level.block.Block;
 
 public class ModBlocks {
-
-  public static final Block FIRE_EXTINGUISHER = new FireExtinguisherBlock();
 
   protected ModBlocks() {}
 
   public static void registerModBlocks() {
     Constants.LOG.info("{} Fire Extinguisher Blocks...", Constants.LOG_SUB_REGISTER_PREFIX);
     Registry.register(
-        Registry.BLOCK, Constants.MOD_ID_PREFIX + FireExtinguisherBlock.NAME, FIRE_EXTINGUISHER);
+        Registry.BLOCK,
+        Constants.MOD_ID_PREFIX + FireExtinguisherBlock.NAME,
+        FireExtinguisherBlocks.FIRE_EXTINGUISHER);
+    Registry.register(
+        Registry.BLOCK,
+        Constants.MOD_ID_PREFIX + FireExtinguisherBlock.NAME + "_copper",
+        FireExtinguisherBlocks.FIRE_EXTINGUISHER_COPPER);
+
+    Constants.LOG.info("{} Fire Alarm Blocks...", Constants.LOG_SUB_REGISTER_PREFIX);
+    Registry.register(
+        Registry.BLOCK,
+        Constants.MOD_ID_PREFIX + FireSprinklerBlock.NAME,
+        FireAlarmBlocks.FIRE_SPRINKLER);
+    Registry.register(
+        Registry.BLOCK,
+        Constants.MOD_ID_PREFIX + FireAlarmSwitchBlock.NAME,
+        FireAlarmBlocks.FIRE_ALARM_SWITCH);
+    Registry.register(
+        Registry.BLOCK,
+        Constants.MOD_ID_PREFIX + FireAlarmBellBlock.NAME,
+        FireAlarmBlocks.FIRE_ALARM_BELL);
+    Registry.register(
+        Registry.BLOCK,
+        Constants.MOD_ID_PREFIX + FireAlarmSirenBlock.NAME,
+        FireAlarmBlocks.FIRE_ALARM_SIREN);
+    Registry.register(
+        Registry.BLOCK,
+        Constants.MOD_ID_PREFIX + FireAlarmSmokeDetectorBlock.NAME,
+        FireAlarmBlocks.FIRE_ALARM_SMOKE_DETECTOR);
+    Registry.register(
+        Registry.BLOCK,
+        Constants.MOD_ID_PREFIX + FireAlarmSmokeDetectorSilentBlock.NAME,
+        FireAlarmBlocks.FIRE_ALARM_SMOKE_DETECTOR_SILENT);
 
     Constants.LOG.info("{} Fire Extinguisher Sign Blocks...", Constants.LOG_SUB_REGISTER_PREFIX);
     Registry.register(

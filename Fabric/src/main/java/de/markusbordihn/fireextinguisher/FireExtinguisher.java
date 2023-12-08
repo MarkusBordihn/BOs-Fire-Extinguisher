@@ -24,6 +24,7 @@ import de.markusbordihn.fireextinguisher.config.CommonConfig;
 import de.markusbordihn.fireextinguisher.config.ForgeConfigHelperFabric;
 import de.markusbordihn.fireextinguisher.item.ModBlockItems;
 import de.markusbordihn.fireextinguisher.item.ModItems;
+import de.markusbordihn.fireextinguisher.sounds.ModSoundEvents;
 import net.fabricmc.api.ModInitializer;
 
 public class FireExtinguisher implements ModInitializer {
@@ -45,5 +46,8 @@ public class FireExtinguisher implements ModInitializer {
 
     Constants.LOG.info("{} Items ...", Constants.LOG_REGISTER_PREFIX);
     ModItems.registerModItems();
+
+    Constants.LOG.info("{} Sound Events ...", Constants.LOG_REGISTER_PREFIX);
+    ModSoundEvents.registerModSoundEvents();
   }
 }

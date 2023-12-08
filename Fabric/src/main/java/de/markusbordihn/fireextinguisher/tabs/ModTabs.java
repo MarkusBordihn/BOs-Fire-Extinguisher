@@ -21,8 +21,9 @@ package de.markusbordihn.fireextinguisher.tabs;
 
 import de.markusbordihn.fireextinguisher.Constants;
 import de.markusbordihn.fireextinguisher.block.ExitSignBlocks;
+import de.markusbordihn.fireextinguisher.block.FireAlarmBlocks;
+import de.markusbordihn.fireextinguisher.block.FireExtinguisherBlocks;
 import de.markusbordihn.fireextinguisher.block.FireExtinguisherSignBlocks;
-import de.markusbordihn.fireextinguisher.item.ModBlockItems;
 import de.markusbordihn.fireextinguisher.item.ModItems;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.minecraft.resources.ResourceLocation;
@@ -34,10 +35,21 @@ public class ModTabs {
   public static void registerModTabs() {
     Constants.LOG.info("{} Fire Extinguisher Tabs ...", Constants.LOG_SUB_REGISTER_PREFIX);
     FabricItemGroupBuilder.create(new ResourceLocation(Constants.MOD_ID, "tab"))
-        .icon(ModBlockItems.FIRE_EXTINGUISHER::getDefaultInstance)
+        .icon(() -> FireExtinguisherBlocks.FIRE_EXTINGUISHER.asItem().getDefaultInstance())
         .appendItems(
             stack -> {
-              stack.add(ModBlockItems.FIRE_EXTINGUISHER.getDefaultInstance());
+              stack.add(FireExtinguisherBlocks.FIRE_EXTINGUISHER.asItem().getDefaultInstance());
+              stack.add(
+                  FireExtinguisherBlocks.FIRE_EXTINGUISHER_COPPER.asItem().getDefaultInstance());
+
+              stack.add(FireAlarmBlocks.FIRE_SPRINKLER.asItem().getDefaultInstance());
+              stack.add(FireAlarmBlocks.FIRE_ALARM_SWITCH.asItem().getDefaultInstance());
+              stack.add(FireAlarmBlocks.FIRE_ALARM_BELL.asItem().getDefaultInstance());
+              stack.add(FireAlarmBlocks.FIRE_ALARM_SIREN.asItem().getDefaultInstance());
+              stack.add(FireAlarmBlocks.FIRE_ALARM_SMOKE_DETECTOR.asItem().getDefaultInstance());
+              stack.add(
+                  FireAlarmBlocks.FIRE_ALARM_SMOKE_DETECTOR_SILENT.asItem().getDefaultInstance());
+
               stack.add(ModItems.FIRE_AXE.getDefaultInstance());
 
               stack.add(ModItems.FIRE_BOOTS.getDefaultInstance());

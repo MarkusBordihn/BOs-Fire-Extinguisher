@@ -41,6 +41,7 @@ public final class Constants {
   public static final Logger LOG = LoggerFactory.getLogger(MOD_NAME);
   // Prefixes
   public static final String TEXT_PREFIX = "text.fire_extinguisher.";
+  public static final String TOOLTIP_PREFIX = "tooltip.fire_extinguisher.";
 
   private Constants() {}
 }

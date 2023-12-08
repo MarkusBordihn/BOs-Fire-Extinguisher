@@ -22,17 +22,21 @@ package de.markusbordihn.fireextinguisher.item;
 import de.markusbordihn.fireextinguisher.Constants;
 import de.markusbordihn.fireextinguisher.block.ExitSign;
 import de.markusbordihn.fireextinguisher.block.ExitSignBlocks;
+import de.markusbordihn.fireextinguisher.block.FireAlarmBlocks;
+import de.markusbordihn.fireextinguisher.block.FireExtinguisherBlocks;
 import de.markusbordihn.fireextinguisher.block.FireExtinguisherSign;
 import de.markusbordihn.fireextinguisher.block.FireExtinguisherSignBlocks;
-import de.markusbordihn.fireextinguisher.block.ModBlocks;
+import de.markusbordihn.fireextinguisher.blockitem.FireAlarmBellBlockItem;
+import de.markusbordihn.fireextinguisher.blockitem.FireAlarmSirenBlockItem;
+import de.markusbordihn.fireextinguisher.blockitem.FireAlarmSmokeDetectorBlockItem;
+import de.markusbordihn.fireextinguisher.blockitem.FireAlarmSwitchBlockItem;
+import de.markusbordihn.fireextinguisher.blockitem.FireExtinguisherBlockItem;
+import de.markusbordihn.fireextinguisher.blockitem.FireSprinklerBlockItem;
 import net.minecraft.core.Registry;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 
 public class ModBlockItems {
-
-  public static final BlockItem FIRE_EXTINGUISHER =
-      new FireExtinguisherBlockItem(ModBlocks.FIRE_EXTINGUISHER);
 
   protected ModBlockItems() {}
 
@@ -40,7 +44,39 @@ public class ModBlockItems {
 
     Constants.LOG.info("- {} Fire Extinguisher Block Items ...", Constants.LOG_REGISTER_PREFIX);
     Registry.register(
-        Registry.ITEM, Constants.MOD_ID_PREFIX + FireExtinguisherBlockItem.NAME, FIRE_EXTINGUISHER);
+        Registry.ITEM,
+        Constants.MOD_ID_PREFIX + FireExtinguisherBlockItem.NAME,
+        new FireExtinguisherBlockItem(FireExtinguisherBlocks.FIRE_EXTINGUISHER));
+    Registry.register(
+        Registry.ITEM,
+        Constants.MOD_ID_PREFIX + FireExtinguisherBlockItem.NAME + "_copper",
+        new FireExtinguisherBlockItem(FireExtinguisherBlocks.FIRE_EXTINGUISHER_COPPER));
+
+    Constants.LOG.info("- {} Fire Alarm Block Items ...", Constants.LOG_REGISTER_PREFIX);
+    Registry.register(
+        Registry.ITEM,
+        Constants.MOD_ID_PREFIX + FireSprinklerBlockItem.NAME,
+        new FireSprinklerBlockItem(FireAlarmBlocks.FIRE_SPRINKLER));
+    Registry.register(
+        Registry.ITEM,
+        Constants.MOD_ID_PREFIX + FireAlarmSwitchBlockItem.NAME,
+        new FireAlarmSwitchBlockItem(FireAlarmBlocks.FIRE_ALARM_SWITCH));
+    Registry.register(
+        Registry.ITEM,
+        Constants.MOD_ID_PREFIX + FireAlarmBellBlockItem.NAME,
+        new FireAlarmBellBlockItem(FireAlarmBlocks.FIRE_ALARM_BELL));
+    Registry.register(
+        Registry.ITEM,
+        Constants.MOD_ID_PREFIX + FireAlarmSirenBlockItem.NAME,
+        new FireAlarmSirenBlockItem(FireAlarmBlocks.FIRE_ALARM_SIREN));
+    Registry.register(
+        Registry.ITEM,
+        Constants.MOD_ID_PREFIX + FireAlarmSmokeDetectorBlockItem.NAME,
+        new FireAlarmSmokeDetectorBlockItem(FireAlarmBlocks.FIRE_ALARM_SMOKE_DETECTOR));
+    Registry.register(
+        Registry.ITEM,
+        Constants.MOD_ID_PREFIX + FireAlarmSmokeDetectorBlockItem.NAME + "_silent",
+        new FireAlarmSmokeDetectorBlockItem(FireAlarmBlocks.FIRE_ALARM_SMOKE_DETECTOR_SILENT));
 
     Constants.LOG.info(
         "- {} Fire Extinguisher Sign Block Items ...", Constants.LOG_REGISTER_PREFIX);

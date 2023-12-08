@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": ["-W-", "#G#", "O.O"],
+  "key": {
+    "#": {
+      "item": "minecraft:iron_ingot"
+    },
+    "-": {
+      "item": "minecraft:redstone"
+    },
+    "W": {
+      "item": "minecraft:water_bucket"
+    },
+    "O": {
+      "item": "minecraft:iron_bars"
+    },
+    "G": {
+      "item": "minecraft:glass_bottle"
+    },
+    ".": {
+      "item": "minecraft:gold_nugget"
+    }
+  },
+  "result": {
+    "item": "fire_extinguisher:fire_sprinkler"
+  }
+}

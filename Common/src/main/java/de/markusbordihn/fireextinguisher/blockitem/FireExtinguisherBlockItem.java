@@ -17,7 +17,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package de.markusbordihn.fireextinguisher.item;
+package de.markusbordihn.fireextinguisher.blockitem;
 
 import de.markusbordihn.fireextinguisher.Constants;
 import de.markusbordihn.fireextinguisher.block.FireExtinguisherBlock;
@@ -47,6 +47,7 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.CampfireBlock;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class FireExtinguisherBlockItem extends BlockItem implements Vanishable {
@@ -114,22 +115,21 @@ public class FireExtinguisherBlockItem extends BlockItem implements Vanishable {
     boolean hasStoppedFire = false;
     for (BlockPos blockPos : blockPositions) {
       BlockState blockState = level.getBlockState(blockPos);
+
       if (blockState.is(Blocks.FIRE)) {
-
-        // Remove block on client and server but only log on client for debug purpose.
-        if (level.isClientSide) {
-          Constants.LOG.debug(
-              "[FireExtinguisher] Removing Fire Block {} at {}", blockState, blockPos);
-        }
         level.removeBlock(blockPos, false);
-
-        // Play fire extinguish sound on the client
-        stopFireSound(level, player);
-
         hasStoppedFire = true;
+        break;
+      } else if (blockState.is(Blocks.CAMPFIRE)
+          && blockState.getBlock() instanceof CampfireBlock
+          && Boolean.TRUE.equals(blockState.getValue(CampfireBlock.LIT))) {
+        level.setBlockAndUpdate(blockPos, blockState.setValue(CampfireBlock.LIT, false));
+        hasStoppedFire = true;
+        break;
       }
     }
     if (hasStoppedFire) {
+      stopFireSound(level, player);
       hurtAndBreak(level, itemStack, player, hand);
     }
   }
@@ -247,7 +247,8 @@ public class FireExtinguisherBlockItem extends BlockItem implements Vanishable {
       TooltipFlag tooltipFlag) {
     tooltipList.add(
         new TranslatableComponent(
-            Constants.TEXT_PREFIX + NAME + "_description", COMMON.fireExtinguisherRadius.get()));
+                Constants.TOOLTIP_PREFIX + NAME, COMMON.fireExtinguisherRadius.get())
+            .withStyle(ChatFormatting.GRAY));
     tooltipList.add(
         new TranslatableComponent(Constants.TEXT_PREFIX + NAME + "_use")
             .withStyle(ChatFormatting.GREEN));

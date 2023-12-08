@@ -41,7 +41,7 @@ public class FireExtinguisherBlock extends Block {
 
   public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 
-  protected static final VoxelShape SHAPE = Block.box(5.5D, 0D, 5.5D, 10.5D, 9D, 10.5D);
+  protected static final VoxelShape SHAPE = Block.box(5, 0, 5, 11, 14, 11);
 
   public FireExtinguisherBlock() {
     this(

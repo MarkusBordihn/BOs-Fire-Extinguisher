@@ -29,15 +29,33 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
-public class ClientSetup {
+public class FireExtinguisherClient {
 
   public static final Logger log = LogManager.getLogger(Constants.LOG_NAME);
 
-  public ClientSetup(final FMLClientSetupEvent event) {
+  public FireExtinguisherClient(final FMLClientSetupEvent event) {
     log.info("{} Client Setup ...", Constants.LOG_REGISTER_PREFIX);
 
     event.enqueueWork(
         () -> {
+          ItemBlockRenderTypes.setRenderLayer(
+              ModBlocks.FIRE_EXTINGUISHER.get(), RenderType.cutoutMipped());
+          ItemBlockRenderTypes.setRenderLayer(
+              ModBlocks.FIRE_EXTINGUISHER_COPPER.get(), RenderType.cutoutMipped());
+
+          ItemBlockRenderTypes.setRenderLayer(
+              ModBlocks.FIRE_SPRINKLER.get(), RenderType.cutoutMipped());
+          ItemBlockRenderTypes.setRenderLayer(
+              ModBlocks.FIRE_ALARM_SWITCH.get(), RenderType.cutoutMipped());
+          ItemBlockRenderTypes.setRenderLayer(
+              ModBlocks.FIRE_ALARM_BELL.get(), RenderType.cutoutMipped());
+          ItemBlockRenderTypes.setRenderLayer(
+              ModBlocks.FIRE_ALARM_SIREN.get(), RenderType.cutoutMipped());
+          ItemBlockRenderTypes.setRenderLayer(
+              ModBlocks.FIRE_ALARM_SMOKE_DETECTOR.get(), RenderType.cutoutMipped());
+          ItemBlockRenderTypes.setRenderLayer(
+              ModBlocks.FIRE_ALARM_SMOKE_DETECTOR_SILENT.get(), RenderType.cutoutMipped());
+
           ItemBlockRenderTypes.setRenderLayer(ModBlocks.EXIT_SIGN.get(), RenderType.cutoutMipped());
           ItemBlockRenderTypes.setRenderLayer(
               ModBlocks.EXIT_SIGN_LEFT.get(), RenderType.cutoutMipped());
