@@ -35,7 +35,8 @@ To place the fire extinguisher, sneak and press the right mouse button.
 
 ### In Action
 
-To use the fire extinguisher target a block which is on (or next to the) fire and press the right mouse button.
+To use the fire extinguisher target a block which is on (or next to the) fire and press the right
+mouse button.
 If you are not targeting any block the fire extinguisher will not work.
 
 ![Fire extinguisher in action][in_action]
@@ -50,8 +51,10 @@ The fire axe is able to remove fire within 1-2 blocks around a destroyed block.
 
 ## Fire Armor
 
-The fire armor will protect you during your duties, but wearing a full fire armor will have a negative effects on your movements.
-Wearing a full fire armor will completely protect you from fire, but you should not try to swim in lava or so.
+The fire armor will protect you during your duties, but wearing a full fire armor will have a
+negative effects on your movements.
+Wearing a full fire armor will completely protect you from fire, but you should not try to swim in
+lava or so.
 
 ![Fire armor][fire_armor]
 
@@ -99,34 +102,37 @@ There are three additional signs to mark the location of the nearest exit.
 
 ![Fire exit signs][exit_signs]
 
-## Version Status Overview 🛠️
-
-| Version        | Status                |
-| -------------- | --------------------- |
-| Fabric Version | ❌ Not planned        |
-| Forge 1.16.5   | ⚠️ Maintenance only   |
-| Forge 1.17.1   | ❌ Not planned        |
-| Forge 1.18.1   | ⚠️ Maintenance only   |
-| Forge 1.18.2   | ⚠️ Maintenance only   |
-| Forge 1.19     | ✔️ Active development |
-
 ## Note
 
-Please only download the mod from the official CurseForge page or with the official CurseForge launcher like:
+Please only download the mod from the official CurseForge page or with the official CurseForge
+launcher like:
 🚀 [Fire Extinguisher - Stop Fire][mod_page]
 
-If you are downloading this mod from other sources we could not make sure that it works as expected or does not includes any unwanted modification (e.g. adware, malware, ...).
+If you are downloading this mod from other sources we could not make sure that it works as expected
+or does not includes any unwanted modification (e.g. adware, malware, ...).
 
 [mod_page]: https://www.curseforge.com/minecraft/mc-mods/fire-extinguisher
+
 [crafting]: https://raw.githubusercontent.com/MarkusBordihn/BOs-Fire-Extinguisher/main/examples/crafting.png
+
 [crafting_axe]: https://raw.githubusercontent.com/MarkusBordihn/BOs-Fire-Extinguisher/main/examples/crafting_axe.png
+
 [crafting_boots]: https://raw.githubusercontent.com/MarkusBordihn/BOs-Fire-Extinguisher/main/examples/crafting_boots.png
+
 [crafting_chestplate]: https://raw.githubusercontent.com/MarkusBordihn/BOs-Fire-Extinguisher/main/examples/crafting_chestplate.png
+
 [crafting_helmet]: https://raw.githubusercontent.com/MarkusBordihn/BOs-Fire-Extinguisher/main/examples/crafting_helmet.png
+
 [crafting_leggings]: https://raw.githubusercontent.com/MarkusBordihn/BOs-Fire-Extinguisher/main/examples/crafting_leggings.png
+
 [exit_signs]: https://raw.githubusercontent.com/MarkusBordihn/BOs-Fire-Extinguisher/main/examples/exit_signs.png
+
 [fire_armor]: https://raw.githubusercontent.com/MarkusBordihn/BOs-Fire-Extinguisher/main/examples/fire_armor.png
+
 [in_action]: https://raw.githubusercontent.com/MarkusBordihn/BOs-Fire-Extinguisher/main/examples/in_action.png
+
 [logo]: https://raw.githubusercontent.com/MarkusBordihn/BOs-Fire-Extinguisher/main/logo.png
+
 [placed_on_floor]: https://raw.githubusercontent.com/MarkusBordihn/BOs-Fire-Extinguisher/main/examples/placed_on_floor.png
+
 [signs]: https://raw.githubusercontent.com/MarkusBordihn/BOs-Fire-Extinguisher/main/examples/signs.png

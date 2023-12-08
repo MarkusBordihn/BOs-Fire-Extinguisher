@@ -1,0 +1,20 @@
+{
+  "fire_alarm_bell": {
+    "category": "neutral",
+    "sounds": [
+      "fire_extinguisher:fire_alarm_bell"
+    ]
+  },
+  "fire_alarm_siren": {
+    "category": "neutral",
+    "sounds": [
+      "fire_extinguisher:fire_alarm_siren"
+    ]
+  },
+  "fire_alarm_smoke_detector": {
+    "category": "neutral",
+    "sounds": [
+      "fire_extinguisher:fire_alarm_smoke_detector"
+    ]
+  }
+}

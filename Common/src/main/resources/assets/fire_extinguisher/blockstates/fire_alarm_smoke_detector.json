@@ -1,0 +1,166 @@
+{
+  "variants": {
+    "face=ceiling,facing=east,disarmed=false,powered=false": {
+      "model": "fire_extinguisher:block/fire_alarm_smoke_detector_green",
+      "x": 180,
+      "y": 270
+    },
+    "face=ceiling,facing=north,disarmed=false,powered=false": {
+      "model": "fire_extinguisher:block/fire_alarm_smoke_detector_green",
+      "x": 180,
+      "y": 180
+    },
+    "face=ceiling,facing=south,disarmed=false,powered=false": {
+      "model": "fire_extinguisher:block/fire_alarm_smoke_detector_green",
+      "x": 180
+    },
+    "face=ceiling,facing=west,disarmed=false,powered=false": {
+      "model": "fire_extinguisher:block/fire_alarm_smoke_detector_green",
+      "x": 180,
+      "y": 90
+    },
+    "face=floor,facing=east,disarmed=false,powered=false": {
+      "model": "fire_extinguisher:block/fire_alarm_smoke_detector_green",
+      "y": 90
+    },
+    "face=floor,facing=north,disarmed=false,powered=false": {
+      "model": "fire_extinguisher:block/fire_alarm_smoke_detector_green"
+    },
+    "face=floor,facing=south,disarmed=false,powered=false": {
+      "model": "fire_extinguisher:block/fire_alarm_smoke_detector_green",
+      "y": 180
+    },
+    "face=floor,facing=west,disarmed=false,powered=false": {
+      "model": "fire_extinguisher:block/fire_alarm_smoke_detector_green",
+      "y": 270
+    },
+    "face=wall,facing=east,disarmed=false,powered=false": {
+      "model": "fire_extinguisher:block/fire_alarm_smoke_detector_green",
+      "x": 270,
+      "y": 270
+    },
+    "face=wall,facing=north,disarmed=false,powered=false": {
+      "model": "fire_extinguisher:block/fire_alarm_smoke_detector_green",
+      "x": 270,
+      "y": 180
+    },
+    "face=wall,facing=south,disarmed=false,powered=false": {
+      "model": "fire_extinguisher:block/fire_alarm_smoke_detector_green",
+      "x": 270,
+      "y": 0
+    },
+    "face=wall,facing=west,disarmed=false,powered=false": {
+      "model": "fire_extinguisher:block/fire_alarm_smoke_detector_green",
+      "x": 270,
+      "y": 90
+    },
+    "face=ceiling,facing=east,disarmed=false,powered=true": {
+      "model": "fire_extinguisher:block/fire_alarm_smoke_detector_red",
+      "x": 180,
+      "y": 270
+    },
+    "face=ceiling,facing=north,disarmed=false,powered=true": {
+      "model": "fire_extinguisher:block/fire_alarm_smoke_detector_red",
+      "x": 180,
+      "y": 180
+    },
+    "face=ceiling,facing=south,disarmed=false,powered=true": {
+      "model": "fire_extinguisher:block/fire_alarm_smoke_detector_red",
+      "x": 180
+    },
+    "face=ceiling,facing=west,disarmed=false,powered=true": {
+      "model": "fire_extinguisher:block/fire_alarm_smoke_detector_red",
+      "x": 180,
+      "y": 90
+    },
+    "face=floor,facing=east,disarmed=false,powered=true": {
+      "model": "fire_extinguisher:block/fire_alarm_smoke_detector_red",
+      "y": 90
+    },
+    "face=floor,facing=north,disarmed=false,powered=true": {
+      "model": "fire_extinguisher:block/fire_alarm_smoke_detector_red"
+    },
+    "face=floor,facing=south,disarmed=false,powered=true": {
+      "model": "fire_extinguisher:block/fire_alarm_smoke_detector_red",
+      "y": 180
+    },
+    "face=floor,facing=west,disarmed=false,powered=true": {
+      "model": "fire_extinguisher:block/fire_alarm_smoke_detector_red",
+      "y": 270
+    },
+    "face=wall,facing=east,disarmed=false,powered=true": {
+      "model": "fire_extinguisher:block/fire_alarm_smoke_detector_red",
+      "x": 270,
+      "y": 270
+    },
+    "face=wall,facing=north,disarmed=false,powered=true": {
+      "model": "fire_extinguisher:block/fire_alarm_smoke_detector_red",
+      "x": 270,
+      "y": 180
+    },
+    "face=wall,facing=south,disarmed=false,powered=true": {
+      "model": "fire_extinguisher:block/fire_alarm_smoke_detector_red",
+      "x": 270,
+      "y": 0
+    },
+    "face=wall,facing=west,disarmed=false,powered=true": {
+      "model": "fire_extinguisher:block/fire_alarm_smoke_detector_red",
+      "x": 270,
+      "y": 90
+    },
+    "face=ceiling,facing=east,disarmed=true": {
+      "model": "fire_extinguisher:block/fire_alarm_smoke_detector_orange",
+      "x": 180,
+      "y": 270
+    },
+    "face=ceiling,facing=north,disarmed=true": {
+      "model": "fire_extinguisher:block/fire_alarm_smoke_detector_orange",
+      "x": 180,
+      "y": 180
+    },
+    "face=ceiling,facing=south,disarmed=true": {
+      "model": "fire_extinguisher:block/fire_alarm_smoke_detector_orange",
+      "x": 180
+    },
+    "face=ceiling,facing=west,disarmed=true": {
+      "model": "fire_extinguisher:block/fire_alarm_smoke_detector_orange",
+      "x": 180,
+      "y": 90
+    },
+    "face=floor,facing=east,disarmed=true": {
+      "model": "fire_extinguisher:block/fire_alarm_smoke_detector_orange",
+      "y": 90
+    },
+    "face=floor,facing=north,disarmed=true": {
+      "model": "fire_extinguisher:block/fire_alarm_smoke_detector_orange"
+    },
+    "face=floor,facing=south,disarmed=true": {
+      "model": "fire_extinguisher:block/fire_alarm_smoke_detector_orange",
+      "y": 180
+    },
+    "face=floor,facing=west,disarmed=true": {
+      "model": "fire_extinguisher:block/fire_alarm_smoke_detector_orange",
+      "y": 270
+    },
+    "face=wall,facing=east,disarmed=true": {
+      "model": "fire_extinguisher:block/fire_alarm_smoke_detector_orange",
+      "x": 270,
+      "y": 270
+    },
+    "face=wall,facing=north,disarmed=true": {
+      "model": "fire_extinguisher:block/fire_alarm_smoke_detector_orange",
+      "x": 270,
+      "y": 180
+    },
+    "face=wall,facing=south,disarmed=true": {
+      "model": "fire_extinguisher:block/fire_alarm_smoke_detector_orange",
+      "x": 270,
+      "y": 0
+    },
+    "face=wall,facing=west,disarmed=true": {
+      "model": "fire_extinguisher:block/fire_alarm_smoke_detector_orange",
+      "x": 270,
+      "y": 90
+    }
+  }
+}
