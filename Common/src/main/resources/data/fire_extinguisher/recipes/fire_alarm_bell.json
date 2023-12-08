@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": ["#|#", "#BR", "#|#"],
+  "key": {
+    "#": {
+      "item": "minecraft:iron_ingot"
+    },
+    "|": {
+      "item": "minecraft:redstone"
+    },
+    "B": {
+      "item": "minecraft:bell"
+    },
+    "R": {
+      "item": "minecraft:red_dye"
+    }
+  },
+  "result": {
+    "item": "fire_extinguisher:fire_alarm_bell"
+  }
+}

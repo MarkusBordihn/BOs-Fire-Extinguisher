@@ -1,0 +1,7 @@
+{
+  "parent": "fire_extinguisher:block/fire_alarm_smoke_detector",
+  "textures": {
+    "texture": "fire_extinguisher:block/fire_alarm_smoke_detector",
+    "status_led": "fire_extinguisher:block/fire_alarm_smoke_detector_led_orange"
+  }
+}

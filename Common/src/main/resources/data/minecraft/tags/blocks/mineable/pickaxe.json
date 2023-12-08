@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "fire_extinguisher:fire_alarm_bell",
+    "fire_extinguisher:fire_alarm_siren",
+    "fire_extinguisher:fire_sprinkler"
+  ]
+}

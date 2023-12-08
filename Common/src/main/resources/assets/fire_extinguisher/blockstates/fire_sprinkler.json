@@ -1,0 +1,44 @@
+{
+  "variants": {
+    "facing=north,powered=false": {
+      "model": "fire_extinguisher:block/fire_sprinkler",
+      "y": 0,
+      "x": 180
+    },
+    "facing=north,powered=true": {
+      "model": "fire_extinguisher:block/fire_sprinkler_on",
+      "y": 0,
+      "x": 180
+    },
+    "facing=east,powered=false": {
+      "model": "fire_extinguisher:block/fire_sprinkler",
+      "y": 90,
+      "x": 180
+    },
+    "facing=east,powered=true": {
+      "model": "fire_extinguisher:block/fire_sprinkler_on",
+      "y": 90,
+      "x": 180
+    },
+    "facing=south,powered=false": {
+      "model": "fire_extinguisher:block/fire_sprinkler",
+      "y": 180,
+      "x": 180
+    },
+    "facing=south,powered=true": {
+      "model": "fire_extinguisher:block/fire_sprinkler_on",
+      "y": 180,
+      "x": 180
+    },
+    "facing=west,powered=false": {
+      "model": "fire_extinguisher:block/fire_sprinkler",
+      "y": 270,
+      "x": 180
+    },
+    "facing=west,powered=true": {
+      "model": "fire_extinguisher:block/fire_sprinkler_on",
+      "y": 270,
+      "x": 180
+    }
+  }
+}

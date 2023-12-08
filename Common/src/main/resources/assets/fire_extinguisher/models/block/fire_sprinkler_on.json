@@ -1,0 +1,7 @@
+{
+  "parent": "fire_extinguisher:block/fire_sprinkler",
+  "textures": {
+    "texture": "fire_extinguisher:block/fire_sprinkler",
+    "bub": "fire_extinguisher:block/fire_sprinkler_bub_broken"
+  }
+}
