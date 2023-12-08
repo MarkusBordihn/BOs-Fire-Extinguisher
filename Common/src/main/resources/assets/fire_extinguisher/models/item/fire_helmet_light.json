@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "fire_extinguisher:item/fire_helmet_light"
+  }
+}

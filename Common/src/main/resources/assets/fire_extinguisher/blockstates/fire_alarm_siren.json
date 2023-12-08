@@ -1,0 +1,58 @@
+{
+  "variants": {
+    "face=ceiling,facing=east": {
+      "model": "fire_extinguisher:block/fire_alarm_siren",
+      "x": 180,
+      "y": 270
+    },
+    "face=ceiling,facing=north": {
+      "model": "fire_extinguisher:block/fire_alarm_siren",
+      "x": 180,
+      "y": 180
+    },
+    "face=ceiling,facing=south": {
+      "model": "fire_extinguisher:block/fire_alarm_siren",
+      "x": 180
+    },
+    "face=ceiling,facing=west": {
+      "model": "fire_extinguisher:block/fire_alarm_siren",
+      "x": 180,
+      "y": 90
+    },
+    "face=floor,facing=east": {
+      "model": "fire_extinguisher:block/fire_alarm_siren",
+      "y": 90
+    },
+    "face=floor,facing=north": {
+      "model": "fire_extinguisher:block/fire_alarm_siren"
+    },
+    "face=floor,facing=south": {
+      "model": "fire_extinguisher:block/fire_alarm_siren",
+      "y": 180
+    },
+    "face=floor,facing=west": {
+      "model": "fire_extinguisher:block/fire_alarm_siren",
+      "y": 270
+    },
+    "face=wall,facing=east": {
+      "model": "fire_extinguisher:block/fire_alarm_siren",
+      "x": 270,
+      "y": 270
+    },
+    "face=wall,facing=north": {
+      "model": "fire_extinguisher:block/fire_alarm_siren",
+      "x": 270,
+      "y": 180
+    },
+    "face=wall,facing=south": {
+      "model": "fire_extinguisher:block/fire_alarm_siren",
+      "x": 270,
+      "y": 0
+    },
+    "face=wall,facing=west": {
+      "model": "fire_extinguisher:block/fire_alarm_siren",
+      "x": 270,
+      "y": 90
+    }
+  }
+}
