@@ -37,7 +37,16 @@ public enum ModArmorMaterials implements ArmorMaterial {
       SoundEvents.ARMOR_EQUIP_IRON,
       0.0F,
       0.0F,
-      () -> Ingredient.of(Items.IRON_INGOT));
+      () -> Ingredient.of(Items.IRON_INGOT)),
+  FIRE_PROTECTION_LIGHT(
+      "fire_protection_light_armor",
+      15,
+      new int[] {2, 5, 6, 2},
+      9,
+      SoundEvents.ARMOR_EQUIP_LEATHER,
+      0.0F,
+      0.0F,
+      () -> Ingredient.of(Items.LEATHER));
 
   private static final int[] HEALTH_PER_SLOT = new int[] {13, 15, 16, 11};
   private final String name;

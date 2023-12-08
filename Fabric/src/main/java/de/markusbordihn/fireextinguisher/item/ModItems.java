@@ -31,6 +31,11 @@ public class ModItems {
   public static final Item FIRE_HELMET = new FireHelmetItem();
   public static final Item FIRE_LEGGINGS = new FireLeggingsItem();
 
+  public static final Item FIRE_BOOTS_LIGHT = new FireBootsLightItem();
+  public static final Item FIRE_CHESTPLATE_LIGHT = new FireChestplateLightItem();
+  public static final Item FIRE_HELMET_LIGHT = new FireHelmetLightItem();
+  public static final Item FIRE_LEGGINGS_LIGHT = new FireLeggingsLightItem();
+
   protected ModItems() {}
 
   public static void registerModItems() {
@@ -45,5 +50,18 @@ public class ModItems {
     Registry.register(Registry.ITEM, Constants.MOD_ID_PREFIX + FireHelmetItem.NAME, FIRE_HELMET);
     Registry.register(
         Registry.ITEM, Constants.MOD_ID_PREFIX + FireLeggingsItem.NAME, FIRE_LEGGINGS);
+
+    Constants.LOG.info(
+        "{} Fire protection light armor items ...", Constants.LOG_SUB_REGISTER_PREFIX);
+    Registry.register(
+        Registry.ITEM, Constants.MOD_ID_PREFIX + FireBootsLightItem.NAME, FIRE_BOOTS_LIGHT);
+    Registry.register(
+        Registry.ITEM,
+        Constants.MOD_ID_PREFIX + FireChestplateLightItem.NAME,
+        FIRE_CHESTPLATE_LIGHT);
+    Registry.register(
+        Registry.ITEM, Constants.MOD_ID_PREFIX + FireHelmetLightItem.NAME, FIRE_HELMET_LIGHT);
+    Registry.register(
+        Registry.ITEM, Constants.MOD_ID_PREFIX + FireLeggingsLightItem.NAME, FIRE_LEGGINGS_LIGHT);
   }
 }

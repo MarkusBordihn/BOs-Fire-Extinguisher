@@ -57,6 +57,11 @@ public class ModTabs {
               stack.add(ModItems.FIRE_HELMET.getDefaultInstance());
               stack.add(ModItems.FIRE_LEGGINGS.getDefaultInstance());
 
+              stack.add(ModItems.FIRE_BOOTS_LIGHT.getDefaultInstance());
+              stack.add(ModItems.FIRE_CHESTPLATE_LIGHT.getDefaultInstance());
+              stack.add(ModItems.FIRE_HELMET_LIGHT.getDefaultInstance());
+              stack.add(ModItems.FIRE_LEGGINGS_LIGHT.getDefaultInstance());
+
               stack.add(
                   FireExtinguisherSignBlocks.FIRE_EXTINGUISHER_SIGN.asItem().getDefaultInstance());
               stack.add(

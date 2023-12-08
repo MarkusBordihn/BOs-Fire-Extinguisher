@@ -52,6 +52,26 @@ public class ModItems {
       ITEMS.register(
           FireBootsItem.NAME,
           () -> new FireBootsItem(new Item.Properties().tab(ModTabs.TAB_FIRE_EXTINGUISHER)));
+  // Fire fighter armor (light)
+  public static final RegistryObject<Item> FIRE_HELMET_LIGHT =
+      ITEMS.register(
+          FireHelmetLightItem.NAME,
+          () -> new FireHelmetLightItem(new Item.Properties().tab(ModTabs.TAB_FIRE_EXTINGUISHER)));
+  public static final RegistryObject<Item> FIRE_CHESTPLATE_LIGHT =
+      ITEMS.register(
+          FireChestplateLightItem.NAME,
+          () ->
+              new FireChestplateLightItem(
+                  new Item.Properties().tab(ModTabs.TAB_FIRE_EXTINGUISHER)));
+  public static final RegistryObject<Item> FIRE_LEGGINGS_LIGHT =
+      ITEMS.register(
+          FireLeggingsLightItem.NAME,
+          () ->
+              new FireLeggingsLightItem(new Item.Properties().tab(ModTabs.TAB_FIRE_EXTINGUISHER)));
+  public static final RegistryObject<Item> FIRE_BOOTS_LIGHT =
+      ITEMS.register(
+          FireBootsLightItem.NAME,
+          () -> new FireBootsLightItem(new Item.Properties().tab(ModTabs.TAB_FIRE_EXTINGUISHER)));
 
   protected ModItems() {}
 }

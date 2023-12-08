@@ -5,6 +5,11 @@
 This change log includes the summarized changes.
 For the full changelog, please go to the [GitHub History][history] instead.
 
+### 6.2.0
+
+- Added lightweight fire armor.
+- Fixed rotation of fire sprinkler.
+
 ### 6.1.0
 
 - Added Fire Sprinkler Block

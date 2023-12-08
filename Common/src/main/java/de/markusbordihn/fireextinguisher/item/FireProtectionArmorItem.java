@@ -23,6 +23,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
@@ -31,7 +32,12 @@ public class FireProtectionArmorItem extends ArmorItem {
   protected static final CommonConfig.Config COMMON = CommonConfig.COMMON;
 
   public FireProtectionArmorItem(EquipmentSlot slot, Properties properties) {
-    super(ModArmorMaterials.FIRE_PROTECTION, slot, properties);
+    this(ModArmorMaterials.FIRE_PROTECTION, slot, properties);
+  }
+
+  public FireProtectionArmorItem(
+      ArmorMaterial armorMaterial, EquipmentSlot slot, Properties properties) {
+    super(armorMaterial, slot, properties);
   }
 
   @Override

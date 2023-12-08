@@ -59,6 +59,10 @@ public class CommonConfig {
     public final ForgeConfigSpec.BooleanValue fireChestplateSlowDownEnabled;
     public final ForgeConfigSpec.BooleanValue fireLeggingsSlowDownEnabled;
 
+    public final ForgeConfigSpec.BooleanValue fireProtectionLightEnabled;
+    public final ForgeConfigSpec.IntValue fireProtectionLightDuration;
+    public final ForgeConfigSpec.IntValue fireProtectionLightRenew;
+
     Config(ForgeConfigSpec.Builder builder) {
       builder.comment(Constants.MOD_NAME);
 
@@ -115,7 +119,7 @@ public class CommonConfig {
               .defineInRange("smokeDetectorRadiusZ", 3, 0, 8);
       builder.pop();
 
-      builder.push("Fire Protection");
+      builder.push("Fire Protection (heavy)");
       fireProtectionEnabled =
           builder
               .comment("Enable/Disable fire protection affects from fire armor.")
@@ -123,12 +127,11 @@ public class CommonConfig {
       fireProtectionRenew =
           builder
               .comment("Defines the amount of ticks after the fire protection get's renewed.")
-              .defineInRange("fireProtectionRenew", 40, 20, 6000);
+              .defineInRange("fireProtectionRenew", 80, 20, 6000);
       fireProtectionDuration =
           builder
               .comment("Defines the amount of ticks how long the fire protection is enabled.")
-              .defineInRange("fireProtectionDuration", 20, 10, 6000);
-      builder.pop();
+              .defineInRange("fireProtectionDuration", 25, 10, 6000);
 
       builder.push("Fire Boots");
       fireBootsSlowDownEnabled =
@@ -149,6 +152,23 @@ public class CommonConfig {
           builder
               .comment("Enable/Disable slow down effect of wearing the fire leggings.")
               .define("fireLeggingsSlowDownEnabled", true);
+      builder.pop();
+
+      builder.pop();
+
+      builder.push("Fire Protection (light)");
+      fireProtectionLightEnabled =
+          builder
+              .comment("Enable/Disable fire protection light affects from fire armor.")
+              .define("fireProtectionLightEnabled", true);
+      fireProtectionLightRenew =
+          builder
+              .comment("Defines the amount of ticks after the fire protection light get's renewed.")
+              .defineInRange("fireProtectionLightRenew", 180, 20, 6000);
+      fireProtectionLightDuration =
+          builder
+              .comment("Defines the amount of ticks how long the fire protection light is enabled.")
+              .defineInRange("fireProtectionLightDuration", 40, 10, 6000);
       builder.pop();
     }
   }
