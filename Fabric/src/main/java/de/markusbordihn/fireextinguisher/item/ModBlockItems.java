@@ -26,14 +26,15 @@ import de.markusbordihn.fireextinguisher.block.FireAlarmBlocks;
 import de.markusbordihn.fireextinguisher.block.FireExtinguisherBlocks;
 import de.markusbordihn.fireextinguisher.block.FireExtinguisherSign;
 import de.markusbordihn.fireextinguisher.block.FireExtinguisherSignBlocks;
+import de.markusbordihn.fireextinguisher.blockitem.ExitSignBlockItem;
 import de.markusbordihn.fireextinguisher.blockitem.FireAlarmBellBlockItem;
 import de.markusbordihn.fireextinguisher.blockitem.FireAlarmSirenBlockItem;
 import de.markusbordihn.fireextinguisher.blockitem.FireAlarmSmokeDetectorBlockItem;
 import de.markusbordihn.fireextinguisher.blockitem.FireAlarmSwitchBlockItem;
 import de.markusbordihn.fireextinguisher.blockitem.FireExtinguisherBlockItem;
+import de.markusbordihn.fireextinguisher.blockitem.FireExtinguisherSignBlockItem;
 import de.markusbordihn.fireextinguisher.blockitem.FireSprinklerBlockItem;
 import net.minecraft.core.Registry;
-import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 
 public class ModBlockItems {
@@ -83,46 +84,47 @@ public class ModBlockItems {
     Registry.register(
         Registry.ITEM,
         Constants.MOD_ID_PREFIX + FireExtinguisherSign.NAME,
-        new BlockItem(FireExtinguisherSignBlocks.FIRE_EXTINGUISHER_SIGN, new Item.Properties()));
+        new FireExtinguisherSignBlockItem(
+            FireExtinguisherSignBlocks.FIRE_EXTINGUISHER_SIGN, new Item.Properties()));
     Registry.register(
         Registry.ITEM,
         Constants.MOD_ID_PREFIX + FireExtinguisherSign.NAME + "_left",
-        new BlockItem(
+        new FireExtinguisherSignBlockItem(
             FireExtinguisherSignBlocks.FIRE_EXTINGUISHER_SIGN_LEFT, new Item.Properties()));
     Registry.register(
         Registry.ITEM,
         Constants.MOD_ID_PREFIX + FireExtinguisherSign.NAME + "_right",
-        new BlockItem(
+        new FireExtinguisherSignBlockItem(
             FireExtinguisherSignBlocks.FIRE_EXTINGUISHER_SIGN_RIGHT, new Item.Properties()));
 
     Constants.LOG.info("{} Exit Sign Block Items ...", Constants.LOG_SUB_REGISTER_PREFIX);
     Registry.register(
         Registry.ITEM,
         Constants.MOD_ID_PREFIX + ExitSign.NAME,
-        new BlockItem(ExitSignBlocks.EXIT_SIGN, new Item.Properties()));
+        new ExitSignBlockItem(ExitSignBlocks.EXIT_SIGN, new Item.Properties()));
     Registry.register(
         Registry.ITEM,
         Constants.MOD_ID_PREFIX + ExitSign.NAME + "_left",
-        new BlockItem(ExitSignBlocks.EXIT_SIGN_LEFT, new Item.Properties()));
+        new ExitSignBlockItem(ExitSignBlocks.EXIT_SIGN_LEFT, new Item.Properties()));
     Registry.register(
         Registry.ITEM,
         Constants.MOD_ID_PREFIX + ExitSign.NAME + "_left_down",
-        new BlockItem(ExitSignBlocks.EXIT_SIGN_LEFT_DOWN, new Item.Properties()));
+        new ExitSignBlockItem(ExitSignBlocks.EXIT_SIGN_LEFT_DOWN, new Item.Properties()));
     Registry.register(
         Registry.ITEM,
         Constants.MOD_ID_PREFIX + ExitSign.NAME + "_left_up",
-        new BlockItem(ExitSignBlocks.EXIT_SIGN_LEFT_UP, new Item.Properties()));
+        new ExitSignBlockItem(ExitSignBlocks.EXIT_SIGN_LEFT_UP, new Item.Properties()));
     Registry.register(
         Registry.ITEM,
         Constants.MOD_ID_PREFIX + ExitSign.NAME + "_right",
-        new BlockItem(ExitSignBlocks.EXIT_SIGN_RIGHT, new Item.Properties()));
+        new ExitSignBlockItem(ExitSignBlocks.EXIT_SIGN_RIGHT, new Item.Properties()));
     Registry.register(
         Registry.ITEM,
         Constants.MOD_ID_PREFIX + ExitSign.NAME + "_right_down",
-        new BlockItem(ExitSignBlocks.EXIT_SIGN_RIGHT_DOWN, new Item.Properties()));
+        new ExitSignBlockItem(ExitSignBlocks.EXIT_SIGN_RIGHT_DOWN, new Item.Properties()));
     Registry.register(
         Registry.ITEM,
         Constants.MOD_ID_PREFIX + ExitSign.NAME + "_right_up",
-        new BlockItem(ExitSignBlocks.EXIT_SIGN_RIGHT_UP, new Item.Properties()));
+        new ExitSignBlockItem(ExitSignBlocks.EXIT_SIGN_RIGHT_UP, new Item.Properties()));
   }
 }
