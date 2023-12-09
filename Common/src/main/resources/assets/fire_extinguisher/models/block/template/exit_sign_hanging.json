@@ -1,0 +1,123 @@
+{
+  "credit": "Made with Blockbench by Markus Bordihn",
+  "texture_size": [32, 16],
+  "render_type": "cutout_mipped",
+  "textures": {
+    "particle": "fire_extinguisher:block/exit_sign",
+    "sign": "fire_extinguisher:block/exit_sign",
+    "background": "fire_extinguisher:block/exit_background",
+    "chains": "minecraft:block/chain"
+  },
+  "elements": [
+    {
+      "from": [0, 4, 7],
+      "to": [16, 12, 9],
+      "faces": {
+        "north": {"uv": [0, 0, 16, 16], "texture": "#background"},
+        "east": {"uv": [0, 0, 0.5, 16], "texture": "#background", "cullface": "east"},
+        "south": {"uv": [0, 0, 16, 16], "texture": "#background"},
+        "west": {"uv": [0, 0, 0.5, 16], "texture": "#background", "cullface": "west"},
+        "up": {"uv": [0, 0, 16, 1], "texture": "#background"},
+        "down": {"uv": [0, 15, 16, 16], "texture": "#background"}
+      }
+    },
+    {
+      "name": "sign",
+      "from": [0.5, 4.5, 6.75],
+      "to": [15.5, 11.5, 9.25],
+      "faces": {
+        "north": {"uv": [0, 0, 16, 16], "texture": "#sign"},
+        "east": {"uv": [0, 0, 0.5, 16], "texture": "#sign"},
+        "south": {"uv": [16, 0, 0, 16], "texture": "#sign"},
+        "west": {"uv": [15.5, 0, 16, 16], "texture": "#sign"},
+        "up": {"uv": [0, 0, 16, 1], "texture": "#sign"},
+        "down": {"uv": [16, 15, 0, 16], "texture": "#sign"}
+      }
+    },
+    {
+      "from": [12.7, 12, 11.475],
+      "to": [12.7, 16, 13.975],
+      "shade": false,
+      "rotation": {"angle": 45, "axis": "y", "origin": [8, 8, 8]},
+      "faces": {
+        "east": {"uv": [6, 0, 3, 6], "texture": "#chains"},
+        "west": {"uv": [6, 0, 3, 6], "texture": "#chains"}
+      }
+    },
+    {
+      "from": [1.7, 12, 6.3],
+      "to": [1.7, 16, 8.8],
+      "shade": false,
+      "rotation": {"angle": 45, "axis": "y", "origin": [2.3, 14, 7.65]},
+      "faces": {
+        "east": {"uv": [6, 0, 3, 6], "texture": "#chains"},
+        "west": {"uv": [6, 0, 3, 6], "texture": "#chains"}
+      }
+    },
+    {
+      "from": [0.45, 12, 7.55],
+      "to": [2.95, 16, 7.55],
+      "shade": false,
+      "rotation": {"angle": 45, "axis": "y", "origin": [2.3, 14, 7.65]},
+      "faces": {
+        "north": {"uv": [3, 0, 0, 6], "texture": "#chains"},
+        "south": {"uv": [3, 0, 0, 6], "texture": "#chains"}
+      }
+    },
+    {
+      "from": [11.45, 12, 12.725],
+      "to": [13.95, 16, 12.725],
+      "shade": false,
+      "rotation": {"angle": 45, "axis": "y", "origin": [8, 8, 8]},
+      "faces": {
+        "north": {"uv": [3, 0, 0, 6], "texture": "#chains"},
+        "south": {"uv": [3, 0, 0, 6], "texture": "#chains"}
+      }
+    }
+  ],
+  "display": {
+    "thirdperson_righthand": {
+      "rotation": [20, -180, 0],
+      "translation": [0, 0.25, 4.5],
+      "scale": [0.6, 0.6, 0.6]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [20, -180, 0],
+      "translation": [0, 0.25, 4.5],
+      "scale": [0.6, 0.6, 0.6]
+    },
+    "firstperson_righthand": {
+      "rotation": [0, -180, 0],
+      "translation": [0, -0.5, 1.25],
+      "scale": [0.6, 0.6, 0.6]
+    },
+    "firstperson_lefthand": {
+      "rotation": [0, -180, 0],
+      "translation": [0, -0.5, 1.25],
+      "scale": [0.6, 0.6, 0.6]
+    },
+    "ground": {
+      "scale": [0.6, 0.6, 0.6]
+    },
+    "gui": {
+      "rotation": [0, -180, 0],
+      "scale": [0.9, 0.9, 0.9]
+    },
+    "head": {
+      "translation": [0, 0, -14.5]
+    },
+    "fixed": {
+      "translation": [0, 0, -8]
+    }
+  },
+  "groups": [
+    0,
+    1,
+    {
+      "name": "chains",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [2, 3, 4, 5]
+    }
+  ]
+}
