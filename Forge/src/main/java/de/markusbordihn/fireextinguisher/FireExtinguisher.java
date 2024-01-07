@@ -27,8 +27,6 @@ import de.markusbordihn.fireextinguisher.item.ModItems;
 import de.markusbordihn.fireextinguisher.sounds.ModSoundEvents;
 import de.markusbordihn.fireextinguisher.tabs.ModTabs;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
@@ -64,14 +62,6 @@ public class FireExtinguisher {
         () ->
             () -> {
               modEventBus.addListener(ModTabs::handleCreativeModeTabRegister);
-              MinecraftForge.EVENT_BUS.addListener(this::onItemTooltip);
             });
-  }
-
-  // This method exists as a wrapper for the code in the Common project.
-  // It takes Forge's event object and passes the parameters along to
-  // the Common listener.
-  private void onItemTooltip(ItemTooltipEvent event) {
-    CommonClass.onItemTooltip(event.getItemStack(), event.getFlags(), event.getToolTip());
   }
 }
