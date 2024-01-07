@@ -33,7 +33,6 @@ public class FireExtinguisher implements ModInitializer {
   public void onInitialize() {
     // Use Fabric to bootstrap the Common mod.
     Constants.LOG.info("Initializing {} (Fabric) ...", Constants.MOD_NAME);
-    CommonClass.init();
 
     Constants.LOG.info("{} Config ...", Constants.LOG_REGISTER_PREFIX);
     new ForgeConfigHelperFabric().registerCommonConfig(CommonConfig.COMMON_SPEC);
