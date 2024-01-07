@@ -19,6 +19,7 @@
 
 package de.markusbordihn.fireextinguisher.block;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.DustParticleOptions;
@@ -93,6 +94,11 @@ public class FireAlarmSwitchBlock extends FaceAttachedHorizontalDirectionalBlock
         0.0,
         0.0,
         0.0);
+  }
+
+  @Override
+  protected MapCodec<? extends FaceAttachedHorizontalDirectionalBlock> codec() {
+    return null;
   }
 
   @Override

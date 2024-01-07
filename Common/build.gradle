@@ -36,9 +36,9 @@ dependencies {
   implementation group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.1'
 
   // Forge Config Support
-  implementation 'com.electronwill.night-config:core:3.6.3'
-  implementation 'com.electronwill.night-config:toml:3.6.3'
-  compileOnly "fuzs.forgeconfigapiport:forgeconfigapiport-fabric:9.1.2"
+  implementation 'com.electronwill.night-config:core:3.6.7'
+  implementation 'com.electronwill.night-config:toml:3.6.7'
+  compileOnly "fuzs.forgeconfigapiport:forgeconfigapiport-fabric:20.4.0"
 }
 
 processResources {

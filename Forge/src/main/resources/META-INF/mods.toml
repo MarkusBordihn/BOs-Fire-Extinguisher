@@ -1,5 +1,5 @@
 modLoader = "javafml"
-loaderVersion = "[48,)"
+loaderVersion = "[0,)"
 license = "MIT"
 issueTrackerURL = "https://github.com/MarkusBordihn/BOs-Fire-Extinguisher/issues"
 
@@ -16,13 +16,13 @@ description = '''Enhance your fire safety with a straightforward and effective f
 [[dependencies.fire_extinguisher]]
 modId = "forge"
 mandatory = true
-versionRange = "[48,)"
+versionRange = "[0,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.fire_extinguisher]]
 modId = "minecraft"
 mandatory = true
-versionRange = "[1.20.2,1.21)"
+versionRange = "[1.20.4,1.21)"
 ordering = "NONE"
 side = "BOTH"

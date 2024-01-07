@@ -1,4 +1,4 @@
-# Changelog for Fire Extinguisher (1.20.2)
+# Changelog for Fire Extinguisher (1.20.4)
 
 ## Note
 

@@ -19,6 +19,7 @@
 
 package de.markusbordihn.fireextinguisher.block;
 
+import com.mojang.serialization.MapCodec;
 import de.markusbordihn.fireextinguisher.config.CommonConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -55,6 +56,11 @@ public abstract class AbstractFireAlarmSignalBlock extends FaceAttachedHorizonta
 
   public static int getLightEmission(BlockState blockState) {
     return Boolean.TRUE.equals(blockState.getValue(POWERED)) ? 15 : 2;
+  }
+
+  @Override
+  protected MapCodec<? extends FaceAttachedHorizontalDirectionalBlock> codec() {
+    return null;
   }
 
   protected void actionTick(
