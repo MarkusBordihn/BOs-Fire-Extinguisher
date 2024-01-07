@@ -25,7 +25,6 @@ import de.markusbordihn.fireextinguisher.block.FireExtinguisherBlocks;
 import de.markusbordihn.fireextinguisher.tabs.ModTabs;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
-import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
 import net.minecraft.client.renderer.RenderType;
 
 public class FireExtinguisherClient implements ClientModInitializer {
@@ -34,7 +33,6 @@ public class FireExtinguisherClient implements ClientModInitializer {
   public void onInitializeClient() {
     // Use Fabric to bootstrap the Common mod.
     Constants.LOG.info("Initializing {} (Fabric-Client) ...", Constants.MOD_NAME);
-    CommonClass.init();
 
     Constants.LOG.info("{} Tabs ...", Constants.LOG_REGISTER_PREFIX);
     ModTabs.registerModTabs();
@@ -70,9 +68,5 @@ public class FireExtinguisherClient implements ClientModInitializer {
         ExitSignBlocks.EXIT_SIGN_RIGHT_DOWN, RenderType.cutoutMipped());
     BlockRenderLayerMap.INSTANCE.putBlock(
         ExitSignBlocks.EXIT_SIGN_RIGHT_UP, RenderType.cutoutMipped());
-
-    // Some code like events require special initialization from the
-    // loader specific code.
-    ItemTooltipCallback.EVENT.register(CommonClass::onItemTooltip);
   }
 }
