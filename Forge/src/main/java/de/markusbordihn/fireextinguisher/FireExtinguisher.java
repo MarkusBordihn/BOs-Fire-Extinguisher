@@ -25,11 +25,7 @@ import de.markusbordihn.fireextinguisher.config.ForgeConfigHelperForge;
 import de.markusbordihn.fireextinguisher.item.ModBlockItems;
 import de.markusbordihn.fireextinguisher.item.ModItems;
 import de.markusbordihn.fireextinguisher.sounds.ModSoundEvents;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
@@ -57,19 +53,5 @@ public class FireExtinguisher {
 
     Constants.LOG.info("{} Sound Events ...", Constants.LOG_REGISTER_PREFIX);
     ModSoundEvents.SOUNDS.register(modEventBus);
-
-    DistExecutor.unsafeRunWhenOn(
-        Dist.CLIENT,
-        () ->
-            () -> {
-              MinecraftForge.EVENT_BUS.addListener(this::onItemTooltip);
-            });
-  }
-
-  // This method exists as a wrapper for the code in the Common project.
-  // It takes Forge's event object and passes the parameters along to
-  // the Common listener.
-  private void onItemTooltip(ItemTooltipEvent event) {
-    CommonClass.onItemTooltip(event.getItemStack(), event.getFlags(), event.getToolTip());
   }
 }

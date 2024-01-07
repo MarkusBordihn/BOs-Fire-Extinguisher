@@ -49,6 +49,10 @@ subprojects {
     options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
   }
 
+  javadoc {
+    options.encoding = 'UTF-8'
+  }
+
   // Disables Gradle's custom module metadata from being published to maven. The
   // metadata includes mapped dependencies which are not reasonably consumable by
   // other mod developers.
