@@ -60,7 +60,7 @@ public class FireAxeItem extends AxeItem {
   public FireAxeItem(Tier tier, float attackBase, float attackSpeed, Properties properties) {
     super(tier, attackBase, attackSpeed, properties);
   }
-  
+
   public static void stopFire(
       Level level,
       Player player,

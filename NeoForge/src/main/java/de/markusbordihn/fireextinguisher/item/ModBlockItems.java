@@ -36,8 +36,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class ModBlockItems {
 
-  public static final DeferredRegister.Items ITEMS =
-      DeferredRegister.createItems(Constants.MOD_ID);
+  public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(Constants.MOD_ID);
 
   // Fire Extinguisher
   public static final DeferredItem<Item> FIRE_EXTINGUISHER =

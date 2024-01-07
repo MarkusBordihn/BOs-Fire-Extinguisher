@@ -39,5 +39,6 @@ public class ModTabs {
                   .displayItems(new FireExtinguisherItems())
                   .title(Component.translatable("itemGroup.fire_extinguisher.tab"))
                   .build());
+
   protected ModTabs() {}
 }
