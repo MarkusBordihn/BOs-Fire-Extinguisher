@@ -3,7 +3,7 @@ plugins {
   id 'maven-publish'
   id 'idea'
   id 'com.matthewprenger.cursegradle' version '1.4.0'
-  id 'nu.studer.credentials' version '1.0.7'
+  id 'nu.studer.credentials' version '3.0'
   id "com.modrinth.minotaur" version "2.+"
 }
 
@@ -86,7 +86,7 @@ publishing {
 }
 
 curseforge {
-  apiKey = "${credentials.curseforge_api_token}"
+  apiKey = "${credentials.forKey('curseforge_api_token')}"
   project {
     id = "${curseforge_project_id}"
     changelog = file("../CHANGELOG.md")
@@ -110,7 +110,7 @@ curseforge {
 }
 
 modrinth {
-  token = "${credentials.modrinth_api_token}"
+  token = "${credentials.forKey('modrinth_api_token')}"
   projectId = "${modrinth_project_id}"
   versionNumber = "${version}"
   versionType = "${modrinth_release_type}"
