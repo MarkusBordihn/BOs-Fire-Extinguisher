@@ -16,30 +16,27 @@
  * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
+package de.markusbordihn.fireextinguisher.config;
 
-package de.markusbordihn.fireextinguisher.platform;
+import de.markusbordihn.fireextinguisher.Constants;
+import fuzs.forgeconfigapiport.neoforge.api.forge.v4.ForgeConfigRegistry;
+import net.minecraftforge.common.ForgeConfigSpec;
+import net.neoforged.fml.config.ModConfig;
 
-import de.markusbordihn.fireextinguisher.platform.services.IPlatformHelper;
-import net.neoforged.fml.ModList;
-import net.neoforged.fml.loading.FMLLoader;
-
-public class NeoForgePlatformHelper implements IPlatformHelper {
+public class ForgeConfigHelperNeoForge implements IForgeConfigHelper {
 
   @Override
-  public String getPlatformName() {
-
-    return "NeoForge";
+  public void registerServerConfig(ForgeConfigSpec spec) {
+    ForgeConfigRegistry.INSTANCE.register(Constants.MOD_ID, ModConfig.Type.SERVER, spec);
   }
 
   @Override
-  public boolean isModLoaded(String modId) {
-
-    return ModList.get().isLoaded(modId);
+  public void registerClientConfig(ForgeConfigSpec spec) {
+    ForgeConfigRegistry.INSTANCE.register(Constants.MOD_ID, ModConfig.Type.CLIENT, spec);
   }
 
   @Override
-  public boolean isDevelopmentEnvironment() {
-
-    return !FMLLoader.isProduction();
+  public void registerCommonConfig(ForgeConfigSpec spec) {
+    ForgeConfigRegistry.INSTANCE.register(Constants.MOD_ID, ModConfig.Type.COMMON, spec);
   }
 }

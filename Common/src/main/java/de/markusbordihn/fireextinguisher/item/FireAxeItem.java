@@ -22,7 +22,6 @@ package de.markusbordihn.fireextinguisher.item;
 import de.markusbordihn.fireextinguisher.Constants;
 import de.markusbordihn.fireextinguisher.config.CommonConfig;
 import java.util.List;
-import javax.annotation.Nullable;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -137,10 +136,7 @@ public class FireAxeItem extends AxeItem {
 
   @Override
   public void appendHoverText(
-      ItemStack itemStack,
-      @Nullable Level level,
-      List<Component> tooltipList,
-      TooltipFlag tooltipFlag) {
+      ItemStack itemStack, Level level, List<Component> tooltipList, TooltipFlag tooltipFlag) {
     tooltipList.add(
         Component.translatable(
             Constants.TEXT_PREFIX + NAME + "_description", COMMON.fireAxtRadius.get()));

@@ -7,8 +7,16 @@ plugins {
   id 'nu.studer.credentials' version '1.0.7'
   id "com.modrinth.minotaur" version "2.+"
 }
+
 base {
   archivesName = "${mod_id}-neoforge-${minecraft_version}"
+}
+
+repositories {
+  maven {
+    name = "Fuzs Mod Resources"
+    url = "https://raw.githubusercontent.com/Fuzss/modresources/main/maven/"
+  }
 }
 
 // Automatically enable neoforge AccessTransformers if the file exists
@@ -17,6 +25,7 @@ base {
 if (file('src/main/resources/META-INF/accesstransformer.cfg').exists()) {
   minecraft.accessTransformers.file file('src/main/resources/META-INF/accesstransformer.cfg')
 }
+
 runs {
   configureEach {
     modSource project.sourceSets.main
@@ -43,6 +52,11 @@ sourceSets.main.resources { srcDir 'src/generated/resources' }
 dependencies {
   implementation "net.neoforged:neoforge:${neoforge_version}"
   compileOnly project(":Common")
+
+  // Forge Config Support
+  implementation 'com.electronwill.night-config:core:3.6.7'
+  implementation 'com.electronwill.night-config:toml:3.6.7'
+  api "fuzs.forgeconfigapiport:forgeconfigapiport-neoforge:20.4.3"
 }
 
 // NeoGradle compiles the game, but we don't want to add our common code to the game's code
@@ -87,6 +101,12 @@ curseforge {
     releaseType = 'release'
     addGameVersion("${minecraft_version}")
     addGameVersion("NeoForge")
+
+    mainArtifact(jar) {
+      relations {
+        requiredDependency 'forge-config-api-port-fabric'
+      }
+    }
   }
   options {
     forgeGradleIntegration = true
@@ -101,4 +121,7 @@ modrinth {
   uploadFile = jar
   gameVersions = ["${minecraft_version}"]
   loaders = ["neoforge"]
+  dependencies {
+    required.project "forge-config-api-port"
+  }
 }

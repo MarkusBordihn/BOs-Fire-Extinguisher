@@ -20,6 +20,8 @@
 package de.markusbordihn.fireextinguisher;
 
 import de.markusbordihn.fireextinguisher.block.ModBlocks;
+import de.markusbordihn.fireextinguisher.config.CommonConfig;
+import de.markusbordihn.fireextinguisher.config.ForgeConfigHelperNeoForge;
 import de.markusbordihn.fireextinguisher.item.ModBlockItems;
 import de.markusbordihn.fireextinguisher.item.ModItems;
 import de.markusbordihn.fireextinguisher.sounds.ModSoundEvents;
@@ -29,8 +31,6 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.DistExecutor;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.neoforged.neoforge.common.NeoForge;
-import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -42,9 +42,8 @@ public class FireExtinguisher {
   public FireExtinguisher() {
     final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
-    log.info("{} Config ...", Constants.LOG_REGISTER_PREFIX);
-    // No config support at this time. Need to figure out how to do this for all mod loader.
-    // ModLoadingContext.get().registerConfig(Type.COMMON, CommonConfig.COMMON_SPEC);
+    Constants.LOG.info("{} Config ...", Constants.LOG_REGISTER_PREFIX);
+    new ForgeConfigHelperNeoForge().registerCommonConfig(CommonConfig.COMMON_SPEC);
 
     log.info("{} Blocks ...", Constants.LOG_REGISTER_PREFIX);
     ModBlocks.BLOCKS.register(modEventBus);
@@ -59,18 +58,6 @@ public class FireExtinguisher {
     ModSoundEvents.SOUNDS.register(modEventBus);
 
     DistExecutor.unsafeRunWhenOn(
-        Dist.CLIENT,
-        () ->
-            () -> {
-              ModTabs.CREATIVE_TABS.register(modEventBus);
-              NeoForge.EVENT_BUS.addListener(this::onItemTooltip);
-            });
-  }
-
-  // This method exists as a wrapper for the code in the Common project.
-  // It takes Forge's event object and passes the parameters along to
-  // the Common listener.
-  private void onItemTooltip(ItemTooltipEvent event) {
-    CommonClass.onItemTooltip(event.getItemStack(), event.getFlags(), event.getToolTip());
+        Dist.CLIENT, () -> () -> ModTabs.CREATIVE_TABS.register(modEventBus));
   }
 }

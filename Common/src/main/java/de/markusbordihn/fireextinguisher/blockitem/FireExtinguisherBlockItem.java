@@ -23,7 +23,6 @@ import de.markusbordihn.fireextinguisher.Constants;
 import de.markusbordihn.fireextinguisher.block.FireExtinguisherBlock;
 import de.markusbordihn.fireextinguisher.config.CommonConfig;
 import java.util.List;
-import javax.annotation.Nullable;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -239,10 +238,7 @@ public class FireExtinguisherBlockItem extends BlockItem implements Vanishable {
 
   @Override
   public void appendHoverText(
-      ItemStack itemStack,
-      @Nullable Level level,
-      List<Component> tooltipList,
-      TooltipFlag tooltipFlag) {
+      ItemStack itemStack, Level level, List<Component> tooltipList, TooltipFlag tooltipFlag) {
     tooltipList.add(
         Component.translatable(Constants.TOOLTIP_PREFIX + NAME, COMMON.fireExtinguisherRadius.get())
             .withStyle(ChatFormatting.GRAY));

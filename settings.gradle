@@ -21,4 +21,4 @@ pluginManagement {
 }
 
 rootProject.name = 'Fire Extinguisher'
-include("Common", "Fabric", "Forge")
+include("Common", "Fabric", "Forge", "NeoForge")

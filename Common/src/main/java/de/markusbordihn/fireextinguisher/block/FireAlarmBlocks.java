@@ -63,6 +63,7 @@ public class FireAlarmBlocks {
   public static final Block FIRE_ALARM_SMOKE_DETECTOR =
       new FireAlarmSmokeDetectorBlock(
           Properties.of()
+              .randomTicks()
               .mapColor(MapColor.WOOD)
               .instrument(NoteBlockInstrument.BASS)
               .strength(0.2F)
@@ -72,6 +73,7 @@ public class FireAlarmBlocks {
   public static final Block FIRE_ALARM_SMOKE_DETECTOR_SILENT =
       new FireAlarmSmokeDetectorSilentBlock(
           Properties.of()
+              .randomTicks()
               .mapColor(MapColor.WOOD)
               .instrument(NoteBlockInstrument.BASS)
               .strength(0.2F)

@@ -132,4 +132,9 @@ public abstract class AbstractFireAlarmSignalBlock extends FaceAttachedHorizonta
     this.checkConditionTick(blockState, serverLevel, blockPos, isPowered, random);
     serverLevel.scheduleTick(blockPos, this, ACTION_TICK_INTERVAL);
   }
+
+  @Override
+  public void randomTick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, RandomSource random) {
+    this.tick(blockState, serverLevel, blockPos, random);
+  }
 }

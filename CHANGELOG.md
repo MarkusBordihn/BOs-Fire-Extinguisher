@@ -5,6 +5,11 @@
 This change log includes the summarized changes.
 For the full changelog, please go to the [GitHub History][history] instead.
 
+### 6.4.0
+
+- Added NeoForge support.
+- Fixed smaller issues with the smoke detector.
+
 ### 6.3.0
 
 - Smaller bug fixes and improvements.
