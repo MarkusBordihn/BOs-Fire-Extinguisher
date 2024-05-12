@@ -19,93 +19,113 @@
 
 package de.markusbordihn.fireextinguisher.item;
 
+import java.util.EnumMap;
+import java.util.List;
+import java.util.Map;
 import java.util.function.Supplier;
+import net.minecraft.Util;
+import net.minecraft.core.Holder;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.util.LazyLoadedValue;
 import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.ArmorItem.Type;
 import net.minecraft.world.item.ArmorMaterial;
+import net.minecraft.world.item.ArmorMaterial.Layer;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 
-public enum ModArmorMaterials implements ArmorMaterial {
+public enum ModArmorMaterials {
   FIRE_PROTECTION(
       "fire_protection_armor",
-      15,
-      new int[] {2, 5, 6, 2},
+      Util.make(
+          new EnumMap(ArmorItem.Type.class),
+          map -> {
+            map.put(Type.BOOTS, 2);
+            map.put(Type.LEGGINGS, 5);
+            map.put(Type.CHESTPLATE, 6);
+            map.put(Type.HELMET, 2);
+            map.put(Type.BODY, 5);
+          }),
       9,
       SoundEvents.ARMOR_EQUIP_IRON,
+      () -> Ingredient.of(Items.IRON_INGOT),
+      List.of(new ArmorMaterial.Layer(new ResourceLocation("fire_protection_armor"))),
       0.0F,
-      0.0F,
-      () -> Ingredient.of(Items.IRON_INGOT)),
+      0.0F),
   FIRE_PROTECTION_LIGHT(
       "fire_protection_light_armor",
-      15,
-      new int[] {2, 5, 6, 2},
+      Util.make(
+          new EnumMap(ArmorItem.Type.class),
+          map -> {
+            map.put(Type.BOOTS, 2);
+            map.put(Type.LEGGINGS, 5);
+            map.put(Type.CHESTPLATE, 6);
+            map.put(Type.HELMET, 2);
+            map.put(Type.BODY, 5);
+          }),
       9,
-      SoundEvents.ARMOR_EQUIP_LEATHER,
+      SoundEvents.ARMOR_EQUIP_IRON,
+      () -> Ingredient.of(Items.IRON_INGOT),
+      List.of(new ArmorMaterial.Layer(new ResourceLocation("fire_protection_armor"))),
       0.0F,
-      0.0F,
-      () -> Ingredient.of(Items.LEATHER));
+      0.0F);
 
-  private static final int[] HEALTH_PER_SLOT = new int[] {13, 15, 16, 11};
+  static {
+    FIRE_PROTECTION.holder =
+        Registry.registerForHolder(
+            BuiltInRegistries.ARMOR_MATERIAL,
+            FIRE_PROTECTION.getResourceLocation(),
+            FIRE_PROTECTION.getArmorMaterial());
+    FIRE_PROTECTION_LIGHT.holder =
+        Registry.registerForHolder(
+            BuiltInRegistries.ARMOR_MATERIAL,
+            FIRE_PROTECTION_LIGHT.getResourceLocation(),
+            FIRE_PROTECTION_LIGHT.getArmorMaterial());
+  }
+
   private final String name;
-  private final int durabilityMultiplier;
-  private final int[] slotProtections;
-  private final int enchantmentValue;
-  private final SoundEvent sound;
-  private final float toughness;
-  private final float knockbackResistance;
-  private final LazyLoadedValue<Ingredient> repairIngredient;
+  private final ResourceLocation resourceLocation;
+  private final ArmorMaterial armorMaterial;
+  private Holder<ArmorMaterial> holder;
 
   ModArmorMaterials(
       String name,
-      int durabilityMultiplier,
-      int[] slotProtections,
+      Map<Type, Integer> defense,
       int enchantmentValue,
-      SoundEvent soundEvent,
+      Holder<SoundEvent> equipSound,
+      Supplier<Ingredient> repairIngredient,
+      List<Layer> layers,
       float toughness,
-      float knockbackResistance,
-      Supplier<Ingredient> repairIngredient) {
+      float knockbackResistance) {
     this.name = name;
-    this.durabilityMultiplier = durabilityMultiplier;
-    this.slotProtections = slotProtections;
-    this.enchantmentValue = enchantmentValue;
-    this.sound = soundEvent;
-    this.toughness = toughness;
-    this.knockbackResistance = knockbackResistance;
-    this.repairIngredient = new LazyLoadedValue<>(repairIngredient);
-  }
-
-  public int getDurabilityForType(ArmorItem.Type type) {
-    return HEALTH_PER_SLOT[type.getSlot().getIndex()] * this.durabilityMultiplier;
-  }
-
-  public int getDefenseForType(ArmorItem.Type type) {
-    return this.slotProtections[type.getSlot().getIndex()];
-  }
-
-  public int getEnchantmentValue() {
-    return this.enchantmentValue;
-  }
-
-  public SoundEvent getEquipSound() {
-    return this.sound;
-  }
-
-  public Ingredient getRepairIngredient() {
-    return this.repairIngredient.get();
+    this.resourceLocation = new ResourceLocation(name);
+    this.armorMaterial =
+        new ArmorMaterial(
+            defense,
+            enchantmentValue,
+            equipSound,
+            repairIngredient,
+            layers,
+            toughness,
+            knockbackResistance);
   }
 
   public String getName() {
     return this.name;
   }
 
-  public float getToughness() {
-    return this.toughness;
+  public ArmorMaterial getArmorMaterial() {
+    return this.armorMaterial;
   }
 
-  public float getKnockbackResistance() {
-    return this.knockbackResistance;
+  public Holder<ArmorMaterial> getArmorMaterialHolder() {
+    return this.holder;
+  }
+
+  public ResourceLocation getResourceLocation() {
+    return this.resourceLocation;
   }
 }

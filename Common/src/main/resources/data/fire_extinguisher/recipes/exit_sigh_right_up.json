@@ -13,7 +13,7 @@
     }
   },
   "result": {
-    "item": "fire_extinguisher:exit_sign_right_up",
+    "id": "fire_extinguisher:exit_sign_right_up",
     "count": 3
   }
 }

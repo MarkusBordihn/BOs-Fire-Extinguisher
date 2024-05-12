@@ -19,6 +19,7 @@
 package de.markusbordihn.fireextinguisher.item;
 
 import de.markusbordihn.fireextinguisher.config.CommonConfig;
+import net.minecraft.core.Holder;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ArmorItem;
@@ -31,12 +32,12 @@ public class FireProtectionArmorItem extends ArmorItem {
   protected static final CommonConfig.Config COMMON = CommonConfig.COMMON;
 
   public FireProtectionArmorItem(ArmorItem.Type type, Properties properties) {
-    this(ModArmorMaterials.FIRE_PROTECTION, type, properties);
+    this(ModArmorMaterials.FIRE_PROTECTION.getArmorMaterialHolder(), type, properties);
   }
 
   public FireProtectionArmorItem(
-      ArmorMaterial armorMaterial, ArmorItem.Type type, Properties properties) {
-    super(armorMaterial, type, properties);
+      Holder<ArmorMaterial> armorMaterial, ArmorItem.Type type, Properties properties) {
+    super(armorMaterial, type, properties.fireResistant());
   }
 
   @Override
@@ -57,10 +58,5 @@ public class FireProtectionArmorItem extends ArmorItem {
 
   public Class<?> getArmorClass() {
     return FireProtectionArmorItem.class;
-  }
-
-  @Override
-  public boolean isFireResistant() {
-    return true;
   }
 }

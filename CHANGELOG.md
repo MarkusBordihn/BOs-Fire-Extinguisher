@@ -1,4 +1,4 @@
-# Changelog for Fire Extinguisher (1.20.4)
+# Changelog for Fire Extinguisher (1.20.6)
 
 ## Note
 
@@ -7,6 +7,7 @@ For the full changelog, please go to the [GitHub History][history] instead.
 
 ### 6.4.0
 
+- Code refactoring for 1.20.6.
 - Added NeoForge support.
 - Fixed smaller issues with the smoke detector.
 

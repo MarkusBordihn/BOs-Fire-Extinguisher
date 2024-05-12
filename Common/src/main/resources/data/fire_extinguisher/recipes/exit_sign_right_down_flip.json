@@ -6,7 +6,7 @@
     }
   ],
   "result": {
-    "item": "fire_extinguisher:exit_sign_right_down",
+    "id": "fire_extinguisher:exit_sign_right_down",
     "count": 1
   }
 }

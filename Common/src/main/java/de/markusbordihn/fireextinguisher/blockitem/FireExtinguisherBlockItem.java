@@ -33,13 +33,13 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.Blaze;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.item.Vanishable;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -47,7 +47,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.CampfireBlock;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class FireExtinguisherBlockItem extends BlockItem implements Vanishable {
+public class FireExtinguisherBlockItem extends BlockItem {
 
   public static final String NAME = "fire_extinguisher";
   private static final CommonConfig.Config COMMON = CommonConfig.COMMON;
@@ -58,7 +58,7 @@ public class FireExtinguisherBlockItem extends BlockItem implements Vanishable {
   private static final int ATTACK_EFFECT_DURATION = 200;
 
   public FireExtinguisherBlockItem(Block block) {
-    this(block, new Properties().stacksTo(1).durability(128));
+    this(block, new Properties().stacksTo(1).durability(128).fireResistant());
   }
 
   public FireExtinguisherBlockItem(Block block, Properties properties) {
@@ -140,7 +140,10 @@ public class FireExtinguisherBlockItem extends BlockItem implements Vanishable {
   public static void hurtAndBreak(
       Level level, ItemStack itemStack, Player player, InteractionHand hand) {
     if (!level.isClientSide) {
-      itemStack.hurtAndBreak(1, player, serverPlayer -> serverPlayer.broadcastBreakEvent(hand));
+      itemStack.hurtAndBreak(
+          1,
+          player,
+          hand == InteractionHand.MAIN_HAND ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND);
     }
   }
 
@@ -232,13 +235,11 @@ public class FireExtinguisherBlockItem extends BlockItem implements Vanishable {
   }
 
   @Override
-  public boolean isFireResistant() {
-    return true;
-  }
-
-  @Override
   public void appendHoverText(
-      ItemStack itemStack, Level level, List<Component> tooltipList, TooltipFlag tooltipFlag) {
+      ItemStack itemStack,
+      TooltipContext tooltipContext,
+      List<Component> tooltipList,
+      TooltipFlag tooltipFlag) {
     tooltipList.add(
         Component.translatable(Constants.TOOLTIP_PREFIX + NAME, COMMON.fireExtinguisherRadius.get())
             .withStyle(ChatFormatting.GRAY));

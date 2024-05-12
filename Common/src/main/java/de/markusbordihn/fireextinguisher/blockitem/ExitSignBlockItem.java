@@ -26,7 +26,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 
 public class ExitSignBlockItem extends BlockItem {
@@ -43,7 +42,10 @@ public class ExitSignBlockItem extends BlockItem {
 
   @Override
   public void appendHoverText(
-      ItemStack itemStack, Level level, List<Component> tooltipList, TooltipFlag tooltipFlag) {
+      ItemStack itemStack,
+      TooltipContext tooltipContext,
+      List<Component> tooltipList,
+      TooltipFlag tooltipFlag) {
     tooltipList.add(
         Component.translatable(Constants.TOOLTIP_PREFIX + NAME).withStyle(ChatFormatting.GRAY));
   }

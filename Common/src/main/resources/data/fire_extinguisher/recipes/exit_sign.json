@@ -13,7 +13,7 @@
     }
   },
   "result": {
-    "item": "fire_extinguisher:exit_sign",
+    "id": "fire_extinguisher:exit_sign",
     "count": 3
   }
 }

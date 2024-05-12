@@ -1,7 +1,7 @@
 plugins {
   id 'idea'
   id 'maven-publish'
-  id 'net.neoforged.gradle.userdev' version '7.0.41'
+  id 'net.neoforged.gradle.userdev' version '7.0.120'
   id 'java-library'
   id 'com.matthewprenger.cursegradle' version '1.4.0'
   id 'nu.studer.credentials' version '1.0.7'
@@ -19,20 +19,17 @@ repositories {
   }
 }
 
-// Automatically enable neoforge AccessTransformers if the file exists
-// This location is hardcoded in FML and can not be changed.
-// https://github.com/neoforged/FancyModLoader/blob/a952595eaaddd571fbc53f43847680b00894e0c1/loader/src/main/java/net/neoforged/fml/loading/moddiscovery/ModFile.java#L118
-if (file('src/main/resources/META-INF/accesstransformer.cfg').exists()) {
-  minecraft.accessTransformers.file file('src/main/resources/META-INF/accesstransformer.cfg')
-}
-
 runs {
   configureEach {
+    systemProperty 'forge.logging.markers', 'REGISTRIES'
+    systemProperty 'forge.logging.console.level', 'debug'
     modSource project.sourceSets.main
   }
+
   client {
     systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
   }
+
   server {
     systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
     programArgument '--nogui'
@@ -49,6 +46,10 @@ runs {
 
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
+configurations {
+  runtimeClasspath.extendsFrom localRuntime
+}
+
 dependencies {
   implementation "net.neoforged:neoforge:${neoforge_version}"
   compileOnly project(":Common")
@@ -56,7 +57,7 @@ dependencies {
   // Forge Config Support
   implementation 'com.electronwill.night-config:core:3.6.7'
   implementation 'com.electronwill.night-config:toml:3.6.7'
-  api "fuzs.forgeconfigapiport:forgeconfigapiport-neoforge:20.4.3"
+  api "fuzs.forgeconfigapiport:forgeconfigapiport-neoforge:20.6.0"
 }
 
 // NeoGradle compiles the game, but we don't want to add our common code to the game's code

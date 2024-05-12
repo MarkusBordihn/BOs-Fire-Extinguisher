@@ -134,7 +134,8 @@ public abstract class AbstractFireAlarmSignalBlock extends FaceAttachedHorizonta
   }
 
   @Override
-  public void randomTick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, RandomSource random) {
+  public void randomTick(
+      BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, RandomSource random) {
     this.tick(blockState, serverLevel, blockPos, random);
   }
 }

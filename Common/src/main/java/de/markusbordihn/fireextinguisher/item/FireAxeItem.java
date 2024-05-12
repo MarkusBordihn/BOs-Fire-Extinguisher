@@ -28,9 +28,12 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.AxeItem;
+import net.minecraft.world.item.DiggerItem;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.Tiers;
@@ -49,15 +52,15 @@ public class FireAxeItem extends AxeItem {
   private static final CommonConfig.Config COMMON = CommonConfig.COMMON;
 
   public FireAxeItem() {
-    this(Tiers.IRON, 6.0F, -3.2F, new Properties());
+    this(
+        Tiers.IRON,
+        (new Item.Properties())
+            .attributes(DiggerItem.createAttributes(Tiers.IRON, 6.0F, -3.2F))
+            .fireResistant());
   }
 
-  public FireAxeItem(Properties properties) {
-    this(Tiers.IRON, 6.0F, -3.2F, properties);
-  }
-
-  public FireAxeItem(Tier tier, float attackBase, float attackSpeed, Properties properties) {
-    super(tier, attackBase, attackSpeed, properties);
+  public FireAxeItem(Tier tier, Properties properties) {
+    super(tier, properties);
   }
 
   public static void stopFire(
@@ -97,9 +100,14 @@ public class FireAxeItem extends AxeItem {
   }
 
   public static void hurtAndBreak(
-      Level level, ItemStack itemStack, Player player, InteractionHand hand) {
+      Level level, ItemStack itemStack, Player player, InteractionHand interactionHand) {
     if (!level.isClientSide) {
-      itemStack.hurtAndBreak(1, player, serverPlayer -> serverPlayer.broadcastBreakEvent(hand));
+      itemStack.hurtAndBreak(
+          1,
+          player,
+          interactionHand == InteractionHand.MAIN_HAND
+              ? EquipmentSlot.MAINHAND
+              : EquipmentSlot.OFFHAND);
     }
   }
 
@@ -130,13 +138,11 @@ public class FireAxeItem extends AxeItem {
   }
 
   @Override
-  public boolean isFireResistant() {
-    return true;
-  }
-
-  @Override
   public void appendHoverText(
-      ItemStack itemStack, Level level, List<Component> tooltipList, TooltipFlag tooltipFlag) {
+      ItemStack itemStack,
+      TooltipContext tooltipContext,
+      List<Component> tooltipList,
+      TooltipFlag tooltipFlag) {
     tooltipList.add(
         Component.translatable(
             Constants.TEXT_PREFIX + NAME + "_description", COMMON.fireAxtRadius.get()));

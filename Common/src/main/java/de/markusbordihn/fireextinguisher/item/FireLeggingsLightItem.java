@@ -42,7 +42,10 @@ public class FireLeggingsLightItem extends FireProtectionArmorItem {
   }
 
   public FireLeggingsLightItem(Properties properties) {
-    super(ModArmorMaterials.FIRE_PROTECTION_LIGHT, ArmorItem.Type.LEGGINGS, properties);
+    super(
+        ModArmorMaterials.FIRE_PROTECTION_LIGHT.getArmorMaterialHolder(),
+        ArmorItem.Type.LEGGINGS,
+        properties);
   }
 
   @Override
@@ -65,7 +68,10 @@ public class FireLeggingsLightItem extends FireProtectionArmorItem {
 
   @Override
   public void appendHoverText(
-      ItemStack itemStack, Level level, List<Component> tooltipList, TooltipFlag tooltipFlag) {
+      ItemStack itemStack,
+      TooltipContext tooltipContext,
+      List<Component> tooltipList,
+      TooltipFlag tooltipFlag) {
     tooltipList.add(Component.translatable(Constants.TEXT_PREFIX + NAME + "_description"));
     if (Boolean.TRUE.equals(COMMON.fireProtectionLightEnabled.get())) {
       tooltipList.add(

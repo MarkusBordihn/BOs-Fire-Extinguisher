@@ -1,5 +1,5 @@
 plugins {
-  id 'fabric-loom' version '1.4-SNAPSHOT'
+  id 'fabric-loom' version '1.6-SNAPSHOT'
   id 'maven-publish'
   id 'idea'
   id 'com.matthewprenger.cursegradle' version '1.4.0'
@@ -26,13 +26,19 @@ dependencies {
   // Forge Config Support
   implementation 'com.electronwill.night-config:core:3.6.7'
   implementation 'com.electronwill.night-config:toml:3.6.7'
-  modImplementation "fuzs.forgeconfigapiport:forgeconfigapiport-fabric:20.4.0"
+  modImplementation "fuzs.forgeconfigapiport:forgeconfigapiport-fabric:20.6.0"
 
   // Recommended Mods
-  modImplementation "curse.maven:tooltipfix-411557:4577194"
+  // modImplementation "curse.maven:tooltipfix-411557:4577194"
 
   // Additional helpful Mods for development
-  modImplementation "curse.maven:jei-238222:4767570"
+  // modImplementation "curse.maven:jei-238222:4767570"
+}
+
+java {
+  withSourcesJar()
+  sourceCompatibility = JavaVersion.VERSION_21
+  targetCompatibility = JavaVersion.VERSION_21
 }
 
 loom {

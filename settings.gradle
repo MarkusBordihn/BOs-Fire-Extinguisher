@@ -20,5 +20,20 @@ pluginManagement {
   }
 }
 
+buildscript {
+  dependencies {
+    classpath 'com.google.code.gson:gson:2.10.1'
+  }
+}
+
+plugins {
+  id 'org.gradle.toolchains.foojay-resolver-convention' version '0.8.0'
+}
+
 rootProject.name = 'Fire Extinguisher'
-include("Common", "Fabric", "Forge", "NeoForge")
+include(
+    "Common",
+    "Fabric",
+    "Forge",
+    "NeoForge"
+)

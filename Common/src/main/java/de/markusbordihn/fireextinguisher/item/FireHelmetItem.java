@@ -63,7 +63,10 @@ public class FireHelmetItem extends FireProtectionArmorItem {
 
   @Override
   public void appendHoverText(
-      ItemStack itemStack, Level level, List<Component> tooltipList, TooltipFlag tooltipFlag) {
+      ItemStack itemStack,
+      TooltipContext tooltipContext,
+      List<Component> tooltipList,
+      TooltipFlag tooltipFlag) {
     tooltipList.add(Component.translatable(Constants.TEXT_PREFIX + NAME + "_description"));
     if (Boolean.TRUE.equals(COMMON.fireProtectionEnabled.get())) {
       tooltipList.add(

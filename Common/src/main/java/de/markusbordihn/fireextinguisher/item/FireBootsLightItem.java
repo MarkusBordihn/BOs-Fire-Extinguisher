@@ -42,7 +42,10 @@ public class FireBootsLightItem extends FireProtectionArmorItem {
   }
 
   public FireBootsLightItem(Properties properties) {
-    super(ModArmorMaterials.FIRE_PROTECTION_LIGHT, ArmorItem.Type.BOOTS, properties);
+    super(
+        ModArmorMaterials.FIRE_PROTECTION_LIGHT.getArmorMaterialHolder(),
+        ArmorItem.Type.BOOTS,
+        properties);
   }
 
   @Override
@@ -65,7 +68,10 @@ public class FireBootsLightItem extends FireProtectionArmorItem {
 
   @Override
   public void appendHoverText(
-      ItemStack itemStack, Level level, List<Component> tooltipList, TooltipFlag tooltipFlag) {
+      ItemStack itemStack,
+      TooltipContext tooltipContext,
+      List<Component> tooltipList,
+      TooltipFlag tooltipFlag) {
     tooltipList.add(Component.translatable(Constants.TEXT_PREFIX + NAME + "_description"));
     if (Boolean.TRUE.equals(COMMON.fireProtectionLightEnabled.get())) {
       tooltipList.add(
