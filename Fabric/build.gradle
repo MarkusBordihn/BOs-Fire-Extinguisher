@@ -1,5 +1,5 @@
 plugins {
-  id 'fabric-loom' version '1.6-SNAPSHOT'
+  id 'fabric-loom' version '1.7-SNAPSHOT'
   id 'maven-publish'
   id 'idea'
   id 'com.matthewprenger.cursegradle' version '1.4.0'
@@ -26,7 +26,7 @@ dependencies {
   // Forge Config Support
   implementation 'com.electronwill.night-config:core:3.6.7'
   implementation 'com.electronwill.night-config:toml:3.6.7'
-  modImplementation "fuzs.forgeconfigapiport:forgeconfigapiport-fabric:20.6.0"
+  modImplementation "fuzs.forgeconfigapiport:forgeconfigapiport-fabric:21.0.6"
 
   // Recommended Mods
   // modImplementation "curse.maven:tooltipfix-411557:4577194"

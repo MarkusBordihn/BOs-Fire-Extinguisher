@@ -57,7 +57,7 @@ dependencies {
   // Forge Config Support
   implementation 'com.electronwill.night-config:core:3.6.7'
   implementation 'com.electronwill.night-config:toml:3.6.7'
-  api "fuzs.forgeconfigapiport:forgeconfigapiport-neoforge:20.6.0"
+  api "fuzs.forgeconfigapiport:forgeconfigapiport-neoforge:21.0.6"
 }
 
 // NeoGradle compiles the game, but we don't want to add our common code to the game's code

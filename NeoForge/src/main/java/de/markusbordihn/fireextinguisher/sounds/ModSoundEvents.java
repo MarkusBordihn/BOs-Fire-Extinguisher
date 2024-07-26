@@ -35,19 +35,20 @@ public class ModSoundEvents {
           "fire_alarm_bell",
           () ->
               SoundEvent.createVariableRangeEvent(
-                  new ResourceLocation(Constants.MOD_ID, "fire_alarm_bell")));
+                  ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "fire_alarm_bell")));
   public static final Holder<SoundEvent> FIRE_ALARM_SIREN =
       SOUNDS.register(
           "fire_alarm_siren",
           () ->
               SoundEvent.createVariableRangeEvent(
-                  new ResourceLocation(Constants.MOD_ID, "fire_alarm_siren")));
+                  ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "fire_alarm_siren")));
   public static final Holder<SoundEvent> FIRE_ALARM_SMOKE_DETECTOR =
       SOUNDS.register(
           "fire_alarm_smoke_detector",
           () ->
               SoundEvent.createVariableRangeEvent(
-                  new ResourceLocation(Constants.MOD_ID, "fire_alarm_smoke_detector")));
+                  ResourceLocation.fromNamespaceAndPath(
+                      Constants.MOD_ID, "fire_alarm_smoke_detector")));
 
   protected ModSoundEvents() {}
 }

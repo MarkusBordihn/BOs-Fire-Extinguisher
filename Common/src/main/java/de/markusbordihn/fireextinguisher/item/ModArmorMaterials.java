@@ -19,6 +19,7 @@
 
 package de.markusbordihn.fireextinguisher.item;
 
+import de.markusbordihn.fireextinguisher.Constants;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
@@ -52,7 +53,9 @@ public enum ModArmorMaterials {
       9,
       SoundEvents.ARMOR_EQUIP_IRON,
       () -> Ingredient.of(Items.IRON_INGOT),
-      List.of(new ArmorMaterial.Layer(new ResourceLocation("fire_protection_armor"))),
+      List.of(
+          new ArmorMaterial.Layer(
+              ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "fire_protection_armor"))),
       0.0F,
       0.0F),
   FIRE_PROTECTION_LIGHT(
@@ -69,7 +72,10 @@ public enum ModArmorMaterials {
       9,
       SoundEvents.ARMOR_EQUIP_IRON,
       () -> Ingredient.of(Items.IRON_INGOT),
-      List.of(new ArmorMaterial.Layer(new ResourceLocation("fire_protection_armor"))),
+      List.of(
+          new ArmorMaterial.Layer(
+              ResourceLocation.fromNamespaceAndPath(
+                  Constants.MOD_ID, "fire_protection_light_armor"))),
       0.0F,
       0.0F);
 
@@ -101,7 +107,7 @@ public enum ModArmorMaterials {
       float toughness,
       float knockbackResistance) {
     this.name = name;
-    this.resourceLocation = new ResourceLocation(name);
+    this.resourceLocation = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, name);
     this.armorMaterial =
         new ArmorMaterial(
             defense,

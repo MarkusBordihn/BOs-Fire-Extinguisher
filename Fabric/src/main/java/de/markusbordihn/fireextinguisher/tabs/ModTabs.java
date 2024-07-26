@@ -34,7 +34,8 @@ public class ModTabs {
 
   public static final ResourceKey<CreativeModeTab> CREATIVE_TABS =
       ResourceKey.create(
-          Registries.CREATIVE_MODE_TAB, new ResourceLocation(Constants.MOD_ID, "tabs"));
+          Registries.CREATIVE_MODE_TAB,
+          ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "tabs"));
 
   protected ModTabs() {}
 

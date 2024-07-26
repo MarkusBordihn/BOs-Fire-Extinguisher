@@ -19,6 +19,7 @@
 
 package de.markusbordihn.fireextinguisher.block;
 
+import de.markusbordihn.fireextinguisher.Constants;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
@@ -34,7 +35,7 @@ public class FireAlarmBellBlock extends AbstractFireAlarmSignalBlock {
 
   public static final String NAME = "fire_alarm_bell";
   protected static final ResourceLocation SOUND_EVENT =
-      new ResourceLocation("fire_extinguisher:fire_alarm_bell");
+      ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "fire_alarm_bell");
   protected static final VoxelShape NORTH_AABB = Block.box(2, 2, 10.5, 14, 14, 16);
   protected static final VoxelShape EAST_AABB = Block.box(0, 2, 2, 5.5, 14, 14);
   protected static final VoxelShape SOUTH_AABB = Block.box(2, 2, 0, 14, 14, 5.5);

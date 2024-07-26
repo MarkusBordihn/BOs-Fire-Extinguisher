@@ -230,7 +230,7 @@ public class FireExtinguisherBlockItem extends BlockItem {
   }
 
   @Override
-  public int getUseDuration(ItemStack itemStack) {
+  public int getUseDuration(ItemStack itemStack, LivingEntity livingEntity) {
     return 10;
   }
 

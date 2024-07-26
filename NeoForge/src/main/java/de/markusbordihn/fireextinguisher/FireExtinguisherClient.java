@@ -19,38 +19,21 @@
 
 package de.markusbordihn.fireextinguisher;
 
-import de.markusbordihn.fireextinguisher.block.ModBlocks;
-import de.markusbordihn.fireextinguisher.config.CommonConfig;
-import de.markusbordihn.fireextinguisher.config.ForgeConfigHelperNeoForge;
-import de.markusbordihn.fireextinguisher.item.ModBlockItems;
-import de.markusbordihn.fireextinguisher.item.ModItems;
-import de.markusbordihn.fireextinguisher.sounds.ModSoundEvents;
+import de.markusbordihn.fireextinguisher.tabs.ModTabs;
+import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-@Mod(Constants.MOD_ID)
-public class FireExtinguisher {
+@Mod(value = Constants.MOD_ID, dist = Dist.CLIENT)
+public class FireExtinguisherClient {
 
   public static final Logger log = LogManager.getLogger(Constants.LOG_NAME);
 
-  public FireExtinguisher(IEventBus modEventBus, ModContainer modContainer) {
-
-    Constants.LOG.info("{} Config ...", Constants.LOG_REGISTER_PREFIX);
-    new ForgeConfigHelperNeoForge().registerCommonConfig(CommonConfig.COMMON_SPEC);
-
-    log.info("{} Blocks ...", Constants.LOG_REGISTER_PREFIX);
-    ModBlocks.BLOCKS.register(modEventBus);
-
-    log.info("{} Block Items ...", Constants.LOG_REGISTER_PREFIX);
-    ModBlockItems.ITEMS.register(modEventBus);
-
-    log.info("{} Items ...", Constants.LOG_REGISTER_PREFIX);
-    ModItems.ITEMS.register(modEventBus);
-
-    Constants.LOG.info("{} Sound Events ...", Constants.LOG_REGISTER_PREFIX);
-    ModSoundEvents.SOUNDS.register(modEventBus);
+  public FireExtinguisherClient(IEventBus modEventBus, ModContainer modContainer) {
+    log.info("{} Creative Tabs ...", Constants.LOG_REGISTER_PREFIX);
+    ModTabs.CREATIVE_TABS.register(modEventBus);
   }
 }

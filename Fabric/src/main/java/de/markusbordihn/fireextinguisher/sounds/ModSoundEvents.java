@@ -34,16 +34,16 @@ public class ModSoundEvents {
         BuiltInRegistries.SOUND_EVENT,
         Constants.MOD_ID_PREFIX + "fire_alarm_bell",
         SoundEvent.createVariableRangeEvent(
-            new ResourceLocation(Constants.MOD_ID_PREFIX + "fire_alarm_bell")));
+            ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "fire_alarm_bell")));
     Registry.register(
         BuiltInRegistries.SOUND_EVENT,
         Constants.MOD_ID_PREFIX + "fire_alarm_siren",
         SoundEvent.createVariableRangeEvent(
-            new ResourceLocation(Constants.MOD_ID_PREFIX + "fire_alarm_siren")));
+            ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "fire_alarm_siren")));
     Registry.register(
         BuiltInRegistries.SOUND_EVENT,
         Constants.MOD_ID_PREFIX + "fire_alarm_smoke_detector",
         SoundEvent.createVariableRangeEvent(
-            new ResourceLocation(Constants.MOD_ID_PREFIX + "fire_alarm_smoke_detector")));
+            ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "fire_alarm_smoke_detector")));
   }
 }

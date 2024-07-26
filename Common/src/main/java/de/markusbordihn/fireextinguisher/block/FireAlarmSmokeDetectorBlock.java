@@ -42,7 +42,7 @@ public class FireAlarmSmokeDetectorBlock extends AbstractFireAlarmSignalBlock {
   public static final String NAME = "fire_alarm_smoke_detector";
   public static final BooleanProperty DISARMED = BlockStateProperties.DISARMED;
   protected static final ResourceLocation SOUND_EVENT =
-      new ResourceLocation("fire_extinguisher:fire_alarm_smoke_detector");
+      ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "fire_alarm_smoke_detector");
   protected static final VoxelShape NORTH_AABB = Block.box(5, 5, 14, 11, 11, 16);
   protected static final VoxelShape EAST_AABB = Block.box(0, 5, 5, 2, 11, 11);
   protected static final VoxelShape SOUTH_AABB = Block.box(5, 5, 0, 11, 11, 2);
