@@ -20,8 +20,8 @@
 package de.markusbordihn.fireextinguisher.item;
 
 import de.markusbordihn.fireextinguisher.Constants;
+import de.markusbordihn.fireextinguisher.config.FireExtinguisherConfig;
 import java.util.List;
-import javax.annotation.Nullable;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
@@ -49,12 +49,12 @@ public class FireBootsLightItem extends FireProtectionArmorItem {
   @Override
   protected void fireArmorTick(ItemStack itemStack, Level level, ServerPlayer serverPlayer) {
     if (Boolean.TRUE.equals(
-            COMMON.fireProtectionLightEnabled.get()
-                && ticker++ > COMMON.fireProtectionLightRenew.get())
+            FireExtinguisherConfig.fireProtectionLightEnabled
+                && ticker++ > FireExtinguisherConfig.fireProtectionLightRenew)
         && !serverPlayer.hasEffect(MobEffects.FIRE_RESISTANCE)) {
       serverPlayer.addEffect(
           new MobEffectInstance(
-              MobEffects.FIRE_RESISTANCE, COMMON.fireProtectionLightDuration.get()));
+              MobEffects.FIRE_RESISTANCE, FireExtinguisherConfig.fireProtectionLightDuration));
       ticker = 0;
     }
   }
@@ -66,17 +66,15 @@ public class FireBootsLightItem extends FireProtectionArmorItem {
 
   @Override
   public void appendHoverText(
-      ItemStack itemStack,
-      @Nullable Level level,
-      List<Component> tooltipList,
-      TooltipFlag tooltipFlag) {
+      ItemStack itemStack, Level level, List<Component> tooltipList, TooltipFlag tooltipFlag) {
     tooltipList.add(Component.translatable(Constants.TEXT_PREFIX + NAME + "_description"));
-    if (Boolean.TRUE.equals(COMMON.fireProtectionLightEnabled.get())) {
+    if (Boolean.TRUE.equals(FireExtinguisherConfig.fireProtectionLightEnabled)) {
       tooltipList.add(
           Component.translatable(
                   Constants.TEXT_PREFIX + "fire_armor_config",
-                  Math.round((COMMON.fireProtectionLightRenew.get() / 20.0) * 10) / 10.0,
-                  Math.round((COMMON.fireProtectionLightDuration.get() / 20.0) * 10) / 10.0)
+                  Math.round((FireExtinguisherConfig.fireProtectionLightRenew / 20.0) * 10) / 10.0,
+                  Math.round((FireExtinguisherConfig.fireProtectionLightDuration / 20.0) * 10)
+                      / 10.0)
               .withStyle(ChatFormatting.GREEN));
     }
   }

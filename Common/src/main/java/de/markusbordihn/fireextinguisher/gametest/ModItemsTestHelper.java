@@ -17,26 +17,27 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package de.markusbordihn.fireextinguisher.config;
+package de.markusbordihn.fireextinguisher.gametest;
 
-import net.minecraftforge.common.ForgeConfigSpec;
-import net.minecraftforge.fml.ModLoadingContext;
-import net.minecraftforge.fml.config.ModConfig;
+import net.minecraft.core.BlockPos;
+import net.minecraft.gametest.framework.GameTestHelper;
+import net.minecraft.world.item.Item;
 
-public class ForgeConfigHelperForge implements IForgeConfigHelper {
+public class ModItemsTestHelper {
 
-  @Override
-  public void registerServerConfig(ForgeConfigSpec spec) {
-    ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, spec);
+  private ModItemsTestHelper() {}
+
+  public static void testModItem(GameTestHelper helper, Item item) {
+    BlockPos blockPos = new BlockPos(0, 1, 0);
+    testModItem(helper, item, blockPos);
   }
 
-  @Override
-  public void registerClientConfig(ForgeConfigSpec spec) {
-    ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, spec);
-  }
-
-  @Override
-  public void registerCommonConfig(ForgeConfigSpec spec) {
-    ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, spec);
+  public static void testModItem(GameTestHelper helper, Item item, BlockPos blockPos) {
+    if (item == null || blockPos == null) {
+      helper.fail("Item or block position is not defined!");
+      return;
+    }
+    helper.spawnItem(item, blockPos.getX(), blockPos.getY(), blockPos.getZ());
+    helper.assertItemEntityPresent(item, blockPos, 0D);
   }
 }

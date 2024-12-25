@@ -17,22 +17,28 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package de.markusbordihn.fireextinguisher.mixin;
+package de.markusbordihn.fireextinguisher.gametest;
 
 import de.markusbordihn.fireextinguisher.Constants;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screens.TitleScreen;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import net.minecraft.gametest.framework.GameTestHelper;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-@Mixin(TitleScreen.class)
-public class FireExtinguisherMixin {
+public class GameTestHelpers {
 
-  @Inject(at = @At("HEAD"), method = "init()V")
-  private void init(CallbackInfo info) {
-    Constants.LOG.info("MC Version: {}", Minecraft.getInstance().getVersionType());
-    Constants.LOG.info("Classloader: {}", this.getClass().getClassLoader());
+  private static final Logger log = LogManager.getLogger(Constants.LOG_NAME);
+
+  private GameTestHelpers() {}
+
+  public static void assertTrue(GameTestHelper helper, String message, boolean condition) {
+    if (condition) {
+      helper.succeed();
+    } else {
+      helper.fail(message);
+    }
+  }
+
+  public static void assertNotNull(GameTestHelper helper, String message, Object object) {
+    assertTrue(helper, message, object != null);
   }
 }

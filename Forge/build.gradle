@@ -1,93 +1,118 @@
-buildscript {
-  repositories {
-    maven { url = 'https://maven.minecraftforge.net' }
-    mavenCentral()
-  }
-  dependencies {
-    classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
-  }
-}
-
 plugins {
+  id 'maven-publish'
+  id 'net.minecraftforge.gradle' version '6.+'
   id 'com.matthewprenger.cursegradle' version '1.4.0'
-  id 'nu.studer.credentials' version '1.0.7'
+  id 'nu.studer.credentials' version '3.0'
   id "com.modrinth.minotaur" version "2.+"
 }
 
-apply plugin: 'java'
 apply plugin: 'net.minecraftforge.gradle'
-apply plugin: 'eclipse'
-apply plugin: 'maven-publish'
 
 archivesBaseName = "${mod_id}-forge-${minecraft_version}"
 
+println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
 minecraft {
-  mappings channel: 'official', version: minecraft_version
+  mappings channel: 'official', version: "${project.minecraft_version}"
 
-  if (project.hasProperty('forge_ats_enabled') && project.findProperty('forge_ats_enabled').toBoolean()) {
-    // This location is hardcoded in Forge and can not be changed.
-    // https://github.com/MinecraftForge/MinecraftForge/blob/be1698bb1554f9c8fa2f58e32b9ab70bc4385e60/fmlloader/src/main/java/net/minecraftforge/fml/loading/moddiscovery/ModFile.java#L123
-    accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
-    project.logger.debug('Forge Access Transformers are enabled for this project.')
-  }
-
+  // Run configurations
   runs {
     client {
-      workingDirectory project.file('run')
-      ideaModule "${rootProject.name}.${project.name}.main"
-      taskName 'Client'
-      property 'mixin.env.remapRefMap', 'true'
-      property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
+      jvmArgs "-XX:+AllowEnhancedClassRedefinition"
+      workingDirectory project.file('run/client')
+      property 'forge.logging.markers', 'REGISTRIES'
+      property 'forge.logging.console.level', 'debug'
+      property 'forge.enabledGameTestNamespaces', "${project.mod_id}"
+
       mods {
-        modClientRun {
+        "${project.mod_id}" {
           source sourceSets.main
-          source project(":Common").sourceSets.main
         }
       }
+
+      // Mixin Support
+      property 'mixin.env.remapRefMap', 'true'
+      property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
+    }
+
+    client2 {
+      parent minecraft.runs.client
+      workingDirectory project.file('run/client2')
+      args '--username', 'guest_player'
     }
 
     server {
-      workingDirectory project.file('run')
-      ideaModule "${rootProject.name}.${project.name}.main"
-      taskName 'Server'
-      property 'mixin.env.remapRefMap', 'true'
-      property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
+      jvmArgs "-XX:+AllowEnhancedClassRedefinition"
+      workingDirectory project.file('run/server')
+      property 'forge.logging.markers', 'REGISTRIES'
+      property 'forge.logging.console.level', 'debug'
+      property 'forge.enabledGameTestNamespaces', "${project.mod_id}"
+
       mods {
-        modServerRun {
+        "${project.mod_id}" {
           source sourceSets.main
-          source project(":Common").sourceSets.main
         }
       }
+
+      // Mixin Support
+      property 'mixin.env.remapRefMap', 'true'
+      property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
+    }
+
+    gameTestServer {
+      workingDirectory project.file('run/gametestserver')
+      property 'forge.logging.markers', 'REGISTRIES'
+      property 'forge.logging.console.level', 'debug'
+      property 'forge.enabledGameTestNamespaces', "${project.mod_id}"
+
+      mods {
+        "${project.mod_id}" {
+          source sourceSets.main
+        }
+      }
+
+      // Mixin Support
+      property 'mixin.env.remapRefMap', 'true'
+      property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
     }
 
     data {
-      workingDirectory project.file('run')
-      ideaModule "${rootProject.name}.${project.name}.main"
-      args '--mod', mod_id, '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
-      taskName 'Data'
-      property 'mixin.env.remapRefMap', 'true'
-      property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
+      workingDirectory project.file('run/data')
+      property 'forge.logging.markers', 'REGISTRIES'
+      property 'forge.logging.console.level', 'debug'
+      property 'forge.enabledGameTestNamespaces', "${project.mod_id}"
+
+      args '--mod', "${project.mod_id}", '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
       mods {
-        modDataRun {
+        "${project.mod_id}" {
           source sourceSets.main
-          source project(":Common").sourceSets.main
         }
       }
     }
   }
 }
 
-sourceSets.main.resources.srcDir 'src/generated/resources'
+// Include resources generated by data generators.
+sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 dependencies {
-  minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
+  minecraft "net.minecraftforge:forge:${project.minecraft_version}-${project.forge_version}"
+
+  // Include Common code
   compileOnly project(":Common")
 
-  // Additional helpful Mods for development
-  runtimeOnly fg.deobf("curse.maven:jei-238222:4712866")
+  // Additional helpful Mods for development (runtime dependency)
+  if (project.hasProperty('forge_jei_mod') && project.forge_jei_mod) {
+    runtimeOnly fg.deobf("curse.maven:jei-238222:${project.forge_jei_mod}")
+  }
+  if (project.hasProperty('forge_spark_mod') && project.forge_spark_mod) {
+    runtimeOnly fg.deobf("curse.maven:spark-361579:${project.forge_spark_mod}")
+  }
+  if (project.hasProperty('forge_xaeros_minimap_mod') && project.forge_xaeros_minimap_mod) {
+    runtimeOnly fg.deobf("curse.maven:xaeros_minimap-263420:${project.forge_xaeros_minimap_mod}")
+  }
 }
 
-tasks.withType(JavaCompile) {
+tasks.withType(JavaCompile).configureEach {
   source(project(":Common").sourceSets.main.allSource)
 }
 
@@ -95,46 +120,62 @@ processResources {
   from project(":Common").sourceSets.main.resources
 }
 
+// Example for how to get properties into the manifest for reading by the runtime..
+jar {
+  manifest {
+    attributes([
+            "Specification-Title"     : "${project.mod_name}",
+            "Specification-Vendor"    : "${project.vendor_name}",
+            "Specification-Version"   : "1", // We are version 1 of ourselves
+            "Implementation-Title"    : project.name,
+            "Implementation-Version"  : "${project.version}",
+            "Implementation-Vendor"   : "${project.mod_id}",
+            "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+    ])
+  }
+}
 
+// Example configuration to allow publishing using the maven-publish task
+// This is the preferred method to reobfuscate your jar file
 jar.finalizedBy('reobfJar')
+// However if you are in a multi-project build, dev time needs unobfed jar files, so you can delay the obfuscation until publishing by doing
+//publish.dependsOn('reobfJar')
 
 publishing {
   publications {
     mavenJava(MavenPublication) {
-      groupId project.group
-      artifactId project.archivesBaseName
-      version project.version
       artifact jar
     }
   }
-  repositories {
-    maven {
-      url "file://" + System.getenv("local_maven")
+}
+
+// CurseForge Publishing
+if (project.hasProperty('curseforge_project_id') && project.curseforge_project_id) {
+  curseforge {
+    apiKey = "${credentials.forKey('curseforge_api_token')}"
+    project {
+      id = "${project.curseforge_project_id}"
+      changelog = rootProject.file("CHANGELOG.md")
+      changelogType = 'markdown'
+      releaseType = "${project.curseforge_release_type}"
+      addGameVersion("${project.minecraft_version}")
+      addGameVersion("Forge")
+      mainArtifact(jar)
     }
   }
 }
 
-curseforge {
-  apiKey = "${credentials.curseforge_api_token}"
-  project {
-    id = "${curseforge_project_id}"
-    changelog = file("../CHANGELOG.md")
-    changelogType = 'markdown'
-    releaseType = 'release'
-    addGameVersion("${minecraft_version}")
-    addGameVersion("Forge")
+// Modrinth Publishing
+if (project.hasProperty('modrinth_project_id') && project.modrinth_project_id) {
+  modrinth {
+    token = "${credentials.forKey('modrinth_api_token')}"
+    projectId = "${project.modrinth_project_id}"
+    versionNumber = "${project.version}"
+    versionType = "${project.modrinth_release_type}"
+    versionName = "${project.mod_name} ${project.version}"
+    changelog = rootProject.file("CHANGELOG.md").text
+    uploadFile = jar
+    gameVersions = ["${project.minecraft_version}"]
+    loaders = ["forge"]
   }
-  options {
-    forgeGradleIntegration = true
-  }
-}
-
-modrinth {
-  token = "${credentials.modrinth_api_token}"
-  projectId = "${modrinth_project_id}"
-  versionNumber = "${version}"
-  versionType = "${modrinth_release_type}"
-  uploadFile = jar
-  gameVersions = ["${minecraft_version}"]
-  loaders = ["forge"]
 }

@@ -16,27 +16,27 @@
  * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package de.markusbordihn.fireextinguisher.config;
+
+package de.markusbordihn.fireextinguisher.gametest;
 
 import de.markusbordihn.fireextinguisher.Constants;
-import net.minecraftforge.api.ModLoadingContext;
-import net.minecraftforge.common.ForgeConfigSpec;
-import net.minecraftforge.fml.config.ModConfig;
+import net.minecraft.gametest.framework.GameTest;
+import net.minecraft.gametest.framework.GameTestHelper;
+import net.minecraftforge.fml.ModList;
+import net.minecraftforge.gametest.GameTestHolder;
+import net.minecraftforge.gametest.PrefixGameTestTemplate;
 
-public class ForgeConfigHelperFabric implements IForgeConfigHelper {
+@SuppressWarnings("unused")
+@PrefixGameTestTemplate(value = false)
+@GameTestHolder(Constants.MOD_ID)
+public class SmokeTest {
 
-  @Override
-  public void registerServerConfig(ForgeConfigSpec spec) {
-    ModLoadingContext.registerConfig(Constants.MOD_ID, ModConfig.Type.SERVER, spec);
-  }
-
-  @Override
-  public void registerClientConfig(ForgeConfigSpec spec) {
-    ModLoadingContext.registerConfig(Constants.MOD_ID, ModConfig.Type.CLIENT, spec);
-  }
-
-  @Override
-  public void registerCommonConfig(ForgeConfigSpec spec) {
-    ModLoadingContext.registerConfig(Constants.MOD_ID, ModConfig.Type.COMMON, spec);
+  @GameTest(template = "gametest.1x1x1")
+  public void testModRegistered(GameTestHelper helper) {
+    GameTestHelpers.assertTrue(
+        helper,
+        "Mod " + Constants.MOD_ID + " is not available!",
+        ModList.get().isLoaded(Constants.MOD_ID));
+    helper.succeed();
   }
 }

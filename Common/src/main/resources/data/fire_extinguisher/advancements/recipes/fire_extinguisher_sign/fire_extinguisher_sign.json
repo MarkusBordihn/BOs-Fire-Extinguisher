@@ -1,0 +1,56 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_red_dye": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["minecraft:red_dye"]
+          }
+        ]
+      }
+    },
+    "has_white_dye": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["minecraft:white_dye"]
+          }
+        ]
+      }
+    },
+    "has_signs": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "minecraft:signs"
+          }
+        ]
+      }
+    },
+    "has_fire_extinguisher_sign": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["fire_extinguisher:fire_extinguisher_sign"]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_red_dye",
+      "has_white_dye",
+      "has_signs",
+      "has_fire_extinguisher_sign"
+    ]
+  ],
+  "rewards": {
+    "recipes": ["fire_extinguisher:fire_extinguisher_sign"]
+  }
+}

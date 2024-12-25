@@ -54,12 +54,13 @@ public class FireAlarmBellBlock extends AbstractFireAlarmSignalBlock {
       CollisionContext collisionContext) {
     return switch (blockState.getValue(FACE)) {
       case FLOOR -> DOWN_AABB;
-      case WALL -> switch (blockState.getValue(FACING)) {
-        case EAST -> EAST_AABB;
-        case WEST -> WEST_AABB;
-        case SOUTH -> SOUTH_AABB;
-        default -> NORTH_AABB;
-      };
+      case WALL ->
+          switch (blockState.getValue(FACING)) {
+            case EAST -> EAST_AABB;
+            case WEST -> WEST_AABB;
+            case SOUTH -> SOUTH_AABB;
+            default -> NORTH_AABB;
+          };
       default -> UP_AABB;
     };
   }

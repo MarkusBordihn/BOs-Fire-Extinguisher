@@ -22,6 +22,8 @@ package de.markusbordihn.fireextinguisher.item;
 import de.markusbordihn.fireextinguisher.Constants;
 import net.minecraft.core.Registry;
 import net.minecraft.world.item.Item;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class ModItems {
 
@@ -30,20 +32,20 @@ public class ModItems {
   public static final Item FIRE_CHESTPLATE = new FireChestplateItem();
   public static final Item FIRE_HELMET = new FireHelmetItem();
   public static final Item FIRE_LEGGINGS = new FireLeggingsItem();
-
   public static final Item FIRE_BOOTS_LIGHT = new FireBootsLightItem();
   public static final Item FIRE_CHESTPLATE_LIGHT = new FireChestplateLightItem();
   public static final Item FIRE_HELMET_LIGHT = new FireHelmetLightItem();
   public static final Item FIRE_LEGGINGS_LIGHT = new FireLeggingsLightItem();
+  private static final Logger log = LogManager.getLogger(Constants.LOG_NAME);
 
   protected ModItems() {}
 
   public static void registerModItems() {
-    Constants.LOG.info("{} Fire fighting weapons items ...", Constants.LOG_SUB_REGISTER_PREFIX);
+    log.info("{} Fire fighting weapons items ...", Constants.LOG_SUB_REGISTER_PREFIX);
 
     Registry.register(Registry.ITEM, Constants.MOD_ID_PREFIX + FireAxeItem.NAME, FIRE_AXE);
 
-    Constants.LOG.info("{} Fire protection armor items ...", Constants.LOG_SUB_REGISTER_PREFIX);
+    log.info("{} Fire protection armor items ...", Constants.LOG_SUB_REGISTER_PREFIX);
     Registry.register(Registry.ITEM, Constants.MOD_ID_PREFIX + FireBootsItem.NAME, FIRE_BOOTS);
     Registry.register(
         Registry.ITEM, Constants.MOD_ID_PREFIX + FireChestplateItem.NAME, FIRE_CHESTPLATE);
@@ -51,8 +53,7 @@ public class ModItems {
     Registry.register(
         Registry.ITEM, Constants.MOD_ID_PREFIX + FireLeggingsItem.NAME, FIRE_LEGGINGS);
 
-    Constants.LOG.info(
-        "{} Fire protection light armor items ...", Constants.LOG_SUB_REGISTER_PREFIX);
+    log.info("{} Fire protection light armor items ...", Constants.LOG_SUB_REGISTER_PREFIX);
     Registry.register(
         Registry.ITEM, Constants.MOD_ID_PREFIX + FireBootsLightItem.NAME, FIRE_BOOTS_LIGHT);
     Registry.register(

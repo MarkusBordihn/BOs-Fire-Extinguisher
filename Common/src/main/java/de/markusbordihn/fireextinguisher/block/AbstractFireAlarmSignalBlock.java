@@ -19,7 +19,6 @@
 
 package de.markusbordihn.fireextinguisher.block;
 
-import de.markusbordihn.fireextinguisher.config.CommonConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Registry;
@@ -41,7 +40,6 @@ public abstract class AbstractFireAlarmSignalBlock extends FaceAttachedHorizonta
 
   public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
   public static final int ACTION_TICK_INTERVAL = 80;
-  protected static final CommonConfig.Config COMMON = CommonConfig.COMMON;
 
   protected AbstractFireAlarmSignalBlock(BlockBehaviour.Properties properties) {
     super(properties);
