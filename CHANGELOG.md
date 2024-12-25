@@ -5,6 +5,10 @@
 This change log includes the summarized changes.
 For the full changelog, please go to the [GitHub History][history] instead.
 
+### 8.1.0
+
+- Added Chinese (zh_cn, zh_hk, zh_tw) translations. Special thanks to @Raaay-Fung.
+
 ### 8.0.0
 
 - Fixed #9 by correct formatting recipes for 1.21.x.
