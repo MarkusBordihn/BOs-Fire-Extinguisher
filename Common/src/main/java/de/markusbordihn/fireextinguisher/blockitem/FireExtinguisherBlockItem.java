@@ -21,9 +21,8 @@ package de.markusbordihn.fireextinguisher.blockitem;
 
 import de.markusbordihn.fireextinguisher.Constants;
 import de.markusbordihn.fireextinguisher.block.FireExtinguisherBlock;
-import de.markusbordihn.fireextinguisher.config.CommonConfig;
+import de.markusbordihn.fireextinguisher.config.FireExtinguisherConfig;
 import java.util.List;
-import javax.annotation.Nullable;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -53,7 +52,6 @@ import net.minecraft.world.level.block.state.BlockState;
 public class FireExtinguisherBlockItem extends BlockItem implements Vanishable {
 
   public static final String NAME = "fire_extinguisher";
-  private static final CommonConfig.Config COMMON = CommonConfig.COMMON;
   private static final double X_SHIFT = 0.0;
   private static final double Y_SHIFT = 1.6;
   private static final double Z_SHIFT = 0.0;
@@ -109,9 +107,9 @@ public class FireExtinguisherBlockItem extends BlockItem implements Vanishable {
     Iterable<BlockPos> blockPositions =
         BlockPos.withinManhattan(
             targetBlockPos.above(),
-            COMMON.fireExtinguisherRadius.get(),
-            COMMON.fireExtinguisherRadius.get(),
-            COMMON.fireExtinguisherRadius.get());
+            FireExtinguisherConfig.fireExtinguisherRadius,
+            FireExtinguisherConfig.fireExtinguisherRadius,
+            FireExtinguisherConfig.fireExtinguisherRadius);
     boolean hasStoppedFire = false;
     for (BlockPos blockPos : blockPositions) {
       BlockState blockState = level.getBlockState(blockPos);
@@ -241,13 +239,10 @@ public class FireExtinguisherBlockItem extends BlockItem implements Vanishable {
 
   @Override
   public void appendHoverText(
-      ItemStack itemStack,
-      @Nullable Level level,
-      List<Component> tooltipList,
-      TooltipFlag tooltipFlag) {
+      ItemStack itemStack, Level level, List<Component> tooltipList, TooltipFlag tooltipFlag) {
     tooltipList.add(
         new TranslatableComponent(
-                Constants.TOOLTIP_PREFIX + NAME, COMMON.fireExtinguisherRadius.get())
+                Constants.TOOLTIP_PREFIX + NAME, FireExtinguisherConfig.fireExtinguisherRadius)
             .withStyle(ChatFormatting.GRAY));
     tooltipList.add(
         new TranslatableComponent(Constants.TEXT_PREFIX + NAME + "_use")

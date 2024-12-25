@@ -5,6 +5,21 @@
 This change log includes the summarized changes.
 For the full changelog, please go to the [GitHub History][history] instead.
 
+### 8.0.0
+
+- Fixed #9 by correct formatting recipes for 1.21.x.
+- Fixed #4 by adding recipe advancements to unlock the crafting recipes.
+- Added automatic game tests for blocks, block items and items.
+- Simplified Fire Extinguisher sign recipe.
+- Fixed smaller issues and improved performance.
+- Updated documentation and logo.
+
+### 7.0.0
+
+- Added simple game tests.
+- Fixed some minor bugs and improved performance.
+- Replaced `forge-config-api-port` with simple config file.
+
 ### 6.3.0
 
 - Smaller bug fixes and improvements.

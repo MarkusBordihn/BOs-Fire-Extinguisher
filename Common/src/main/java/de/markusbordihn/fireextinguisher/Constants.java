@@ -19,8 +19,8 @@
 
 package de.markusbordihn.fireextinguisher;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public final class Constants {
 
@@ -37,11 +37,12 @@ public final class Constants {
   public static final String MOD_NAME = "Fire Extinguisher";
   public static final String MOD_URL =
       "https://www.curseforge.com/minecraft/mc-mods/fire-extinguisher";
-  // Logger
-  public static final Logger LOG = LoggerFactory.getLogger(MOD_NAME);
   // Prefixes
   public static final String TEXT_PREFIX = "text.fire_extinguisher.";
   public static final String TOOLTIP_PREFIX = "tooltip.fire_extinguisher.";
+  // Static paths
+  public static Path GAME_DIR = Paths.get("").toAbsolutePath();
+  public static Path CONFIG_DIR = GAME_DIR.resolve("config");
 
   private Constants() {}
 }

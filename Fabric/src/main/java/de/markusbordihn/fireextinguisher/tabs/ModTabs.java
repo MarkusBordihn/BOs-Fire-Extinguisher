@@ -27,13 +27,17 @@ import de.markusbordihn.fireextinguisher.block.FireExtinguisherSignBlocks;
 import de.markusbordihn.fireextinguisher.item.ModItems;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.minecraft.resources.ResourceLocation;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class ModTabs {
+
+  private static final Logger log = LogManager.getLogger(Constants.LOG_NAME);
 
   protected ModTabs() {}
 
   public static void registerModTabs() {
-    Constants.LOG.info("{} Fire Extinguisher Tabs ...", Constants.LOG_SUB_REGISTER_PREFIX);
+    log.info("{} Fire Extinguisher Tabs ...", Constants.LOG_SUB_REGISTER_PREFIX);
     FabricItemGroupBuilder.create(new ResourceLocation(Constants.MOD_ID, "tab"))
         .icon(() -> FireExtinguisherBlocks.FIRE_EXTINGUISHER.asItem().getDefaultInstance())
         .appendItems(

@@ -20,8 +20,8 @@
 package de.markusbordihn.fireextinguisher.item;
 
 import de.markusbordihn.fireextinguisher.Constants;
+import de.markusbordihn.fireextinguisher.config.FireExtinguisherConfig;
 import java.util.List;
-import javax.annotation.Nullable;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
@@ -50,14 +50,16 @@ public class FireLeggingsItem extends FireProtectionArmorItem {
   @Override
   protected void fireArmorTick(ItemStack itemStack, Level level, ServerPlayer serverPlayer) {
     if (Boolean.TRUE.equals(
-            COMMON.fireProtectionEnabled.get() && ticker++ > COMMON.fireProtectionRenew.get())
+            FireExtinguisherConfig.fireProtectionEnabled
+                && ticker++ > FireExtinguisherConfig.fireProtectionRenew)
         && !serverPlayer.hasEffect(MobEffects.FIRE_RESISTANCE)) {
       serverPlayer.addEffect(
-          new MobEffectInstance(MobEffects.FIRE_RESISTANCE, COMMON.fireProtectionDuration.get()));
-      if (Boolean.TRUE.equals(COMMON.fireLeggingsSlowDownEnabled.get())) {
+          new MobEffectInstance(
+              MobEffects.FIRE_RESISTANCE, FireExtinguisherConfig.fireProtectionDuration));
+      if (Boolean.TRUE.equals(FireExtinguisherConfig.fireLeggingsSlowDownEnabled)) {
         serverPlayer.addEffect(
             new MobEffectInstance(
-                MobEffects.MOVEMENT_SLOWDOWN, COMMON.fireProtectionDuration.get()));
+                MobEffects.MOVEMENT_SLOWDOWN, FireExtinguisherConfig.fireProtectionDuration));
       }
       ticker = 0;
     }
@@ -70,20 +72,17 @@ public class FireLeggingsItem extends FireProtectionArmorItem {
 
   @Override
   public void appendHoverText(
-      ItemStack itemStack,
-      @Nullable Level level,
-      List<Component> tooltipList,
-      TooltipFlag tooltipFlag) {
+      ItemStack itemStack, Level level, List<Component> tooltipList, TooltipFlag tooltipFlag) {
     tooltipList.add(new TranslatableComponent(Constants.TEXT_PREFIX + NAME + "_description"));
-    if (Boolean.TRUE.equals(COMMON.fireProtectionEnabled.get())) {
+    if (Boolean.TRUE.equals(FireExtinguisherConfig.fireProtectionEnabled)) {
       tooltipList.add(
           new TranslatableComponent(
                   Constants.TEXT_PREFIX + "fire_armor_config",
-                  Math.round((COMMON.fireProtectionRenew.get() / 20.0) * 10) / 10.0,
-                  Math.round((COMMON.fireProtectionDuration.get() / 20.0) * 10) / 10.0)
+                  Math.round((FireExtinguisherConfig.fireProtectionRenew / 20.0) * 10) / 10.0,
+                  Math.round((FireExtinguisherConfig.fireProtectionDuration / 20.0) * 10) / 10.0)
               .withStyle(ChatFormatting.GREEN));
     }
-    if (Boolean.TRUE.equals(COMMON.fireLeggingsSlowDownEnabled.get())) {
+    if (Boolean.TRUE.equals(FireExtinguisherConfig.fireLeggingsSlowDownEnabled)) {
       tooltipList.add(
           new TranslatableComponent(Constants.TEXT_PREFIX + "fire_armor_slow_down")
               .withStyle(ChatFormatting.DARK_RED));

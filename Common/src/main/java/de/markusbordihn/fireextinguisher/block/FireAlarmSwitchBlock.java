@@ -102,20 +102,23 @@ public class FireAlarmSwitchBlock extends FaceAttachedHorizontalDirectionalBlock
       BlockPos blockPos,
       CollisionContext collisionContext) {
     return switch (blockState.getValue(FACE)) {
-      case FLOOR -> switch (blockState.getValue(FACING).getAxis()) {
-        case X -> DOWN_AABB_X;
-        default -> DOWN_AABB_Z;
-      };
-      case WALL -> switch (blockState.getValue(FACING)) {
-        case EAST -> EAST_AABB;
-        case WEST -> WEST_AABB;
-        case SOUTH -> SOUTH_AABB;
-        default -> NORTH_AABB;
-      };
-      default -> switch (blockState.getValue(FACING).getAxis()) {
-        case X -> UP_AABB_X;
-        default -> UP_AABB_Z;
-      };
+      case FLOOR ->
+          switch (blockState.getValue(FACING).getAxis()) {
+            case X -> DOWN_AABB_X;
+            default -> DOWN_AABB_Z;
+          };
+      case WALL ->
+          switch (blockState.getValue(FACING)) {
+            case EAST -> EAST_AABB;
+            case WEST -> WEST_AABB;
+            case SOUTH -> SOUTH_AABB;
+            default -> NORTH_AABB;
+          };
+      default ->
+          switch (blockState.getValue(FACING).getAxis()) {
+            case X -> UP_AABB_X;
+            default -> UP_AABB_Z;
+          };
     };
   }
 

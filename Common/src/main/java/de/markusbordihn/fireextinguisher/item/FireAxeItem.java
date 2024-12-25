@@ -20,9 +20,8 @@
 package de.markusbordihn.fireextinguisher.item;
 
 import de.markusbordihn.fireextinguisher.Constants;
-import de.markusbordihn.fireextinguisher.config.CommonConfig;
+import de.markusbordihn.fireextinguisher.config.FireExtinguisherConfig;
 import java.util.List;
-import javax.annotation.Nullable;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -48,7 +47,6 @@ public class FireAxeItem extends AxeItem {
 
   public static final String NAME = "fire_axe";
   protected static final Logger log = LogManager.getLogger(Constants.LOG_NAME);
-  private static final CommonConfig.Config COMMON = CommonConfig.COMMON;
 
   public FireAxeItem() {
     this(Tiers.IRON, 6.0F, -3.2F, new Properties());
@@ -68,10 +66,12 @@ public class FireAxeItem extends AxeItem {
       InteractionHand hand,
       BlockPos targetBlockPos,
       ItemStack itemStack) {
-    int fireAxtRadius = COMMON.fireAxtRadius.get();
     Iterable<BlockPos> blockPositions =
         BlockPos.withinManhattan(
-            targetBlockPos.above(), fireAxtRadius, fireAxtRadius, fireAxtRadius);
+            targetBlockPos.above(),
+            FireExtinguisherConfig.fireAxtRadius,
+            FireExtinguisherConfig.fireAxtRadius,
+            FireExtinguisherConfig.fireAxtRadius);
     boolean hasStoppedFire = false;
     for (BlockPos blockPos : blockPositions) {
       BlockState blockState = level.getBlockState(blockPos);
@@ -138,13 +138,10 @@ public class FireAxeItem extends AxeItem {
 
   @Override
   public void appendHoverText(
-      ItemStack itemStack,
-      @Nullable Level level,
-      List<Component> tooltipList,
-      TooltipFlag tooltipFlag) {
+      ItemStack itemStack, Level level, List<Component> tooltipList, TooltipFlag tooltipFlag) {
     tooltipList.add(
         new TranslatableComponent(
-            Constants.TEXT_PREFIX + NAME + "_description", COMMON.fireAxtRadius.get()));
+            Constants.TEXT_PREFIX + NAME + "_description", FireExtinguisherConfig.fireAxtRadius));
     tooltipList.add(
         new TranslatableComponent(Constants.TEXT_PREFIX + NAME + "_use")
             .withStyle(ChatFormatting.GREEN));
