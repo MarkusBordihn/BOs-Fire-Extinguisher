@@ -39,8 +39,8 @@ public class FireExtinguisher {
 
   public static final Logger log = LogManager.getLogger(Constants.LOG_NAME);
 
-  public FireExtinguisher() {
-    final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+  public FireExtinguisher(FMLJavaModLoadingContext context) {
+    final IEventBus modEventBus = context.getModEventBus();
 
     log.info("{} Constants ...", Constants.LOG_REGISTER_PREFIX);
     Constants.GAME_DIR = FMLPaths.GAMEDIR.get();
