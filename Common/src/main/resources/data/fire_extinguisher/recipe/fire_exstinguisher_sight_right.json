@@ -1,9 +1,12 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": ["   ", " #F", "   "],
+  "pattern": [" W ", " #R", "   "],
   "key": {
-    "F": {
-      "item": "fire_extinguisher:fire_extinguisher"
+    "R": {
+      "item": "minecraft:red_dye"
+    },
+    "W": {
+      "item": "minecraft:white_dye"
     },
     "#": {
       "tag": "minecraft:signs"
@@ -11,6 +14,6 @@
   },
   "result": {
     "id": "fire_extinguisher:fire_extinguisher_sign_right",
-    "count": 5
+    "count": 3
   }
 }

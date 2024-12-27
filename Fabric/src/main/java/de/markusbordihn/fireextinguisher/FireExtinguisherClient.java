@@ -26,18 +26,22 @@ import de.markusbordihn.fireextinguisher.tabs.ModTabs;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.minecraft.client.renderer.RenderType;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class FireExtinguisherClient implements ClientModInitializer {
+
+  protected static final Logger log = LogManager.getLogger(Constants.LOG_NAME);
 
   @Override
   public void onInitializeClient() {
     // Use Fabric to bootstrap the Common mod.
-    Constants.LOG.info("Initializing {} (Fabric-Client) ...", Constants.MOD_NAME);
+    log.info("Initializing {} (Fabric-Client) ...", Constants.MOD_NAME);
 
-    Constants.LOG.info("{} Tabs ...", Constants.LOG_REGISTER_PREFIX);
+    log.info("{} Tabs ...", Constants.LOG_REGISTER_PREFIX);
     ModTabs.registerModTabs();
 
-    Constants.LOG.info("{} Block Layers ...", Constants.LOG_REGISTER_PREFIX);
+    log.info("{} Block Layers ...", Constants.LOG_REGISTER_PREFIX);
     BlockRenderLayerMap.INSTANCE.putBlock(
         FireExtinguisherBlocks.FIRE_EXTINGUISHER, RenderType.cutoutMipped());
     BlockRenderLayerMap.INSTANCE.putBlock(

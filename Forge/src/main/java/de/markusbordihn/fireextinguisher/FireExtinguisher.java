@@ -20,8 +20,7 @@
 package de.markusbordihn.fireextinguisher;
 
 import de.markusbordihn.fireextinguisher.block.ModBlocks;
-import de.markusbordihn.fireextinguisher.config.CommonConfig;
-import de.markusbordihn.fireextinguisher.config.ForgeConfigHelperForge;
+import de.markusbordihn.fireextinguisher.config.Config;
 import de.markusbordihn.fireextinguisher.item.ModBlockItems;
 import de.markusbordihn.fireextinguisher.item.ModItems;
 import de.markusbordihn.fireextinguisher.sounds.ModSoundEvents;
@@ -31,6 +30,7 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.fml.loading.FMLPaths;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -42,8 +42,12 @@ public class FireExtinguisher {
   public FireExtinguisher() {
     final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
-    log.info("{} Config ...", Constants.LOG_REGISTER_PREFIX);
-    new ForgeConfigHelperForge().registerCommonConfig(CommonConfig.COMMON_SPEC);
+    log.info("{} Constants ...", Constants.LOG_REGISTER_PREFIX);
+    Constants.GAME_DIR = FMLPaths.GAMEDIR.get();
+    Constants.CONFIG_DIR = FMLPaths.CONFIGDIR.get();
+
+    log.info("{} Configuration ...", Constants.LOG_REGISTER_PREFIX);
+    Config.register();
 
     log.info("{} Blocks ...", Constants.LOG_REGISTER_PREFIX);
     ModBlocks.BLOCKS.register(modEventBus);
@@ -54,7 +58,7 @@ public class FireExtinguisher {
     log.info("{} Items ...", Constants.LOG_REGISTER_PREFIX);
     ModItems.ITEMS.register(modEventBus);
 
-    Constants.LOG.info("{} Sound Events ...", Constants.LOG_REGISTER_PREFIX);
+    log.info("{} Sound Events ...", Constants.LOG_REGISTER_PREFIX);
     ModSoundEvents.SOUNDS.register(modEventBus);
 
     DistExecutor.unsafeRunWhenOn(

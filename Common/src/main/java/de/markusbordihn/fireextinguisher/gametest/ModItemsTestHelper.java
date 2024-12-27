@@ -16,27 +16,28 @@
  * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package de.markusbordihn.fireextinguisher.config;
 
-import de.markusbordihn.fireextinguisher.Constants;
-import fuzs.forgeconfigapiport.fabric.api.forge.v4.ForgeConfigRegistry;
-import net.minecraftforge.common.ForgeConfigSpec;
-import net.minecraftforge.fml.config.ModConfig;
+package de.markusbordihn.fireextinguisher.gametest;
 
-public class ForgeConfigHelperFabric implements IForgeConfigHelper {
+import net.minecraft.core.BlockPos;
+import net.minecraft.gametest.framework.GameTestHelper;
+import net.minecraft.world.item.Item;
 
-  @Override
-  public void registerServerConfig(ForgeConfigSpec spec) {
-    ForgeConfigRegistry.INSTANCE.register(Constants.MOD_ID, ModConfig.Type.SERVER, spec);
+public class ModItemsTestHelper {
+
+  private ModItemsTestHelper() {}
+
+  public static void testModItem(GameTestHelper helper, Item item) {
+    BlockPos blockPos = new BlockPos(0, 1, 0);
+    testModItem(helper, item, blockPos);
   }
 
-  @Override
-  public void registerClientConfig(ForgeConfigSpec spec) {
-    ForgeConfigRegistry.INSTANCE.register(Constants.MOD_ID, ModConfig.Type.CLIENT, spec);
-  }
-
-  @Override
-  public void registerCommonConfig(ForgeConfigSpec spec) {
-    ForgeConfigRegistry.INSTANCE.register(Constants.MOD_ID, ModConfig.Type.COMMON, spec);
+  public static void testModItem(GameTestHelper helper, Item item, BlockPos blockPos) {
+    if (item == null || blockPos == null) {
+      helper.fail("Item or block position is not defined!");
+      return;
+    }
+    helper.spawnItem(item, blockPos.getX(), blockPos.getY(), blockPos.getZ());
+    helper.assertItemEntityPresent(item, blockPos, 0D);
   }
 }

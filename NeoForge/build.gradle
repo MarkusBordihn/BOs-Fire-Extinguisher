@@ -1,22 +1,13 @@
 plugins {
-  id 'idea'
   id 'maven-publish'
-  id 'net.neoforged.gradle.userdev' version '7.0.120'
-  id 'java-library'
+  id 'net.neoforged.gradle.userdev' version '7.0.145'
   id 'com.matthewprenger.cursegradle' version '1.4.0'
-  id 'nu.studer.credentials' version '1.0.7'
+  id 'nu.studer.credentials' version '3.0'
   id "com.modrinth.minotaur" version "2.+"
 }
 
 base {
   archivesName = "${mod_id}-neoforge-${minecraft_version}"
-}
-
-repositories {
-  maven {
-    name = "Fuzs Mod Resources"
-    url = "https://raw.githubusercontent.com/Fuzss/modresources/main/maven/"
-  }
 }
 
 runs {
@@ -28,6 +19,12 @@ runs {
 
   client {
     systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+  }
+
+  client2 {
+    configure('client')
+    workingDirectory project.file('runs/client2')
+    programArguments.addAll '--username', 'guest_player'
   }
 
   server {
@@ -46,18 +43,12 @@ runs {
 
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
-configurations {
-  runtimeClasspath.extendsFrom localRuntime
-}
-
 dependencies {
-  implementation "net.neoforged:neoforge:${neoforge_version}"
+  implementation "net.neoforged:neoforge:${project.neoforge_version}"
   compileOnly project(":Common")
 
-  // Forge Config Support
-  implementation 'com.electronwill.night-config:core:3.6.7'
-  implementation 'com.electronwill.night-config:toml:3.6.7'
-  api "fuzs.forgeconfigapiport:forgeconfigapiport-neoforge:21.0.6"
+  testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.1'
+  testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.7.1'
 }
 
 // NeoGradle compiles the game, but we don't want to add our common code to the game's code
@@ -93,36 +84,33 @@ publishing {
   }
 }
 
-curseforge {
-  apiKey = "${credentials.curseforge_api_token}"
-  project {
-    id = "${curseforge_project_id}"
-    changelog = file("../CHANGELOG.md")
-    changelogType = 'markdown'
-    releaseType = 'release'
-    addGameVersion("${minecraft_version}")
-    addGameVersion("NeoForge")
-
-    mainArtifact(jar) {
-      relations {
-        requiredDependency 'forge-config-api-port-fabric'
-      }
+// CurseForge Publishing
+if (project.hasProperty('curseforge_project_id') && project.curseforge_project_id) {
+  curseforge {
+    apiKey = "${credentials.forKey('curseforge_api_token')}"
+    project {
+      id = "${project.curseforge_project_id}"
+      changelog = rootProject.file("CHANGELOG.md")
+      changelogType = 'markdown'
+      releaseType = "${project.curseforge_release_type}"
+      addGameVersion("${project.minecraft_version}")
+      addGameVersion("NeoForge")
+      mainArtifact(jar)
     }
-  }
-  options {
-    forgeGradleIntegration = true
   }
 }
 
-modrinth {
-  token = "${credentials.modrinth_api_token}"
-  projectId = "${modrinth_project_id}"
-  versionNumber = "${version}"
-  versionType = "${modrinth_release_type}"
-  uploadFile = jar
-  gameVersions = ["${minecraft_version}"]
-  loaders = ["neoforge"]
-  dependencies {
-    required.project "forge-config-api-port"
+// Modrinth Publishing
+if (project.hasProperty('modrinth_project_id') && project.modrinth_project_id) {
+  modrinth {
+    token = "${credentials.forKey('modrinth_api_token')}"
+    projectId = "${project.modrinth_project_id}"
+    versionNumber = "${project.version}"
+    versionType = "${project.modrinth_release_type}"
+    versionName = "${project.mod_name} ${project.version}"
+    changelog = rootProject.file("CHANGELOG.md").text
+    uploadFile = jar
+    gameVersions = ["${project.minecraft_version}"]
+    loaders = ["neoforge"]
   }
 }

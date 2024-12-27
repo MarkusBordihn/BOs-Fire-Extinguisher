@@ -1,57 +1,29 @@
 plugins {
-  id 'java'
-  id 'idea'
   id 'org.spongepowered.gradle.vanilla' version '0.2.1-SNAPSHOT'
-  id 'maven-publish'
-  id 'com.matthewprenger.cursegradle' version '1.4.0'
-  id 'nu.studer.credentials' version '1.0.7'
 }
 
 archivesBaseName = "${mod_name}-common-${minecraft_version}"
 
 minecraft {
   version(minecraft_version)
-}
-
-repositories {
-  maven {
-    name = "Fuzs Mod Resources"
-    url = "https://raw.githubusercontent.com/Fuzss/modresources/main/maven/"
+  runs {
+    server('vanilla_server') {
+      workingDirectory(this.file("run"))
+    }
+    client('vanilla_client') {
+      workingDirectory(this.file("run"))
+    }
   }
 }
 
 dependencies {
-  compileOnly group: 'org.spongepowered', name: 'mixin', version: '0.8.5'
-
-  // Forge Config Support
-  //implementation 'com.electronwill.night-config:core:3.6.7'
-  //implementation 'com.electronwill.night-config:toml:3.6.7'
-  compileOnly "fuzs.forgeconfigapiport:forgeconfigapiport-fabric:20.6.0"
+  compileOnly group: 'org.spongepowered', name: 'mixin', version: '0.8.7'
 }
 
 processResources {
-
   def buildProps = project.properties.clone()
 
   filesMatching(['pack.mcmeta']) {
-
     expand buildProps
-  }
-}
-
-publishing {
-  publications {
-    mavenJava(MavenPublication) {
-      groupId project.group
-      artifactId project.archivesBaseName
-      version project.version
-      from components.java
-    }
-  }
-
-  repositories {
-    maven {
-      url "file://" + System.getenv("local_maven")
-    }
   }
 }

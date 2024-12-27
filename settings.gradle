@@ -30,10 +30,10 @@ plugins {
   id 'org.gradle.toolchains.foojay-resolver-convention' version '0.8.0'
 }
 
-rootProject.name = 'Fire Extinguisher'
+rootProject.name = 'Fire Extinguisher 1.21'
 include(
-    "Common",
-    "Fabric",
-    "Forge",
-    "NeoForge"
+        "Common",
+        "Fabric",
+        "Forge",
+        "NeoForge"
 )

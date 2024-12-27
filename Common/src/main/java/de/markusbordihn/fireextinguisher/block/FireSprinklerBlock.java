@@ -19,6 +19,7 @@
 
 package de.markusbordihn.fireextinguisher.block;
 
+import de.markusbordihn.fireextinguisher.config.FireExtinguisherConfig;
 import java.util.Random;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -52,9 +53,9 @@ public class FireSprinklerBlock extends AbstractFireAlarmSignalBlock {
     Iterable<BlockPos> blockPositions =
         BlockPos.withinManhattan(
             targetBlockPos.below(),
-            COMMON.fireSprinklerRadiusX.get(),
-            COMMON.fireSprinklerRadiusY.get(),
-            COMMON.fireSprinklerRadiusZ.get());
+            FireExtinguisherConfig.fireSprinklerRadiusX,
+            FireExtinguisherConfig.fireSprinklerRadiusY,
+            FireExtinguisherConfig.fireSprinklerRadiusZ);
     for (BlockPos blockPos : blockPositions) {
       BlockState blockState = serverLevel.getBlockState(blockPos);
 

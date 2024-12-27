@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Markus Bordihn
+ * Copyright 2024 Markus Bordihn
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
  * associated documentation files (the "Software"), to deal in the Software without restriction,
@@ -16,27 +16,27 @@
  * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package de.markusbordihn.fireextinguisher.config;
+
+package de.markusbordihn.fireextinguisher.gametest;
 
 import de.markusbordihn.fireextinguisher.Constants;
-import fuzs.forgeconfigapiport.neoforge.api.forge.v4.ForgeConfigRegistry;
-import net.minecraftforge.common.ForgeConfigSpec;
-import net.neoforged.fml.config.ModConfig;
+import net.minecraft.gametest.framework.GameTest;
+import net.minecraft.gametest.framework.GameTestHelper;
+import net.neoforged.fml.ModList;
+import net.neoforged.neoforge.gametest.GameTestHolder;
+import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
 
-public class ForgeConfigHelperNeoForge implements IForgeConfigHelper {
+@SuppressWarnings("unused")
+@PrefixGameTestTemplate(value = false)
+@GameTestHolder(Constants.MOD_ID)
+public class SmokeTest {
 
-  @Override
-  public void registerServerConfig(ForgeConfigSpec spec) {
-    ForgeConfigRegistry.INSTANCE.register(Constants.MOD_ID, ModConfig.Type.SERVER, spec);
-  }
-
-  @Override
-  public void registerClientConfig(ForgeConfigSpec spec) {
-    ForgeConfigRegistry.INSTANCE.register(Constants.MOD_ID, ModConfig.Type.CLIENT, spec);
-  }
-
-  @Override
-  public void registerCommonConfig(ForgeConfigSpec spec) {
-    ForgeConfigRegistry.INSTANCE.register(Constants.MOD_ID, ModConfig.Type.COMMON, spec);
+  @GameTest(template = "gametest.3x3x3")
+  public void testModRegistered(GameTestHelper helper) {
+    GameTestHelpers.assertTrue(
+        helper,
+        "Mod " + Constants.MOD_ID + " is not available!",
+        ModList.get().isLoaded(Constants.MOD_ID));
+    helper.succeed();
   }
 }

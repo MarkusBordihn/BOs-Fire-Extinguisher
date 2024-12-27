@@ -26,10 +26,3 @@ type = "required"
 versionRange = "[1.21,1.22)"
 ordering = "NONE"
 side = "BOTH"
-
-[[dependencies.fire_extinguisher]]
-modId = "forgeconfigapiport"
-type = "required"
-versionRange = "[21.0.6,)"
-ordering = "NONE"
-side = "BOTH"

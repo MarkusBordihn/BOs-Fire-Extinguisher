@@ -20,6 +20,7 @@
 package de.markusbordihn.fireextinguisher.block;
 
 import de.markusbordihn.fireextinguisher.Constants;
+import de.markusbordihn.fireextinguisher.config.FireExtinguisherConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
@@ -36,6 +37,8 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class FireAlarmSmokeDetectorBlock extends AbstractFireAlarmSignalBlock {
 
@@ -49,6 +52,7 @@ public class FireAlarmSmokeDetectorBlock extends AbstractFireAlarmSignalBlock {
   protected static final VoxelShape WEST_AABB = Block.box(14, 5, 5, 16, 11, 11);
   protected static final VoxelShape UP_AABB = Block.box(5, 14, 5, 11, 16, 11);
   protected static final VoxelShape DOWN_AABB = Block.box(5, 0, 5, 11, 2, 11);
+  private static final Logger log = LogManager.getLogger(Constants.LOG_NAME);
 
   public FireAlarmSmokeDetectorBlock(Properties properties) {
     super(properties);
@@ -113,9 +117,9 @@ public class FireAlarmSmokeDetectorBlock extends AbstractFireAlarmSignalBlock {
     Iterable<BlockPos> blockPositions =
         BlockPos.withinManhattan(
             blockPos.above(),
-            COMMON.smokeDetectorRadiusX.get(),
-            COMMON.smokeDetectorRadiusY.get(),
-            COMMON.smokeDetectorRadiusZ.get());
+            FireExtinguisherConfig.smokeDetectorRadiusX,
+            FireExtinguisherConfig.smokeDetectorRadiusY,
+            FireExtinguisherConfig.smokeDetectorRadiusZ);
     boolean detectedFire = false;
     for (BlockPos blockBlockPosition : blockPositions) {
       BlockState blockBlockState = serverLevel.getBlockState(blockBlockPosition);
@@ -132,7 +136,7 @@ public class FireAlarmSmokeDetectorBlock extends AbstractFireAlarmSignalBlock {
     // Arm smoke detector
     if (Boolean.TRUE.equals(blockState.getValue(DISARMED))) {
       serverLevel.setBlockAndUpdate(blockPos, blockState.setValue(DISARMED, false));
-      Constants.LOG.info("Smoke detector at {} is armed and ready.", blockPos);
+      log.info("Smoke detector at {} is armed and ready.", blockPos);
     }
 
     // Update powered state, if fire is detected.
@@ -158,7 +162,7 @@ public class FireAlarmSmokeDetectorBlock extends AbstractFireAlarmSignalBlock {
       super.onRemove(blockState, level, blockPos, formerBlockState, removed);
     }
     if (removed && !level.isClientSide()) {
-      Constants.LOG.info("Smoke detector at {} is removed.", blockPos);
+      log.info("Smoke detector at {} is removed.", blockPos);
     }
   }
 

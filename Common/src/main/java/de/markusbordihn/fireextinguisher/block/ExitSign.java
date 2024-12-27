@@ -33,7 +33,6 @@ import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import org.jetbrains.annotations.NotNull;
 
 public class ExitSign extends Block {
 
@@ -64,7 +63,6 @@ public class ExitSign extends Block {
             .setValue(ATTACH_FACE, AttachFace.FLOOR));
   }
 
-  @NotNull
   private static AttachFace getAttachFace(BlockPlaceContext context, Direction faceDirection) {
     AttachFace attachFace = AttachFace.FLOOR;
     if (faceDirection == Direction.DOWN) {
