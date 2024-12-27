@@ -21,7 +21,6 @@ package de.markusbordihn.fireextinguisher.blockitem;
 
 import de.markusbordihn.fireextinguisher.Constants;
 import java.util.List;
-import javax.annotation.Nullable;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.BlockItem;
@@ -44,10 +43,7 @@ public class FireAlarmBellBlockItem extends BlockItem {
 
   @Override
   public void appendHoverText(
-      ItemStack itemStack,
-      @Nullable Level level,
-      List<Component> tooltipList,
-      TooltipFlag tooltipFlag) {
+      ItemStack itemStack, Level level, List<Component> tooltipList, TooltipFlag tooltipFlag) {
     tooltipList.add(
         Component.translatable(Constants.TOOLTIP_PREFIX + NAME).withStyle(ChatFormatting.GRAY));
   }

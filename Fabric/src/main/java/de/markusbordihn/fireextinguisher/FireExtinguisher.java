@@ -20,33 +20,41 @@
 package de.markusbordihn.fireextinguisher;
 
 import de.markusbordihn.fireextinguisher.block.ModBlocks;
-import de.markusbordihn.fireextinguisher.config.CommonConfig;
-import de.markusbordihn.fireextinguisher.config.ForgeConfigHelperFabric;
+import de.markusbordihn.fireextinguisher.config.Config;
 import de.markusbordihn.fireextinguisher.item.ModBlockItems;
 import de.markusbordihn.fireextinguisher.item.ModItems;
 import de.markusbordihn.fireextinguisher.sounds.ModSoundEvents;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.loader.api.FabricLoader;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class FireExtinguisher implements ModInitializer {
+
+  protected static final Logger log = LogManager.getLogger(Constants.LOG_NAME);
 
   @Override
   public void onInitialize() {
     // Use Fabric to bootstrap the Common mod.
-    Constants.LOG.info("Initializing {} (Fabric) ...", Constants.MOD_NAME);
+    log.info("Initializing {} (Fabric) ...", Constants.MOD_NAME);
 
-    Constants.LOG.info("{} Config ...", Constants.LOG_REGISTER_PREFIX);
-    new ForgeConfigHelperFabric().registerCommonConfig(CommonConfig.COMMON_SPEC);
+    log.info("{} Constants ...", Constants.LOG_REGISTER_PREFIX);
+    Constants.GAME_DIR = FabricLoader.getInstance().getGameDir();
+    Constants.CONFIG_DIR = FabricLoader.getInstance().getConfigDir();
 
-    Constants.LOG.info("{} Blocks ...", Constants.LOG_REGISTER_PREFIX);
+    log.info("{} Config ...", Constants.LOG_REGISTER_PREFIX);
+    Config.register();
+
+    log.info("{} Blocks ...", Constants.LOG_REGISTER_PREFIX);
     ModBlocks.registerModBlocks();
 
-    Constants.LOG.info("{} Block Items ...", Constants.LOG_REGISTER_PREFIX);
+    log.info("{} Block Items ...", Constants.LOG_REGISTER_PREFIX);
     ModBlockItems.registerModBlockItems();
 
-    Constants.LOG.info("{} Items ...", Constants.LOG_REGISTER_PREFIX);
+    log.info("{} Items ...", Constants.LOG_REGISTER_PREFIX);
     ModItems.registerModItems();
 
-    Constants.LOG.info("{} Sound Events ...", Constants.LOG_REGISTER_PREFIX);
+    log.info("{} Sound Events ...", Constants.LOG_REGISTER_PREFIX);
     ModSoundEvents.registerModSoundEvents();
   }
 }

@@ -1,0 +1,58 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_iron_ingot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["minecraft:iron_ingot"]
+          }
+        ]
+      }
+    },
+    "has_leather_helmet": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["minecraft:leather_helmet"]
+          }
+        ]
+      }
+    },
+    "has_white_dye": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["minecraft:white_dye"]
+          }
+        ]
+      }
+    },
+    "has_fire_helmet_light": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["fire_extinguisher:fire_helmet_light"]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_iron_ingot",
+      "has_leather_helmet",
+      "has_white_dye",
+      "has_fire_helmet_light"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "fire_extinguisher:fire_helmet_light_from_leather_helmet"
+    ]
+  }
+}

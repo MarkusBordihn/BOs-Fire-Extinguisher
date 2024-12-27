@@ -1,0 +1,56 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_green_dye": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["minecraft:green_dye"]
+          }
+        ]
+      }
+    },
+    "has_doors": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "minecraft:doors"
+          }
+        ]
+      }
+    },
+    "has_signs": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "minecraft:signs"
+          }
+        ]
+      }
+    },
+    "has_exit_sign_left": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["fire_extinguisher:exit_sign_left"]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_green_dye",
+      "has_doors",
+      "has_signs",
+      "has_exit_sign_left"
+    ]
+  ],
+  "rewards": {
+    "recipes": ["fire_extinguisher:exit_sigh_left"]
+  }
+}

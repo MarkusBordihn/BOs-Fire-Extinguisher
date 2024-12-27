@@ -1,0 +1,56 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_gold_ingot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["minecraft:gold_ingot"]
+          }
+        ]
+      }
+    },
+    "has_iron_leggings": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["minecraft:iron_leggings"]
+          }
+        ]
+      }
+    },
+    "has_red_dye": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["minecraft:red_dye"]
+          }
+        ]
+      }
+    },
+    "has_fire_leggings": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["fire_extinguisher:fire_leggings"]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_gold_ingot",
+      "has_iron_leggings",
+      "has_red_dye",
+      "has_fire_leggings"
+    ]
+  ],
+  "rewards": {
+    "recipes": ["fire_extinguisher:fire_leggings_from_iron_leggings"]
+  }
+}

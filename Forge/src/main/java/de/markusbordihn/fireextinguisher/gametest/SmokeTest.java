@@ -17,22 +17,26 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package de.markusbordihn.fireextinguisher.mixin;
+package de.markusbordihn.fireextinguisher.gametest;
 
 import de.markusbordihn.fireextinguisher.Constants;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screens.TitleScreen;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import net.minecraft.gametest.framework.GameTest;
+import net.minecraft.gametest.framework.GameTestHelper;
+import net.minecraftforge.fml.ModList;
+import net.minecraftforge.gametest.GameTestHolder;
+import net.minecraftforge.gametest.PrefixGameTestTemplate;
 
-@Mixin(TitleScreen.class)
-public class FireExtinguisherMixin {
+@SuppressWarnings("unused")
+@PrefixGameTestTemplate(value = false)
+@GameTestHolder(Constants.MOD_ID)
+public class SmokeTest {
 
-  @Inject(at = @At("HEAD"), method = "init()V")
-  private void init(CallbackInfo info) {
-    Constants.LOG.info("MC Version: {}", Minecraft.getInstance().getVersionType());
-    Constants.LOG.info("Classloader: {}", this.getClass().getClassLoader());
+  @GameTest(template = "gametest.1x1x1")
+  public void testModRegistered(GameTestHelper helper) {
+    GameTestHelpers.assertTrue(
+        helper,
+        "Mod " + Constants.MOD_ID + " is not available!",
+        ModList.get().isLoaded(Constants.MOD_ID));
+    helper.succeed();
   }
 }

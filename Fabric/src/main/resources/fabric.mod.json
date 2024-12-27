@@ -20,15 +20,18 @@
     ],
     "client": [
       "de.markusbordihn.fireextinguisher.FireExtinguisherClient"
+    ],
+    "fabric-gametest": [
+      "de.markusbordihn.fireextinguisher.gametest.SmokeTest",
+      "de.markusbordihn.fireextinguisher.gametest.ModBlocksTest",
+      "de.markusbordihn.fireextinguisher.gametest.ModBlockItemsTest",
+      "de.markusbordihn.fireextinguisher.gametest.ModItemsTest",
+      "de.markusbordihn.fireextinguisher.gametest.LootTablesTest"
     ]
   },
-  "mixins": [
-    "fireextinguisher.mixins.json"
-  ],
   "depends": {
     "fabricloader": ">=0.15.0",
     "fabric": "*",
-    "forgeconfigapiport": ">=8.0.0",
     "minecraft": "1.20.1",
     "java": ">=17"
   },
@@ -36,4 +39,3 @@
     "tooltipfix": "*"
   }
 }
-  

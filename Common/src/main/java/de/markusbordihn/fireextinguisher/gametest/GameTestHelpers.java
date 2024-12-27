@@ -17,15 +17,28 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package de.markusbordihn.fireextinguisher.config;
+package de.markusbordihn.fireextinguisher.gametest;
 
-import net.minecraftforge.common.ForgeConfigSpec;
+import de.markusbordihn.fireextinguisher.Constants;
+import net.minecraft.gametest.framework.GameTestHelper;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-public interface IForgeConfigHelper {
+public class GameTestHelpers {
 
-  void registerServerConfig(ForgeConfigSpec spec);
+  private static final Logger log = LogManager.getLogger(Constants.LOG_NAME);
 
-  void registerClientConfig(ForgeConfigSpec spec);
+  private GameTestHelpers() {}
 
-  void registerCommonConfig(ForgeConfigSpec spec);
+  public static void assertTrue(GameTestHelper helper, String message, boolean condition) {
+    if (condition) {
+      helper.succeed();
+    } else {
+      helper.fail(message);
+    }
+  }
+
+  public static void assertNotNull(GameTestHelper helper, String message, Object object) {
+    assertTrue(helper, message, object != null);
+  }
 }

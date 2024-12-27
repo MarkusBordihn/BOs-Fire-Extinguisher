@@ -22,13 +22,17 @@ package de.markusbordihn.fireextinguisher.block;
 import de.markusbordihn.fireextinguisher.Constants;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class ModBlocks {
+
+  private static final Logger log = LogManager.getLogger(Constants.LOG_NAME);
 
   protected ModBlocks() {}
 
   public static void registerModBlocks() {
-    Constants.LOG.info("{} Fire Extinguisher Blocks...", Constants.LOG_SUB_REGISTER_PREFIX);
+    log.info("{} Fire Extinguisher Blocks...", Constants.LOG_SUB_REGISTER_PREFIX);
     Registry.register(
         BuiltInRegistries.BLOCK,
         Constants.MOD_ID_PREFIX + FireExtinguisherBlock.NAME,
@@ -38,7 +42,7 @@ public class ModBlocks {
         Constants.MOD_ID_PREFIX + FireExtinguisherBlock.NAME + "_copper",
         FireExtinguisherBlocks.FIRE_EXTINGUISHER_COPPER);
 
-    Constants.LOG.info("{} Fire Alarm Blocks...", Constants.LOG_SUB_REGISTER_PREFIX);
+    log.info("{} Fire Alarm Blocks...", Constants.LOG_SUB_REGISTER_PREFIX);
     Registry.register(
         BuiltInRegistries.BLOCK,
         Constants.MOD_ID_PREFIX + FireSprinklerBlock.NAME,
@@ -64,7 +68,7 @@ public class ModBlocks {
         Constants.MOD_ID_PREFIX + FireAlarmSmokeDetectorSilentBlock.NAME,
         FireAlarmBlocks.FIRE_ALARM_SMOKE_DETECTOR_SILENT);
 
-    Constants.LOG.info("{} Fire Extinguisher Sign Blocks...", Constants.LOG_SUB_REGISTER_PREFIX);
+    log.info("{} Fire Extinguisher Sign Blocks...", Constants.LOG_SUB_REGISTER_PREFIX);
     Registry.register(
         BuiltInRegistries.BLOCK,
         Constants.MOD_ID_PREFIX + FireExtinguisherSign.NAME,
@@ -78,7 +82,7 @@ public class ModBlocks {
         Constants.MOD_ID_PREFIX + FireExtinguisherSign.NAME + "_right",
         FireExtinguisherSignBlocks.FIRE_EXTINGUISHER_SIGN_RIGHT);
 
-    Constants.LOG.info("{} Exit Sign Blocks ...", Constants.LOG_SUB_REGISTER_PREFIX);
+    log.info("{} Exit Sign Blocks ...", Constants.LOG_SUB_REGISTER_PREFIX);
     Registry.register(
         BuiltInRegistries.BLOCK, Constants.MOD_ID_PREFIX + ExitSign.NAME, ExitSignBlocks.EXIT_SIGN);
     Registry.register(
