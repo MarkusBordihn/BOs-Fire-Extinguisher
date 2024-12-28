@@ -24,6 +24,7 @@ import java.util.EnumMap;
 import java.util.Map;
 import net.minecraft.Util;
 import net.minecraft.core.Holder;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -32,6 +33,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.equipment.ArmorMaterial;
 import net.minecraft.world.item.equipment.ArmorType;
+import net.minecraft.world.item.equipment.EquipmentAsset;
 
 public enum ModArmorMaterials {
   FIRE_PROTECTION(
@@ -48,7 +50,9 @@ public enum ModArmorMaterials {
       9,
       SoundEvents.ARMOR_EQUIP_IRON,
       ItemTags.REPAIRS_IRON_ARMOR,
-      ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "fire_protection_armor"),
+      ResourceKey.create(
+          ResourceKey.createRegistryKey(ResourceLocation.withDefaultNamespace("equipment_asset")),
+          ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "fire_protection_armor")),
       0.0F,
       0.0F),
   FIRE_PROTECTION_LIGHT(
@@ -65,7 +69,9 @@ public enum ModArmorMaterials {
       9,
       SoundEvents.ARMOR_EQUIP_IRON,
       ItemTags.REPAIRS_IRON_ARMOR,
-      ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "fire_protection_light_armor"),
+      ResourceKey.create(
+          ResourceKey.createRegistryKey(ResourceLocation.withDefaultNamespace("equipment_asset")),
+          ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "fire_protection_light_armor")),
       0.0F,
       0.0F);
 
@@ -80,7 +86,7 @@ public enum ModArmorMaterials {
       int enchantmentValue,
       Holder<SoundEvent> equipSound,
       TagKey<Item> repairIngredient,
-      ResourceLocation resourceLocation,
+      ResourceKey<EquipmentAsset> resourceLocation,
       float toughness,
       float knockbackResistance) {
     this.name = name;

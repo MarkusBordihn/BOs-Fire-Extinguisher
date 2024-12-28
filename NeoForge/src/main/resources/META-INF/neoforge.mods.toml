@@ -16,13 +16,13 @@ description = '''Enhance your fire safety with a straightforward and effective f
 [[dependencies.fire_extinguisher]]
 modId = "neoforge"
 type = "required"
-versionRange = "[21.3.0,)"
+versionRange = "[21.4.0,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.fire_extinguisher]]
 modId = "minecraft"
 type = "required"
-versionRange = "[1.21.3,1.22)"
+versionRange = "[1.21.4,1.22)"
 ordering = "NONE"
 side = "BOTH"
