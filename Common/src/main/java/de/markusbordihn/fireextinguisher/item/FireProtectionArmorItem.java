@@ -18,22 +18,23 @@
  */
 package de.markusbordihn.fireextinguisher.item;
 
-import net.minecraft.core.Holder;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.equipment.ArmorMaterial;
+import net.minecraft.world.item.equipment.ArmorType;
 import net.minecraft.world.level.Level;
 
 public class FireProtectionArmorItem extends ArmorItem {
 
-  public FireProtectionArmorItem(ArmorItem.Type type, Properties properties) {
-    this(ModArmorMaterials.FIRE_PROTECTION.getArmorMaterialHolder(), type, properties);
+  public FireProtectionArmorItem(ArmorType type, Properties properties) {
+    this(ModArmorMaterials.FIRE_PROTECTION.getArmorMaterial(), type, properties);
   }
 
   public FireProtectionArmorItem(
-      Holder<ArmorMaterial> armorMaterial, ArmorItem.Type type, Properties properties) {
+      ArmorMaterial armorMaterial, ArmorType type, Properties properties) {
     super(armorMaterial, type, properties.fireResistant());
   }
 
@@ -42,7 +43,11 @@ public class FireProtectionArmorItem extends ArmorItem {
       ItemStack itemStack, Level level, Entity entity, int slot, boolean selected) {
     if (!level.isClientSide
         && entity instanceof ServerPlayer serverPlayer
-        && serverPlayer.getItemBySlot(getEquipmentSlot()) == itemStack
+        && (slot == EquipmentSlot.BODY.getId()
+            || slot == EquipmentSlot.CHEST.getId()
+            || slot == EquipmentSlot.HEAD.getId()
+            || slot == EquipmentSlot.LEGS.getId()
+            || slot == EquipmentSlot.FEET.getId())
         && itemStack.getItem().getClass().equals(getArmorClass())) {
       fireArmorTick(itemStack, level, serverPlayer);
     }

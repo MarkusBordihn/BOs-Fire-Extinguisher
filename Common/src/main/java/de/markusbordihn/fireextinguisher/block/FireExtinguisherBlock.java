@@ -25,31 +25,20 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
-import net.minecraft.world.level.block.SoundType;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
-import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class FireExtinguisherBlock extends Block {
 
-  public static final String NAME = "fire_extinguisher";
+  public static final String ID = "fire_extinguisher";
+  public static final String ID_COPPER = "fire_extinguisher_copper";
 
-  public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
+  public static final EnumProperty<Direction> FACING = HorizontalDirectionalBlock.FACING;
 
   protected static final VoxelShape SHAPE = Block.box(5, 0, 5, 11, 14, 11);
-
-  public FireExtinguisherBlock() {
-    this(
-        BlockBehaviour.Properties.of()
-            .mapColor(MapColor.STONE)
-            .instabreak()
-            .noOcclusion()
-            .sound(SoundType.METAL));
-  }
 
   public FireExtinguisherBlock(Properties properties) {
     super(properties);

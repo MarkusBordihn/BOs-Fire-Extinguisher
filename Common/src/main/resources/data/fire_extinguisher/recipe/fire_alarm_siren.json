@@ -1,19 +1,12 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "building",
   "pattern": ["#|#", "#NR", "#|#"],
   "key": {
-    "#": {
-      "item": "minecraft:iron_ingot"
-    },
-    "|": {
-      "item": "minecraft:redstone"
-    },
-    "N": {
-      "item": "minecraft:note_block"
-    },
-    "R": {
-      "item": "minecraft:red_dye"
-    }
+    "#": "minecraft:iron_ingot",
+    "|": "minecraft:redstone",
+    "N": "minecraft:note_block",
+    "R": "minecraft:red_dye"
   },
   "result": {
     "id": "fire_extinguisher:fire_alarm_siren"

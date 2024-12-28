@@ -1,18 +1,11 @@
 {
   "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
   "ingredients": [
-    {
-      "item": "minecraft:iron_leggings"
-    },
-    {
-      "item": "minecraft:gold_ingot"
-    },
-    {
-      "item": "minecraft:red_dye"
-    },
-    {
-      "item": "minecraft:leather"
-    }
+    "minecraft:iron_leggings",
+    "minecraft:gold_ingot",
+    "minecraft:red_dye",
+    "minecraft:leather"
   ],
   "result": {
     "id": "fire_extinguisher:fire_leggings",

@@ -27,15 +27,17 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class FireExtinguisherSign extends Block {
 
-  public static final String NAME = "fire_extinguisher_sign";
+  public static final String ID = "fire_extinguisher_sign";
+  public static final String ID_LEFT = "fire_extinguisher_sign_left";
+  public static final String ID_RIGHT = "fire_extinguisher_sign_right";
 
-  public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
+  public static final EnumProperty<Direction> FACING = HorizontalDirectionalBlock.FACING;
 
   protected static final VoxelShape SHAPE_NORTH_AABB = Block.box(0D, 0D, 14.75D, 16D, 16D, 16D);
   protected static final VoxelShape SHAPE_EAST_AABB = Block.box(0D, 0D, 0D, 1.25D, 16D, 16D);

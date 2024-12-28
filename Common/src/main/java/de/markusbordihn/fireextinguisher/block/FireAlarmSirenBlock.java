@@ -33,7 +33,8 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class FireAlarmSirenBlock extends AbstractFireAlarmSignalBlock {
 
-  public static final String NAME = "fire_alarm_siren";
+  public static final String ID = "fire_alarm_siren";
+
   protected static final ResourceLocation SOUND_EVENT =
       ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "fire_alarm_siren");
   protected static final VoxelShape NORTH_AABB = Block.box(5, 5, 11.5, 11, 11, 16);

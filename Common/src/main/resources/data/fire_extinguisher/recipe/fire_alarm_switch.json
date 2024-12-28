@@ -1,22 +1,13 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "building",
   "pattern": ["#G#", "#LR", "#|#"],
   "key": {
-    "#": {
-      "item": "minecraft:iron_ingot"
-    },
-    "|": {
-      "item": "minecraft:redstone"
-    },
-    "G": {
-      "item": "minecraft:glass_pane"
-    },
-    "L": {
-      "item": "minecraft:lever"
-    },
-    "R": {
-      "item": "minecraft:red_dye"
-    }
+    "#": "minecraft:iron_ingot",
+    "|": "minecraft:redstone",
+    "G": "minecraft:glass_pane",
+    "L": "minecraft:lever",
+    "R": "minecraft:red_dye"
   },
   "result": {
     "id": "fire_extinguisher:fire_alarm_switch"

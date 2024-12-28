@@ -31,57 +31,56 @@ public class ModBlocks {
       DeferredRegister.create(ForgeRegistries.BLOCKS, Constants.MOD_ID);
   // Fire Extinguisher
   public static final RegistryObject<Block> FIRE_EXTINGUISHER =
-      BLOCKS.register(FireExtinguisherBlock.NAME, () -> FireExtinguisherBlocks.FIRE_EXTINGUISHER);
+      BLOCKS.register(FireExtinguisherBlock.ID, () -> FireExtinguisherBlocks.FIRE_EXTINGUISHER);
   public static final RegistryObject<Block> FIRE_EXTINGUISHER_COPPER =
       BLOCKS.register(
-          FireExtinguisherBlock.NAME + "_copper",
-          () -> FireExtinguisherBlocks.FIRE_EXTINGUISHER_COPPER);
+          FireExtinguisherBlock.ID_COPPER, () -> FireExtinguisherBlocks.FIRE_EXTINGUISHER_COPPER);
 
   // Fire Alarm
   public static final RegistryObject<Block> FIRE_SPRINKLER =
-      BLOCKS.register(FireSprinklerBlock.NAME, () -> FireAlarmBlocks.FIRE_SPRINKLER);
+      BLOCKS.register(FireSprinklerBlock.ID, () -> FireAlarmBlocks.FIRE_SPRINKLER);
   public static final RegistryObject<Block> FIRE_ALARM_SWITCH =
-      BLOCKS.register(FireAlarmSwitchBlock.NAME, () -> FireAlarmBlocks.FIRE_ALARM_SWITCH);
+      BLOCKS.register(FireAlarmSwitchBlock.ID, () -> FireAlarmBlocks.FIRE_ALARM_SWITCH);
   public static final RegistryObject<Block> FIRE_ALARM_BELL =
-      BLOCKS.register(FireAlarmBellBlock.NAME, () -> FireAlarmBlocks.FIRE_ALARM_BELL);
+      BLOCKS.register(FireAlarmBellBlock.ID, () -> FireAlarmBlocks.FIRE_ALARM_BELL);
   public static final RegistryObject<Block> FIRE_ALARM_SIREN =
-      BLOCKS.register(FireAlarmSirenBlock.NAME, () -> FireAlarmBlocks.FIRE_ALARM_SIREN);
+      BLOCKS.register(FireAlarmSirenBlock.ID, () -> FireAlarmBlocks.FIRE_ALARM_SIREN);
   public static final RegistryObject<Block> FIRE_ALARM_SMOKE_DETECTOR =
       BLOCKS.register(
-          FireAlarmSmokeDetectorBlock.NAME, () -> FireAlarmBlocks.FIRE_ALARM_SMOKE_DETECTOR);
+          FireAlarmSmokeDetectorBlock.ID, () -> FireAlarmBlocks.FIRE_ALARM_SMOKE_DETECTOR);
   public static final RegistryObject<Block> FIRE_ALARM_SMOKE_DETECTOR_SILENT =
       BLOCKS.register(
-          FireAlarmSmokeDetectorSilentBlock.NAME,
+          FireAlarmSmokeDetectorSilentBlock.ID,
           () -> FireAlarmBlocks.FIRE_ALARM_SMOKE_DETECTOR_SILENT);
 
   // Fire Extinguisher Signs
   public static final RegistryObject<Block> FIRE_EXTINGUISHER_SIGN =
       BLOCKS.register(
-          FireExtinguisherSign.NAME, () -> FireExtinguisherSignBlocks.FIRE_EXTINGUISHER_SIGN);
+          FireExtinguisherSign.ID, () -> FireExtinguisherSignBlocks.FIRE_EXTINGUISHER_SIGN);
   public static final RegistryObject<Block> FIRE_EXTINGUISHER_SIGN_LEFT =
       BLOCKS.register(
-          FireExtinguisherSign.NAME + "_left",
+          FireExtinguisherSign.ID_LEFT,
           () -> FireExtinguisherSignBlocks.FIRE_EXTINGUISHER_SIGN_LEFT);
   public static final RegistryObject<Block> FIRE_EXTINGUISHER_SIGN_RIGHT =
       BLOCKS.register(
-          FireExtinguisherSign.NAME + "_right",
+          FireExtinguisherSign.ID_RIGHT,
           () -> FireExtinguisherSignBlocks.FIRE_EXTINGUISHER_SIGN_RIGHT);
 
   // Exit Signs
   public static final RegistryObject<Block> EXIT_SIGN =
-      BLOCKS.register(ExitSign.NAME, () -> ExitSignBlocks.EXIT_SIGN);
+      BLOCKS.register(ExitSign.ID, () -> ExitSignBlocks.EXIT_SIGN);
   public static final RegistryObject<Block> EXIT_SIGN_LEFT =
-      BLOCKS.register(ExitSign.NAME + "_left", () -> ExitSignBlocks.EXIT_SIGN_LEFT);
+      BLOCKS.register(ExitSign.ID_LEFT, () -> ExitSignBlocks.EXIT_SIGN_LEFT);
   public static final RegistryObject<Block> EXIT_SIGN_LEFT_DOWN =
-      BLOCKS.register(ExitSign.NAME + "_left_down", () -> ExitSignBlocks.EXIT_SIGN_LEFT_DOWN);
+      BLOCKS.register(ExitSign.ID_LEFT_DOWN, () -> ExitSignBlocks.EXIT_SIGN_LEFT_DOWN);
   public static final RegistryObject<Block> EXIT_SIGN_LEFT_UP =
-      BLOCKS.register(ExitSign.NAME + "_left_up", () -> ExitSignBlocks.EXIT_SIGN_LEFT_UP);
+      BLOCKS.register(ExitSign.ID_LEFT_UP, () -> ExitSignBlocks.EXIT_SIGN_LEFT_UP);
   public static final RegistryObject<Block> EXIT_SIGN_RIGHT =
-      BLOCKS.register(ExitSign.NAME + "_right", () -> ExitSignBlocks.EXIT_SIGN_RIGHT);
+      BLOCKS.register(ExitSign.ID_RIGHT, () -> ExitSignBlocks.EXIT_SIGN_RIGHT);
   public static final RegistryObject<Block> EXIT_SIGN_RIGHT_DOWN =
-      BLOCKS.register(ExitSign.NAME + "_right_down", () -> ExitSignBlocks.EXIT_SIGN_RIGHT_DOWN);
+      BLOCKS.register(ExitSign.ID_RIGHT_DOWN, () -> ExitSignBlocks.EXIT_SIGN_RIGHT_DOWN);
   public static final RegistryObject<Block> EXIT_SIGN_RIGHT_UP =
-      BLOCKS.register(ExitSign.NAME + "_right_up", () -> ExitSignBlocks.EXIT_SIGN_RIGHT_UP);
+      BLOCKS.register(ExitSign.ID_RIGHT_UP, () -> ExitSignBlocks.EXIT_SIGN_RIGHT_UP);
 
   protected ModBlocks() {}
 }

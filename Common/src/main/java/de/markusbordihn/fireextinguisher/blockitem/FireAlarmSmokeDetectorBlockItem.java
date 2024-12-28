@@ -22,7 +22,10 @@ package de.markusbordihn.fireextinguisher.blockitem;
 import de.markusbordihn.fireextinguisher.Constants;
 import java.util.List;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -30,10 +33,17 @@ import net.minecraft.world.level.block.Block;
 
 public class FireAlarmSmokeDetectorBlockItem extends BlockItem {
 
-  public static final String NAME = "fire_alarm_smoke_detector";
+  public static final String ID = "fire_alarm_smoke_detector";
+  public static final String ID_SILENT = "fire_alarm_smoke_detector_silent";
 
-  public FireAlarmSmokeDetectorBlockItem(Block block) {
-    this(block, new Properties());
+  public FireAlarmSmokeDetectorBlockItem(Block block, String id) {
+    this(
+        block,
+        new Properties()
+            .useBlockDescriptionPrefix()
+            .setId(
+                ResourceKey.create(
+                    Registries.ITEM, ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, id))));
   }
 
   public FireAlarmSmokeDetectorBlockItem(Block block, Properties properties) {
@@ -47,7 +57,7 @@ public class FireAlarmSmokeDetectorBlockItem extends BlockItem {
       List<Component> tooltipList,
       TooltipFlag tooltipFlag) {
     tooltipList.add(
-        Component.translatable(Constants.TOOLTIP_PREFIX + NAME).withStyle(ChatFormatting.GRAY));
+        Component.translatable(Constants.TOOLTIP_PREFIX + ID).withStyle(ChatFormatting.GRAY));
     tooltipList.add(
         Component.translatable(Constants.TOOLTIP_PREFIX + "fire_alarm_smoke_detector.status")
             .withStyle(ChatFormatting.GRAY));

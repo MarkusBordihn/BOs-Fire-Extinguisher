@@ -35,6 +35,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.redstone.Orientation;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.apache.logging.log4j.LogManager;
@@ -42,7 +43,8 @@ import org.apache.logging.log4j.Logger;
 
 public class FireAlarmSmokeDetectorBlock extends AbstractFireAlarmSignalBlock {
 
-  public static final String NAME = "fire_alarm_smoke_detector";
+  public static final String ID = "fire_alarm_smoke_detector";
+
   public static final BooleanProperty DISARMED = BlockStateProperties.DISARMED;
   protected static final ResourceLocation SOUND_EVENT =
       ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "fire_alarm_smoke_detector");
@@ -100,7 +102,7 @@ public class FireAlarmSmokeDetectorBlock extends AbstractFireAlarmSignalBlock {
       Level level,
       BlockPos blockPos,
       Block block,
-      BlockPos unused,
+      Orientation unused,
       boolean unused2) {
     // Not accepting any neighbor changes
   }

@@ -20,6 +20,7 @@
 package de.markusbordihn.fireextinguisher.block;
 
 import de.markusbordihn.fireextinguisher.Constants;
+import de.markusbordihn.fireextinguisher.blockitem.FireExtinguisherSignBlockItem;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import org.apache.logging.log4j.LogManager;
@@ -35,79 +36,79 @@ public class ModBlocks {
     log.info("{} Fire Extinguisher Blocks...", Constants.LOG_SUB_REGISTER_PREFIX);
     Registry.register(
         BuiltInRegistries.BLOCK,
-        Constants.MOD_ID_PREFIX + FireExtinguisherBlock.NAME,
+        Constants.MOD_ID_PREFIX + FireExtinguisherBlock.ID,
         FireExtinguisherBlocks.FIRE_EXTINGUISHER);
     Registry.register(
         BuiltInRegistries.BLOCK,
-        Constants.MOD_ID_PREFIX + FireExtinguisherBlock.NAME + "_copper",
+        Constants.MOD_ID_PREFIX + FireExtinguisherBlock.ID + "_copper",
         FireExtinguisherBlocks.FIRE_EXTINGUISHER_COPPER);
 
     log.info("{} Fire Alarm Blocks...", Constants.LOG_SUB_REGISTER_PREFIX);
     Registry.register(
         BuiltInRegistries.BLOCK,
-        Constants.MOD_ID_PREFIX + FireSprinklerBlock.NAME,
+        Constants.MOD_ID_PREFIX + FireSprinklerBlock.ID,
         FireAlarmBlocks.FIRE_SPRINKLER);
     Registry.register(
         BuiltInRegistries.BLOCK,
-        Constants.MOD_ID_PREFIX + FireAlarmSwitchBlock.NAME,
+        Constants.MOD_ID_PREFIX + FireAlarmSwitchBlock.ID,
         FireAlarmBlocks.FIRE_ALARM_SWITCH);
     Registry.register(
         BuiltInRegistries.BLOCK,
-        Constants.MOD_ID_PREFIX + FireAlarmBellBlock.NAME,
+        Constants.MOD_ID_PREFIX + FireAlarmBellBlock.ID,
         FireAlarmBlocks.FIRE_ALARM_BELL);
     Registry.register(
         BuiltInRegistries.BLOCK,
-        Constants.MOD_ID_PREFIX + FireAlarmSirenBlock.NAME,
+        Constants.MOD_ID_PREFIX + FireAlarmSirenBlock.ID,
         FireAlarmBlocks.FIRE_ALARM_SIREN);
     Registry.register(
         BuiltInRegistries.BLOCK,
-        Constants.MOD_ID_PREFIX + FireAlarmSmokeDetectorBlock.NAME,
+        Constants.MOD_ID_PREFIX + FireAlarmSmokeDetectorBlock.ID,
         FireAlarmBlocks.FIRE_ALARM_SMOKE_DETECTOR);
     Registry.register(
         BuiltInRegistries.BLOCK,
-        Constants.MOD_ID_PREFIX + FireAlarmSmokeDetectorSilentBlock.NAME,
+        Constants.MOD_ID_PREFIX + FireAlarmSmokeDetectorSilentBlock.ID,
         FireAlarmBlocks.FIRE_ALARM_SMOKE_DETECTOR_SILENT);
 
     log.info("{} Fire Extinguisher Sign Blocks...", Constants.LOG_SUB_REGISTER_PREFIX);
     Registry.register(
         BuiltInRegistries.BLOCK,
-        Constants.MOD_ID_PREFIX + FireExtinguisherSign.NAME,
+        Constants.MOD_ID_PREFIX + FireExtinguisherSignBlockItem.ID,
         FireExtinguisherSignBlocks.FIRE_EXTINGUISHER_SIGN);
     Registry.register(
         BuiltInRegistries.BLOCK,
-        Constants.MOD_ID_PREFIX + FireExtinguisherSign.NAME + "_left",
+        Constants.MOD_ID_PREFIX + FireExtinguisherSignBlockItem.ID_LEFT,
         FireExtinguisherSignBlocks.FIRE_EXTINGUISHER_SIGN_LEFT);
     Registry.register(
         BuiltInRegistries.BLOCK,
-        Constants.MOD_ID_PREFIX + FireExtinguisherSign.NAME + "_right",
+        Constants.MOD_ID_PREFIX + FireExtinguisherSignBlockItem.ID_RIGHT,
         FireExtinguisherSignBlocks.FIRE_EXTINGUISHER_SIGN_RIGHT);
 
     log.info("{} Exit Sign Blocks ...", Constants.LOG_SUB_REGISTER_PREFIX);
     Registry.register(
-        BuiltInRegistries.BLOCK, Constants.MOD_ID_PREFIX + ExitSign.NAME, ExitSignBlocks.EXIT_SIGN);
+        BuiltInRegistries.BLOCK, Constants.MOD_ID_PREFIX + ExitSign.ID, ExitSignBlocks.EXIT_SIGN);
     Registry.register(
         BuiltInRegistries.BLOCK,
-        Constants.MOD_ID_PREFIX + ExitSign.NAME + "_left",
+        Constants.MOD_ID_PREFIX + ExitSign.ID_LEFT,
         ExitSignBlocks.EXIT_SIGN_LEFT);
     Registry.register(
         BuiltInRegistries.BLOCK,
-        Constants.MOD_ID_PREFIX + ExitSign.NAME + "_left_down",
+        Constants.MOD_ID_PREFIX + ExitSign.ID_LEFT_DOWN,
         ExitSignBlocks.EXIT_SIGN_LEFT_DOWN);
     Registry.register(
         BuiltInRegistries.BLOCK,
-        Constants.MOD_ID_PREFIX + ExitSign.NAME + "_left_up",
+        Constants.MOD_ID_PREFIX + ExitSign.ID_LEFT_UP,
         ExitSignBlocks.EXIT_SIGN_LEFT_UP);
     Registry.register(
         BuiltInRegistries.BLOCK,
-        Constants.MOD_ID_PREFIX + ExitSign.NAME + "_right",
+        Constants.MOD_ID_PREFIX + ExitSign.ID_RIGHT,
         ExitSignBlocks.EXIT_SIGN_RIGHT);
     Registry.register(
         BuiltInRegistries.BLOCK,
-        Constants.MOD_ID_PREFIX + ExitSign.NAME + "_right_down",
+        Constants.MOD_ID_PREFIX + ExitSign.ID_RIGHT_DOWN,
         ExitSignBlocks.EXIT_SIGN_RIGHT_DOWN);
     Registry.register(
         BuiltInRegistries.BLOCK,
-        Constants.MOD_ID_PREFIX + ExitSign.NAME + "_right_up",
+        Constants.MOD_ID_PREFIX + ExitSign.ID_RIGHT_UP,
         ExitSignBlocks.EXIT_SIGN_RIGHT_UP);
   }
 }

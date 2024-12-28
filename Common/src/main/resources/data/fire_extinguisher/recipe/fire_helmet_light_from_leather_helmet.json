@@ -1,21 +1,12 @@
 {
   "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
   "ingredients": [
-    {
-      "item": "minecraft:leather_helmet"
-    },
-    {
-      "item": "minecraft:iron_ingot"
-    },
-    {
-      "item": "minecraft:white_dye"
-    },
-    {
-      "item": "minecraft:leather"
-    },
-    {
-      "item": "minecraft:gold_ingot"
-    }
+    "minecraft:leather_helmet",
+    "minecraft:iron_ingot",
+    "minecraft:white_dye",
+    "minecraft:leather",
+    "minecraft:gold_ingot"
   ],
   "result": {
     "id": "fire_extinguisher:fire_helmet_light",

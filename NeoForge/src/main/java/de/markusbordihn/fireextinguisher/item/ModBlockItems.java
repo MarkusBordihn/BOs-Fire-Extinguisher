@@ -20,7 +20,6 @@
 package de.markusbordihn.fireextinguisher.item;
 
 import de.markusbordihn.fireextinguisher.Constants;
-import de.markusbordihn.fireextinguisher.block.FireExtinguisherSign;
 import de.markusbordihn.fireextinguisher.block.ModBlocks;
 import de.markusbordihn.fireextinguisher.blockitem.ExitSignBlockItem;
 import de.markusbordihn.fireextinguisher.blockitem.FireAlarmBellBlockItem;
@@ -41,83 +40,105 @@ public class ModBlockItems {
   // Fire Extinguisher
   public static final DeferredItem<Item> FIRE_EXTINGUISHER =
       ITEMS.register(
-          FireExtinguisherBlockItem.NAME,
-          () -> new FireExtinguisherBlockItem(ModBlocks.FIRE_EXTINGUISHER.get()));
+          FireExtinguisherBlockItem.ID,
+          () ->
+              new FireExtinguisherBlockItem(
+                  ModBlocks.FIRE_EXTINGUISHER.get(), FireExtinguisherBlockItem.ID));
   public static final DeferredItem<Item> FIRE_EXTINGUISHER_COPPER =
       ITEMS.register(
-          FireExtinguisherBlockItem.NAME + "_copper",
-          () -> new FireExtinguisherBlockItem(ModBlocks.FIRE_EXTINGUISHER_COPPER.get()));
+          FireExtinguisherBlockItem.ID_COPPER,
+          () ->
+              new FireExtinguisherBlockItem(
+                  ModBlocks.FIRE_EXTINGUISHER_COPPER.get(), FireExtinguisherBlockItem.ID_COPPER));
 
   // Fire Alarm
   public static final DeferredItem<Item> FIRE_SPRINKLER =
       ITEMS.register(
-          FireSprinklerBlockItem.NAME,
+          FireSprinklerBlockItem.ID,
           () -> new FireSprinklerBlockItem(ModBlocks.FIRE_SPRINKLER.get()));
   public static final DeferredItem<Item> FIRE_ALARM_SWITCH =
       ITEMS.register(
-          FireAlarmSwitchBlockItem.NAME,
+          FireAlarmSwitchBlockItem.ID,
           () -> new FireAlarmSwitchBlockItem(ModBlocks.FIRE_ALARM_SWITCH.get()));
   public static final DeferredItem<Item> FIRE_ALARM_BELL =
       ITEMS.register(
-          FireAlarmBellBlockItem.NAME,
+          FireAlarmBellBlockItem.ID,
           () -> new FireAlarmBellBlockItem(ModBlocks.FIRE_ALARM_BELL.get()));
   public static final DeferredItem<Item> FIRE_ALARM_SIREN =
       ITEMS.register(
-          FireAlarmSirenBlockItem.NAME,
+          FireAlarmSirenBlockItem.ID,
           () -> new FireAlarmSirenBlockItem(ModBlocks.FIRE_ALARM_SIREN.get()));
   public static final DeferredItem<Item> FIRE_ALARM_SMOKE_DETECTOR =
       ITEMS.register(
-          FireAlarmSmokeDetectorBlockItem.NAME,
-          () -> new FireAlarmSmokeDetectorBlockItem(ModBlocks.FIRE_ALARM_SMOKE_DETECTOR.get()));
-  public static final DeferredItem<Item> FIRE_ALARM_SMOKE_DETECTOR_SILENT =
-      ITEMS.register(
-          FireAlarmSmokeDetectorBlockItem.NAME + "_silent",
+          FireAlarmSmokeDetectorBlockItem.ID,
           () ->
               new FireAlarmSmokeDetectorBlockItem(
-                  ModBlocks.FIRE_ALARM_SMOKE_DETECTOR_SILENT.get()));
+                  ModBlocks.FIRE_ALARM_SMOKE_DETECTOR.get(), FireAlarmSmokeDetectorBlockItem.ID));
+  public static final DeferredItem<Item> FIRE_ALARM_SMOKE_DETECTOR_SILENT =
+      ITEMS.register(
+          FireAlarmSmokeDetectorBlockItem.ID_SILENT,
+          () ->
+              new FireAlarmSmokeDetectorBlockItem(
+                  ModBlocks.FIRE_ALARM_SMOKE_DETECTOR_SILENT.get(),
+                  FireAlarmSmokeDetectorBlockItem.ID_SILENT));
 
   // Fire Extinguisher Signs
   public static final DeferredItem<Item> FIRE_EXTINGUISHER_SIGN =
       ITEMS.register(
-          FireExtinguisherSign.NAME,
-          () -> new FireExtinguisherSignBlockItem(ModBlocks.FIRE_EXTINGUISHER_SIGN.get()));
+          FireExtinguisherSignBlockItem.ID,
+          () ->
+              new FireExtinguisherSignBlockItem(
+                  ModBlocks.FIRE_EXTINGUISHER_SIGN.get(), FireExtinguisherSignBlockItem.ID));
   public static final DeferredItem<Item> FIRE_EXTINGUISHER_SIGN_LEFT =
       ITEMS.register(
-          FireExtinguisherSign.NAME + "_left",
-          () -> new FireExtinguisherSignBlockItem(ModBlocks.FIRE_EXTINGUISHER_SIGN_LEFT.get()));
+          FireExtinguisherSignBlockItem.ID_LEFT,
+          () ->
+              new FireExtinguisherSignBlockItem(
+                  ModBlocks.FIRE_EXTINGUISHER_SIGN_LEFT.get(),
+                  FireExtinguisherSignBlockItem.ID_LEFT));
   public static final DeferredItem<Item> FIRE_EXTINGUISHER_SIGN_RIGHT =
       ITEMS.register(
-          FireExtinguisherSign.NAME + "_right",
-          () -> new FireExtinguisherSignBlockItem(ModBlocks.FIRE_EXTINGUISHER_SIGN_RIGHT.get()));
+          FireExtinguisherSignBlockItem.ID_RIGHT,
+          () ->
+              new FireExtinguisherSignBlockItem(
+                  ModBlocks.FIRE_EXTINGUISHER_SIGN_RIGHT.get(),
+                  FireExtinguisherSignBlockItem.ID_RIGHT));
 
   // Exit Signs
   public static final DeferredItem<Item> EXIT_SIGN =
       ITEMS.register(
-          ExitSignBlockItem.NAME, () -> new ExitSignBlockItem(ModBlocks.EXIT_SIGN.get()));
+          ExitSignBlockItem.ID,
+          () -> new ExitSignBlockItem(ModBlocks.EXIT_SIGN.get(), ExitSignBlockItem.ID));
   public static final DeferredItem<Item> EXIT_SIGN_LEFT =
       ITEMS.register(
-          ExitSignBlockItem.NAME + "_left",
-          () -> new ExitSignBlockItem(ModBlocks.EXIT_SIGN_LEFT.get()));
+          ExitSignBlockItem.ID_LEFT,
+          () -> new ExitSignBlockItem(ModBlocks.EXIT_SIGN_LEFT.get(), ExitSignBlockItem.ID_LEFT));
   public static final DeferredItem<Item> EXIT_SIGN_LEFT_DOWN =
       ITEMS.register(
-          ExitSignBlockItem.NAME + "_left_down",
-          () -> new ExitSignBlockItem(ModBlocks.EXIT_SIGN_LEFT_DOWN.get()));
+          ExitSignBlockItem.ID_LEFT_DOWN,
+          () ->
+              new ExitSignBlockItem(
+                  ModBlocks.EXIT_SIGN_LEFT_DOWN.get(), ExitSignBlockItem.ID_LEFT_DOWN));
   public static final DeferredItem<Item> EXIT_SIGN_LEFT_UP =
       ITEMS.register(
-          ExitSignBlockItem.NAME + "_left_up",
-          () -> new ExitSignBlockItem(ModBlocks.EXIT_SIGN_LEFT_UP.get()));
+          ExitSignBlockItem.ID_LEFT_UP,
+          () ->
+              new ExitSignBlockItem(
+                  ModBlocks.EXIT_SIGN_LEFT_UP.get(), ExitSignBlockItem.ID_LEFT_UP));
   public static final DeferredItem<Item> EXIT_SIGN_RIGHT =
       ITEMS.register(
-          ExitSignBlockItem.NAME + "_right",
-          () -> new ExitSignBlockItem(ModBlocks.EXIT_SIGN_RIGHT.get()));
+          ExitSignBlockItem.ID_RIGHT,
+          () -> new ExitSignBlockItem(ModBlocks.EXIT_SIGN_RIGHT.get(), ExitSignBlockItem.ID_RIGHT));
   public static final DeferredItem<Item> EXIT_SIGN_RIGHT_DOWN =
       ITEMS.register(
-          ExitSignBlockItem.NAME + "_right_down",
-          () -> new ExitSignBlockItem(ModBlocks.EXIT_SIGN_RIGHT_DOWN.get()));
+          ExitSignBlockItem.ID_RIGHT_DOWN,
+          () ->
+              new ExitSignBlockItem(
+                  ModBlocks.EXIT_SIGN_RIGHT_DOWN.get(), ExitSignBlockItem.ID_RIGHT_DOWN));
   public static final DeferredItem<Item> EXIT_SIGN_RIGHT_UP =
       ITEMS.register(
-          ExitSignBlockItem.NAME + "_right_up",
-          () -> new ExitSignBlockItem(ModBlocks.EXIT_SIGN_RIGHT_UP.get()));
+          ExitSignBlockItem.ID_RIGHT_UP,
+          () -> new ExitSignBlockItem(ModBlocks.EXIT_SIGN_RIGHT_UP.get(), ExitSignBlockItem.ID));
 
   protected ModBlockItems() {}
 }

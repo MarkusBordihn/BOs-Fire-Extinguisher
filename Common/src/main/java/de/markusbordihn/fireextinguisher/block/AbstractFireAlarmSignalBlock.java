@@ -36,6 +36,7 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.AttachFace;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.redstone.Orientation;
 
 public abstract class AbstractFireAlarmSignalBlock extends FaceAttachedHorizontalDirectionalBlock {
 
@@ -93,7 +94,7 @@ public abstract class AbstractFireAlarmSignalBlock extends FaceAttachedHorizonta
       Level level,
       BlockPos blockPos,
       Block block,
-      BlockPos unused,
+      Orientation unused,
       boolean unused2) {
     if (!level.isClientSide) {
       boolean isPowered = blockState.getValue(POWERED);

@@ -6,7 +6,7 @@
       "conditions": {
         "items": [
           {
-            "items": ["minecraft:iron_ingot"]
+            "items": "minecraft:iron_ingot"
           }
         ]
       }
@@ -16,7 +16,7 @@
       "conditions": {
         "items": [
           {
-            "items": ["minecraft:leather_chestplate"]
+            "items": "minecraft:leather_chestplate"
           }
         ]
       }
@@ -26,7 +26,7 @@
       "conditions": {
         "items": [
           {
-            "items": ["minecraft:white_dye"]
+            "items": "minecraft:white_dye"
           }
         ]
       }
@@ -36,7 +36,7 @@
       "conditions": {
         "items": [
           {
-            "items": ["fire_extinguisher:fire_chestplate_light"]
+            "items": "fire_extinguisher:fire_chestplate_light"
           }
         ]
       }

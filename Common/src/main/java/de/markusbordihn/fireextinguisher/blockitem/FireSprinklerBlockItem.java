@@ -22,7 +22,10 @@ package de.markusbordihn.fireextinguisher.blockitem;
 import de.markusbordihn.fireextinguisher.Constants;
 import java.util.List;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -30,10 +33,16 @@ import net.minecraft.world.level.block.Block;
 
 public class FireSprinklerBlockItem extends BlockItem {
 
-  public static final String NAME = "fire_sprinkler";
+  public static final String ID = "fire_sprinkler";
 
   public FireSprinklerBlockItem(Block block) {
-    this(block, new Properties());
+    this(
+        block,
+        new Properties()
+            .useBlockDescriptionPrefix()
+            .setId(
+                ResourceKey.create(
+                    Registries.ITEM, ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, ID))));
   }
 
   public FireSprinklerBlockItem(Block block, Properties properties) {
@@ -47,6 +56,6 @@ public class FireSprinklerBlockItem extends BlockItem {
       List<Component> tooltipList,
       TooltipFlag tooltipFlag) {
     tooltipList.add(
-        Component.translatable(Constants.TOOLTIP_PREFIX + NAME).withStyle(ChatFormatting.GRAY));
+        Component.translatable(Constants.TOOLTIP_PREFIX + ID).withStyle(ChatFormatting.GRAY));
   }
 }

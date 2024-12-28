@@ -1,9 +1,8 @@
 {
   "type": "minecraft:crafting_shapeless",
+  "category": "building",
   "ingredients": [
-    {
-      "item": "fire_extinguisher:exit_sign_right"
-    }
+    "fire_extinguisher:exit_sign_right"
   ],
   "result": {
     "id": "fire_extinguisher:exit_sign_left",

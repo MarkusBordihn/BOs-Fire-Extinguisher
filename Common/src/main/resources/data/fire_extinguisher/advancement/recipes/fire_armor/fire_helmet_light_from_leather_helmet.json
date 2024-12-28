@@ -6,7 +6,7 @@
       "conditions": {
         "items": [
           {
-            "items": ["minecraft:iron_ingot"]
+            "items": "minecraft:iron_ingot"
           }
         ]
       }
@@ -16,7 +16,7 @@
       "conditions": {
         "items": [
           {
-            "items": ["minecraft:leather_helmet"]
+            "items": "minecraft:leather_helmet"
           }
         ]
       }
@@ -26,7 +26,7 @@
       "conditions": {
         "items": [
           {
-            "items": ["minecraft:white_dye"]
+            "items": "minecraft:white_dye"
           }
         ]
       }
@@ -36,7 +36,7 @@
       "conditions": {
         "items": [
           {
-            "items": ["fire_extinguisher:fire_helmet_light"]
+            "items": "fire_extinguisher:fire_helmet_light"
           }
         ]
       }
@@ -51,8 +51,6 @@
     ]
   ],
   "rewards": {
-    "recipes": [
-      "fire_extinguisher:fire_helmet_light_from_leather_helmet"
-    ]
+    "recipes": ["fire_extinguisher:fire_helmet_light_from_leather_helmet"]
   }
 }

@@ -6,7 +6,7 @@
       "conditions": {
         "items": [
           {
-            "items": ["minecraft:iron_ingot"]
+            "items": "minecraft:iron_ingot"
           }
         ]
       }
@@ -16,7 +16,7 @@
       "conditions": {
         "items": [
           {
-            "items": ["minecraft:water_bucket"]
+            "items": "minecraft:water_bucket"
           }
         ]
       }
@@ -26,7 +26,7 @@
       "conditions": {
         "items": [
           {
-            "items": ["minecraft:gold_ingot"]
+            "items": "minecraft:gold_ingot"
           }
         ]
       }
@@ -36,7 +36,7 @@
       "conditions": {
         "items": [
           {
-            "items": ["minecraft:lever"]
+            "items": "minecraft:lever"
           }
         ]
       }
@@ -46,7 +46,7 @@
       "conditions": {
         "items": [
           {
-            "items": ["minecraft:red_dye"]
+            "items": "minecraft:red_dye"
           }
         ]
       }
@@ -56,7 +56,7 @@
       "conditions": {
         "items": [
           {
-            "items": ["fire_extinguisher:fire_extinguisher"]
+            "items": "fire_extinguisher:fire_extinguisher"
           }
         ]
       }

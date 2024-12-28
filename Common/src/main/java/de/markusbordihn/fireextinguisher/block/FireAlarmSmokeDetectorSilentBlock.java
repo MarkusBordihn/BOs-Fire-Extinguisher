@@ -26,7 +26,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 
 public class FireAlarmSmokeDetectorSilentBlock extends FireAlarmSmokeDetectorBlock {
 
-  public static final String NAME = "fire_alarm_smoke_detector_silent";
+  public static final String ID = "fire_alarm_smoke_detector_silent";
 
   public FireAlarmSmokeDetectorSilentBlock(BlockBehaviour.Properties properties) {
     super(properties);

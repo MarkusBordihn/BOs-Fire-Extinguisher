@@ -1,18 +1,11 @@
 {
   "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
   "ingredients": [
-    {
-      "item": "minecraft:iron_axe"
-    },
-    {
-      "item": "minecraft:gold_ingot"
-    },
-    {
-      "item": "minecraft:red_dye"
-    },
-    {
-      "item": "minecraft:black_dye"
-    }
+    "minecraft:iron_axe",
+    "minecraft:gold_ingot",
+    "minecraft:red_dye",
+    "minecraft:black_dye"
   ],
   "result": {
     "id": "fire_extinguisher:fire_axe",

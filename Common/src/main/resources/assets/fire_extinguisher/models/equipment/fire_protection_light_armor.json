@@ -1,0 +1,6 @@
+{
+  "layers": {
+    "humanoid": [{"texture": "fire_extinguisher:fire_protection_light_armor"}],
+    "humanoid_leggings": [{"texture": "fire_extinguisher:fire_protection_light_armor"}]
+  }
+}

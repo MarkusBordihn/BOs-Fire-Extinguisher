@@ -6,7 +6,7 @@
       "conditions": {
         "items": [
           {
-            "items": ["minecraft:green_dye"]
+            "items": "minecraft:green_dye"
           }
         ]
       }
@@ -36,7 +36,7 @@
       "conditions": {
         "items": [
           {
-            "items": ["fire_extinguisher:exit_sign_right_down"]
+            "items": "fire_extinguisher:exit_sign_right_down"
           }
         ]
       }

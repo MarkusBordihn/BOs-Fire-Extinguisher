@@ -1,18 +1,11 @@
 {
   "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
   "ingredients": [
-    {
-      "item": "minecraft:leather_chestplate"
-    },
-    {
-      "item": "minecraft:iron_ingot"
-    },
-    {
-      "item": "minecraft:white_dye"
-    },
-    {
-      "item": "minecraft:leather"
-    }
+    "minecraft:leather_chestplate",
+    "minecraft:iron_ingot",
+    "minecraft:white_dye",
+    "minecraft:leather"
   ],
   "result": {
     "id": "fire_extinguisher:fire_chestplate_light",

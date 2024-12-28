@@ -19,6 +19,10 @@
 
 package de.markusbordihn.fireextinguisher.block;
 
+import de.markusbordihn.fireextinguisher.Constants;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -29,6 +33,11 @@ public class FireExtinguisherSignBlocks {
   public static final Block FIRE_EXTINGUISHER_SIGN =
       new FireExtinguisherSign(
           BlockBehaviour.Properties.of()
+              .setId(
+                  ResourceKey.create(
+                      Registries.BLOCK,
+                      ResourceLocation.fromNamespaceAndPath(
+                          Constants.MOD_ID, FireExtinguisherSign.ID)))
               .mapColor(MapColor.STONE)
               .requiresCorrectToolForDrops()
               .strength(3.0F, 6.0F)
@@ -36,6 +45,11 @@ public class FireExtinguisherSignBlocks {
   public static final Block FIRE_EXTINGUISHER_SIGN_LEFT =
       new FireExtinguisherSignPosition(
           BlockBehaviour.Properties.of()
+              .setId(
+                  ResourceKey.create(
+                      Registries.BLOCK,
+                      ResourceLocation.fromNamespaceAndPath(
+                          Constants.MOD_ID, FireExtinguisherSign.ID_LEFT)))
               .mapColor(MapColor.STONE)
               .requiresCorrectToolForDrops()
               .strength(3.0F, 6.0F)
@@ -43,6 +57,11 @@ public class FireExtinguisherSignBlocks {
   public static final Block FIRE_EXTINGUISHER_SIGN_RIGHT =
       new FireExtinguisherSignPosition(
           BlockBehaviour.Properties.of()
+              .setId(
+                  ResourceKey.create(
+                      Registries.BLOCK,
+                      ResourceLocation.fromNamespaceAndPath(
+                          Constants.MOD_ID, FireExtinguisherSign.ID_RIGHT)))
               .mapColor(MapColor.STONE)
               .requiresCorrectToolForDrops()
               .strength(3.0F, 6.0F)

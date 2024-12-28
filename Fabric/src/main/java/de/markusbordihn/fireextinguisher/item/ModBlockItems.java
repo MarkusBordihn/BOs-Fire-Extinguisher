@@ -20,11 +20,9 @@
 package de.markusbordihn.fireextinguisher.item;
 
 import de.markusbordihn.fireextinguisher.Constants;
-import de.markusbordihn.fireextinguisher.block.ExitSign;
 import de.markusbordihn.fireextinguisher.block.ExitSignBlocks;
 import de.markusbordihn.fireextinguisher.block.FireAlarmBlocks;
 import de.markusbordihn.fireextinguisher.block.FireExtinguisherBlocks;
-import de.markusbordihn.fireextinguisher.block.FireExtinguisherSign;
 import de.markusbordihn.fireextinguisher.block.FireExtinguisherSignBlocks;
 import de.markusbordihn.fireextinguisher.blockitem.ExitSignBlockItem;
 import de.markusbordihn.fireextinguisher.blockitem.FireAlarmBellBlockItem;
@@ -71,101 +69,113 @@ public class ModBlockItems {
     FIRE_EXTINGUISHER =
         Registry.register(
             BuiltInRegistries.ITEM,
-            Constants.MOD_ID_PREFIX + FireExtinguisherBlockItem.NAME,
-            new FireExtinguisherBlockItem(FireExtinguisherBlocks.FIRE_EXTINGUISHER));
+            Constants.MOD_ID_PREFIX + FireExtinguisherBlockItem.ID,
+            new FireExtinguisherBlockItem(
+                FireExtinguisherBlocks.FIRE_EXTINGUISHER, FireExtinguisherBlockItem.ID));
     FIRE_EXTINGUISHER_COPPER =
         Registry.register(
             BuiltInRegistries.ITEM,
-            Constants.MOD_ID_PREFIX + FireExtinguisherBlockItem.NAME + "_copper",
-            new FireExtinguisherBlockItem(FireExtinguisherBlocks.FIRE_EXTINGUISHER_COPPER));
+            Constants.MOD_ID_PREFIX + FireExtinguisherBlockItem.ID_COPPER,
+            new FireExtinguisherBlockItem(
+                FireExtinguisherBlocks.FIRE_EXTINGUISHER_COPPER,
+                FireExtinguisherBlockItem.ID_COPPER));
 
     log.info("- {} Fire Alarm Block Items ...", Constants.LOG_REGISTER_PREFIX);
     FIRE_SPRINKLER =
         Registry.register(
             BuiltInRegistries.ITEM,
-            Constants.MOD_ID_PREFIX + FireSprinklerBlockItem.NAME,
+            Constants.MOD_ID_PREFIX + FireSprinklerBlockItem.ID,
             new FireSprinklerBlockItem(FireAlarmBlocks.FIRE_SPRINKLER));
     FIRE_ALARM_SWITCH =
         Registry.register(
             BuiltInRegistries.ITEM,
-            Constants.MOD_ID_PREFIX + FireAlarmSwitchBlockItem.NAME,
+            Constants.MOD_ID_PREFIX + FireAlarmSwitchBlockItem.ID,
             new FireAlarmSwitchBlockItem(FireAlarmBlocks.FIRE_ALARM_SWITCH));
     FIRE_ALARM_BELL =
         Registry.register(
             BuiltInRegistries.ITEM,
-            Constants.MOD_ID_PREFIX + FireAlarmBellBlockItem.NAME,
+            Constants.MOD_ID_PREFIX + FireAlarmBellBlockItem.ID,
             new FireAlarmBellBlockItem(FireAlarmBlocks.FIRE_ALARM_BELL));
     FIRE_ALARM_SIREN =
         Registry.register(
             BuiltInRegistries.ITEM,
-            Constants.MOD_ID_PREFIX + FireAlarmSirenBlockItem.NAME,
+            Constants.MOD_ID_PREFIX + FireAlarmSirenBlockItem.ID,
             new FireAlarmSirenBlockItem(FireAlarmBlocks.FIRE_ALARM_SIREN));
     FIRE_ALARM_SMOKE_DETECTOR =
         Registry.register(
             BuiltInRegistries.ITEM,
-            Constants.MOD_ID_PREFIX + FireAlarmSmokeDetectorBlockItem.NAME,
-            new FireAlarmSmokeDetectorBlockItem(FireAlarmBlocks.FIRE_ALARM_SMOKE_DETECTOR));
+            Constants.MOD_ID_PREFIX + FireAlarmSmokeDetectorBlockItem.ID,
+            new FireAlarmSmokeDetectorBlockItem(
+                FireAlarmBlocks.FIRE_ALARM_SMOKE_DETECTOR, FireAlarmSmokeDetectorBlockItem.ID));
     FIRE_ALARM_SMOKE_DETECTOR_SILENT =
         Registry.register(
             BuiltInRegistries.ITEM,
-            Constants.MOD_ID_PREFIX + FireAlarmSmokeDetectorBlockItem.NAME + "_silent",
-            new FireAlarmSmokeDetectorBlockItem(FireAlarmBlocks.FIRE_ALARM_SMOKE_DETECTOR_SILENT));
+            Constants.MOD_ID_PREFIX + FireAlarmSmokeDetectorBlockItem.ID_SILENT,
+            new FireAlarmSmokeDetectorBlockItem(
+                FireAlarmBlocks.FIRE_ALARM_SMOKE_DETECTOR_SILENT,
+                FireAlarmSmokeDetectorBlockItem.ID_SILENT));
 
     log.info("- {} Fire Extinguisher Sign Block Items ...", Constants.LOG_REGISTER_PREFIX);
     FIRE_EXTINGUISHER_SIGN =
         Registry.register(
             BuiltInRegistries.ITEM,
-            Constants.MOD_ID_PREFIX + FireExtinguisherSign.NAME,
+            Constants.MOD_ID_PREFIX + FireExtinguisherSignBlockItem.ID,
             new FireExtinguisherSignBlockItem(
-                FireExtinguisherSignBlocks.FIRE_EXTINGUISHER_SIGN, new Item.Properties()));
+                FireExtinguisherSignBlocks.FIRE_EXTINGUISHER_SIGN,
+                FireExtinguisherSignBlockItem.ID));
     FIRE_EXTINGUISHER_SIGN_LEFT =
         Registry.register(
             BuiltInRegistries.ITEM,
-            Constants.MOD_ID_PREFIX + FireExtinguisherSign.NAME + "_left",
+            Constants.MOD_ID_PREFIX + FireExtinguisherSignBlockItem.ID_LEFT,
             new FireExtinguisherSignBlockItem(
-                FireExtinguisherSignBlocks.FIRE_EXTINGUISHER_SIGN_LEFT, new Item.Properties()));
+                FireExtinguisherSignBlocks.FIRE_EXTINGUISHER_SIGN_LEFT,
+                FireExtinguisherSignBlockItem.ID_LEFT));
     FIRE_EXTINGUISHER_SIGN_RIGHT =
         Registry.register(
             BuiltInRegistries.ITEM,
-            Constants.MOD_ID_PREFIX + FireExtinguisherSign.NAME + "_right",
+            Constants.MOD_ID_PREFIX + FireExtinguisherSignBlockItem.ID_RIGHT,
             new FireExtinguisherSignBlockItem(
-                FireExtinguisherSignBlocks.FIRE_EXTINGUISHER_SIGN_RIGHT, new Item.Properties()));
+                FireExtinguisherSignBlocks.FIRE_EXTINGUISHER_SIGN_RIGHT,
+                FireExtinguisherSignBlockItem.ID_RIGHT));
 
     log.info("{} Exit Sign Block Items ...", Constants.LOG_SUB_REGISTER_PREFIX);
     EXIT_SIGN =
         Registry.register(
             BuiltInRegistries.ITEM,
-            Constants.MOD_ID_PREFIX + ExitSign.NAME,
-            new ExitSignBlockItem(ExitSignBlocks.EXIT_SIGN, new Item.Properties()));
+            Constants.MOD_ID_PREFIX + ExitSignBlockItem.ID,
+            new ExitSignBlockItem(ExitSignBlocks.EXIT_SIGN, ExitSignBlockItem.ID));
     EXIT_SIGN_LEFT =
         Registry.register(
             BuiltInRegistries.ITEM,
-            Constants.MOD_ID_PREFIX + ExitSign.NAME + "_left",
-            new ExitSignBlockItem(ExitSignBlocks.EXIT_SIGN_LEFT, new Item.Properties()));
+            Constants.MOD_ID_PREFIX + ExitSignBlockItem.ID_LEFT,
+            new ExitSignBlockItem(ExitSignBlocks.EXIT_SIGN_LEFT, ExitSignBlockItem.ID_LEFT));
     EXIT_SIGN_LEFT_DOWN =
         Registry.register(
             BuiltInRegistries.ITEM,
-            Constants.MOD_ID_PREFIX + ExitSign.NAME + "_left_down",
-            new ExitSignBlockItem(ExitSignBlocks.EXIT_SIGN_LEFT_DOWN, new Item.Properties()));
+            Constants.MOD_ID_PREFIX + ExitSignBlockItem.ID_LEFT_DOWN,
+            new ExitSignBlockItem(
+                ExitSignBlocks.EXIT_SIGN_LEFT_DOWN, ExitSignBlockItem.ID_LEFT_DOWN));
     EXIT_SIGN_LEFT_UP =
         Registry.register(
             BuiltInRegistries.ITEM,
-            Constants.MOD_ID_PREFIX + ExitSign.NAME + "_left_up",
-            new ExitSignBlockItem(ExitSignBlocks.EXIT_SIGN_LEFT_UP, new Item.Properties()));
+            Constants.MOD_ID_PREFIX + ExitSignBlockItem.ID_LEFT_UP,
+            new ExitSignBlockItem(ExitSignBlocks.EXIT_SIGN_LEFT_UP, ExitSignBlockItem.ID_LEFT_UP));
     EXIT_SIGN_RIGHT =
         Registry.register(
             BuiltInRegistries.ITEM,
-            Constants.MOD_ID_PREFIX + ExitSign.NAME + "_right",
-            new ExitSignBlockItem(ExitSignBlocks.EXIT_SIGN_RIGHT, new Item.Properties()));
+            Constants.MOD_ID_PREFIX + ExitSignBlockItem.ID_RIGHT,
+            new ExitSignBlockItem(ExitSignBlocks.EXIT_SIGN_RIGHT, ExitSignBlockItem.ID_RIGHT));
     EXIT_SIGN_RIGHT_DOWN =
         Registry.register(
             BuiltInRegistries.ITEM,
-            Constants.MOD_ID_PREFIX + ExitSign.NAME + "_right_down",
-            new ExitSignBlockItem(ExitSignBlocks.EXIT_SIGN_RIGHT_DOWN, new Item.Properties()));
+            Constants.MOD_ID_PREFIX + ExitSignBlockItem.ID_RIGHT_DOWN,
+            new ExitSignBlockItem(
+                ExitSignBlocks.EXIT_SIGN_RIGHT_DOWN, ExitSignBlockItem.ID_RIGHT_DOWN));
     EXIT_SIGN_RIGHT_UP =
         Registry.register(
             BuiltInRegistries.ITEM,
-            Constants.MOD_ID_PREFIX + ExitSign.NAME + "_right_up",
-            new ExitSignBlockItem(ExitSignBlocks.EXIT_SIGN_RIGHT_UP, new Item.Properties()));
+            Constants.MOD_ID_PREFIX + ExitSignBlockItem.ID_RIGHT_UP,
+            new ExitSignBlockItem(
+                ExitSignBlocks.EXIT_SIGN_RIGHT_UP, ExitSignBlockItem.ID_RIGHT_UP));
   }
 }

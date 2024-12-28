@@ -45,7 +45,8 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class FireAlarmSwitchBlock extends FaceAttachedHorizontalDirectionalBlock {
 
-  public static final String NAME = "fire_alarm_switch";
+  public static final String ID = "fire_alarm_switch";
+
   public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
   protected static final VoxelShape NORTH_AABB = Block.box(4, 3, 13, 12, 13, 16);
   protected static final VoxelShape EAST_AABB = Block.box(0, 3, 4, 3, 13, 12);

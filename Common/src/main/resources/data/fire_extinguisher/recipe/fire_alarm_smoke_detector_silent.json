@@ -1,22 +1,13 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "building",
   "pattern": ["#D#", "#RW", "#|#"],
   "key": {
-    "#": {
-      "item": "minecraft:iron_ingot"
-    },
-    "R": {
-      "item": "minecraft:redstone_torch"
-    },
-    "|": {
-      "item": "minecraft:redstone"
-    },
-    "W": {
-      "item": "minecraft:white_dye"
-    },
-    "D": {
-      "item": "minecraft:daylight_detector"
-    }
+    "#": "minecraft:iron_ingot",
+    "R": "minecraft:redstone_torch",
+    "|": "minecraft:redstone",
+    "W": "minecraft:white_dye",
+    "D": "minecraft:daylight_detector"
   },
   "result": {
     "id": "fire_extinguisher:fire_alarm_smoke_detector_silent"

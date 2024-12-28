@@ -21,76 +21,53 @@ package de.markusbordihn.fireextinguisher.item;
 
 import de.markusbordihn.fireextinguisher.Constants;
 import java.util.EnumMap;
-import java.util.List;
 import java.util.Map;
-import java.util.function.Supplier;
 import net.minecraft.Util;
 import net.minecraft.core.Holder;
-import net.minecraft.core.Registry;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.ArmorItem.Type;
-import net.minecraft.world.item.ArmorMaterial;
-import net.minecraft.world.item.ArmorMaterial.Layer;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.equipment.ArmorMaterial;
+import net.minecraft.world.item.equipment.ArmorType;
 
 public enum ModArmorMaterials {
   FIRE_PROTECTION(
       "fire_protection_armor",
       Util.make(
-          new EnumMap(ArmorItem.Type.class),
+          new EnumMap(ArmorType.class),
           map -> {
-            map.put(Type.BOOTS, 2);
-            map.put(Type.LEGGINGS, 5);
-            map.put(Type.CHESTPLATE, 6);
-            map.put(Type.HELMET, 2);
-            map.put(Type.BODY, 5);
+            map.put(ArmorType.BOOTS, 2);
+            map.put(ArmorType.LEGGINGS, 5);
+            map.put(ArmorType.CHESTPLATE, 6);
+            map.put(ArmorType.HELMET, 2);
+            map.put(ArmorType.BODY, 5);
           }),
       9,
       SoundEvents.ARMOR_EQUIP_IRON,
-      () -> Ingredient.of(Items.IRON_INGOT),
-      List.of(
-          new ArmorMaterial.Layer(
-              ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "fire_protection_armor"))),
+      ItemTags.REPAIRS_IRON_ARMOR,
+      ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "fire_protection_armor"),
       0.0F,
       0.0F),
   FIRE_PROTECTION_LIGHT(
       "fire_protection_light_armor",
       Util.make(
-          new EnumMap(ArmorItem.Type.class),
+          new EnumMap(ArmorType.class),
           map -> {
-            map.put(Type.BOOTS, 2);
-            map.put(Type.LEGGINGS, 5);
-            map.put(Type.CHESTPLATE, 6);
-            map.put(Type.HELMET, 2);
-            map.put(Type.BODY, 5);
+            map.put(ArmorType.BOOTS, 2);
+            map.put(ArmorType.LEGGINGS, 5);
+            map.put(ArmorType.CHESTPLATE, 6);
+            map.put(ArmorType.HELMET, 2);
+            map.put(ArmorType.BODY, 5);
           }),
       9,
       SoundEvents.ARMOR_EQUIP_IRON,
-      () -> Ingredient.of(Items.IRON_INGOT),
-      List.of(
-          new ArmorMaterial.Layer(
-              ResourceLocation.fromNamespaceAndPath(
-                  Constants.MOD_ID, "fire_protection_light_armor"))),
+      ItemTags.REPAIRS_IRON_ARMOR,
+      ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "fire_protection_light_armor"),
       0.0F,
       0.0F);
-
-  static {
-    FIRE_PROTECTION.holder =
-        Registry.registerForHolder(
-            BuiltInRegistries.ARMOR_MATERIAL,
-            FIRE_PROTECTION.getResourceLocation(),
-            FIRE_PROTECTION.getArmorMaterial());
-    FIRE_PROTECTION_LIGHT.holder =
-        Registry.registerForHolder(
-            BuiltInRegistries.ARMOR_MATERIAL,
-            FIRE_PROTECTION_LIGHT.getResourceLocation(),
-            FIRE_PROTECTION_LIGHT.getArmorMaterial());
-  }
 
   private final String name;
   private final ResourceLocation resourceLocation;
@@ -99,24 +76,25 @@ public enum ModArmorMaterials {
 
   ModArmorMaterials(
       String name,
-      Map<Type, Integer> defense,
+      Map<ArmorType, Integer> defense,
       int enchantmentValue,
       Holder<SoundEvent> equipSound,
-      Supplier<Ingredient> repairIngredient,
-      List<Layer> layers,
+      TagKey<Item> repairIngredient,
+      ResourceLocation resourceLocation,
       float toughness,
       float knockbackResistance) {
     this.name = name;
     this.resourceLocation = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, name);
     this.armorMaterial =
         new ArmorMaterial(
+            15,
             defense,
             enchantmentValue,
             equipSound,
-            repairIngredient,
-            layers,
             toughness,
-            knockbackResistance);
+            knockbackResistance,
+            repairIngredient,
+            resourceLocation);
   }
 
   public String getName() {
@@ -125,13 +103,5 @@ public enum ModArmorMaterials {
 
   public ArmorMaterial getArmorMaterial() {
     return this.armorMaterial;
-  }
-
-  public Holder<ArmorMaterial> getArmorMaterialHolder() {
-    return this.holder;
-  }
-
-  public ResourceLocation getResourceLocation() {
-    return this.resourceLocation;
   }
 }

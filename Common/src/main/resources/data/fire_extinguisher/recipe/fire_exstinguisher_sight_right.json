@@ -1,16 +1,11 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [" W ", " #R", "   "],
+  "category": "building",
   "key": {
-    "R": {
-      "item": "minecraft:red_dye"
-    },
-    "W": {
-      "item": "minecraft:white_dye"
-    },
-    "#": {
-      "tag": "minecraft:signs"
-    }
+    "R": "minecraft:red_dye",
+    "W": "minecraft:white_dye",
+    "#": "#minecraft:signs"
   },
   "result": {
     "id": "fire_extinguisher:fire_extinguisher_sign_right",

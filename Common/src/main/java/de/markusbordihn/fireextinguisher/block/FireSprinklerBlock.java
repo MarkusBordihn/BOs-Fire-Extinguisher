@@ -41,7 +41,8 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class FireSprinklerBlock extends AbstractFireAlarmSignalBlock {
 
-  public static final String NAME = "fire_sprinkler";
+  public static final String ID = "fire_sprinkler";
+
   protected static final VoxelShape UP_AABB = Block.box(7, 13.325, 7, 9, 16, 9);
   private static final Random random = new Random();
 
@@ -66,7 +67,7 @@ public class FireSprinklerBlock extends AbstractFireAlarmSignalBlock {
             null, blockPos, SoundEvents.FIRE_EXTINGUISH, SoundSource.BLOCKS, 1.0f, 1.0f);
       } else if (blockState.is(Blocks.CAMPFIRE)
           && blockState.getBlock() instanceof CampfireBlock
-          && Boolean.TRUE.equals(blockState.getValue(CampfireBlock.LIT))) {
+          && CampfireBlock.isLitCampfire(blockState)) {
         serverLevel.setBlockAndUpdate(blockPos, blockState.setValue(CampfireBlock.LIT, false));
       }
     }
@@ -82,8 +83,7 @@ public class FireSprinklerBlock extends AbstractFireAlarmSignalBlock {
     }
 
     // Make sure that the block is not placed below an air block.
-    if (blockPos.getY() < level.getMaxBuildHeight() - 1
-        && !level.getBlockState(blockPos.above()).isAir()) {
+    if (blockPos.getY() < level.getMaxY() - 1 && !level.getBlockState(blockPos.above()).isAir()) {
       return this.defaultBlockState()
           .setValue(FACE, AttachFace.CEILING)
           .setValue(FACING, context.getHorizontalDirection());

@@ -19,6 +19,10 @@
 
 package de.markusbordihn.fireextinguisher.block;
 
+import de.markusbordihn.fireextinguisher.Constants;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -29,6 +33,11 @@ public class FireExtinguisherBlocks {
   public static final Block FIRE_EXTINGUISHER =
       new FireExtinguisherBlock(
           BlockBehaviour.Properties.of()
+              .setId(
+                  ResourceKey.create(
+                      Registries.BLOCK,
+                      ResourceLocation.fromNamespaceAndPath(
+                          Constants.MOD_ID, FireExtinguisherBlock.ID)))
               .mapColor(MapColor.METAL)
               .instabreak()
               .noOcclusion()
@@ -36,6 +45,11 @@ public class FireExtinguisherBlocks {
   public static final Block FIRE_EXTINGUISHER_COPPER =
       new FireExtinguisherBlock(
           BlockBehaviour.Properties.of()
+              .setId(
+                  ResourceKey.create(
+                      Registries.BLOCK,
+                      ResourceLocation.fromNamespaceAndPath(
+                          Constants.MOD_ID, FireExtinguisherBlock.ID_COPPER)))
               .mapColor(MapColor.METAL)
               .instabreak()
               .noOcclusion()

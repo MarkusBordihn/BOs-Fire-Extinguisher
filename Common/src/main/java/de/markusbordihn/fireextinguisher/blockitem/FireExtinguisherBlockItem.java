@@ -22,15 +22,21 @@ package de.markusbordihn.fireextinguisher.blockitem;
 import de.markusbordihn.fireextinguisher.Constants;
 import de.markusbordihn.fireextinguisher.block.FireExtinguisherBlock;
 import de.markusbordihn.fireextinguisher.config.FireExtinguisherConfig;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -38,6 +44,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.Blaze;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item.TooltipContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
@@ -49,15 +56,26 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class FireExtinguisherBlockItem extends BlockItem {
 
-  public static final String NAME = "fire_extinguisher";
+  public static final String ID = "fire_extinguisher";
+  public static final String ID_COPPER = "fire_extinguisher_copper";
+
   private static final double X_SHIFT = 0.0;
   private static final double Y_SHIFT = 1.6;
   private static final double Z_SHIFT = 0.0;
   private static final int PARTICLE_FRAMES = 8;
   private static final int ATTACK_EFFECT_DURATION = 200;
 
-  public FireExtinguisherBlockItem(Block block) {
-    this(block, new Properties().stacksTo(1).durability(128).fireResistant());
+  public FireExtinguisherBlockItem(Block block, String id) {
+    this(
+        block,
+        new Properties()
+            .useBlockDescriptionPrefix()
+            .setId(
+                ResourceKey.create(
+                    Registries.ITEM, ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, id)))
+            .stacksTo(1)
+            .durability(128)
+            .fireResistant());
   }
 
   public FireExtinguisherBlockItem(Block block, Properties properties) {
@@ -97,7 +115,7 @@ public class FireExtinguisherBlockItem extends BlockItem {
   }
 
   public static void stopFire(
-      Level level,
+      ServerLevel serverLevel,
       Player player,
       InteractionHand hand,
       BlockPos targetBlockPos,
@@ -105,28 +123,29 @@ public class FireExtinguisherBlockItem extends BlockItem {
     Iterable<BlockPos> blockPositions =
         BlockPos.withinManhattan(
             targetBlockPos.above(),
-            FireExtinguisherConfig.fireExtinguisherRadius,
-            FireExtinguisherConfig.fireExtinguisherRadius,
-            FireExtinguisherConfig.fireExtinguisherRadius);
-    boolean hasStoppedFire = false;
+            FireExtinguisherConfig.fireExtinguisherRadiusX,
+            FireExtinguisherConfig.fireExtinguisherRadiusY,
+            FireExtinguisherConfig.fireExtinguisherRadiusZ);
+    Set<BlockPos> affectedPositions = new HashSet<>();
     for (BlockPos blockPos : blockPositions) {
-      BlockState blockState = level.getBlockState(blockPos);
-
+      BlockState blockState = serverLevel.getBlockState(blockPos);
       if (blockState.is(Blocks.FIRE)) {
-        level.removeBlock(blockPos, false);
-        hasStoppedFire = true;
-        break;
+        serverLevel.removeBlock(blockPos, false);
+        serverLevel.sendBlockUpdated(blockPos, Blocks.AIR.defaultBlockState(), blockState, 3);
+        affectedPositions.add(blockPos);
       } else if (blockState.is(Blocks.CAMPFIRE)
           && blockState.getBlock() instanceof CampfireBlock
-          && Boolean.TRUE.equals(blockState.getValue(CampfireBlock.LIT))) {
-        level.setBlockAndUpdate(blockPos, blockState.setValue(CampfireBlock.LIT, false));
-        hasStoppedFire = true;
-        break;
+          && CampfireBlock.isLitCampfire(blockState)) {
+        BlockState newBlockState = blockState.setValue(CampfireBlock.LIT, false);
+        serverLevel.setBlock(blockPos, newBlockState, 3);
+        serverLevel.sendBlockUpdated(blockPos, newBlockState, blockState, 3);
+        affectedPositions.add(blockPos);
       }
     }
-    if (hasStoppedFire) {
-      stopFireSound(level, player);
-      hurtAndBreak(level, itemStack, player, hand);
+    if (!affectedPositions.isEmpty()) {
+      hurtAndBreak(serverLevel, itemStack, player, hand);
+      serverLevel.playSound(
+          null, targetBlockPos, SoundEvents.FIRE_EXTINGUISH, SoundSource.BLOCKS, 1.0f, 1.0f);
     }
   }
 
@@ -168,13 +187,15 @@ public class FireExtinguisherBlockItem extends BlockItem {
       return super.useOn(context);
     }
     stopFireAnimation(player, level, blockPos);
-    stopFire(level, player, interactionHand, blockPos, itemStack);
+    if (level instanceof ServerLevel serverLevel) {
+      stopFire(serverLevel, player, interactionHand, blockPos, itemStack);
+    }
 
     return InteractionResult.FAIL;
   }
 
   @Override
-  public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+  public InteractionResult use(Level level, Player player, InteractionHand hand) {
     ItemStack itemStack = player.getItemInHand(hand);
 
     // Let player stop fire on them self, if he is not targeting any block.
@@ -186,7 +207,7 @@ public class FireExtinguisherBlockItem extends BlockItem {
       stopFireSound(level, player);
       hurtAndBreak(level, itemStack, player, hand);
     }
-    return InteractionResultHolder.pass(itemStack);
+    return InteractionResult.PASS;
   }
 
   @Override
@@ -241,13 +262,13 @@ public class FireExtinguisherBlockItem extends BlockItem {
       TooltipFlag tooltipFlag) {
     tooltipList.add(
         Component.translatable(
-                Constants.TOOLTIP_PREFIX + NAME, FireExtinguisherConfig.fireExtinguisherRadius)
+                Constants.TOOLTIP_PREFIX + ID, FireExtinguisherConfig.fireExtinguisherRadiusX)
             .withStyle(ChatFormatting.GRAY));
     tooltipList.add(
-        Component.translatable(Constants.TEXT_PREFIX + NAME + "_use")
+        Component.translatable(Constants.TEXT_PREFIX + ID + "_use")
             .withStyle(ChatFormatting.GREEN));
     tooltipList.add(
-        Component.translatable(Constants.TEXT_PREFIX + NAME + "_place")
+        Component.translatable(Constants.TEXT_PREFIX + ID + "_place")
             .withStyle(ChatFormatting.DARK_GREEN));
   }
 }

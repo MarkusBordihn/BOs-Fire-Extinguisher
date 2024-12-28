@@ -24,7 +24,10 @@ import de.markusbordihn.fireextinguisher.config.FireExtinguisherConfig;
 import java.util.List;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -32,11 +35,9 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.AxeItem;
-import net.minecraft.world.item.DiggerItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Tier;
-import net.minecraft.world.item.Tiers;
+import net.minecraft.world.item.ToolMaterial;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
@@ -47,19 +48,22 @@ import org.apache.logging.log4j.Logger;
 
 public class FireAxeItem extends AxeItem {
 
-  public static final String NAME = "fire_axe";
+  public static final String ID = "fire_axe";
+
   protected static final Logger log = LogManager.getLogger(Constants.LOG_NAME);
 
   public FireAxeItem() {
     this(
-        Tiers.IRON,
-        (new Item.Properties())
-            .attributes(DiggerItem.createAttributes(Tiers.IRON, 6.0F, -3.2F))
+        ToolMaterial.IRON,
+        new Item.Properties()
+            .setId(
+                ResourceKey.create(
+                    Registries.ITEM, ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, ID)))
             .fireResistant());
   }
 
-  public FireAxeItem(Tier tier, Properties properties) {
-    super(tier, properties);
+  public FireAxeItem(ToolMaterial tier, Properties properties) {
+    super(tier, 6.0F, -3.2F, properties);
   }
 
   public static void stopFire(
@@ -122,7 +126,9 @@ public class FireAxeItem extends AxeItem {
 
     stopFire(level, player, interactionHand, blockPos, itemStack);
 
-    return InteractionResult.sidedSuccess(context.getLevel().isClientSide());
+    return context.getLevel().isClientSide()
+        ? InteractionResult.SUCCESS
+        : InteractionResult.CONSUME;
   }
 
   @Override
@@ -146,9 +152,9 @@ public class FireAxeItem extends AxeItem {
       TooltipFlag tooltipFlag) {
     tooltipList.add(
         Component.translatable(
-            Constants.TEXT_PREFIX + NAME + "_description", FireExtinguisherConfig.fireAxtRadius));
+            Constants.TEXT_PREFIX + ID + "_description", FireExtinguisherConfig.fireAxtRadius));
     tooltipList.add(
-        Component.translatable(Constants.TEXT_PREFIX + NAME + "_use")
+        Component.translatable(Constants.TEXT_PREFIX + ID + "_use")
             .withStyle(ChatFormatting.GREEN));
   }
 }

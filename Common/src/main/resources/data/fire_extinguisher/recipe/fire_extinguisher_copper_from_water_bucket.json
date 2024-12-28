@@ -1,22 +1,13 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "equipment",
   "pattern": ["-O#", "R# ", "#W "],
   "key": {
-    "#": {
-      "item": "minecraft:copper_ingot"
-    },
-    "W": {
-      "item": "minecraft:water_bucket"
-    },
-    "O": {
-      "item": "minecraft:gold_ingot"
-    },
-    "-": {
-      "item": "minecraft:lever"
-    },
-    "R": {
-      "item": "minecraft:red_dye"
-    }
+    "#": "minecraft:copper_ingot",
+    "W": "minecraft:water_bucket",
+    "O": "minecraft:gold_ingot",
+    "-": "minecraft:lever",
+    "R": "minecraft:red_dye"
   },
   "result": {
     "id": "fire_extinguisher:fire_extinguisher_copper"

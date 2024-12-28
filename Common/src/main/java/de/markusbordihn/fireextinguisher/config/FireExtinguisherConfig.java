@@ -26,7 +26,9 @@ public class FireExtinguisherConfig extends Config {
   public static final String CONFIG_FILE_NAME = "fire_extinguisher.cfg";
   public static final String CONFIG_FILE_HEADER = "Fire Extinguisher Configuration";
 
-  public static int fireExtinguisherRadius = 2;
+  public static int fireExtinguisherRadiusX = 1;
+  public static int fireExtinguisherRadiusY = 2;
+  public static int fireExtinguisherRadiusZ = 1;
 
   public static int fireAxtRadius = 1;
 
@@ -61,10 +63,14 @@ public class FireExtinguisherConfig extends Config {
     Properties unmodifiedProperties = (Properties) properties.clone();
 
     // Config entries
-    fireExtinguisherRadius =
-        parseConfigValue(properties, "fireExtinguisherRadius", fireExtinguisherRadius);
+    fireExtinguisherRadiusX =
+        parseConfigValue(properties, "fireExtinguisherRadiusX", fireExtinguisherRadiusX);
+    fireExtinguisherRadiusY =
+        parseConfigValue(properties, "fireExtinguisherRadiusY", fireExtinguisherRadiusY);
+    fireExtinguisherRadiusZ =
+        parseConfigValue(properties, "fireExtinguisherRadiusZ", fireExtinguisherRadiusZ);
 
-    fireAxtRadius = parseConfigValue(properties, "fireAxtRadius", fireExtinguisherRadius);
+    fireAxtRadius = parseConfigValue(properties, "fireAxtRadius", fireAxtRadius);
 
     fireSprinklerRadiusX =
         parseConfigValue(properties, "fireSprinklerRadiusX", fireSprinklerRadiusX);

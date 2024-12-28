@@ -45,34 +45,32 @@ public class ModItems {
   public static void registerModItems() {
     log.info("{} Fire fighting weapons items ...", Constants.LOG_SUB_REGISTER_PREFIX);
 
-    Registry.register(BuiltInRegistries.ITEM, Constants.MOD_ID_PREFIX + FireAxeItem.NAME, FIRE_AXE);
+    Registry.register(BuiltInRegistries.ITEM, Constants.MOD_ID_PREFIX + FireAxeItem.ID, FIRE_AXE);
 
     log.info("{} Fire protection armor items ...", Constants.LOG_SUB_REGISTER_PREFIX);
     Registry.register(
-        BuiltInRegistries.ITEM, Constants.MOD_ID_PREFIX + FireBootsItem.NAME, FIRE_BOOTS);
+        BuiltInRegistries.ITEM, Constants.MOD_ID_PREFIX + FireBootsItem.ID, FIRE_BOOTS);
     Registry.register(
-        BuiltInRegistries.ITEM, Constants.MOD_ID_PREFIX + FireChestplateItem.NAME, FIRE_CHESTPLATE);
+        BuiltInRegistries.ITEM, Constants.MOD_ID_PREFIX + FireChestplateItem.ID, FIRE_CHESTPLATE);
     Registry.register(
-        BuiltInRegistries.ITEM, Constants.MOD_ID_PREFIX + FireHelmetItem.NAME, FIRE_HELMET);
+        BuiltInRegistries.ITEM, Constants.MOD_ID_PREFIX + FireHelmetItem.ID, FIRE_HELMET);
     Registry.register(
-        BuiltInRegistries.ITEM, Constants.MOD_ID_PREFIX + FireLeggingsItem.NAME, FIRE_LEGGINGS);
+        BuiltInRegistries.ITEM, Constants.MOD_ID_PREFIX + FireLeggingsItem.ID, FIRE_LEGGINGS);
 
     log.info("{} Fire protection light armor items ...", Constants.LOG_SUB_REGISTER_PREFIX);
     Registry.register(
-        BuiltInRegistries.ITEM,
-        Constants.MOD_ID_PREFIX + FireBootsLightItem.NAME,
-        FIRE_BOOTS_LIGHT);
+        BuiltInRegistries.ITEM, Constants.MOD_ID_PREFIX + FireBootsLightItem.ID, FIRE_BOOTS_LIGHT);
     Registry.register(
         BuiltInRegistries.ITEM,
-        Constants.MOD_ID_PREFIX + FireChestplateLightItem.NAME,
+        Constants.MOD_ID_PREFIX + FireChestplateLightItem.ID,
         FIRE_CHESTPLATE_LIGHT);
     Registry.register(
         BuiltInRegistries.ITEM,
-        Constants.MOD_ID_PREFIX + FireHelmetLightItem.NAME,
+        Constants.MOD_ID_PREFIX + FireHelmetLightItem.ID,
         FIRE_HELMET_LIGHT);
     Registry.register(
         BuiltInRegistries.ITEM,
-        Constants.MOD_ID_PREFIX + FireLeggingsLightItem.NAME,
+        Constants.MOD_ID_PREFIX + FireLeggingsLightItem.ID,
         FIRE_LEGGINGS_LIGHT);
   }
 }

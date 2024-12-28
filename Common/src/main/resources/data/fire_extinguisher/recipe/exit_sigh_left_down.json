@@ -1,16 +1,11 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "building",
   "pattern": [" G ", " # ", "E  "],
   "key": {
-    "G": {
-      "item": "minecraft:green_dye"
-    },
-    "E": {
-      "tag": "minecraft:doors"
-    },
-    "#": {
-      "tag": "minecraft:signs"
-    }
+    "G": "minecraft:green_dye",
+    "E": "#minecraft:doors",
+    "#": "#minecraft:signs"
   },
   "result": {
     "id": "fire_extinguisher:exit_sign_left_down",

@@ -27,27 +27,30 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 public class ModItems {
 
   public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(Constants.MOD_ID);
+
   // Fire fight weapons
   public static final DeferredItem<Item> FIRE_AXE =
-      ITEMS.register(FireAxeItem.NAME, () -> new FireAxeItem());
-  // Fire fight armor
+      ITEMS.register(FireAxeItem.ID, () -> new FireAxeItem());
+
+  // Firefighter armor
   public static final DeferredItem<Item> FIRE_HELMET =
-      ITEMS.register(FireHelmetItem.NAME, () -> new FireHelmetItem());
+      ITEMS.register(FireHelmetItem.ID, () -> new FireHelmetItem());
   public static final DeferredItem<Item> FIRE_CHESTPLATE =
-      ITEMS.register(FireChestplateItem.NAME, () -> new FireChestplateItem());
+      ITEMS.register(FireChestplateItem.ID, () -> new FireChestplateItem());
   public static final DeferredItem<Item> FIRE_LEGGINGS =
-      ITEMS.register(FireLeggingsItem.NAME, () -> new FireLeggingsItem());
+      ITEMS.register(FireLeggingsItem.ID, () -> new FireLeggingsItem());
   public static final DeferredItem<Item> FIRE_BOOTS =
-      ITEMS.register(FireBootsItem.NAME, () -> new FireBootsItem());
-  // Fire fighter armor (light)
+      ITEMS.register(FireBootsItem.ID, () -> new FireBootsItem());
+
+  // Firefighter armor (light)
   public static final DeferredItem<Item> FIRE_HELMET_LIGHT =
-      ITEMS.register(FireHelmetLightItem.NAME, () -> new FireHelmetLightItem());
+      ITEMS.register(FireHelmetLightItem.ID, () -> new FireHelmetLightItem());
   public static final DeferredItem<Item> FIRE_CHESTPLATE_LIGHT =
-      ITEMS.register(FireChestplateLightItem.NAME, () -> new FireChestplateLightItem());
+      ITEMS.register(FireChestplateLightItem.ID, () -> new FireChestplateLightItem());
   public static final DeferredItem<Item> FIRE_LEGGINGS_LIGHT =
-      ITEMS.register(FireLeggingsLightItem.NAME, () -> new FireLeggingsLightItem());
+      ITEMS.register(FireLeggingsLightItem.ID, () -> new FireLeggingsLightItem());
   public static final DeferredItem<Item> FIRE_BOOTS_LIGHT =
-      ITEMS.register(FireBootsLightItem.NAME, () -> new FireBootsLightItem());
+      ITEMS.register(FireBootsLightItem.ID, () -> new FireBootsLightItem());
 
   protected ModItems() {}
 }

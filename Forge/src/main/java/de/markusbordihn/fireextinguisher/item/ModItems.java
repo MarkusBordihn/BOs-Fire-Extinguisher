@@ -29,27 +29,30 @@ public class ModItems {
 
   public static final DeferredRegister<Item> ITEMS =
       DeferredRegister.create(ForgeRegistries.ITEMS, Constants.MOD_ID);
+
   // Fire fight weapons
   public static final RegistryObject<Item> FIRE_AXE =
-      ITEMS.register(FireAxeItem.NAME, FireAxeItem::new);
-  // Fire fight armor
+      ITEMS.register(FireAxeItem.ID, FireAxeItem::new);
+
+  // Firefighter armor
   public static final RegistryObject<Item> FIRE_HELMET =
-      ITEMS.register(FireHelmetItem.NAME, FireHelmetItem::new);
+      ITEMS.register(FireHelmetItem.ID, FireHelmetItem::new);
   public static final RegistryObject<Item> FIRE_CHESTPLATE =
-      ITEMS.register(FireChestplateItem.NAME, FireChestplateItem::new);
+      ITEMS.register(FireChestplateItem.ID, FireChestplateItem::new);
   public static final RegistryObject<Item> FIRE_LEGGINGS =
-      ITEMS.register(FireLeggingsItem.NAME, FireLeggingsItem::new);
+      ITEMS.register(FireLeggingsItem.ID, FireLeggingsItem::new);
   public static final RegistryObject<Item> FIRE_BOOTS =
-      ITEMS.register(FireBootsItem.NAME, FireBootsItem::new);
-  // Fire fighter armor (light)
+      ITEMS.register(FireBootsItem.ID, FireBootsItem::new);
+
+  // Firefighter armor (light)
   public static final RegistryObject<Item> FIRE_HELMET_LIGHT =
-      ITEMS.register(FireHelmetLightItem.NAME, FireHelmetLightItem::new);
+      ITEMS.register(FireHelmetLightItem.ID, FireHelmetLightItem::new);
   public static final RegistryObject<Item> FIRE_CHESTPLATE_LIGHT =
-      ITEMS.register(FireChestplateLightItem.NAME, FireChestplateLightItem::new);
+      ITEMS.register(FireChestplateLightItem.ID, FireChestplateLightItem::new);
   public static final RegistryObject<Item> FIRE_LEGGINGS_LIGHT =
-      ITEMS.register(FireLeggingsLightItem.NAME, FireLeggingsLightItem::new);
+      ITEMS.register(FireLeggingsLightItem.ID, FireLeggingsLightItem::new);
   public static final RegistryObject<Item> FIRE_BOOTS_LIGHT =
-      ITEMS.register(FireBootsLightItem.NAME, FireBootsLightItem::new);
+      ITEMS.register(FireBootsLightItem.ID, FireBootsLightItem::new);
 
   protected ModItems() {}
 }

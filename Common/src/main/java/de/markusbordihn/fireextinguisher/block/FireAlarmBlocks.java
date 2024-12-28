@@ -19,6 +19,10 @@
 
 package de.markusbordihn.fireextinguisher.block;
 
+import de.markusbordihn.fireextinguisher.Constants;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
@@ -31,6 +35,11 @@ public class FireAlarmBlocks {
   public static final Block FIRE_SPRINKLER =
       new FireSprinklerBlock(
           Properties.of()
+              .setId(
+                  ResourceKey.create(
+                      Registries.BLOCK,
+                      ResourceLocation.fromNamespaceAndPath(
+                          Constants.MOD_ID, FireSprinklerBlock.ID)))
               .mapColor(MapColor.STONE)
               .instrument(NoteBlockInstrument.BASEDRUM)
               .requiresCorrectToolForDrops()
@@ -38,6 +47,11 @@ public class FireAlarmBlocks {
   public static final Block FIRE_ALARM_SWITCH =
       new FireAlarmSwitchBlock(
           Properties.of()
+              .setId(
+                  ResourceKey.create(
+                      Registries.BLOCK,
+                      ResourceLocation.fromNamespaceAndPath(
+                          Constants.MOD_ID, FireAlarmSwitchBlock.ID)))
               .noCollission()
               .strength(0.5F)
               .sound(SoundType.STONE)
@@ -45,6 +59,11 @@ public class FireAlarmBlocks {
   public static final Block FIRE_ALARM_BELL =
       new FireAlarmBellBlock(
           Properties.of()
+              .setId(
+                  ResourceKey.create(
+                      Registries.BLOCK,
+                      ResourceLocation.fromNamespaceAndPath(
+                          Constants.MOD_ID, FireAlarmBellBlock.ID)))
               .mapColor(MapColor.GOLD)
               .instrument(NoteBlockInstrument.BELL)
               .requiresCorrectToolForDrops()
@@ -54,6 +73,11 @@ public class FireAlarmBlocks {
   public static final Block FIRE_ALARM_SIREN =
       new FireAlarmSirenBlock(
           Properties.of()
+              .setId(
+                  ResourceKey.create(
+                      Registries.BLOCK,
+                      ResourceLocation.fromNamespaceAndPath(
+                          Constants.MOD_ID, FireAlarmSirenBlock.ID)))
               .mapColor(MapColor.GOLD)
               .instrument(NoteBlockInstrument.BELL)
               .requiresCorrectToolForDrops()
@@ -63,6 +87,11 @@ public class FireAlarmBlocks {
   public static final Block FIRE_ALARM_SMOKE_DETECTOR =
       new FireAlarmSmokeDetectorBlock(
           Properties.of()
+              .setId(
+                  ResourceKey.create(
+                      Registries.BLOCK,
+                      ResourceLocation.fromNamespaceAndPath(
+                          Constants.MOD_ID, FireAlarmSmokeDetectorBlock.ID)))
               .randomTicks()
               .mapColor(MapColor.WOOD)
               .instrument(NoteBlockInstrument.BASS)
@@ -73,6 +102,11 @@ public class FireAlarmBlocks {
   public static final Block FIRE_ALARM_SMOKE_DETECTOR_SILENT =
       new FireAlarmSmokeDetectorSilentBlock(
           Properties.of()
+              .setId(
+                  ResourceKey.create(
+                      Registries.BLOCK,
+                      ResourceLocation.fromNamespaceAndPath(
+                          Constants.MOD_ID, FireAlarmSmokeDetectorSilentBlock.ID)))
               .randomTicks()
               .mapColor(MapColor.WOOD)
               .instrument(NoteBlockInstrument.BASS)

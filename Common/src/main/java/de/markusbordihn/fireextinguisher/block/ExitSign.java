@@ -29,17 +29,22 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.AttachFace;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class ExitSign extends Block {
 
-  public static final String NAME = "exit_sign";
+  public static final String ID = "exit_sign";
+  public static final String ID_LEFT = "exit_sign_left";
+  public static final String ID_LEFT_DOWN = "exit_sign_left_down";
+  public static final String ID_LEFT_UP = "exit_sign_left_up";
+  public static final String ID_RIGHT = "exit_sign_right";
+  public static final String ID_RIGHT_DOWN = "exit_sign_right_down";
+  public static final String ID_RIGHT_UP = "exit_sign_right_up";
 
   // Defines if we need to rotate the Object based on the click position and player pov
-  public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
+  public static final EnumProperty<Direction> FACING = HorizontalDirectionalBlock.FACING;
   public static final EnumProperty<AttachFace> ATTACH_FACE = BlockStateProperties.ATTACH_FACE;
 
   // We need a VoxelShape for each side to cover all faces and possibilities

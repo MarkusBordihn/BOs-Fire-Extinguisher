@@ -1,25 +1,14 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "building",
   "pattern": ["-W-", "#G#", "O.O"],
   "key": {
-    "#": {
-      "item": "minecraft:iron_ingot"
-    },
-    "-": {
-      "item": "minecraft:redstone"
-    },
-    "W": {
-      "item": "minecraft:water_bucket"
-    },
-    "O": {
-      "item": "minecraft:iron_bars"
-    },
-    "G": {
-      "item": "minecraft:glass_bottle"
-    },
-    ".": {
-      "item": "minecraft:gold_nugget"
-    }
+    "#": "minecraft:iron_ingot",
+    "-": "minecraft:redstone",
+    "W": "minecraft:water_bucket",
+    "O": "minecraft:iron_bars",
+    "G": "minecraft:glass_bottle",
+    ".": "minecraft:gold_nugget"
   },
   "result": {
     "id": "fire_extinguisher:fire_sprinkler"
