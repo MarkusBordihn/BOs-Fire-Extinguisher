@@ -21,6 +21,7 @@ package de.markusbordihn.fireextinguisher.item;
 
 import de.markusbordihn.fireextinguisher.Constants;
 import de.markusbordihn.fireextinguisher.config.FireExtinguisherConfig;
+import de.markusbordihn.fireextinguisher.utils.ToolTips;
 import java.util.List;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -73,9 +74,13 @@ public class FireChestplateItem extends FireProtectionArmorItem {
   @Override
   public void appendHoverText(
       ItemStack itemStack, Level level, List<Component> tooltipList, TooltipFlag tooltipFlag) {
-    tooltipList.add(new TranslatableComponent(Constants.TEXT_PREFIX + NAME + "_description"));
+    ToolTips.addTooltip(
+        tooltipList,
+        new TranslatableComponent(Constants.TEXT_PREFIX + NAME + "_description")
+            .withStyle(ChatFormatting.GRAY));
     if (Boolean.TRUE.equals(FireExtinguisherConfig.fireProtectionEnabled)) {
-      tooltipList.add(
+      ToolTips.addTooltip(
+          tooltipList,
           new TranslatableComponent(
                   Constants.TEXT_PREFIX + "fire_armor_config",
                   Math.round((FireExtinguisherConfig.fireProtectionRenew / 20.0) * 10) / 10.0,
@@ -83,7 +88,8 @@ public class FireChestplateItem extends FireProtectionArmorItem {
               .withStyle(ChatFormatting.GREEN));
     }
     if (Boolean.TRUE.equals(FireExtinguisherConfig.fireChestplateSlowDownEnabled)) {
-      tooltipList.add(
+      ToolTips.addTooltip(
+          tooltipList,
           new TranslatableComponent(Constants.TEXT_PREFIX + "fire_armor_slow_down")
               .withStyle(ChatFormatting.DARK_RED));
     }

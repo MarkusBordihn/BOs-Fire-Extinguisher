@@ -17,37 +17,26 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package de.markusbordihn.fireextinguisher.blockitem;
+package de.markusbordihn.fireextinguisher.commands;
 
 import de.markusbordihn.fireextinguisher.Constants;
-import de.markusbordihn.fireextinguisher.utils.ToolTips;
-import java.util.List;
 import net.minecraft.ChatFormatting;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.network.chat.TextComponent;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-public class FireSprinklerBlockItem extends BlockItem {
+public class Command {
 
-  public static final String NAME = "fire_sprinkler";
+  public static final int FAILURE = 0;
+  public static final int SINGLE_SUCCESS = 1;
+  protected static final Logger log = LogManager.getLogger(Constants.LOG_NAME);
 
-  public FireSprinklerBlockItem(Block block) {
-    this(block, new Properties());
-  }
+  protected Command() {}
 
-  public FireSprinklerBlockItem(Block block, Properties properties) {
-    super(block, properties);
-  }
-
-  @Override
-  public void appendHoverText(
-      ItemStack itemStack, Level level, List<Component> tooltipList, TooltipFlag tooltipFlag) {
-    ToolTips.addTooltip(
-        tooltipList,
-        new TranslatableComponent(Constants.TOOLTIP_PREFIX + NAME).withStyle(ChatFormatting.GRAY));
+  public static int sendSuccessMessage(
+      CommandSourceStack context, String message, ChatFormatting formatting) {
+    context.sendSuccess(new TextComponent(message).withStyle(formatting), true);
+    return SINGLE_SUCCESS;
   }
 }

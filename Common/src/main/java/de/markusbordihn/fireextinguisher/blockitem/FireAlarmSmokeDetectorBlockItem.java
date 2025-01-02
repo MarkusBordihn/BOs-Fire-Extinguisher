@@ -20,6 +20,7 @@
 package de.markusbordihn.fireextinguisher.blockitem;
 
 import de.markusbordihn.fireextinguisher.Constants;
+import de.markusbordihn.fireextinguisher.utils.ToolTips;
 import java.util.List;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -46,24 +47,29 @@ public class FireAlarmSmokeDetectorBlockItem extends BlockItem {
   @Override
   public void appendHoverText(
       ItemStack itemStack, Level level, List<Component> tooltipList, TooltipFlag tooltipFlag) {
-    tooltipList.add(
+    ToolTips.addTooltip(
+        tooltipList,
         new TranslatableComponent(Constants.TOOLTIP_PREFIX + NAME).withStyle(ChatFormatting.GRAY));
-    tooltipList.add(
+    ToolTips.addTooltip(
+        tooltipList,
         new TranslatableComponent(Constants.TOOLTIP_PREFIX + "fire_alarm_smoke_detector.status")
             .withStyle(ChatFormatting.GRAY));
-    tooltipList.add(
+    ToolTips.addTooltip(
+        tooltipList,
         new TextComponent("⏹ ")
             .withStyle(ChatFormatting.YELLOW)
             .append(
                 new TranslatableComponent(
                     Constants.TOOLTIP_PREFIX + "fire_alarm_smoke_detector.status.orange")));
-    tooltipList.add(
+    ToolTips.addTooltip(
+        tooltipList,
         new TextComponent("⏹ ")
             .withStyle(ChatFormatting.GREEN)
             .append(
                 new TranslatableComponent(
                     Constants.TOOLTIP_PREFIX + "fire_alarm_smoke_detector.status.green")));
-    tooltipList.add(
+    ToolTips.addTooltip(
+        tooltipList,
         new TextComponent("⏹ ")
             .withStyle(ChatFormatting.RED)
             .append(

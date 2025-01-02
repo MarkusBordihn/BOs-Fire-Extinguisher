@@ -61,7 +61,7 @@ processResources {
   }
 }
 
-tasks.withType(JavaCompile) {
+tasks.withType(JavaCompile).configureEach {
   source(project(":Common").sourceSets.main.allSource)
 }
 
@@ -91,7 +91,6 @@ if (project.hasProperty('curseforge_project_id') && project.curseforge_project_i
       mainArtifact(remapJar) {
         relations {
           requiredDependency 'fabric-api'
-          optionalDependency 'tooltipfix'
         }
       }
     }
@@ -115,7 +114,6 @@ if (project.hasProperty('modrinth_project_id') && project.modrinth_project_id) {
     loaders = ["fabric", "quilt"]
     dependencies {
       required.project "fabric-api"
-      optional.project "tooltipfix"
     }
   }
 }

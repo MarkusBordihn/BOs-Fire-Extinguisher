@@ -20,11 +20,14 @@
 package de.markusbordihn.fireextinguisher;
 
 import de.markusbordihn.fireextinguisher.block.ModBlocks;
+import de.markusbordihn.fireextinguisher.commands.manager.CommandManager;
 import de.markusbordihn.fireextinguisher.config.Config;
+import de.markusbordihn.fireextinguisher.debug.DebugManager;
 import de.markusbordihn.fireextinguisher.item.ModBlockItems;
 import de.markusbordihn.fireextinguisher.item.ModItems;
 import de.markusbordihn.fireextinguisher.sounds.ModSoundEvents;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
 import net.fabricmc.loader.api.FabricLoader;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -38,9 +41,17 @@ public class FireExtinguisher implements ModInitializer {
     // Use Fabric to bootstrap the Common mod.
     log.info("Initializing {} (Fabric) ...", Constants.MOD_NAME);
 
+    log.info("{} Debug Manager ...", Constants.LOG_REGISTER_PREFIX);
+    if (System.getProperty("fabric.development") != null) {
+      DebugManager.setDevelopmentEnvironment(true);
+    }
+    DebugManager.checkForDebugLogging(Constants.LOG_NAME);
+
     log.info("{} Constants ...", Constants.LOG_REGISTER_PREFIX);
     Constants.GAME_DIR = FabricLoader.getInstance().getGameDir();
     Constants.CONFIG_DIR = FabricLoader.getInstance().getConfigDir();
+    Constants.IS_FABRIC = true;
+    Constants.HAS_FABRIC_TOOLTIPFIX_MOD = FabricLoader.getInstance().isModLoaded("tooltipfix");
 
     log.info("{} Config ...", Constants.LOG_REGISTER_PREFIX);
     Config.register();
@@ -56,5 +67,9 @@ public class FireExtinguisher implements ModInitializer {
 
     log.info("{} Sound Events ...", Constants.LOG_REGISTER_PREFIX);
     ModSoundEvents.registerModSoundEvents();
+
+    log.info("{} Command register event ...", Constants.LOG_REGISTER_PREFIX);
+    CommandRegistrationCallback.EVENT.register(
+        (dispatcher, dedicated) -> CommandManager.registerCommands(dispatcher));
   }
 }
