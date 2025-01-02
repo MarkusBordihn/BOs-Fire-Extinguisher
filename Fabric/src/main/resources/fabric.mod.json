@@ -34,8 +34,5 @@
     "fabric": "*",
     "minecraft": "1.19.2",
     "java": ">=17"
-  },
-  "suggests": {
-    "tooltipfix": "*"
   }
 }
