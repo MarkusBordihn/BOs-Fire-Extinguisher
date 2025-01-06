@@ -5,6 +5,12 @@
 This change log includes the summarized changes.
 For the full changelog, please go to the [GitHub History][history] instead.
 
+### 8.3.0
+
+- Fixed Fire Alarm Smoke Detector texture bleeding with shaders.
+- Fixed issues where fire extinguishing foam is not visible for others.
+- Fixed smaller rendering issues with the Replay Mod.
+
 ### 8.2.0
 
 - Fixed consistent tooltip line wrapping in Fabric when TooltipFix mod is not present.

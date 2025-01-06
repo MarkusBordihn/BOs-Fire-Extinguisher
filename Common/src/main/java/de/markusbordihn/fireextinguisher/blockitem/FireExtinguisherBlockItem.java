@@ -75,19 +75,13 @@ public class FireExtinguisherBlockItem extends BlockItem implements Vanishable {
   }
 
   public static void stopFireAnimation(Player player, Level level, BlockPos blockPos) {
-    if (!level.isClientSide) {
-      return;
-    }
-
     // Calculate source and target position
     double x = player.getX();
     double y = player.getY();
     double z = player.getZ();
 
     // Correct position to item position.
-    x = (x >= 0) ? x + X_SHIFT : x - X_SHIFT;
     y = (y >= 0) ? y + Y_SHIFT : y - Y_SHIFT;
-    z = (z >= 0) ? z + Z_SHIFT : z - Z_SHIFT;
 
     // Show particle in targeted block direction.
     if (blockPos != null) {
@@ -101,7 +95,11 @@ public class FireExtinguisherBlockItem extends BlockItem implements Vanishable {
         x += targetXRatio;
         y += targetYRatio;
         z += targetZRatio;
-        level.addParticle(ParticleTypes.CLOUD, x, y, z, 0D, 0D, 0D);
+        if (level instanceof ServerLevel serverLevel) {
+          serverLevel.sendParticles(ParticleTypes.CLOUD, x, y, z, 1, 0.2, 0.5, 0.2, 0.01);
+        } else {
+          level.addParticle(ParticleTypes.CLOUD, x, y, z, 0D, 0D, 0D);
+        }
       }
     }
   }
