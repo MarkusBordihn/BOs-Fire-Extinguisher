@@ -29,7 +29,6 @@ public final class Constants {
   public static final String LOG_ICON = "🔥";
   public static final String LOG_ICON_NAME = LOG_ICON + " " + LOG_NAME;
   public static final String LOG_REGISTER_PREFIX = LOG_ICON + "Register " + LOG_NAME;
-
   public static final String LOG_SUB_REGISTER_PREFIX = "- Register " + LOG_NAME;
   public static final String MOD_COMMAND = "fire_extinguisher";
   public static final String MOD_ID = "fire_extinguisher";
@@ -37,12 +36,22 @@ public final class Constants {
   public static final String MOD_NAME = "Fire Extinguisher";
   public static final String MOD_URL =
       "https://www.curseforge.com/minecraft/mc-mods/fire-extinguisher";
+
   // Prefixes
   public static final String TEXT_PREFIX = "text.fire_extinguisher.";
   public static final String TOOLTIP_PREFIX = "tooltip.fire_extinguisher.";
+
   // Static paths
   public static Path GAME_DIR = Paths.get("").toAbsolutePath();
   public static Path CONFIG_DIR = GAME_DIR.resolve("config");
+
+  // Mod Loader checks
+  public static boolean IS_FABRIC = false;
+  public static boolean IS_FORGE = false;
+  public static boolean IS_NEOFORGE = false;
+
+  // Mod specific checks
+  public static boolean HAS_FABRIC_TOOLTIPFIX_MOD = false;
 
   private Constants() {}
 }
