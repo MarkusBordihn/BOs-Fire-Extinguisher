@@ -18,6 +18,7 @@
  */
 package de.markusbordihn.fireextinguisher.item;
 
+import de.markusbordihn.fireextinguisher.Constants;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -43,11 +44,18 @@ public class FireProtectionArmorItem extends ArmorItem {
       ItemStack itemStack, Level level, Entity entity, int slot, boolean selected) {
     if (!level.isClientSide
         && entity instanceof ServerPlayer serverPlayer
-        && (slot == EquipmentSlot.BODY.getId()
-            || slot == EquipmentSlot.CHEST.getId()
-            || slot == EquipmentSlot.HEAD.getId()
-            || slot == EquipmentSlot.LEGS.getId()
-            || slot == EquipmentSlot.FEET.getId())
+        && ((slot == EquipmentSlot.BODY.getId()
+                || slot == EquipmentSlot.CHEST.getId()
+                || slot == EquipmentSlot.HEAD.getId()
+                || slot == EquipmentSlot.LEGS.getId()
+                || slot == EquipmentSlot.FEET.getId())
+            // NeoForge: Fix for armor slots, seems like the slots are different.
+            || (Constants.IS_NEOFORGE
+                && (slot == EquipmentSlot.BODY.getId() + 35
+                    || slot == EquipmentSlot.CHEST.getId() + 35
+                    || slot == EquipmentSlot.HEAD.getId() + 35
+                    || slot == EquipmentSlot.LEGS.getId() + 35
+                    || slot == EquipmentSlot.FEET.getId() + 35)))
         && itemStack.getItem().getClass().equals(getArmorClass())) {
       fireArmorTick(itemStack, level, serverPlayer);
     }

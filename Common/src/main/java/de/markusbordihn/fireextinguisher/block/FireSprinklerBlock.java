@@ -19,6 +19,7 @@
 
 package de.markusbordihn.fireextinguisher.block;
 
+import de.markusbordihn.fireextinguisher.Constants;
 import de.markusbordihn.fireextinguisher.config.FireExtinguisherConfig;
 import java.util.Random;
 import net.minecraft.core.BlockPos;
@@ -38,10 +39,14 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.AttachFace;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class FireSprinklerBlock extends AbstractFireAlarmSignalBlock {
 
   public static final String ID = "fire_sprinkler";
+
+  protected static final Logger log = LogManager.getLogger(Constants.LOG_NAME);
 
   protected static final VoxelShape UP_AABB = Block.box(7, 13.325, 7, 9, 16, 9);
   private static final Random random = new Random();
@@ -62,12 +67,14 @@ public class FireSprinklerBlock extends AbstractFireAlarmSignalBlock {
 
       // Remove fire block
       if (blockState.is(Blocks.FIRE)) {
+        log.debug("[Fire Sprinkler] Remove fire block at {}", blockPos);
         serverLevel.removeBlock(blockPos, false);
         serverLevel.playSound(
             null, blockPos, SoundEvents.FIRE_EXTINGUISH, SoundSource.BLOCKS, 1.0f, 1.0f);
       } else if (blockState.is(Blocks.CAMPFIRE)
           && blockState.getBlock() instanceof CampfireBlock
           && CampfireBlock.isLitCampfire(blockState)) {
+        log.debug("[Fire Sprinkler] Extinguish campfire block at {}", blockPos);
         serverLevel.setBlockAndUpdate(blockPos, blockState.setValue(CampfireBlock.LIT, false));
       }
     }
