@@ -129,7 +129,7 @@ public class FireAlarmSmokeDetectorBlock extends AbstractFireAlarmSignalBlock {
       if (blockBlockState.is(Blocks.FIRE)
           || (blockBlockState.is(Blocks.CAMPFIRE)
               && blockBlockState.getBlock() instanceof CampfireBlock
-              && Boolean.TRUE.equals(blockBlockState.getValue(CampfireBlock.LIT)))) {
+              && CampfireBlock.isLitCampfire(blockState))) {
         detectedFire = true;
         break;
       }
@@ -138,11 +138,12 @@ public class FireAlarmSmokeDetectorBlock extends AbstractFireAlarmSignalBlock {
     // Arm smoke detector
     if (Boolean.TRUE.equals(blockState.getValue(DISARMED))) {
       serverLevel.setBlockAndUpdate(blockPos, blockState.setValue(DISARMED, false));
-      log.info("Smoke detector at {} is armed and ready.", blockPos);
+      log.debug("[Smoke Detector] At {} is armed and ready.", blockPos);
     }
 
     // Update powered state, if fire is detected.
     if (Boolean.TRUE.equals(blockState.getValue(POWERED)) != detectedFire) {
+      log.debug("[Smoke Detector] Fire detected at {} with state {}", blockPos, blockState);
       BlockState newBlockState =
           blockState.setValue(POWERED, detectedFire).setValue(DISARMED, false);
       serverLevel.setBlockAndUpdate(blockPos, newBlockState);
@@ -164,7 +165,7 @@ public class FireAlarmSmokeDetectorBlock extends AbstractFireAlarmSignalBlock {
       super.onRemove(blockState, level, blockPos, formerBlockState, removed);
     }
     if (removed && !level.isClientSide()) {
-      log.info("Smoke detector at {} is removed.", blockPos);
+      log.debug("[Smoke Detector] At {} is removed.", blockPos);
     }
   }
 

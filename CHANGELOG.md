@@ -5,6 +5,21 @@
 This change log includes the summarized changes.
 For the full changelog, please go to the [GitHub History][history] instead.
 
+### 8.3.0
+
+- Fixed Fire Alarm Smoke Detector texture bleeding with shaders.
+- Fixed issues where fire extinguishing foam is not visible for others.
+- Fixed smaller rendering issues with the Replay Mod.
+
+### 8.2.0
+
+- Fixed consistent tooltip line wrapping in Fabric when TooltipFix mod is not present.
+- Fixed some important sounds only playing on the client side.
+- Fixed Fire Axt is not working on campfires.
+- Moved some specific Fire Extinguisher logic to the server side.
+- Added debug command to help with troubleshooting and lower logging outputs.
+- Code refactoring and performance improvements.
+
 ### 8.1.0
 
 - Added Chinese (zh_cn, zh_hk, zh_tw) translations. Special thanks to @Raaay-Fung.

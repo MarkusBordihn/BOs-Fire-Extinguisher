@@ -21,6 +21,7 @@ package de.markusbordihn.fireextinguisher.item;
 
 import de.markusbordihn.fireextinguisher.Constants;
 import de.markusbordihn.fireextinguisher.config.FireExtinguisherConfig;
+import de.markusbordihn.fireextinguisher.utils.ToolTips;
 import java.util.List;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
@@ -42,6 +43,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.CampfireBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -84,8 +86,20 @@ public class FireAxeItem extends AxeItem {
       if (blockState.is(Blocks.FIRE)) {
 
         // Remove block on client and server.
-        log.debug("[FireAxt] Removing Fire Block {} at {}", blockState, blockPos);
+        log.debug("[Fire Axt] Removing Fire Block {} at {}", blockState, blockPos);
         level.removeBlock(blockPos, false);
+
+        // Play fire extinguish sound on the client
+        stopFireSound(level, player);
+
+        hasStoppedFire = true;
+      } else if (blockState.is(Blocks.CAMPFIRE)
+          && blockState.getBlock() instanceof CampfireBlock
+          && CampfireBlock.isLitCampfire(blockState)) {
+
+        // Remove block on client and server.
+        log.debug("[Fire Axt] Extinguishing Campfire Block {} at {}", blockState, blockPos);
+        level.setBlockAndUpdate(blockPos, blockState.setValue(CampfireBlock.LIT, false));
 
         // Play fire extinguish sound on the client
         stopFireSound(level, player);
@@ -150,10 +164,13 @@ public class FireAxeItem extends AxeItem {
       TooltipContext tooltipContext,
       List<Component> tooltipList,
       TooltipFlag tooltipFlag) {
-    tooltipList.add(
+    ToolTips.addTooltip(
+        tooltipList,
         Component.translatable(
-            Constants.TEXT_PREFIX + ID + "_description", FireExtinguisherConfig.fireAxtRadius));
-    tooltipList.add(
+                Constants.TEXT_PREFIX + ID + "_description", FireExtinguisherConfig.fireAxtRadius)
+            .withStyle(ChatFormatting.GRAY));
+    ToolTips.addTooltip(
+        tooltipList,
         Component.translatable(Constants.TEXT_PREFIX + ID + "_use")
             .withStyle(ChatFormatting.GREEN));
   }

@@ -21,6 +21,7 @@ package de.markusbordihn.fireextinguisher.item;
 
 import de.markusbordihn.fireextinguisher.Constants;
 import de.markusbordihn.fireextinguisher.config.FireExtinguisherConfig;
+import de.markusbordihn.fireextinguisher.utils.ToolTips;
 import java.util.List;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.registries.Registries;
@@ -80,9 +81,13 @@ public class FireChestplateLightItem extends FireProtectionArmorItem {
       TooltipContext tooltipContext,
       List<Component> tooltipList,
       TooltipFlag tooltipFlag) {
-    tooltipList.add(Component.translatable(Constants.TEXT_PREFIX + ID + "_description"));
+    ToolTips.addTooltip(
+        tooltipList,
+        Component.translatable(Constants.TEXT_PREFIX + ID + "_description")
+            .withStyle(ChatFormatting.GRAY));
     if (Boolean.TRUE.equals(FireExtinguisherConfig.fireProtectionLightEnabled)) {
-      tooltipList.add(
+      ToolTips.addTooltip(
+          tooltipList,
           Component.translatable(
                   Constants.TEXT_PREFIX + "fire_armor_config",
                   Math.round((FireExtinguisherConfig.fireProtectionLightRenew / 20.0) * 10) / 10.0,
