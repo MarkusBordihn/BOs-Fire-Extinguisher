@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Markus Bordihn
+ * Copyright 2024 Markus Bordihn
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
  * associated documentation files (the "Software"), to deal in the Software without restriction,
@@ -17,38 +17,35 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package de.markusbordihn.fireextinguisher.blockitem;
+package de.markusbordihn.fireextinguisher.utils;
 
 import de.markusbordihn.fireextinguisher.Constants;
-import de.markusbordihn.fireextinguisher.utils.ToolTips;
 import java.util.List;
-import net.minecraft.ChatFormatting;
+import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.level.block.Block;
+import net.minecraft.network.chat.FormattedText;
+import net.minecraft.network.chat.Style;
 
-public class ExitSignBlockItem extends BlockItem {
+public class ToolTips {
 
-  public static final String NAME = "exit_sign";
+  private static final int MAX_TOOLTIP_WIDTH = 200;
 
-  public ExitSignBlockItem(Block block) {
-    this(block, new Properties());
-  }
+  private ToolTips() {}
 
-  public ExitSignBlockItem(Block block, Properties properties) {
-    super(block, properties);
-  }
-
-  @Override
-  public void appendHoverText(
-      ItemStack itemStack,
-      TooltipContext tooltipContext,
-      List<Component> tooltipList,
-      TooltipFlag tooltipFlag) {
-    ToolTips.addTooltip(
-        tooltipList,
-        Component.translatable(Constants.TOOLTIP_PREFIX + NAME).withStyle(ChatFormatting.GRAY));
+  public static void addTooltip(List<Component> tooltip, final Component component) {
+    if (Constants.IS_FABRIC && !Constants.HAS_FABRIC_TOOLTIPFIX_MOD) {
+      String componentString = component.getString();
+      Style style = component.getStyle();
+      List<FormattedText> lines =
+          Minecraft.getInstance()
+              .font
+              .getSplitter()
+              .splitLines(componentString, MAX_TOOLTIP_WIDTH, Style.EMPTY);
+      for (FormattedText line : lines) {
+        tooltip.add(Component.literal(line.getString()).withStyle(style));
+      }
+    } else {
+      tooltip.add(component);
+    }
   }
 }
