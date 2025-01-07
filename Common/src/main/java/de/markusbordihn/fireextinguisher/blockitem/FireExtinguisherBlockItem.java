@@ -22,12 +22,17 @@ package de.markusbordihn.fireextinguisher.blockitem;
 import de.markusbordihn.fireextinguisher.Constants;
 import de.markusbordihn.fireextinguisher.block.FireExtinguisherBlock;
 import de.markusbordihn.fireextinguisher.config.FireExtinguisherConfig;
+import de.markusbordihn.fireextinguisher.utils.ToolTips;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
@@ -46,13 +51,14 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.CampfireBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class FireExtinguisherBlockItem extends BlockItem {
 
   public static final String NAME = "fire_extinguisher";
-  private static final double X_SHIFT = 0.0;
+  private static final Logger log = LogManager.getLogger(Constants.LOG_NAME);
   private static final double Y_SHIFT = 1.6;
-  private static final double Z_SHIFT = 0.0;
   private static final int PARTICLE_FRAMES = 8;
   private static final int ATTACK_EFFECT_DURATION = 200;
 
@@ -65,19 +71,13 @@ public class FireExtinguisherBlockItem extends BlockItem {
   }
 
   public static void stopFireAnimation(Player player, Level level, BlockPos blockPos) {
-    if (!level.isClientSide) {
-      return;
-    }
-
     // Calculate source and target position
     double x = player.getX();
     double y = player.getY();
     double z = player.getZ();
 
     // Correct position to item position.
-    x = (x >= 0) ? x + X_SHIFT : x - X_SHIFT;
     y = (y >= 0) ? y + Y_SHIFT : y - Y_SHIFT;
-    z = (z >= 0) ? z + Z_SHIFT : z - Z_SHIFT;
 
     // Show particle in targeted block direction.
     if (blockPos != null) {
@@ -91,13 +91,17 @@ public class FireExtinguisherBlockItem extends BlockItem {
         x += targetXRatio;
         y += targetYRatio;
         z += targetZRatio;
-        level.addParticle(ParticleTypes.CLOUD, x, y, z, 0D, 0D, 0D);
+        if (level instanceof ServerLevel serverLevel) {
+          serverLevel.sendParticles(ParticleTypes.CLOUD, x, y, z, 1, 0.2, 0.5, 0.2, 0.01);
+        } else {
+          level.addParticle(ParticleTypes.CLOUD, x, y, z, 0D, 0D, 0D);
+        }
       }
     }
   }
 
   public static void stopFire(
-      Level level,
+      ServerLevel serverLevel,
       Player player,
       InteractionHand hand,
       BlockPos targetBlockPos,
@@ -105,28 +109,32 @@ public class FireExtinguisherBlockItem extends BlockItem {
     Iterable<BlockPos> blockPositions =
         BlockPos.withinManhattan(
             targetBlockPos.above(),
-            FireExtinguisherConfig.fireExtinguisherRadius,
-            FireExtinguisherConfig.fireExtinguisherRadius,
-            FireExtinguisherConfig.fireExtinguisherRadius);
-    boolean hasStoppedFire = false;
+            FireExtinguisherConfig.fireExtinguisherRadiusX,
+            FireExtinguisherConfig.fireExtinguisherRadiusY,
+            FireExtinguisherConfig.fireExtinguisherRadiusZ);
+    Set<BlockPos> affectedPositions = new HashSet<>();
     for (BlockPos blockPos : blockPositions) {
-      BlockState blockState = level.getBlockState(blockPos);
+      BlockState blockState = serverLevel.getBlockState(blockPos);
 
       if (blockState.is(Blocks.FIRE)) {
-        level.removeBlock(blockPos, false);
-        hasStoppedFire = true;
-        break;
+        log.debug("[FireExtinguisher] Removing Fire Block {} at {}", blockState, blockPos);
+        serverLevel.removeBlock(blockPos, false);
+        serverLevel.sendBlockUpdated(blockPos, Blocks.AIR.defaultBlockState(), blockState, 3);
+        affectedPositions.add(blockPos);
       } else if (blockState.is(Blocks.CAMPFIRE)
           && blockState.getBlock() instanceof CampfireBlock
-          && Boolean.TRUE.equals(blockState.getValue(CampfireBlock.LIT))) {
-        level.setBlockAndUpdate(blockPos, blockState.setValue(CampfireBlock.LIT, false));
-        hasStoppedFire = true;
-        break;
+          && CampfireBlock.isLitCampfire(blockState)) {
+        log.debug("[FireExtinguisher] Extinguish Campfire Block {} at {}", blockState, blockPos);
+        BlockState newBlockState = blockState.setValue(CampfireBlock.LIT, false);
+        serverLevel.setBlock(blockPos, newBlockState, 3);
+        serverLevel.sendBlockUpdated(blockPos, newBlockState, blockState, 3);
+        affectedPositions.add(blockPos);
       }
     }
-    if (hasStoppedFire) {
-      stopFireSound(level, player);
-      hurtAndBreak(level, itemStack, player, hand);
+    if (!affectedPositions.isEmpty()) {
+      hurtAndBreak(serverLevel, itemStack, player, hand);
+      serverLevel.playSound(
+          null, targetBlockPos, SoundEvents.FIRE_EXTINGUISH, SoundSource.BLOCKS, 1.0f, 1.0f);
     }
   }
 
@@ -168,7 +176,9 @@ public class FireExtinguisherBlockItem extends BlockItem {
       return super.useOn(context);
     }
     stopFireAnimation(player, level, blockPos);
-    stopFire(level, player, interactionHand, blockPos, itemStack);
+    if (level instanceof ServerLevel serverLevel) {
+      stopFire(serverLevel, player, interactionHand, blockPos, itemStack);
+    }
 
     return InteractionResult.FAIL;
   }
@@ -239,14 +249,17 @@ public class FireExtinguisherBlockItem extends BlockItem {
       TooltipContext tooltipContext,
       List<Component> tooltipList,
       TooltipFlag tooltipFlag) {
-    tooltipList.add(
+    ToolTips.addTooltip(
+        tooltipList,
         Component.translatable(
-                Constants.TOOLTIP_PREFIX + NAME, FireExtinguisherConfig.fireExtinguisherRadius)
+                Constants.TOOLTIP_PREFIX + NAME, FireExtinguisherConfig.fireExtinguisherRadiusX)
             .withStyle(ChatFormatting.GRAY));
-    tooltipList.add(
+    ToolTips.addTooltip(
+        tooltipList,
         Component.translatable(Constants.TEXT_PREFIX + NAME + "_use")
             .withStyle(ChatFormatting.GREEN));
-    tooltipList.add(
+    ToolTips.addTooltip(
+        tooltipList,
         Component.translatable(Constants.TEXT_PREFIX + NAME + "_place")
             .withStyle(ChatFormatting.DARK_GREEN));
   }

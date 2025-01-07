@@ -20,6 +20,7 @@
 package de.markusbordihn.fireextinguisher.blockitem;
 
 import de.markusbordihn.fireextinguisher.Constants;
+import de.markusbordihn.fireextinguisher.utils.ToolTips;
 import java.util.List;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -46,7 +47,8 @@ public class FireAlarmSirenBlockItem extends BlockItem {
       TooltipContext tooltipContext,
       List<Component> tooltipList,
       TooltipFlag tooltipFlag) {
-    tooltipList.add(
+    ToolTips.addTooltip(
+        tooltipList,
         Component.translatable(Constants.TOOLTIP_PREFIX + NAME).withStyle(ChatFormatting.GRAY));
   }
 }

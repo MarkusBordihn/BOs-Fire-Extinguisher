@@ -19,12 +19,16 @@
 
 package de.markusbordihn.fireextinguisher;
 
+import cpw.mods.modlauncher.Launcher;
+import cpw.mods.modlauncher.api.IEnvironment;
 import de.markusbordihn.fireextinguisher.block.ModBlocks;
 import de.markusbordihn.fireextinguisher.config.Config;
+import de.markusbordihn.fireextinguisher.debug.DebugManager;
 import de.markusbordihn.fireextinguisher.item.ModBlockItems;
 import de.markusbordihn.fireextinguisher.item.ModItems;
 import de.markusbordihn.fireextinguisher.sounds.ModSoundEvents;
 import de.markusbordihn.fireextinguisher.tabs.ModTabs;
+import java.util.Optional;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
@@ -42,9 +46,18 @@ public class FireExtinguisher {
   public FireExtinguisher() {
     final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
+    log.info("{} Debug Manager ...", Constants.LOG_REGISTER_PREFIX);
+    Optional<String> version =
+        Launcher.INSTANCE.environment().getProperty(IEnvironment.Keys.VERSION.get());
+    if (version.isPresent() && "MOD_DEV".equals(version.get())) {
+      DebugManager.setDevelopmentEnvironment(true);
+    }
+    DebugManager.checkForDebugLogging(Constants.LOG_NAME);
+
     log.info("{} Constants ...", Constants.LOG_REGISTER_PREFIX);
     Constants.GAME_DIR = FMLPaths.GAMEDIR.get();
     Constants.CONFIG_DIR = FMLPaths.CONFIGDIR.get();
+    Constants.IS_FORGE = true;
 
     log.info("{} Configuration ...", Constants.LOG_REGISTER_PREFIX);
     Config.register();

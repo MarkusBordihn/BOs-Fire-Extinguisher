@@ -17,38 +17,31 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package de.markusbordihn.fireextinguisher.blockitem;
+package de.markusbordihn.fireextinguisher.commands.manager;
 
+import com.mojang.brigadier.CommandDispatcher;
 import de.markusbordihn.fireextinguisher.Constants;
-import de.markusbordihn.fireextinguisher.utils.ToolTips;
-import java.util.List;
-import net.minecraft.ChatFormatting;
-import net.minecraft.network.chat.Component;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.level.block.Block;
+import de.markusbordihn.fireextinguisher.server.commands.DebugCommand;
+import net.minecraft.commands.CommandBuildContext;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.commands.Commands;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-public class ExitSignBlockItem extends BlockItem {
+public class CommandManager {
 
-  public static final String NAME = "exit_sign";
+  protected static final Logger log = LogManager.getLogger(Constants.LOG_NAME);
 
-  public ExitSignBlockItem(Block block) {
-    this(block, new Properties());
-  }
+  private CommandManager() {}
 
-  public ExitSignBlockItem(Block block, Properties properties) {
-    super(block, properties);
-  }
-
-  @Override
-  public void appendHoverText(
-      ItemStack itemStack,
-      TooltipContext tooltipContext,
-      List<Component> tooltipList,
-      TooltipFlag tooltipFlag) {
-    ToolTips.addTooltip(
-        tooltipList,
-        Component.translatable(Constants.TOOLTIP_PREFIX + NAME).withStyle(ChatFormatting.GRAY));
+  public static void registerCommands(
+      CommandDispatcher<CommandSourceStack> commandDispatcher, CommandBuildContext context) {
+    log.info(
+        "{} /{} commands for {} ...",
+        Constants.LOG_REGISTER_PREFIX,
+        Constants.MOD_COMMAND,
+        Constants.MOD_NAME);
+    commandDispatcher.register(
+        Commands.literal(Constants.MOD_COMMAND).then(DebugCommand.register()));
   }
 }
