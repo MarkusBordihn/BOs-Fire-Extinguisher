@@ -1,9 +1,13 @@
-# Changelog for Fire Extinguisher (1.20.6)
+# Changelog for Fire Extinguisher (1.21.3)
 
 ## Note
 
 This change log includes the summarized changes.
 For the full changelog, please go to the [GitHub History][history] instead.
+
+### 8.3.1
+
+- Fixed Fire Protection Armor Items for NeoForge.
 
 ### 8.3.0
 
