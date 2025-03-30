@@ -22,7 +22,7 @@ package de.markusbordihn.fireextinguisher.item;
 import de.markusbordihn.fireextinguisher.Constants;
 import de.markusbordihn.fireextinguisher.config.FireExtinguisherConfig;
 import de.markusbordihn.fireextinguisher.utils.ToolTips;
-import java.util.List;
+import java.util.function.Consumer;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
@@ -40,6 +40,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ToolMaterial;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
@@ -162,15 +163,16 @@ public class FireAxeItem extends AxeItem {
   public void appendHoverText(
       ItemStack itemStack,
       TooltipContext tooltipContext,
-      List<Component> tooltipList,
+      TooltipDisplay tooltipDisplay,
+      Consumer<Component> tooltipConsumer,
       TooltipFlag tooltipFlag) {
     ToolTips.addTooltip(
-        tooltipList,
+        tooltipConsumer,
         Component.translatable(
                 Constants.TEXT_PREFIX + ID + "_description", FireExtinguisherConfig.fireAxtRadius)
             .withStyle(ChatFormatting.GRAY));
     ToolTips.addTooltip(
-        tooltipList,
+        tooltipConsumer,
         Component.translatable(Constants.TEXT_PREFIX + ID + "_use")
             .withStyle(ChatFormatting.GREEN));
   }

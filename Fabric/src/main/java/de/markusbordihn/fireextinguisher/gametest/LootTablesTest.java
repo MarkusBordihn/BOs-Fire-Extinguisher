@@ -24,20 +24,20 @@ import de.markusbordihn.fireextinguisher.block.FireAlarmBlocks;
 import de.markusbordihn.fireextinguisher.block.FireExtinguisherBlocks;
 import de.markusbordihn.fireextinguisher.block.FireExtinguisherSignBlocks;
 import de.markusbordihn.fireextinguisher.item.ModBlockItems;
-import net.minecraft.gametest.framework.GameTest;
+import net.fabricmc.fabric.api.gametest.v1.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
 
 @SuppressWarnings("unused")
 public class LootTablesTest {
 
-  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  @GameTest(structure = "fire_extinguisher:gametest.1x1x1")
   public void testFireExtinguisherDrop(GameTestHelper helper) {
     LootTableTestHelper.testBlockDropItem(
         helper, FireExtinguisherBlocks.FIRE_EXTINGUISHER, ModBlockItems.FIRE_EXTINGUISHER);
     helper.succeed();
   }
 
-  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  @GameTest(structure = "fire_extinguisher:gametest.1x1x1")
   public void testFireExtinguisherCopperDrop(GameTestHelper helper) {
     LootTableTestHelper.testBlockDropItem(
         helper,
@@ -46,42 +46,42 @@ public class LootTablesTest {
     helper.succeed();
   }
 
-  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  @GameTest(structure = "fire_extinguisher:gametest.1x1x1")
   public void testFireSprinklerDrop(GameTestHelper helper) {
     LootTableTestHelper.testBlockDropItem(
         helper, FireAlarmBlocks.FIRE_SPRINKLER, ModBlockItems.FIRE_SPRINKLER);
     helper.succeed();
   }
 
-  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  @GameTest(structure = "fire_extinguisher:gametest.1x1x1")
   public void testFireAlarmSwitchDrop(GameTestHelper helper) {
     LootTableTestHelper.testBlockDropItem(
         helper, FireAlarmBlocks.FIRE_ALARM_SWITCH, ModBlockItems.FIRE_ALARM_SWITCH);
     helper.succeed();
   }
 
-  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  @GameTest(structure = "fire_extinguisher:gametest.1x1x1")
   public void testFireAlarmBellDrop(GameTestHelper helper) {
     LootTableTestHelper.testBlockDropItem(
         helper, FireAlarmBlocks.FIRE_ALARM_BELL, ModBlockItems.FIRE_ALARM_BELL);
     helper.succeed();
   }
 
-  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  @GameTest(structure = "fire_extinguisher:gametest.1x1x1")
   public void testFireAlarmSirenDrop(GameTestHelper helper) {
     LootTableTestHelper.testBlockDropItem(
         helper, FireAlarmBlocks.FIRE_ALARM_SIREN, ModBlockItems.FIRE_ALARM_SIREN);
     helper.succeed();
   }
 
-  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  @GameTest(structure = "fire_extinguisher:gametest.1x1x1")
   public void testFireAlarmSmokeDetectorDrop(GameTestHelper helper) {
     LootTableTestHelper.testBlockDropItem(
         helper, FireAlarmBlocks.FIRE_ALARM_SMOKE_DETECTOR, ModBlockItems.FIRE_ALARM_SMOKE_DETECTOR);
     helper.succeed();
   }
 
-  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  @GameTest(structure = "fire_extinguisher:gametest.1x1x1")
   public void testFireAlarmSmokeDetectorSilentDrop(GameTestHelper helper) {
     LootTableTestHelper.testBlockDropItem(
         helper,
@@ -90,7 +90,7 @@ public class LootTablesTest {
     helper.succeed();
   }
 
-  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  @GameTest(structure = "fire_extinguisher:gametest.1x1x1")
   public void testFireExtinguisherSignDrop(GameTestHelper helper) {
     LootTableTestHelper.testAxeBlockDropItem(
         helper,
@@ -99,7 +99,7 @@ public class LootTablesTest {
     helper.succeed();
   }
 
-  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  @GameTest(structure = "fire_extinguisher:gametest.1x1x1")
   public void testFireExtinguisherSignLeftDrop(GameTestHelper helper) {
     LootTableTestHelper.testAxeBlockDropItem(
         helper,
@@ -108,7 +108,7 @@ public class LootTablesTest {
     helper.succeed();
   }
 
-  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  @GameTest(structure = "fire_extinguisher:gametest.1x1x1")
   public void testFireExtinguisherSignRightDrop(GameTestHelper helper) {
     LootTableTestHelper.testAxeBlockDropItem(
         helper,
@@ -117,49 +117,49 @@ public class LootTablesTest {
     helper.succeed();
   }
 
-  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  @GameTest(structure = "fire_extinguisher:gametest.1x1x1")
   public void testExitSignDrop(GameTestHelper helper) {
     LootTableTestHelper.testAxeBlockDropItem(
         helper, ExitSignBlocks.EXIT_SIGN, ModBlockItems.EXIT_SIGN);
     helper.succeed();
   }
 
-  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  @GameTest(structure = "fire_extinguisher:gametest.1x1x1")
   public void testExitSignLeftDrop(GameTestHelper helper) {
     LootTableTestHelper.testAxeBlockDropItem(
         helper, ExitSignBlocks.EXIT_SIGN_LEFT, ModBlockItems.EXIT_SIGN_LEFT);
     helper.succeed();
   }
 
-  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  @GameTest(structure = "fire_extinguisher:gametest.1x1x1")
   public void testExitSignLeftDownDrop(GameTestHelper helper) {
     LootTableTestHelper.testAxeBlockDropItem(
         helper, ExitSignBlocks.EXIT_SIGN_LEFT_DOWN, ModBlockItems.EXIT_SIGN_LEFT_DOWN);
     helper.succeed();
   }
 
-  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  @GameTest(structure = "fire_extinguisher:gametest.1x1x1")
   public void testExitSignLeftUpDrop(GameTestHelper helper) {
     LootTableTestHelper.testAxeBlockDropItem(
         helper, ExitSignBlocks.EXIT_SIGN_LEFT_UP, ModBlockItems.EXIT_SIGN_LEFT_UP);
     helper.succeed();
   }
 
-  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  @GameTest(structure = "fire_extinguisher:gametest.1x1x1")
   public void testExitSignRightDrop(GameTestHelper helper) {
     LootTableTestHelper.testAxeBlockDropItem(
         helper, ExitSignBlocks.EXIT_SIGN_RIGHT, ModBlockItems.EXIT_SIGN_RIGHT);
     helper.succeed();
   }
 
-  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  @GameTest(structure = "fire_extinguisher:gametest.1x1x1")
   public void testExitSignRightDownDrop(GameTestHelper helper) {
     LootTableTestHelper.testAxeBlockDropItem(
         helper, ExitSignBlocks.EXIT_SIGN_RIGHT_DOWN, ModBlockItems.EXIT_SIGN_RIGHT_DOWN);
     helper.succeed();
   }
 
-  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  @GameTest(structure = "fire_extinguisher:gametest.1x1x1")
   public void testExitSignRightUpDrop(GameTestHelper helper) {
     LootTableTestHelper.testAxeBlockDropItem(
         helper, ExitSignBlocks.EXIT_SIGN_RIGHT_UP, ModBlockItems.EXIT_SIGN_RIGHT_UP);

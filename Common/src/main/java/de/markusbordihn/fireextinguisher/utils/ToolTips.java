@@ -21,6 +21,7 @@ package de.markusbordihn.fireextinguisher.utils;
 
 import de.markusbordihn.fireextinguisher.Constants;
 import java.util.List;
+import java.util.function.Consumer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.FormattedText;
@@ -32,7 +33,7 @@ public class ToolTips {
 
   private ToolTips() {}
 
-  public static void addTooltip(List<Component> tooltip, final Component component) {
+  public static void addTooltip(Consumer<Component> tooltip, final Component component) {
     if (Constants.IS_FABRIC && !Constants.HAS_FABRIC_TOOLTIPFIX_MOD) {
       String componentString = component.getString();
       Style style = component.getStyle();
@@ -42,10 +43,10 @@ public class ToolTips {
               .getSplitter()
               .splitLines(componentString, MAX_TOOLTIP_WIDTH, Style.EMPTY);
       for (FormattedText line : lines) {
-        tooltip.add(Component.literal(line.getString()).withStyle(style));
+        tooltip.accept(Component.literal(line.getString()).withStyle(style));
       }
     } else {
-      tooltip.add(component);
+      tooltip.accept(component);
     }
   }
 }

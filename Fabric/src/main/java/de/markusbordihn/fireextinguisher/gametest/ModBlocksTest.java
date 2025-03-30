@@ -23,117 +23,117 @@ import de.markusbordihn.fireextinguisher.block.ExitSignBlocks;
 import de.markusbordihn.fireextinguisher.block.FireAlarmBlocks;
 import de.markusbordihn.fireextinguisher.block.FireExtinguisherBlocks;
 import de.markusbordihn.fireextinguisher.block.FireExtinguisherSignBlocks;
-import net.minecraft.gametest.framework.GameTest;
+import net.fabricmc.fabric.api.gametest.v1.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
 
 @SuppressWarnings("unused")
 public class ModBlocksTest {
 
-  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  @GameTest(structure = "fire_extinguisher:gametest.1x1x1")
   public void testFireExtinguisherBlock(GameTestHelper helper) {
     ModBlocksTestHelper.testModBlock(helper, FireExtinguisherBlocks.FIRE_EXTINGUISHER);
     helper.succeed();
   }
 
-  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  @GameTest(structure = "fire_extinguisher:gametest.1x1x1")
   public void testFireExtinguisherCopperBlock(GameTestHelper helper) {
     ModBlocksTestHelper.testModBlock(helper, FireExtinguisherBlocks.FIRE_EXTINGUISHER_COPPER);
     helper.succeed();
   }
 
-  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  @GameTest(structure = "fire_extinguisher:gametest.1x1x1")
   public void testFireSprinklerBlock(GameTestHelper helper) {
     ModBlocksTestHelper.testModBlock(helper, FireAlarmBlocks.FIRE_SPRINKLER);
     helper.succeed();
   }
 
-  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  @GameTest(structure = "fire_extinguisher:gametest.1x1x1")
   public void testFireAlarmSwitchBlock(GameTestHelper helper) {
     ModBlocksTestHelper.testModBlock(helper, FireAlarmBlocks.FIRE_ALARM_SWITCH);
     helper.succeed();
   }
 
-  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  @GameTest(structure = "fire_extinguisher:gametest.1x1x1")
   public void testFireAlarmBellBlock(GameTestHelper helper) {
     ModBlocksTestHelper.testModBlock(helper, FireAlarmBlocks.FIRE_ALARM_BELL);
     helper.succeed();
   }
 
-  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  @GameTest(structure = "fire_extinguisher:gametest.1x1x1")
   public void testFireAlarmSirenBlock(GameTestHelper helper) {
     ModBlocksTestHelper.testModBlock(helper, FireAlarmBlocks.FIRE_ALARM_SIREN);
     helper.succeed();
   }
 
-  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  @GameTest(structure = "fire_extinguisher:gametest.1x1x1")
   public void testFireAlarmSmokeDetectorBlock(GameTestHelper helper) {
     ModBlocksTestHelper.testModBlock(helper, FireAlarmBlocks.FIRE_ALARM_SMOKE_DETECTOR);
     helper.succeed();
   }
 
-  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  @GameTest(structure = "fire_extinguisher:gametest.1x1x1")
   public void testFireAlarmSmokeDetectorSilentBlock(GameTestHelper helper) {
     ModBlocksTestHelper.testModBlock(helper, FireAlarmBlocks.FIRE_ALARM_SMOKE_DETECTOR_SILENT);
     helper.succeed();
   }
 
-  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  @GameTest(structure = "fire_extinguisher:gametest.1x1x1")
   public void testFireExtinguisherSignBlock(GameTestHelper helper) {
     ModBlocksTestHelper.testModBlock(helper, FireExtinguisherSignBlocks.FIRE_EXTINGUISHER_SIGN);
     helper.succeed();
   }
 
-  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  @GameTest(structure = "fire_extinguisher:gametest.1x1x1")
   public void testFireExtinguisherSignLeftBlock(GameTestHelper helper) {
     ModBlocksTestHelper.testModBlock(
         helper, FireExtinguisherSignBlocks.FIRE_EXTINGUISHER_SIGN_LEFT);
     helper.succeed();
   }
 
-  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  @GameTest(structure = "fire_extinguisher:gametest.1x1x1")
   public void testFireExtinguisherSignRightBlock(GameTestHelper helper) {
     ModBlocksTestHelper.testModBlock(
         helper, FireExtinguisherSignBlocks.FIRE_EXTINGUISHER_SIGN_RIGHT);
     helper.succeed();
   }
 
-  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  @GameTest(structure = "fire_extinguisher:gametest.1x1x1")
   public void testExitSignBlock(GameTestHelper helper) {
     ModBlocksTestHelper.testModBlock(helper, ExitSignBlocks.EXIT_SIGN);
     helper.succeed();
   }
 
-  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  @GameTest(structure = "fire_extinguisher:gametest.1x1x1")
   public void testExitSignLeftBlock(GameTestHelper helper) {
     ModBlocksTestHelper.testModBlock(helper, ExitSignBlocks.EXIT_SIGN_LEFT);
     helper.succeed();
   }
 
-  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  @GameTest(structure = "fire_extinguisher:gametest.1x1x1")
   public void testExitSignLeftDownBlock(GameTestHelper helper) {
     ModBlocksTestHelper.testModBlock(helper, ExitSignBlocks.EXIT_SIGN_LEFT_DOWN);
     helper.succeed();
   }
 
-  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  @GameTest(structure = "fire_extinguisher:gametest.1x1x1")
   public void testExitSignLeftUpBlock(GameTestHelper helper) {
     ModBlocksTestHelper.testModBlock(helper, ExitSignBlocks.EXIT_SIGN_LEFT_UP);
     helper.succeed();
   }
 
-  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  @GameTest(structure = "fire_extinguisher:gametest.1x1x1")
   public void testExitSignRightBlock(GameTestHelper helper) {
     ModBlocksTestHelper.testModBlock(helper, ExitSignBlocks.EXIT_SIGN_RIGHT);
     helper.succeed();
   }
 
-  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  @GameTest(structure = "fire_extinguisher:gametest.1x1x1")
   public void testExitSignRightDownBlock(GameTestHelper helper) {
     ModBlocksTestHelper.testModBlock(helper, ExitSignBlocks.EXIT_SIGN_RIGHT_DOWN);
     helper.succeed();
   }
 
-  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  @GameTest(structure = "fire_extinguisher:gametest.1x1x1")
   public void testExitSignRightUpBlock(GameTestHelper helper) {
     ModBlocksTestHelper.testModBlock(helper, ExitSignBlocks.EXIT_SIGN_RIGHT_UP);
     helper.succeed();

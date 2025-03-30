@@ -23,6 +23,7 @@ import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.DustParticleOptions;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
@@ -175,17 +176,13 @@ public class FireAlarmSwitchBlock extends FaceAttachedHorizontalDirectionalBlock
   }
 
   @Override
-  public void onRemove(
-      BlockState blockState,
-      Level level,
-      BlockPos blockPos,
-      BlockState formerBlockState,
-      boolean removed) {
+  public void affectNeighborsAfterRemoval(
+      BlockState blockState, ServerLevel level, BlockPos blockPos, boolean removed) {
     if (!removed && !blockState.is(blockState.getBlock())) {
       if (Boolean.TRUE.equals(blockState.getValue(POWERED))) {
         this.updateNeighbours(blockState, level, blockPos);
       }
-      super.onRemove(blockState, level, blockPos, formerBlockState, removed);
+      super.affectNeighborsAfterRemoval(blockState, level, blockPos, removed);
     }
   }
 

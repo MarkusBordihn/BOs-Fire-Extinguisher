@@ -24,8 +24,8 @@ import de.markusbordihn.fireextinguisher.block.FireExtinguisherBlock;
 import de.markusbordihn.fireextinguisher.config.FireExtinguisherConfig;
 import de.markusbordihn.fireextinguisher.utils.ToolTips;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
+import java.util.function.Consumer;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -48,6 +48,7 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item.TooltipContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -167,12 +168,16 @@ public class FireExtinguisherBlockItem extends BlockItem {
   }
 
   @Override
-  public boolean canAttackBlock(
-      BlockState blockState, Level level, BlockPos blockPos, Player player) {
+  public boolean canDestroyBlock(
+      ItemStack itemStack,
+      BlockState blockState,
+      Level level,
+      BlockPos blockPos,
+      LivingEntity livingEntity) {
     if (blockState.getBlock() instanceof FireExtinguisherBlock) {
       return true;
     }
-    return player.isShiftKeyDown();
+    return livingEntity instanceof Player player ? player.isShiftKeyDown() : false;
   }
 
   @Override
@@ -229,7 +234,7 @@ public class FireExtinguisherBlockItem extends BlockItem {
     if (!level.isClientSide) {
       // Add slowness effect for movement and jump
       livingEntity.addEffect(
-          new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, ATTACK_EFFECT_DURATION, 10));
+          new MobEffectInstance(MobEffects.SLOWNESS, ATTACK_EFFECT_DURATION, 10));
       livingEntity.addEffect(
           new MobEffectInstance(MobEffects.SLOW_FALLING, ATTACK_EFFECT_DURATION, 10));
 
@@ -259,19 +264,20 @@ public class FireExtinguisherBlockItem extends BlockItem {
   public void appendHoverText(
       ItemStack itemStack,
       TooltipContext tooltipContext,
-      List<Component> tooltipList,
+      TooltipDisplay tooltipDisplay,
+      Consumer<Component> tooltipConsumer,
       TooltipFlag tooltipFlag) {
     ToolTips.addTooltip(
-        tooltipList,
+        tooltipConsumer,
         Component.translatable(
                 Constants.TOOLTIP_PREFIX + ID, FireExtinguisherConfig.fireExtinguisherRadiusX)
             .withStyle(ChatFormatting.GRAY));
     ToolTips.addTooltip(
-        tooltipList,
+        tooltipConsumer,
         Component.translatable(Constants.TEXT_PREFIX + ID + "_use")
             .withStyle(ChatFormatting.GREEN));
     ToolTips.addTooltip(
-        tooltipList,
+        tooltipConsumer,
         Component.translatable(Constants.TEXT_PREFIX + ID + "_place")
             .withStyle(ChatFormatting.DARK_GREEN));
   }

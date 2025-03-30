@@ -16,50 +16,43 @@
  * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package de.markusbordihn.fireextinguisher.item;
+package de.markusbordihn.fireextinguisher.item.equipment;
 
-import de.markusbordihn.fireextinguisher.Constants;
+import de.markusbordihn.fireextinguisher.item.ModArmorMaterials;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.equipment.ArmorMaterial;
 import net.minecraft.world.item.equipment.ArmorType;
 import net.minecraft.world.level.Level;
 
-public class FireProtectionArmorItem extends ArmorItem {
+public class FireProtectionArmorItem extends Item {
 
   public FireProtectionArmorItem(ArmorType type, Properties properties) {
     this(ModArmorMaterials.FIRE_PROTECTION.getArmorMaterial(), type, properties);
   }
 
   public FireProtectionArmorItem(
-      ArmorMaterial armorMaterial, ArmorType type, Properties properties) {
-    super(armorMaterial, type, properties.fireResistant());
+      ArmorMaterial armorMaterial, ArmorType armorType, Properties properties) {
+    super(properties.humanoidArmor(armorMaterial, armorType).fireResistant());
   }
 
   @Override
   public void inventoryTick(
-      ItemStack itemStack, Level level, Entity entity, int slot, boolean selected) {
-    if (!level.isClientSide
-        && entity instanceof ServerPlayer serverPlayer
-        && ((slot == EquipmentSlot.BODY.getId()
-                || slot == EquipmentSlot.CHEST.getId()
-                || slot == EquipmentSlot.HEAD.getId()
-                || slot == EquipmentSlot.LEGS.getId()
-                || slot == EquipmentSlot.FEET.getId())
-            // NeoForge: Fix for armor slots, seems like the slots are different.
-            || (Constants.IS_NEOFORGE
-                && (slot == EquipmentSlot.BODY.getId() + 35
-                    || slot == EquipmentSlot.CHEST.getId() + 35
-                    || slot == EquipmentSlot.HEAD.getId() + 35
-                    || slot == EquipmentSlot.LEGS.getId() + 35
-                    || slot == EquipmentSlot.FEET.getId() + 35)))
-        && itemStack.getItem().getClass().equals(getArmorClass())) {
-      fireArmorTick(itemStack, level, serverPlayer);
+      ItemStack itemStack, ServerLevel serverLevel, Entity entity, EquipmentSlot equipmentSlot) {
+    if (entity instanceof ServerPlayer serverPlayer
+        && (equipmentSlot == EquipmentSlot.BODY
+            || equipmentSlot == EquipmentSlot.CHEST
+            || equipmentSlot == EquipmentSlot.HEAD
+            || equipmentSlot == EquipmentSlot.LEGS
+            || equipmentSlot == EquipmentSlot.FEET
+                && itemStack.getItem().getClass().equals(getArmorClass()))) {
+      fireArmorTick(itemStack, serverLevel, serverPlayer);
     }
-    super.inventoryTick(itemStack, level, entity, slot, selected);
+    super.inventoryTick(itemStack, serverLevel, entity, equipmentSlot);
   }
 
   protected void fireArmorTick(ItemStack itemStack, Level level, ServerPlayer serverPlayer) {

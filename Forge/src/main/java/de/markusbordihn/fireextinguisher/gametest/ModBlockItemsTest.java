@@ -19,119 +19,116 @@
 
 package de.markusbordihn.fireextinguisher.gametest;
 
-import de.markusbordihn.fireextinguisher.Constants;
 import de.markusbordihn.fireextinguisher.item.ModBlockItems;
-import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
-import net.minecraftforge.gametest.GameTestHolder;
+import net.minecraftforge.gametest.GameTest;
 
 @SuppressWarnings("unused")
-@GameTestHolder(Constants.MOD_ID)
 public class ModBlockItemsTest {
 
-  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  @GameTest(structure = "fire_extinguisher:gametest.1x1x1")
   public void testFireExtinguisherItem(GameTestHelper helper) {
     ModItemsTestHelper.testModItem(helper, ModBlockItems.FIRE_EXTINGUISHER.get());
     helper.succeed();
   }
 
-  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  @GameTest(structure = "fire_extinguisher:gametest.1x1x1")
   public void testFireExtinguisherCopperItem(GameTestHelper helper) {
     ModItemsTestHelper.testModItem(helper, ModBlockItems.FIRE_EXTINGUISHER_COPPER.get());
     helper.succeed();
   }
 
-  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  @GameTest(structure = "fire_extinguisher:gametest.1x1x1")
   public void testFireSprinklerItem(GameTestHelper helper) {
     ModItemsTestHelper.testModItem(helper, ModBlockItems.FIRE_SPRINKLER.get());
     helper.succeed();
   }
 
-  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  @GameTest(structure = "fire_extinguisher:gametest.1x1x1")
   public void testFireAlarmSwitchItem(GameTestHelper helper) {
     ModItemsTestHelper.testModItem(helper, ModBlockItems.FIRE_ALARM_SWITCH.get());
     helper.succeed();
   }
 
-  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  @GameTest(structure = "fire_extinguisher:gametest.1x1x1")
   public void testFireAlarmBellItem(GameTestHelper helper) {
     ModItemsTestHelper.testModItem(helper, ModBlockItems.FIRE_ALARM_BELL.get());
     helper.succeed();
   }
 
-  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  @GameTest(structure = "fire_extinguisher:gametest.1x1x1")
   public void testFireAlarmSirenItem(GameTestHelper helper) {
     ModItemsTestHelper.testModItem(helper, ModBlockItems.FIRE_ALARM_SIREN.get());
     helper.succeed();
   }
 
-  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  @GameTest(structure = "fire_extinguisher:gametest.1x1x1")
   public void testFireAlarmSmokeDetectorItem(GameTestHelper helper) {
     ModItemsTestHelper.testModItem(helper, ModBlockItems.FIRE_ALARM_SMOKE_DETECTOR.get());
     helper.succeed();
   }
 
-  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  @GameTest(structure = "fire_extinguisher:gametest.1x1x1")
   public void testFireAlarmSmokeDetectorSilentItem(GameTestHelper helper) {
     ModItemsTestHelper.testModItem(helper, ModBlockItems.FIRE_ALARM_SMOKE_DETECTOR_SILENT.get());
     helper.succeed();
   }
 
-  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  @GameTest(structure = "fire_extinguisher:gametest.1x1x1")
   public void testFireExtinguisherSignItem(GameTestHelper helper) {
     ModItemsTestHelper.testModItem(helper, ModBlockItems.FIRE_EXTINGUISHER_SIGN.get());
     helper.succeed();
   }
 
-  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  @GameTest(structure = "fire_extinguisher:gametest.1x1x1")
   public void testFireExtinguisherSignLeftItem(GameTestHelper helper) {
     ModItemsTestHelper.testModItem(helper, ModBlockItems.FIRE_EXTINGUISHER_SIGN_LEFT.get());
     helper.succeed();
   }
 
-  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  @GameTest(structure = "fire_extinguisher:gametest.1x1x1")
   public void testFireExtinguisherSignRightItem(GameTestHelper helper) {
     ModItemsTestHelper.testModItem(helper, ModBlockItems.FIRE_EXTINGUISHER_SIGN_RIGHT.get());
     helper.succeed();
   }
 
-  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  @GameTest(structure = "fire_extinguisher:gametest.1x1x1")
   public void testExitSignItem(GameTestHelper helper) {
     ModItemsTestHelper.testModItem(helper, ModBlockItems.EXIT_SIGN.get());
     helper.succeed();
   }
 
-  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  @GameTest(structure = "fire_extinguisher:gametest.1x1x1")
   public void testExitSignLeftItem(GameTestHelper helper) {
     ModItemsTestHelper.testModItem(helper, ModBlockItems.EXIT_SIGN_LEFT.get());
     helper.succeed();
   }
 
-  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  @GameTest(structure = "fire_extinguisher:gametest.1x1x1")
   public void testExitSignLeftDownItem(GameTestHelper helper) {
     ModItemsTestHelper.testModItem(helper, ModBlockItems.EXIT_SIGN_LEFT_DOWN.get());
     helper.succeed();
   }
 
-  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  @GameTest(structure = "fire_extinguisher:gametest.1x1x1")
   public void testExitSignLeftUpItem(GameTestHelper helper) {
     ModItemsTestHelper.testModItem(helper, ModBlockItems.EXIT_SIGN_LEFT_UP.get());
     helper.succeed();
   }
 
-  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  @GameTest(structure = "fire_extinguisher:gametest.1x1x1")
   public void testExitSignRightItem(GameTestHelper helper) {
     ModItemsTestHelper.testModItem(helper, ModBlockItems.EXIT_SIGN_RIGHT.get());
     helper.succeed();
   }
 
-  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  @GameTest(structure = "fire_extinguisher:gametest.1x1x1")
   public void testExitSignRightDownItem(GameTestHelper helper) {
     ModItemsTestHelper.testModItem(helper, ModBlockItems.EXIT_SIGN_RIGHT_DOWN.get());
     helper.succeed();
   }
 
-  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  @GameTest(structure = "fire_extinguisher:gametest.1x1x1")
   public void testExitSignRightUpItem(GameTestHelper helper) {
     ModItemsTestHelper.testModItem(helper, ModBlockItems.EXIT_SIGN_RIGHT_UP.get());
     helper.succeed();

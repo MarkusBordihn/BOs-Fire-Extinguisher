@@ -21,7 +21,7 @@ package de.markusbordihn.fireextinguisher.blockitem;
 
 import de.markusbordihn.fireextinguisher.Constants;
 import de.markusbordihn.fireextinguisher.utils.ToolTips;
-import java.util.List;
+import java.util.function.Consumer;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -30,6 +30,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.level.block.Block;
 
 public class FireExtinguisherSignBlockItem extends BlockItem {
@@ -56,10 +57,11 @@ public class FireExtinguisherSignBlockItem extends BlockItem {
   public void appendHoverText(
       ItemStack itemStack,
       TooltipContext tooltipContext,
-      List<Component> tooltipList,
+      TooltipDisplay tooltipDisplay,
+      Consumer<Component> tooltipConsumer,
       TooltipFlag tooltipFlag) {
     ToolTips.addTooltip(
-        tooltipList,
+        tooltipConsumer,
         Component.translatable(Constants.TOOLTIP_PREFIX + ID).withStyle(ChatFormatting.GRAY));
   }
 }

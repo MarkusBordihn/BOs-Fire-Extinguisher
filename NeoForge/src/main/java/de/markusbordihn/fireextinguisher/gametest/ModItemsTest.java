@@ -19,67 +19,52 @@
 
 package de.markusbordihn.fireextinguisher.gametest;
 
-import de.markusbordihn.fireextinguisher.Constants;
 import de.markusbordihn.fireextinguisher.item.ModItems;
-import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
-import net.neoforged.neoforge.gametest.GameTestHolder;
-import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
 
 @SuppressWarnings("unused")
-@PrefixGameTestTemplate(value = false)
-@GameTestHolder(Constants.MOD_ID)
 public class ModItemsTest {
 
-  @GameTest(template = "gametest.1x1x1")
   public void testFireAxeItem(GameTestHelper helper) {
     ModItemsTestHelper.testModItem(helper, ModItems.FIRE_AXE.get());
     helper.succeed();
   }
 
-  @GameTest(template = "gametest.1x1x1")
   public void testFireHelmetItem(GameTestHelper helper) {
     ModItemsTestHelper.testModItem(helper, ModItems.FIRE_HELMET.get());
     helper.succeed();
   }
 
-  @GameTest(template = "gametest.1x1x1")
   public void testFireChestplateItem(GameTestHelper helper) {
     ModItemsTestHelper.testModItem(helper, ModItems.FIRE_CHESTPLATE.get());
     helper.succeed();
   }
 
-  @GameTest(template = "gametest.1x1x1")
   public void testFireLeggingsItem(GameTestHelper helper) {
     ModItemsTestHelper.testModItem(helper, ModItems.FIRE_LEGGINGS.get());
     helper.succeed();
   }
 
-  @GameTest(template = "gametest.1x1x1")
   public void testFireBootsItem(GameTestHelper helper) {
     ModItemsTestHelper.testModItem(helper, ModItems.FIRE_BOOTS.get());
     helper.succeed();
   }
 
-  @GameTest(template = "gametest.1x1x1")
   public void testFireHelmetLightItem(GameTestHelper helper) {
     ModItemsTestHelper.testModItem(helper, ModItems.FIRE_HELMET_LIGHT.get());
     helper.succeed();
   }
 
-  @GameTest(template = "gametest.1x1x1")
   public void testFireChestplateLightItem(GameTestHelper helper) {
     ModItemsTestHelper.testModItem(helper, ModItems.FIRE_CHESTPLATE_LIGHT.get());
     helper.succeed();
   }
 
-  @GameTest(template = "gametest.1x1x1")
   public void testFireLeggingsLightItem(GameTestHelper helper) {
     ModItemsTestHelper.testModItem(helper, ModItems.FIRE_LEGGINGS_LIGHT.get());
     helper.succeed();
   }
 
-  @GameTest(template = "gametest.1x1x1")
   public void testFireBootsLightItem(GameTestHelper helper) {
     ModItemsTestHelper.testModItem(helper, ModItems.FIRE_BOOTS_LIGHT.get());
     helper.succeed();

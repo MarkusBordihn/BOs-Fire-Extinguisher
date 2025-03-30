@@ -22,25 +22,101 @@ package de.markusbordihn.fireextinguisher.gametest;
 import de.markusbordihn.fireextinguisher.Constants;
 import de.markusbordihn.fireextinguisher.block.ModBlocks;
 import de.markusbordihn.fireextinguisher.item.ModBlockItems;
-import net.minecraft.gametest.framework.GameTest;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.gametest.framework.GameTestHelper;
-import net.neoforged.neoforge.gametest.GameTestHolder;
-import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
+import net.minecraft.resources.ResourceLocation;
 
 @SuppressWarnings("unused")
-@PrefixGameTestTemplate(value = false)
-@GameTestHolder(Constants.MOD_ID)
 public class LootTablesTest {
 
-  @GameTest(template = "gametest.1x1x1")
-  public void testFireExtinguisherDrop(GameTestHelper helper) {
+  static {
+    Registry.register(
+        BuiltInRegistries.TEST_FUNCTION,
+        ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "test_fire_extinguisher_drop"),
+        LootTablesTest::testFireExtinguisherDrop);
+    Registry.register(
+        BuiltInRegistries.TEST_FUNCTION,
+        ResourceLocation.fromNamespaceAndPath(
+            Constants.MOD_ID, "test_fire_extinguisher_copper_drop"),
+        LootTablesTest::testFireExtinguisherCopperDrop);
+    Registry.register(
+        BuiltInRegistries.TEST_FUNCTION,
+        ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "test_fire_sprinkler_drop"),
+        LootTablesTest::testFireSprinklerDrop);
+    Registry.register(
+        BuiltInRegistries.TEST_FUNCTION,
+        ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "test_fire_alarm_switch_drop"),
+        LootTablesTest::testFireAlarmSwitchDrop);
+    Registry.register(
+        BuiltInRegistries.TEST_FUNCTION,
+        ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "test_fire_alarm_bell_drop"),
+        LootTablesTest::testFireAlarmBellDrop);
+    Registry.register(
+        BuiltInRegistries.TEST_FUNCTION,
+        ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "test_fire_alarm_siren_drop"),
+        LootTablesTest::testFireAlarmSirenDrop);
+    Registry.register(
+        BuiltInRegistries.TEST_FUNCTION,
+        ResourceLocation.fromNamespaceAndPath(
+            Constants.MOD_ID, "test_fire_alarm_smoke_detector_drop"),
+        LootTablesTest::testFireAlarmSmokeDetectorDrop);
+    Registry.register(
+        BuiltInRegistries.TEST_FUNCTION,
+        ResourceLocation.fromNamespaceAndPath(
+            Constants.MOD_ID, "test_fire_alarm_smoke_detector_silent_drop"),
+        LootTablesTest::testFireAlarmSmokeDetectorSilentDrop);
+    Registry.register(
+        BuiltInRegistries.TEST_FUNCTION,
+        ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "test_fire_extinguisher_sign_drop"),
+        LootTablesTest::testFireExtinguisherSignDrop);
+    Registry.register(
+        BuiltInRegistries.TEST_FUNCTION,
+        ResourceLocation.fromNamespaceAndPath(
+            Constants.MOD_ID, "test_fire_extinguisher_sign_left_drop"),
+        LootTablesTest::testFireExtinguisherSignLeftDrop);
+    Registry.register(
+        BuiltInRegistries.TEST_FUNCTION,
+        ResourceLocation.fromNamespaceAndPath(
+            Constants.MOD_ID, "test_fire_extinguisher_sign_right_drop"),
+        LootTablesTest::testFireExtinguisherSignRightDrop);
+    Registry.register(
+        BuiltInRegistries.TEST_FUNCTION,
+        ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "test_exit_sign_drop"),
+        LootTablesTest::testExitSignDrop);
+    Registry.register(
+        BuiltInRegistries.TEST_FUNCTION,
+        ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "test_exit_sign_left_drop"),
+        LootTablesTest::testExitSignLeftDrop);
+    Registry.register(
+        BuiltInRegistries.TEST_FUNCTION,
+        ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "test_exit_sign_left_down_drop"),
+        LootTablesTest::testExitSignLeftDownDrop);
+    Registry.register(
+        BuiltInRegistries.TEST_FUNCTION,
+        ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "test_exit_sign_left_up_drop"),
+        LootTablesTest::testExitSignLeftUpDrop);
+    Registry.register(
+        BuiltInRegistries.TEST_FUNCTION,
+        ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "test_exit_sign_right_drop"),
+        LootTablesTest::testExitSignRightDrop);
+    Registry.register(
+        BuiltInRegistries.TEST_FUNCTION,
+        ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "test_exit_sign_right_down_drop"),
+        LootTablesTest::testExitSignRightDownDrop);
+    Registry.register(
+        BuiltInRegistries.TEST_FUNCTION,
+        ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "test_exit_sign_right_up_drop"),
+        LootTablesTest::testExitSignRightUpDrop);
+  }
+
+  public static void testFireExtinguisherDrop(GameTestHelper helper) {
     LootTableTestHelper.testBlockDropItem(
         helper, ModBlocks.FIRE_EXTINGUISHER.get(), ModBlockItems.FIRE_EXTINGUISHER.get());
     helper.succeed();
   }
 
-  @GameTest(template = "gametest.1x1x1")
-  public void testFireExtinguisherCopperDrop(GameTestHelper helper) {
+  public static void testFireExtinguisherCopperDrop(GameTestHelper helper) {
     LootTableTestHelper.testBlockDropItem(
         helper,
         ModBlocks.FIRE_EXTINGUISHER_COPPER.get(),
@@ -48,36 +124,31 @@ public class LootTablesTest {
     helper.succeed();
   }
 
-  @GameTest(template = "gametest.1x1x1")
-  public void testFireSprinklerDrop(GameTestHelper helper) {
+  public static void testFireSprinklerDrop(GameTestHelper helper) {
     LootTableTestHelper.testBlockDropItem(
         helper, ModBlocks.FIRE_SPRINKLER.get(), ModBlockItems.FIRE_SPRINKLER.get());
     helper.succeed();
   }
 
-  @GameTest(template = "gametest.1x1x1")
-  public void testFireAlarmSwitchDrop(GameTestHelper helper) {
+  public static void testFireAlarmSwitchDrop(GameTestHelper helper) {
     LootTableTestHelper.testBlockDropItem(
         helper, ModBlocks.FIRE_ALARM_SWITCH.get(), ModBlockItems.FIRE_ALARM_SWITCH.get());
     helper.succeed();
   }
 
-  @GameTest(template = "gametest.1x1x1")
-  public void testFireAlarmBellDrop(GameTestHelper helper) {
+  public static void testFireAlarmBellDrop(GameTestHelper helper) {
     LootTableTestHelper.testBlockDropItem(
         helper, ModBlocks.FIRE_ALARM_BELL.get(), ModBlockItems.FIRE_ALARM_BELL.get());
     helper.succeed();
   }
 
-  @GameTest(template = "gametest.1x1x1")
-  public void testFireAlarmSirenDrop(GameTestHelper helper) {
+  public static void testFireAlarmSirenDrop(GameTestHelper helper) {
     LootTableTestHelper.testBlockDropItem(
         helper, ModBlocks.FIRE_ALARM_SIREN.get(), ModBlockItems.FIRE_ALARM_SIREN.get());
     helper.succeed();
   }
 
-  @GameTest(template = "gametest.1x1x1")
-  public void testFireAlarmSmokeDetectorDrop(GameTestHelper helper) {
+  public static void testFireAlarmSmokeDetectorDrop(GameTestHelper helper) {
     LootTableTestHelper.testBlockDropItem(
         helper,
         ModBlocks.FIRE_ALARM_SMOKE_DETECTOR.get(),
@@ -85,8 +156,7 @@ public class LootTablesTest {
     helper.succeed();
   }
 
-  @GameTest(template = "gametest.1x1x1")
-  public void testFireAlarmSmokeDetectorSilentDrop(GameTestHelper helper) {
+  public static void testFireAlarmSmokeDetectorSilentDrop(GameTestHelper helper) {
     LootTableTestHelper.testBlockDropItem(
         helper,
         ModBlocks.FIRE_ALARM_SMOKE_DETECTOR_SILENT.get(),
@@ -94,15 +164,13 @@ public class LootTablesTest {
     helper.succeed();
   }
 
-  @GameTest(template = "gametest.1x1x1")
-  public void testFireExtinguisherSignDrop(GameTestHelper helper) {
+  public static void testFireExtinguisherSignDrop(GameTestHelper helper) {
     LootTableTestHelper.testAxeBlockDropItem(
         helper, ModBlocks.FIRE_EXTINGUISHER_SIGN.get(), ModBlockItems.FIRE_EXTINGUISHER_SIGN.get());
     helper.succeed();
   }
 
-  @GameTest(template = "gametest.1x1x1")
-  public void testFireExtinguisherSignLeftDrop(GameTestHelper helper) {
+  public static void testFireExtinguisherSignLeftDrop(GameTestHelper helper) {
     LootTableTestHelper.testAxeBlockDropItem(
         helper,
         ModBlocks.FIRE_EXTINGUISHER_SIGN_LEFT.get(),
@@ -110,8 +178,7 @@ public class LootTablesTest {
     helper.succeed();
   }
 
-  @GameTest(template = "gametest.1x1x1")
-  public void testFireExtinguisherSignRightDrop(GameTestHelper helper) {
+  public static void testFireExtinguisherSignRightDrop(GameTestHelper helper) {
     LootTableTestHelper.testAxeBlockDropItem(
         helper,
         ModBlocks.FIRE_EXTINGUISHER_SIGN_RIGHT.get(),
@@ -119,50 +186,43 @@ public class LootTablesTest {
     helper.succeed();
   }
 
-  @GameTest(template = "gametest.1x1x1")
-  public void testExitSignDrop(GameTestHelper helper) {
+  public static void testExitSignDrop(GameTestHelper helper) {
     LootTableTestHelper.testAxeBlockDropItem(
         helper, ModBlocks.EXIT_SIGN.get(), ModBlockItems.EXIT_SIGN.get());
     helper.succeed();
   }
 
-  @GameTest(template = "gametest.1x1x1")
-  public void testExitSignLeftDrop(GameTestHelper helper) {
+  public static void testExitSignLeftDrop(GameTestHelper helper) {
     LootTableTestHelper.testAxeBlockDropItem(
         helper, ModBlocks.EXIT_SIGN_LEFT.get(), ModBlockItems.EXIT_SIGN_LEFT.get());
     helper.succeed();
   }
 
-  @GameTest(template = "gametest.1x1x1")
-  public void testExitSignLeftDownDrop(GameTestHelper helper) {
+  public static void testExitSignLeftDownDrop(GameTestHelper helper) {
     LootTableTestHelper.testAxeBlockDropItem(
         helper, ModBlocks.EXIT_SIGN_LEFT_DOWN.get(), ModBlockItems.EXIT_SIGN_LEFT_DOWN.get());
     helper.succeed();
   }
 
-  @GameTest(template = "gametest.1x1x1")
-  public void testExitSignLeftUpDrop(GameTestHelper helper) {
+  public static void testExitSignLeftUpDrop(GameTestHelper helper) {
     LootTableTestHelper.testAxeBlockDropItem(
         helper, ModBlocks.EXIT_SIGN_LEFT_UP.get(), ModBlockItems.EXIT_SIGN_LEFT_UP.get());
     helper.succeed();
   }
 
-  @GameTest(template = "gametest.1x1x1")
-  public void testExitSignRightDrop(GameTestHelper helper) {
+  public static void testExitSignRightDrop(GameTestHelper helper) {
     LootTableTestHelper.testAxeBlockDropItem(
         helper, ModBlocks.EXIT_SIGN_RIGHT.get(), ModBlockItems.EXIT_SIGN_RIGHT.get());
     helper.succeed();
   }
 
-  @GameTest(template = "gametest.1x1x1")
-  public void testExitSignRightDownDrop(GameTestHelper helper) {
+  public static void testExitSignRightDownDrop(GameTestHelper helper) {
     LootTableTestHelper.testAxeBlockDropItem(
         helper, ModBlocks.EXIT_SIGN_RIGHT_DOWN.get(), ModBlockItems.EXIT_SIGN_RIGHT_DOWN.get());
     helper.succeed();
   }
 
-  @GameTest(template = "gametest.1x1x1")
-  public void testExitSignRightUpDrop(GameTestHelper helper) {
+  public static void testExitSignRightUpDrop(GameTestHelper helper) {
     LootTableTestHelper.testAxeBlockDropItem(
         helper, ModBlocks.EXIT_SIGN_RIGHT_UP.get(), ModBlockItems.EXIT_SIGN_RIGHT_UP.get());
     helper.succeed();

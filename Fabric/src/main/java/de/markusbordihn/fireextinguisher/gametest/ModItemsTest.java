@@ -20,61 +20,61 @@
 package de.markusbordihn.fireextinguisher.gametest;
 
 import de.markusbordihn.fireextinguisher.item.ModItems;
-import net.minecraft.gametest.framework.GameTest;
+import net.fabricmc.fabric.api.gametest.v1.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
 
 @SuppressWarnings("unused")
 public class ModItemsTest {
 
-  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  @GameTest(structure = "fire_extinguisher:gametest.1x1x1")
   public void testFireAxeItem(GameTestHelper helper) {
     ModItemsTestHelper.testModItem(helper, ModItems.FIRE_AXE);
     helper.succeed();
   }
 
-  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  @GameTest(structure = "fire_extinguisher:gametest.1x1x1")
   public void testFireHelmetItem(GameTestHelper helper) {
     ModItemsTestHelper.testModItem(helper, ModItems.FIRE_HELMET);
     helper.succeed();
   }
 
-  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  @GameTest(structure = "fire_extinguisher:gametest.1x1x1")
   public void testFireChestplateItem(GameTestHelper helper) {
     ModItemsTestHelper.testModItem(helper, ModItems.FIRE_CHESTPLATE);
     helper.succeed();
   }
 
-  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  @GameTest(structure = "fire_extinguisher:gametest.1x1x1")
   public void testFireLeggingsItem(GameTestHelper helper) {
     ModItemsTestHelper.testModItem(helper, ModItems.FIRE_LEGGINGS);
     helper.succeed();
   }
 
-  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  @GameTest(structure = "fire_extinguisher:gametest.1x1x1")
   public void testFireBootsItem(GameTestHelper helper) {
     ModItemsTestHelper.testModItem(helper, ModItems.FIRE_BOOTS);
     helper.succeed();
   }
 
-  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  @GameTest(structure = "fire_extinguisher:gametest.1x1x1")
   public void testFireHelmetLightItem(GameTestHelper helper) {
     ModItemsTestHelper.testModItem(helper, ModItems.FIRE_HELMET_LIGHT);
     helper.succeed();
   }
 
-  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  @GameTest(structure = "fire_extinguisher:gametest.1x1x1")
   public void testFireChestplateLightItem(GameTestHelper helper) {
     ModItemsTestHelper.testModItem(helper, ModItems.FIRE_CHESTPLATE_LIGHT);
     helper.succeed();
   }
 
-  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  @GameTest(structure = "fire_extinguisher:gametest.1x1x1")
   public void testFireLeggingsLightItem(GameTestHelper helper) {
     ModItemsTestHelper.testModItem(helper, ModItems.FIRE_LEGGINGS_LIGHT);
     helper.succeed();
   }
 
-  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  @GameTest(structure = "fire_extinguisher:gametest.1x1x1")
   public void testFireBootsLightItem(GameTestHelper helper) {
     ModItemsTestHelper.testModItem(helper, ModItems.FIRE_BOOTS_LIGHT);
     helper.succeed();

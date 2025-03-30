@@ -20,19 +20,23 @@
 package de.markusbordihn.fireextinguisher.gametest;
 
 import de.markusbordihn.fireextinguisher.Constants;
-import net.minecraft.gametest.framework.GameTest;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.gametest.framework.GameTestHelper;
+import net.minecraft.resources.ResourceLocation;
 import net.neoforged.fml.ModList;
-import net.neoforged.neoforge.gametest.GameTestHolder;
-import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
 
 @SuppressWarnings("unused")
-@PrefixGameTestTemplate(value = false)
-@GameTestHolder(Constants.MOD_ID)
 public class SmokeTest {
 
-  @GameTest(template = "gametest.3x3x3")
-  public void testModRegistered(GameTestHelper helper) {
+  public static void register() {
+    Registry.register(
+        BuiltInRegistries.TEST_FUNCTION,
+        ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "test_mod_registered"),
+        SmokeTest::testModRegistered);
+  }
+
+  public static void testModRegistered(GameTestHelper helper) {
     GameTestHelpers.assertTrue(
         helper,
         "Mod " + Constants.MOD_ID + " is not available!",

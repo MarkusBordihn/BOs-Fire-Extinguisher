@@ -20,6 +20,14 @@
 package de.markusbordihn.fireextinguisher.item;
 
 import de.markusbordihn.fireextinguisher.Constants;
+import de.markusbordihn.fireextinguisher.item.equipment.FireBootsItem;
+import de.markusbordihn.fireextinguisher.item.equipment.FireBootsLightItem;
+import de.markusbordihn.fireextinguisher.item.equipment.FireChestplateItem;
+import de.markusbordihn.fireextinguisher.item.equipment.FireChestplateLightItem;
+import de.markusbordihn.fireextinguisher.item.equipment.FireHelmetItem;
+import de.markusbordihn.fireextinguisher.item.equipment.FireHelmetLightItem;
+import de.markusbordihn.fireextinguisher.item.equipment.FireLeggingsItem;
+import de.markusbordihn.fireextinguisher.item.equipment.FireLeggingsLightItem;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.Item;
