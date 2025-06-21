@@ -20,19 +20,12 @@
     ],
     "client": [
       "de.markusbordihn.fireextinguisher.FireExtinguisherClient"
-    ],
-    "fabric-gametest": [
-      "de.markusbordihn.fireextinguisher.gametest.SmokeTest",
-      "de.markusbordihn.fireextinguisher.gametest.ModBlocksTest",
-      "de.markusbordihn.fireextinguisher.gametest.ModBlockItemsTest",
-      "de.markusbordihn.fireextinguisher.gametest.ModItemsTest",
-      "de.markusbordihn.fireextinguisher.gametest.LootTablesTest"
     ]
   },
   "depends": {
     "fabricloader": ">=0.15",
     "fabric": "*",
-    "minecraft": "1.21.5",
+    "minecraft": "1.21.6",
     "java": ">=21"
   }
 }

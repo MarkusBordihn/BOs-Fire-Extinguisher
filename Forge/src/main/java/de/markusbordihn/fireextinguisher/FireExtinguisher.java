@@ -29,9 +29,6 @@ import de.markusbordihn.fireextinguisher.item.ModItems;
 import de.markusbordihn.fireextinguisher.sounds.ModSoundEvents;
 import de.markusbordihn.fireextinguisher.tabs.ModTabs;
 import java.util.Optional;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLPaths;
@@ -44,7 +41,7 @@ public class FireExtinguisher {
   public static final Logger log = LogManager.getLogger(Constants.LOG_NAME);
 
   public FireExtinguisher(FMLJavaModLoadingContext context) {
-    final IEventBus modEventBus = context.getModEventBus();
+    final var modBusGroup = context.getModBusGroup();
 
     log.info("{} Debug Manager ...", Constants.LOG_REGISTER_PREFIX);
     Optional<String> version =
@@ -63,18 +60,18 @@ public class FireExtinguisher {
     Config.register();
 
     log.info("{} Blocks ...", Constants.LOG_REGISTER_PREFIX);
-    ModBlocks.BLOCKS.register(modEventBus);
+    ModBlocks.BLOCKS.register(modBusGroup);
 
     log.info("{} Block Items ...", Constants.LOG_REGISTER_PREFIX);
-    ModBlockItems.ITEMS.register(modEventBus);
+    ModBlockItems.ITEMS.register(modBusGroup);
 
     log.info("{} Items ...", Constants.LOG_REGISTER_PREFIX);
-    ModItems.ITEMS.register(modEventBus);
+    ModItems.ITEMS.register(modBusGroup);
 
     log.info("{} Sound Events ...", Constants.LOG_REGISTER_PREFIX);
-    ModSoundEvents.SOUNDS.register(modEventBus);
+    ModSoundEvents.SOUNDS.register(modBusGroup);
 
-    DistExecutor.unsafeRunWhenOn(
-        Dist.CLIENT, () -> () -> ModTabs.CREATIVE_TABS.register(modEventBus));
+    log.info("{} Creative Tabs ...", Constants.LOG_REGISTER_PREFIX);
+    ModTabs.CREATIVE_TABS.register(modBusGroup);
   }
 }

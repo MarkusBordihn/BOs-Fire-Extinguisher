@@ -21,7 +21,7 @@ package de.markusbordihn.fireextinguisher.commands;
 
 import de.markusbordihn.fireextinguisher.commands.manager.CommandManager;
 import net.minecraftforge.event.RegisterCommandsEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.eventbus.api.listener.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
 @EventBusSubscriber
