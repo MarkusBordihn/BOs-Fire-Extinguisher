@@ -43,6 +43,10 @@ runs {
 
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
+configurations {
+  runtimeClasspath.extendsFrom localRuntime
+}
+
 dependencies {
   implementation "net.neoforged:neoforge:${project.neoforge_version}"
   compileOnly project(":Common")
