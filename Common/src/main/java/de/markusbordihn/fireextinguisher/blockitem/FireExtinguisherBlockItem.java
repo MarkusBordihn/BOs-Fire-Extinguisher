@@ -152,14 +152,14 @@ public class FireExtinguisherBlockItem extends BlockItem {
   }
 
   public static void stopFireSound(Level level, Player player) {
-    if (level.isClientSide) {
+    if (level.isClientSide()) {
       player.playSound(SoundEvents.FIRE_EXTINGUISH, 1.0F, 1.0F);
     }
   }
 
   public static void hurtAndBreak(
       Level level, ItemStack itemStack, Player player, InteractionHand hand) {
-    if (!level.isClientSide) {
+    if (!level.isClientSide()) {
       itemStack.hurtAndBreak(
           1,
           player,
@@ -231,7 +231,7 @@ public class FireExtinguisherBlockItem extends BlockItem {
       livingEntity.setRemainingFireTicks(2);
     }
 
-    if (!level.isClientSide) {
+    if (!level.isClientSide()) {
       // Add slowness effect for movement and jump
       livingEntity.addEffect(
           new MobEffectInstance(MobEffects.SLOWNESS, ATTACK_EFFECT_DURATION, 10));

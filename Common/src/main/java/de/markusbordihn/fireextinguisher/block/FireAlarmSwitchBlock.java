@@ -136,7 +136,7 @@ public class FireAlarmSwitchBlock extends FaceAttachedHorizontalDirectionalBlock
       BlockPos blockPos,
       Player player,
       BlockHitResult blockHitResult) {
-    if (level.isClientSide) {
+    if (level.isClientSide()) {
       BlockState powerBlockState = blockState.cycle(POWERED);
       if (Boolean.TRUE.equals(powerBlockState.getValue(POWERED))) {
         makeParticle(powerBlockState, level, blockPos, 1.0F);

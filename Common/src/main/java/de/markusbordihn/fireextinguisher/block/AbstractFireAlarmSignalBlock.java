@@ -96,7 +96,7 @@ public abstract class AbstractFireAlarmSignalBlock extends FaceAttachedHorizonta
       Block block,
       Orientation unused,
       boolean unused2) {
-    if (!level.isClientSide) {
+    if (!level.isClientSide()) {
       boolean isPowered = blockState.getValue(POWERED);
       if (isPowered != level.hasNeighborSignal(blockPos) && !isPowered) {
         level.setBlock(blockPos, blockState.cycle(POWERED), 2);

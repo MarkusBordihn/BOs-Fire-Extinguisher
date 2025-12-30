@@ -52,7 +52,7 @@ public class FireAlarmBlocks {
                       Registries.BLOCK,
                       ResourceLocation.fromNamespaceAndPath(
                           Constants.MOD_ID, FireAlarmSwitchBlock.ID)))
-              .noCollission()
+              .noCollision()
               .strength(0.5F)
               .sound(SoundType.STONE)
               .pushReaction(PushReaction.DESTROY));
