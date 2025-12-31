@@ -22,7 +22,7 @@ package de.markusbordihn.fireextinguisher.block;
 import de.markusbordihn.fireextinguisher.Constants;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -36,7 +36,7 @@ public class ExitSignBlocks {
               .setId(
                   ResourceKey.create(
                       Registries.BLOCK,
-                      ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, ExitSign.ID)))
+                      Identifier.fromNamespaceAndPath(Constants.MOD_ID, ExitSign.ID)))
               .mapColor(MapColor.STONE)
               .requiresCorrectToolForDrops()
               .strength(3.0F, 6.0F)
@@ -47,7 +47,7 @@ public class ExitSignBlocks {
               .setId(
                   ResourceKey.create(
                       Registries.BLOCK,
-                      ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, ExitSign.ID_LEFT)))
+                      Identifier.fromNamespaceAndPath(Constants.MOD_ID, ExitSign.ID_LEFT)))
               .mapColor(MapColor.STONE)
               .requiresCorrectToolForDrops()
               .strength(3.0F, 6.0F)
@@ -58,7 +58,7 @@ public class ExitSignBlocks {
               .setId(
                   ResourceKey.create(
                       Registries.BLOCK,
-                      ResourceLocation.fromNamespaceAndPath(
+                      Identifier.fromNamespaceAndPath(
                           Constants.MOD_ID, ExitSign.ID_LEFT_DOWN)))
               .mapColor(MapColor.STONE)
               .requiresCorrectToolForDrops()
@@ -70,7 +70,7 @@ public class ExitSignBlocks {
               .setId(
                   ResourceKey.create(
                       Registries.BLOCK,
-                      ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, ExitSign.ID_LEFT_UP)))
+                      Identifier.fromNamespaceAndPath(Constants.MOD_ID, ExitSign.ID_LEFT_UP)))
               .mapColor(MapColor.STONE)
               .requiresCorrectToolForDrops()
               .strength(3.0F, 6.0F)
@@ -81,7 +81,7 @@ public class ExitSignBlocks {
               .setId(
                   ResourceKey.create(
                       Registries.BLOCK,
-                      ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, ExitSign.ID_RIGHT)))
+                      Identifier.fromNamespaceAndPath(Constants.MOD_ID, ExitSign.ID_RIGHT)))
               .mapColor(MapColor.STONE)
               .requiresCorrectToolForDrops()
               .strength(3.0F, 6.0F)
@@ -92,7 +92,7 @@ public class ExitSignBlocks {
               .setId(
                   ResourceKey.create(
                       Registries.BLOCK,
-                      ResourceLocation.fromNamespaceAndPath(
+                      Identifier.fromNamespaceAndPath(
                           Constants.MOD_ID, ExitSign.ID_RIGHT_DOWN)))
               .mapColor(MapColor.STONE)
               .requiresCorrectToolForDrops()
@@ -104,7 +104,7 @@ public class ExitSignBlocks {
               .setId(
                   ResourceKey.create(
                       Registries.BLOCK,
-                      ResourceLocation.fromNamespaceAndPath(
+                      Identifier.fromNamespaceAndPath(
                           Constants.MOD_ID, ExitSign.ID_RIGHT_UP)))
               .mapColor(MapColor.STONE)
               .requiresCorrectToolForDrops()

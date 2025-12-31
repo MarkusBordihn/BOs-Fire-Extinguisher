@@ -1,8 +1,10 @@
 plugins {
-  id 'net.neoforged.moddev' version '2.0.107'
+  id 'net.neoforged.moddev' version '2.0.126'
 }
 
-archivesBaseName = "${mod_name}-common-${minecraft_version}"
+base {
+  archivesName = "${mod_name}-common-${minecraft_version}"
+}
 
 neoForge {
   neoFormVersion = neo_form_version
@@ -18,4 +20,9 @@ processResources {
   filesMatching(['pack.mcmeta']) {
     expand buildProps
   }
+}
+
+tasks.register("prepareWorkspace") {
+  group = "ide"
+  description = "Runs post-sync tasks for IDE integration"
 }

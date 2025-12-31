@@ -43,29 +43,25 @@ public class FireExtinguisherClient implements ClientModInitializer {
 
     log.info("{} Block Layers ...", Constants.LOG_REGISTER_PREFIX);
     BlockRenderLayerMap.putBlock(
-        FireExtinguisherBlocks.FIRE_EXTINGUISHER, ChunkSectionLayer.CUTOUT_MIPPED);
+        FireExtinguisherBlocks.FIRE_EXTINGUISHER, ChunkSectionLayer.CUTOUT);
     BlockRenderLayerMap.putBlock(
-        FireExtinguisherBlocks.FIRE_EXTINGUISHER_COPPER, ChunkSectionLayer.CUTOUT_MIPPED);
+        FireExtinguisherBlocks.FIRE_EXTINGUISHER_COPPER, ChunkSectionLayer.CUTOUT);
 
-    BlockRenderLayerMap.putBlock(FireAlarmBlocks.FIRE_SPRINKLER, ChunkSectionLayer.CUTOUT_MIPPED);
+    BlockRenderLayerMap.putBlock(FireAlarmBlocks.FIRE_SPRINKLER, ChunkSectionLayer.CUTOUT);
+    BlockRenderLayerMap.putBlock(FireAlarmBlocks.FIRE_ALARM_SWITCH, ChunkSectionLayer.CUTOUT);
+    BlockRenderLayerMap.putBlock(FireAlarmBlocks.FIRE_ALARM_BELL, ChunkSectionLayer.CUTOUT);
+    BlockRenderLayerMap.putBlock(FireAlarmBlocks.FIRE_ALARM_SIREN, ChunkSectionLayer.CUTOUT);
     BlockRenderLayerMap.putBlock(
-        FireAlarmBlocks.FIRE_ALARM_SWITCH, ChunkSectionLayer.CUTOUT_MIPPED);
-    BlockRenderLayerMap.putBlock(FireAlarmBlocks.FIRE_ALARM_BELL, ChunkSectionLayer.CUTOUT_MIPPED);
-    BlockRenderLayerMap.putBlock(FireAlarmBlocks.FIRE_ALARM_SIREN, ChunkSectionLayer.CUTOUT_MIPPED);
+        FireAlarmBlocks.FIRE_ALARM_SMOKE_DETECTOR, ChunkSectionLayer.CUTOUT);
     BlockRenderLayerMap.putBlock(
-        FireAlarmBlocks.FIRE_ALARM_SMOKE_DETECTOR, ChunkSectionLayer.CUTOUT_MIPPED);
-    BlockRenderLayerMap.putBlock(
-        FireAlarmBlocks.FIRE_ALARM_SMOKE_DETECTOR_SILENT, ChunkSectionLayer.CUTOUT_MIPPED);
+        FireAlarmBlocks.FIRE_ALARM_SMOKE_DETECTOR_SILENT, ChunkSectionLayer.CUTOUT);
 
-    BlockRenderLayerMap.putBlock(ExitSignBlocks.EXIT_SIGN, ChunkSectionLayer.CUTOUT_MIPPED);
-    BlockRenderLayerMap.putBlock(ExitSignBlocks.EXIT_SIGN_LEFT, ChunkSectionLayer.CUTOUT_MIPPED);
-    BlockRenderLayerMap.putBlock(
-        ExitSignBlocks.EXIT_SIGN_LEFT_DOWN, ChunkSectionLayer.CUTOUT_MIPPED);
-    BlockRenderLayerMap.putBlock(ExitSignBlocks.EXIT_SIGN_LEFT_UP, ChunkSectionLayer.CUTOUT_MIPPED);
-    BlockRenderLayerMap.putBlock(ExitSignBlocks.EXIT_SIGN_RIGHT, ChunkSectionLayer.CUTOUT_MIPPED);
-    BlockRenderLayerMap.putBlock(
-        ExitSignBlocks.EXIT_SIGN_RIGHT_DOWN, ChunkSectionLayer.CUTOUT_MIPPED);
-    BlockRenderLayerMap.putBlock(
-        ExitSignBlocks.EXIT_SIGN_RIGHT_UP, ChunkSectionLayer.CUTOUT_MIPPED);
+    BlockRenderLayerMap.putBlock(ExitSignBlocks.EXIT_SIGN, ChunkSectionLayer.CUTOUT);
+    BlockRenderLayerMap.putBlock(ExitSignBlocks.EXIT_SIGN_LEFT, ChunkSectionLayer.CUTOUT);
+    BlockRenderLayerMap.putBlock(ExitSignBlocks.EXIT_SIGN_LEFT_DOWN, ChunkSectionLayer.CUTOUT);
+    BlockRenderLayerMap.putBlock(ExitSignBlocks.EXIT_SIGN_LEFT_UP, ChunkSectionLayer.CUTOUT);
+    BlockRenderLayerMap.putBlock(ExitSignBlocks.EXIT_SIGN_RIGHT, ChunkSectionLayer.CUTOUT);
+    BlockRenderLayerMap.putBlock(ExitSignBlocks.EXIT_SIGN_RIGHT_DOWN, ChunkSectionLayer.CUTOUT);
+    BlockRenderLayerMap.putBlock(ExitSignBlocks.EXIT_SIGN_RIGHT_UP, ChunkSectionLayer.CUTOUT);
   }
 }

@@ -17,12 +17,8 @@ pluginManagement {
       name = 'Sponge Snapshots'
       url = 'https://repo.spongepowered.org/repository/maven-public/'
     }
-    maven {
-      name = 'Parchment'
-      url = 'https://maven.parchmentmc.org'
-    }
   }
 }
 
-rootProject.name = 'Fire Extinguisher 1.21.10'
+rootProject.name = 'Fire Extinguisher 1.21.11'
 include("Common", "Fabric", "Forge", "NeoForge")

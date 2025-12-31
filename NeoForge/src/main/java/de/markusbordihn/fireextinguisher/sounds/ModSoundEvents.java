@@ -22,7 +22,7 @@ package de.markusbordihn.fireextinguisher.sounds;
 import de.markusbordihn.fireextinguisher.Constants;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -35,19 +35,19 @@ public class ModSoundEvents {
           "fire_alarm_bell",
           () ->
               SoundEvent.createVariableRangeEvent(
-                  ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "fire_alarm_bell")));
+                  Identifier.fromNamespaceAndPath(Constants.MOD_ID, "fire_alarm_bell")));
   public static final Holder<SoundEvent> FIRE_ALARM_SIREN =
       SOUNDS.register(
           "fire_alarm_siren",
           () ->
               SoundEvent.createVariableRangeEvent(
-                  ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "fire_alarm_siren")));
+                  Identifier.fromNamespaceAndPath(Constants.MOD_ID, "fire_alarm_siren")));
   public static final Holder<SoundEvent> FIRE_ALARM_SMOKE_DETECTOR =
       SOUNDS.register(
           "fire_alarm_smoke_detector",
           () ->
               SoundEvent.createVariableRangeEvent(
-                  ResourceLocation.fromNamespaceAndPath(
+                  Identifier.fromNamespaceAndPath(
                       Constants.MOD_ID, "fire_alarm_smoke_detector")));
 
   protected ModSoundEvents() {}

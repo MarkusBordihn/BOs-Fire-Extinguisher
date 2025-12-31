@@ -32,7 +32,7 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -74,7 +74,7 @@ public class FireExtinguisherBlockItem extends BlockItem {
             .useBlockDescriptionPrefix()
             .setId(
                 ResourceKey.create(
-                    Registries.ITEM, ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, id)))
+                    Registries.ITEM, Identifier.fromNamespaceAndPath(Constants.MOD_ID, id)))
             .stacksTo(1)
             .durability(128)
             .fireResistant());

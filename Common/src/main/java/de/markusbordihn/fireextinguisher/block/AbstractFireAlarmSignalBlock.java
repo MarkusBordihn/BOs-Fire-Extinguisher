@@ -23,7 +23,7 @@ import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
@@ -80,7 +80,7 @@ public abstract class AbstractFireAlarmSignalBlock extends FaceAttachedHorizonta
       RandomSource random) {}
 
   protected void playPoweredSound(
-      ResourceLocation resourceLocation, ServerLevel serverLevel, BlockPos blockPos) {
+      Identifier resourceLocation, ServerLevel serverLevel, BlockPos blockPos) {
     BuiltInRegistries.SOUND_EVENT
         .getOptional(resourceLocation)
         .ifPresent(

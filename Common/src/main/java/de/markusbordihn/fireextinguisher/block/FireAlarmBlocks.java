@@ -22,7 +22,7 @@ package de.markusbordihn.fireextinguisher.block;
 import de.markusbordihn.fireextinguisher.Constants;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
@@ -38,7 +38,7 @@ public class FireAlarmBlocks {
               .setId(
                   ResourceKey.create(
                       Registries.BLOCK,
-                      ResourceLocation.fromNamespaceAndPath(
+                      Identifier.fromNamespaceAndPath(
                           Constants.MOD_ID, FireSprinklerBlock.ID)))
               .mapColor(MapColor.STONE)
               .instrument(NoteBlockInstrument.BASEDRUM)
@@ -50,7 +50,7 @@ public class FireAlarmBlocks {
               .setId(
                   ResourceKey.create(
                       Registries.BLOCK,
-                      ResourceLocation.fromNamespaceAndPath(
+                      Identifier.fromNamespaceAndPath(
                           Constants.MOD_ID, FireAlarmSwitchBlock.ID)))
               .noCollision()
               .strength(0.5F)
@@ -62,7 +62,7 @@ public class FireAlarmBlocks {
               .setId(
                   ResourceKey.create(
                       Registries.BLOCK,
-                      ResourceLocation.fromNamespaceAndPath(
+                      Identifier.fromNamespaceAndPath(
                           Constants.MOD_ID, FireAlarmBellBlock.ID)))
               .mapColor(MapColor.GOLD)
               .instrument(NoteBlockInstrument.BELL)
@@ -76,7 +76,7 @@ public class FireAlarmBlocks {
               .setId(
                   ResourceKey.create(
                       Registries.BLOCK,
-                      ResourceLocation.fromNamespaceAndPath(
+                      Identifier.fromNamespaceAndPath(
                           Constants.MOD_ID, FireAlarmSirenBlock.ID)))
               .mapColor(MapColor.GOLD)
               .instrument(NoteBlockInstrument.BELL)
@@ -90,7 +90,7 @@ public class FireAlarmBlocks {
               .setId(
                   ResourceKey.create(
                       Registries.BLOCK,
-                      ResourceLocation.fromNamespaceAndPath(
+                      Identifier.fromNamespaceAndPath(
                           Constants.MOD_ID, FireAlarmSmokeDetectorBlock.ID)))
               .randomTicks()
               .mapColor(MapColor.WOOD)
@@ -105,7 +105,7 @@ public class FireAlarmBlocks {
               .setId(
                   ResourceKey.create(
                       Registries.BLOCK,
-                      ResourceLocation.fromNamespaceAndPath(
+                      Identifier.fromNamespaceAndPath(
                           Constants.MOD_ID, FireAlarmSmokeDetectorSilentBlock.ID)))
               .randomTicks()
               .mapColor(MapColor.WOOD)

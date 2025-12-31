@@ -20,12 +20,10 @@
 package de.markusbordihn.fireextinguisher.item;
 
 import de.markusbordihn.fireextinguisher.Constants;
-import java.util.EnumMap;
 import java.util.Map;
-import net.minecraft.Util;
 import net.minecraft.core.Holder;
+import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.ItemTags;
@@ -38,69 +36,68 @@ import net.minecraft.world.item.equipment.EquipmentAsset;
 public enum ModArmorMaterials {
   FIRE_PROTECTION(
       "fire_protection_armor",
-      Util.make(
-          new EnumMap(ArmorType.class),
-          map -> {
-            map.put(ArmorType.BOOTS, 2);
-            map.put(ArmorType.LEGGINGS, 5);
-            map.put(ArmorType.CHESTPLATE, 6);
-            map.put(ArmorType.HELMET, 2);
-            map.put(ArmorType.BODY, 5);
-          }),
+      15,
+      makeDefense(2, 5, 6, 2, 5),
       9,
       SoundEvents.ARMOR_EQUIP_IRON,
+      0.0F,
+      0.0F,
       ItemTags.REPAIRS_IRON_ARMOR,
       ResourceKey.create(
-          ResourceKey.createRegistryKey(ResourceLocation.withDefaultNamespace("equipment_asset")),
-          ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "fire_protection_armor")),
-      0.0F,
-      0.0F),
+          ResourceKey.createRegistryKey(Identifier.withDefaultNamespace("equipment_asset")),
+          Identifier.fromNamespaceAndPath(Constants.MOD_ID, "fire_protection_armor"))),
   FIRE_PROTECTION_LIGHT(
       "fire_protection_light_armor",
-      Util.make(
-          new EnumMap(ArmorType.class),
-          map -> {
-            map.put(ArmorType.BOOTS, 2);
-            map.put(ArmorType.LEGGINGS, 5);
-            map.put(ArmorType.CHESTPLATE, 6);
-            map.put(ArmorType.HELMET, 2);
-            map.put(ArmorType.BODY, 5);
-          }),
+      15,
+      makeDefense(2, 5, 6, 2, 5),
       9,
       SoundEvents.ARMOR_EQUIP_IRON,
+      0.0F,
+      0.0F,
       ItemTags.REPAIRS_IRON_ARMOR,
       ResourceKey.create(
-          ResourceKey.createRegistryKey(ResourceLocation.withDefaultNamespace("equipment_asset")),
-          ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "fire_protection_light_armor")),
-      0.0F,
-      0.0F);
+          ResourceKey.createRegistryKey(Identifier.withDefaultNamespace("equipment_asset")),
+          Identifier.fromNamespaceAndPath(Constants.MOD_ID, "fire_protection_light_armor")));
 
   private final String name;
-  private final ResourceLocation resourceLocation;
   private final ArmorMaterial armorMaterial;
-  private Holder<ArmorMaterial> holder;
 
   ModArmorMaterials(
       String name,
+      int durability,
       Map<ArmorType, Integer> defense,
       int enchantmentValue,
       Holder<SoundEvent> equipSound,
-      TagKey<Item> repairIngredient,
-      ResourceKey<EquipmentAsset> resourceLocation,
       float toughness,
-      float knockbackResistance) {
+      float knockbackResistance,
+      TagKey<Item> repairIngredient,
+      ResourceKey<EquipmentAsset> assetId) {
     this.name = name;
-    this.resourceLocation = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, name);
     this.armorMaterial =
         new ArmorMaterial(
-            15,
+            durability,
             defense,
             enchantmentValue,
             equipSound,
             toughness,
             knockbackResistance,
             repairIngredient,
-            resourceLocation);
+            assetId);
+  }
+
+  private static Map<ArmorType, Integer> makeDefense(
+      int boots, int leggings, int chestplate, int helmet, int body) {
+    return Map.of(
+        ArmorType.BOOTS,
+        boots,
+        ArmorType.LEGGINGS,
+        leggings,
+        ArmorType.CHESTPLATE,
+        chestplate,
+        ArmorType.HELMET,
+        helmet,
+        ArmorType.BODY,
+        body);
   }
 
   public String getName() {

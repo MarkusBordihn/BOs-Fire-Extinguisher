@@ -28,7 +28,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -61,7 +61,7 @@ public class FireAxeItem extends AxeItem {
         new Item.Properties()
             .setId(
                 ResourceKey.create(
-                    Registries.ITEM, ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, ID)))
+                    Registries.ITEM, Identifier.fromNamespaceAndPath(Constants.MOD_ID, ID)))
             .fireResistant());
   }
 

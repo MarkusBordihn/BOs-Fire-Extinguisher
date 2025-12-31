@@ -20,7 +20,7 @@
 package de.markusbordihn.fireextinguisher.block;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 
@@ -34,7 +34,7 @@ public class FireAlarmSmokeDetectorSilentBlock extends FireAlarmSmokeDetectorBlo
 
   @Override
   protected void playPoweredSound(
-      ResourceLocation resourceLocation, ServerLevel serverLevel, BlockPos blockPos) {
+      Identifier resourceLocation, ServerLevel serverLevel, BlockPos blockPos) {
     // Silent
   }
 }
