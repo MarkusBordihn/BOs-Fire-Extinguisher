@@ -23,24 +23,19 @@ import de.markusbordihn.fireextinguisher.Constants;
 import de.markusbordihn.fireextinguisher.config.FireExtinguisherConfig;
 import de.markusbordihn.fireextinguisher.utils.ToolTips;
 import java.util.List;
+import java.util.Properties;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.equipment.ArmorType;
-import net.minecraft.world.level.Level;
 
 public class FireLeggingsItem extends FireProtectionArmorItem {
 
   public static final String ID = "fire_leggings";
-
-  private int ticker = 0;
 
   public FireLeggingsItem() {
     this(
@@ -52,24 +47,6 @@ public class FireLeggingsItem extends FireProtectionArmorItem {
 
   public FireLeggingsItem(Properties properties) {
     super(ArmorType.LEGGINGS, properties);
-  }
-
-  @Override
-  protected void fireArmorTick(ItemStack itemStack, Level level, ServerPlayer serverPlayer) {
-    if (Boolean.TRUE.equals(
-            FireExtinguisherConfig.fireProtectionEnabled
-                && ticker++ > FireExtinguisherConfig.fireProtectionRenew)
-        && !serverPlayer.hasEffect(MobEffects.FIRE_RESISTANCE)) {
-      serverPlayer.addEffect(
-          new MobEffectInstance(
-              MobEffects.FIRE_RESISTANCE, FireExtinguisherConfig.fireProtectionDuration));
-      if (Boolean.TRUE.equals(FireExtinguisherConfig.fireLeggingsSlowDownEnabled)) {
-        serverPlayer.addEffect(
-            new MobEffectInstance(
-                MobEffects.MOVEMENT_SLOWDOWN, FireExtinguisherConfig.fireProtectionDuration));
-      }
-      ticker = 0;
-    }
   }
 
   @Override
@@ -87,7 +64,7 @@ public class FireLeggingsItem extends FireProtectionArmorItem {
         tooltipList,
         Component.translatable(Constants.TEXT_PREFIX + ID + "_description")
             .withStyle(ChatFormatting.GRAY));
-    if (Boolean.TRUE.equals(FireExtinguisherConfig.fireProtectionEnabled)) {
+    if (FireExtinguisherConfig.fireProtectionEnabled) {
       ToolTips.addTooltip(
           tooltipList,
           Component.translatable(
@@ -96,7 +73,7 @@ public class FireLeggingsItem extends FireProtectionArmorItem {
                   Math.round((FireExtinguisherConfig.fireProtectionDuration / 20.0) * 10) / 10.0)
               .withStyle(ChatFormatting.GREEN));
     }
-    if (Boolean.TRUE.equals(FireExtinguisherConfig.fireLeggingsSlowDownEnabled)) {
+    if (FireExtinguisherConfig.fireLeggingsSlowDownEnabled) {
       ToolTips.addTooltip(
           tooltipList,
           Component.translatable(Constants.TEXT_PREFIX + "fire_armor_slow_down")

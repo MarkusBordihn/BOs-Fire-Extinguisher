@@ -40,8 +40,6 @@ public class FireHelmetItem extends FireProtectionArmorItem {
 
   public static final String ID = "fire_helmet";
 
-  private int ticker = 0;
-
   public FireHelmetItem() {
     this(
         new Properties()
@@ -56,14 +54,22 @@ public class FireHelmetItem extends FireProtectionArmorItem {
 
   @Override
   protected void fireArmorTick(ItemStack itemStack, Level level, ServerPlayer serverPlayer) {
-    if (Boolean.TRUE.equals(
-            FireExtinguisherConfig.fireProtectionEnabled
-                && ticker++ > FireExtinguisherConfig.fireProtectionRenew)
+    if (FireExtinguisherConfig.fireProtectionEnabled
         && !serverPlayer.hasEffect(MobEffects.FIRE_RESISTANCE)) {
-      serverPlayer.addEffect(
-          new MobEffectInstance(
-              MobEffects.FIRE_RESISTANCE, FireExtinguisherConfig.fireProtectionDuration));
-      ticker = 0;
+      long currentTime = level.getGameTime();
+      long lastTime = lastEffectTime.getOrDefault(serverPlayer.getUUID(), 0L);
+      if (currentTime - lastTime > FireExtinguisherConfig.fireProtectionRenew) {
+        int armorCount = countWornFireArmorPieces(serverPlayer, ModArmorMaterials.FIRE_PROTECTION.getArmorMaterial());
+        int totalDuration = FireExtinguisherConfig.fireProtectionDuration * armorCount;
+        if (totalDuration > 0) {
+          serverPlayer.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, totalDuration));
+          if (hasSlowDownArmor(serverPlayer)) {
+            serverPlayer.addEffect(
+                new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, totalDuration));
+          }
+          lastEffectTime.put(serverPlayer.getUUID(), currentTime);
+        }
+      }
     }
   }
 
@@ -82,7 +88,7 @@ public class FireHelmetItem extends FireProtectionArmorItem {
         tooltipList,
         Component.translatable(Constants.TEXT_PREFIX + ID + "_description")
             .withStyle(ChatFormatting.GRAY));
-    if (Boolean.TRUE.equals(FireExtinguisherConfig.fireProtectionEnabled)) {
+    if (FireExtinguisherConfig.fireProtectionEnabled) {
       ToolTips.addTooltip(
           tooltipList,
           Component.translatable(

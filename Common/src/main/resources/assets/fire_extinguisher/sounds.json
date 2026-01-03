@@ -1,20 +1,29 @@
 {
   "fire_alarm_bell": {
-    "category": "neutral",
+    "category": "block",
     "sounds": [
-      "fire_extinguisher:fire_alarm_bell"
+      {
+        "name": "fire_extinguisher:fire_alarm_bell",
+        "attenuation_distance": 24
+      }
     ]
   },
   "fire_alarm_siren": {
-    "category": "neutral",
+    "category": "block",
     "sounds": [
-      "fire_extinguisher:fire_alarm_siren"
+      {
+        "name": "fire_extinguisher:fire_alarm_siren",
+        "attenuation_distance": 32
+      }
     ]
   },
   "fire_alarm_smoke_detector": {
-    "category": "neutral",
+    "category": "block",
     "sounds": [
-      "fire_extinguisher:fire_alarm_smoke_detector"
+      {
+        "name": "fire_extinguisher:fire_alarm_smoke_detector",
+        "attenuation_distance": 32
+      }
     ]
   }
 }

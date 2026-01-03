@@ -33,7 +33,7 @@ public class FireExtinguisherConfig extends Config {
   public static int fireAxtRadius = 1;
 
   public static int fireSprinklerRadiusX = 2;
-  public static int fireSprinklerRadiusY = 3;
+  public static int fireSprinklerRadiusY = 4;
   public static int fireSprinklerRadiusZ = 2;
 
   public static int smokeDetectorRadiusX = 3;
@@ -41,11 +41,11 @@ public class FireExtinguisherConfig extends Config {
   public static int smokeDetectorRadiusZ = 3;
 
   public static boolean fireProtectionEnabled = true;
-  public static int fireProtectionDuration = 25;
+  public static int fireProtectionDuration = 45;
   public static int fireProtectionRenew = 80;
 
   public static boolean fireProtectionLightEnabled = true;
-  public static int fireProtectionLightDuration = 180;
+  public static int fireProtectionLightDuration = 25;
   public static int fireProtectionLightRenew = 40;
 
   public static boolean fireBootsSlowDownEnabled = true;
@@ -107,7 +107,21 @@ public class FireExtinguisherConfig extends Config {
     fireLeggingsSlowDownEnabled =
         parseConfigValue(properties, "fireLeggingsSlowDownEnabled", fireLeggingsSlowDownEnabled);
 
-    // Update config file if needed
+    fireExtinguisherRadiusX = Math.max(0, fireExtinguisherRadiusX);
+    fireExtinguisherRadiusY = Math.max(0, fireExtinguisherRadiusY);
+    fireExtinguisherRadiusZ = Math.max(0, fireExtinguisherRadiusZ);
+    fireAxtRadius = Math.max(0, fireAxtRadius);
+    fireSprinklerRadiusX = Math.max(0, fireSprinklerRadiusX);
+    fireSprinklerRadiusY = Math.max(0, fireSprinklerRadiusY);
+    fireSprinklerRadiusZ = Math.max(0, fireSprinklerRadiusZ);
+    smokeDetectorRadiusX = Math.max(0, smokeDetectorRadiusX);
+    smokeDetectorRadiusY = Math.max(0, smokeDetectorRadiusY);
+    smokeDetectorRadiusZ = Math.max(0, smokeDetectorRadiusZ);
+    fireProtectionDuration = Math.max(0, fireProtectionDuration);
+    fireProtectionRenew = Math.max(0, fireProtectionRenew);
+    fireProtectionLightDuration = Math.max(0, fireProtectionLightDuration);
+    fireProtectionLightRenew = Math.max(0, fireProtectionLightRenew);
+
     updateConfigFileIfChanged(configFile, CONFIG_FILE_HEADER, properties, unmodifiedProperties);
   }
 }

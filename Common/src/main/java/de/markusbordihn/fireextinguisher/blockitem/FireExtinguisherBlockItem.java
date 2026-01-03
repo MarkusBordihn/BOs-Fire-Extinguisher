@@ -26,6 +26,7 @@ import de.markusbordihn.fireextinguisher.utils.ToolTips;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.WeakHashMap;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -62,9 +63,13 @@ public class FireExtinguisherBlockItem extends BlockItem {
   public static final String ID = "fire_extinguisher";
   public static final String ID_COPPER = "fire_extinguisher_copper";
   private static final Logger log = LogManager.getLogger(Constants.LOG_NAME);
+  private static final double X_SHIFT = 0.0;
   private static final double Y_SHIFT = 1.6;
+  private static final double Z_SHIFT = 0.0;
   private static final int PARTICLE_FRAMES = 8;
   private static final int ATTACK_EFFECT_DURATION = 200;
+  private static final WeakHashMap<Player, Long> activeExtinguishers = new WeakHashMap<>();
+  private static final long EXTINGUISH_COOLDOWN_MS = 1000;
 
   public FireExtinguisherBlockItem(Block block, String id) {
     this(
@@ -183,16 +188,37 @@ public class FireExtinguisherBlockItem extends BlockItem {
     ItemStack itemStack = context.getItemInHand();
     InteractionHand interactionHand = context.getHand();
 
-    // Place block if shift key is down.
-    if (player != null && player.isShiftKeyDown()) {
-      return super.useOn(context);
-    }
-    stopFireAnimation(player, level, blockPos);
-    if (level instanceof ServerLevel serverLevel) {
-      stopFire(serverLevel, player, interactionHand, blockPos, itemStack);
+    if (player != null) {
+      long currentTime = System.currentTimeMillis();
+      Long lastUseTime = activeExtinguishers.get(player);
+      boolean wasRecentlyExtinguishing =
+          lastUseTime != null && (currentTime - lastUseTime) < EXTINGUISH_COOLDOWN_MS;
+
+      // Prevent block placement if the fire extinguisher was recently used for extinguishing.
+      if (wasRecentlyExtinguishing) {
+        activeExtinguishers.put(player, currentTime);
+        stopFireAnimation(player, level, blockPos);
+        if (level instanceof ServerLevel serverLevel) {
+          stopFire(serverLevel, player, interactionHand, blockPos, itemStack);
+        }
+        return level.isClientSide() ? InteractionResult.SUCCESS : InteractionResult.CONSUME;
+      }
+
+      // Only allow block placement when sneaking and NOT recently extinguishing.
+      if (player.isShiftKeyDown()) {
+        activeExtinguishers.remove(player);
+        return super.useOn(context);
+      }
+
+      // Normal fire extinguishing behavior (not sneaking).
+      activeExtinguishers.put(player, currentTime);
+      stopFireAnimation(player, level, blockPos);
+      if (level instanceof ServerLevel serverLevel) {
+        stopFire(serverLevel, player, interactionHand, blockPos, itemStack);
+      }
     }
 
-    return InteractionResult.FAIL;
+    return level.isClientSide() ? InteractionResult.SUCCESS : InteractionResult.CONSUME;
   }
 
   @Override
@@ -201,6 +227,7 @@ public class FireExtinguisherBlockItem extends BlockItem {
 
     // Let player stop fire on them self, if he is not targeting any block.
     if (player.isOnFire()) {
+      activeExtinguishers.put(player, System.currentTimeMillis());
       if (player.getRemainingFireTicks() > 2) {
         player.setRemainingFireTicks(2);
       }
@@ -216,6 +243,8 @@ public class FireExtinguisherBlockItem extends BlockItem {
       ItemStack itemStack, Player player, LivingEntity livingEntity, InteractionHand hand) {
     BlockPos blockPos = livingEntity.getOnPos();
     Level level = player.level();
+
+    activeExtinguishers.put(player, System.currentTimeMillis());
     stopFireAnimation(player, player.level(), blockPos.above());
 
     // Set frozen
