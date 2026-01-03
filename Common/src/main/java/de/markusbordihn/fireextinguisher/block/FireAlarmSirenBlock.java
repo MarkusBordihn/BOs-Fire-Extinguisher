@@ -42,7 +42,7 @@ public class FireAlarmSirenBlock extends AbstractFireAlarmSignalBlock {
   protected static final VoxelShape SOUTH_AABB = Block.box(5, 5, 0, 11, 11, 4.5);
   protected static final VoxelShape WEST_AABB = Block.box(11.5, 5, 5, 16, 11, 11);
   protected static final VoxelShape UP_AABB = Block.box(5, 11.5, 5, 11, 16, 11);
-  protected static final VoxelShape DOWN_AABB = Block.box(5, 0., 5, 11, 4.5, 11);
+  protected static final VoxelShape DOWN_AABB = Block.box(5, 0.0, 5, 11, 4.5, 11);
 
   public FireAlarmSirenBlock(BlockBehaviour.Properties properties) {
     super(properties);

@@ -30,7 +30,6 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.CampfireBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -125,11 +124,7 @@ public class FireAlarmSmokeDetectorBlock extends AbstractFireAlarmSignalBlock {
     boolean detectedFire = false;
     for (BlockPos blockBlockPosition : blockPositions) {
       BlockState blockBlockState = serverLevel.getBlockState(blockBlockPosition);
-      // Check for fire block and lit campfire block
-      if (blockBlockState.is(Blocks.FIRE)
-          || (blockBlockState.is(Blocks.CAMPFIRE)
-              && blockBlockState.getBlock() instanceof CampfireBlock
-              && CampfireBlock.isLitCampfire(blockState))) {
+      if (blockBlockState.is(Blocks.FIRE)) {
         detectedFire = true;
         break;
       }
@@ -194,7 +189,7 @@ public class FireAlarmSmokeDetectorBlock extends AbstractFireAlarmSignalBlock {
       BlockPos blockPos,
       boolean isPowered,
       RandomSource random) {
-    if (Boolean.TRUE.equals(blockState.getValue(POWERED))) {
+    if (blockState.getValue(POWERED)) {
       playPoweredSound(SOUND_EVENT, serverLevel, blockPos);
     }
   }

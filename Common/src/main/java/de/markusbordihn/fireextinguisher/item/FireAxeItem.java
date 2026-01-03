@@ -30,6 +30,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -85,37 +86,23 @@ public class FireAxeItem extends AxeItem {
     for (BlockPos blockPos : blockPositions) {
       BlockState blockState = level.getBlockState(blockPos);
       if (blockState.is(Blocks.FIRE)) {
-
-        // Remove block on client and server.
         log.debug("[Fire Axt] Removing Fire Block {} at {}", blockState, blockPos);
         level.removeBlock(blockPos, false);
-
-        // Play fire extinguish sound on the client
-        stopFireSound(level, player);
-
         hasStoppedFire = true;
       } else if (blockState.is(Blocks.CAMPFIRE)
           && blockState.getBlock() instanceof CampfireBlock
           && CampfireBlock.isLitCampfire(blockState)) {
-
-        // Remove block on client and server.
         log.debug("[Fire Axt] Extinguishing Campfire Block {} at {}", blockState, blockPos);
         level.setBlockAndUpdate(blockPos, blockState.setValue(CampfireBlock.LIT, false));
-
-        // Play fire extinguish sound on the client
-        stopFireSound(level, player);
-
         hasStoppedFire = true;
       }
     }
     if (hasStoppedFire) {
+      if (!level.isClientSide) {
+        level.playSound(
+            null, targetBlockPos, SoundEvents.FIRE_EXTINGUISH, SoundSource.PLAYERS, 1.0F, 1.0F);
+      }
       hurtAndBreak(level, itemStack, player, hand);
-    }
-  }
-
-  public static void stopFireSound(Level level, Player player) {
-    if (level.isClientSide) {
-      player.playSound(SoundEvents.FIRE_EXTINGUISH, 1.0F, 1.0F);
     }
   }
 
