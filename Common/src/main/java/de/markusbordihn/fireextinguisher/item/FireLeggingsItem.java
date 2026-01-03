@@ -26,9 +26,6 @@ import java.util.List;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -38,32 +35,12 @@ public class FireLeggingsItem extends FireProtectionArmorItem {
 
   public static final String NAME = "fire_leggings";
 
-  private int ticker = 0;
-
   public FireLeggingsItem() {
     this(new Properties());
   }
 
   public FireLeggingsItem(Properties properties) {
     super(EquipmentSlot.LEGS, properties);
-  }
-
-  @Override
-  protected void fireArmorTick(ItemStack itemStack, Level level, ServerPlayer serverPlayer) {
-    if (Boolean.TRUE.equals(
-            FireExtinguisherConfig.fireProtectionEnabled
-                && ticker++ > FireExtinguisherConfig.fireProtectionRenew)
-        && !serverPlayer.hasEffect(MobEffects.FIRE_RESISTANCE)) {
-      serverPlayer.addEffect(
-          new MobEffectInstance(
-              MobEffects.FIRE_RESISTANCE, FireExtinguisherConfig.fireProtectionDuration));
-      if (Boolean.TRUE.equals(FireExtinguisherConfig.fireLeggingsSlowDownEnabled)) {
-        serverPlayer.addEffect(
-            new MobEffectInstance(
-                MobEffects.MOVEMENT_SLOWDOWN, FireExtinguisherConfig.fireProtectionDuration));
-      }
-      ticker = 0;
-    }
   }
 
   @Override
@@ -78,7 +55,7 @@ public class FireLeggingsItem extends FireProtectionArmorItem {
         tooltipList,
         new TranslatableComponent(Constants.TEXT_PREFIX + NAME + "_description")
             .withStyle(ChatFormatting.GRAY));
-    if (Boolean.TRUE.equals(FireExtinguisherConfig.fireProtectionEnabled)) {
+    if (FireExtinguisherConfig.fireProtectionEnabled) {
       ToolTips.addTooltip(
           tooltipList,
           new TranslatableComponent(
@@ -87,7 +64,7 @@ public class FireLeggingsItem extends FireProtectionArmorItem {
                   Math.round((FireExtinguisherConfig.fireProtectionDuration / 20.0) * 10) / 10.0)
               .withStyle(ChatFormatting.GREEN));
     }
-    if (Boolean.TRUE.equals(FireExtinguisherConfig.fireLeggingsSlowDownEnabled)) {
+    if (FireExtinguisherConfig.fireLeggingsSlowDownEnabled) {
       ToolTips.addTooltip(
           tooltipList,
           new TranslatableComponent(Constants.TEXT_PREFIX + "fire_armor_slow_down")

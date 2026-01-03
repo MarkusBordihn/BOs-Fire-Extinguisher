@@ -54,7 +54,7 @@ public class FireSprinklerBlock extends AbstractFireAlarmSignalBlock {
   public static void stopFire(ServerLevel serverLevel, BlockPos targetBlockPos) {
     Iterable<BlockPos> blockPositions =
         BlockPos.withinManhattan(
-            targetBlockPos.below(),
+            targetBlockPos,
             FireExtinguisherConfig.fireSprinklerRadiusX,
             FireExtinguisherConfig.fireSprinklerRadiusY,
             FireExtinguisherConfig.fireSprinklerRadiusZ);

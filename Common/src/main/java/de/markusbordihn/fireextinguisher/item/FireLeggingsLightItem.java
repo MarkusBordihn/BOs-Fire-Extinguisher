@@ -26,9 +26,6 @@ import java.util.List;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -38,27 +35,12 @@ public class FireLeggingsLightItem extends FireProtectionArmorItem {
 
   public static final String NAME = "fire_leggings_light";
 
-  private int ticker = 0;
-
   public FireLeggingsLightItem() {
     this(new Properties());
   }
 
   public FireLeggingsLightItem(Properties properties) {
     super(ModArmorMaterials.FIRE_PROTECTION_LIGHT, EquipmentSlot.LEGS, properties);
-  }
-
-  @Override
-  protected void fireArmorTick(ItemStack itemStack, Level level, ServerPlayer serverPlayer) {
-    if (Boolean.TRUE.equals(
-            FireExtinguisherConfig.fireProtectionLightEnabled
-                && ticker++ > FireExtinguisherConfig.fireProtectionLightRenew)
-        && !serverPlayer.hasEffect(MobEffects.FIRE_RESISTANCE)) {
-      serverPlayer.addEffect(
-          new MobEffectInstance(
-              MobEffects.FIRE_RESISTANCE, FireExtinguisherConfig.fireProtectionLightDuration));
-      ticker = 0;
-    }
   }
 
   @Override
@@ -73,7 +55,7 @@ public class FireLeggingsLightItem extends FireProtectionArmorItem {
         tooltipList,
         new TranslatableComponent(Constants.TEXT_PREFIX + NAME + "_description")
             .withStyle(ChatFormatting.GRAY));
-    if (Boolean.TRUE.equals(FireExtinguisherConfig.fireProtectionLightEnabled)) {
+    if (FireExtinguisherConfig.fireProtectionLightEnabled) {
       ToolTips.addTooltip(
           tooltipList,
           new TranslatableComponent(
