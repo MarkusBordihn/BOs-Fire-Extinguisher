@@ -164,7 +164,7 @@ public class FireAlarmSwitchBlock extends FaceAttachedHorizontalDirectionalBlock
   @Override
   public void animateTick(
       BlockState blockState, Level level, BlockPos blockPos, RandomSource random) {
-    if (Boolean.TRUE.equals(blockState.getValue(POWERED)) && random.nextFloat() < 0.25F) {
+    if (blockState.getValue(POWERED) && random.nextFloat() < 0.25F) {
       makeParticle(blockState, level, blockPos, 0.5F);
     }
   }
@@ -177,7 +177,7 @@ public class FireAlarmSwitchBlock extends FaceAttachedHorizontalDirectionalBlock
       BlockState formerBlockState,
       boolean removed) {
     if (!removed && !blockState.is(blockState.getBlock())) {
-      if (Boolean.TRUE.equals(blockState.getValue(POWERED))) {
+      if (blockState.getValue(POWERED)) {
         this.updateNeighbours(blockState, level, blockPos);
       }
       super.onRemove(blockState, level, blockPos, formerBlockState, removed);
@@ -187,16 +187,13 @@ public class FireAlarmSwitchBlock extends FaceAttachedHorizontalDirectionalBlock
   @Override
   public int getSignal(
       BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, Direction direction) {
-    return Boolean.TRUE.equals(blockState.getValue(POWERED)) ? 15 : 0;
+    return blockState.getValue(POWERED) ? 15 : 0;
   }
 
   @Override
   public int getDirectSignal(
       BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, Direction direction) {
-    return Boolean.TRUE.equals(blockState.getValue(POWERED))
-            && getConnectedDirection(blockState) == direction
-        ? 15
-        : 0;
+    return blockState.getValue(POWERED) && getConnectedDirection(blockState) == direction ? 15 : 0;
   }
 
   @Override

@@ -25,9 +25,6 @@ import de.markusbordihn.fireextinguisher.utils.ToolTips;
 import java.util.List;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -37,32 +34,12 @@ public class FireBootsItem extends FireProtectionArmorItem {
 
   public static final String NAME = "fire_boots";
 
-  private int ticker = 0;
-
   public FireBootsItem() {
     this(new Properties());
   }
 
   public FireBootsItem(Properties properties) {
     super(ArmorItem.Type.BOOTS, properties);
-  }
-
-  @Override
-  protected void fireArmorTick(ItemStack itemStack, Level level, ServerPlayer serverPlayer) {
-    if (Boolean.TRUE.equals(
-            FireExtinguisherConfig.fireProtectionEnabled
-                && ticker++ > FireExtinguisherConfig.fireProtectionRenew)
-        && !serverPlayer.hasEffect(MobEffects.FIRE_RESISTANCE)) {
-      serverPlayer.addEffect(
-          new MobEffectInstance(
-              MobEffects.FIRE_RESISTANCE, FireExtinguisherConfig.fireProtectionDuration));
-      if (Boolean.TRUE.equals(FireExtinguisherConfig.fireBootsSlowDownEnabled)) {
-        serverPlayer.addEffect(
-            new MobEffectInstance(
-                MobEffects.MOVEMENT_SLOWDOWN, FireExtinguisherConfig.fireProtectionDuration));
-      }
-      ticker = 0;
-    }
   }
 
   @Override
@@ -77,7 +54,7 @@ public class FireBootsItem extends FireProtectionArmorItem {
         tooltipList,
         Component.translatable(Constants.TEXT_PREFIX + NAME + "_description")
             .withStyle(ChatFormatting.GRAY));
-    if (Boolean.TRUE.equals(FireExtinguisherConfig.fireProtectionEnabled)) {
+    if (FireExtinguisherConfig.fireProtectionEnabled) {
       ToolTips.addTooltip(
           tooltipList,
           Component.translatable(
@@ -86,7 +63,7 @@ public class FireBootsItem extends FireProtectionArmorItem {
                   Math.round((FireExtinguisherConfig.fireProtectionDuration / 20.0) * 10) / 10.0)
               .withStyle(ChatFormatting.GREEN));
     }
-    if (Boolean.TRUE.equals(FireExtinguisherConfig.fireBootsSlowDownEnabled)) {
+    if (FireExtinguisherConfig.fireBootsSlowDownEnabled) {
       ToolTips.addTooltip(
           tooltipList,
           Component.translatable(Constants.TEXT_PREFIX + "fire_armor_slow_down")

@@ -37,27 +37,12 @@ public class FireLeggingsLightItem extends FireProtectionArmorItem {
 
   public static final String NAME = "fire_leggings_light";
 
-  private int ticker = 0;
-
   public FireLeggingsLightItem() {
     this(new Properties());
   }
 
   public FireLeggingsLightItem(Properties properties) {
     super(ModArmorMaterials.FIRE_PROTECTION_LIGHT, ArmorItem.Type.LEGGINGS, properties);
-  }
-
-  @Override
-  protected void fireArmorTick(ItemStack itemStack, Level level, ServerPlayer serverPlayer) {
-    if (Boolean.TRUE.equals(
-            FireExtinguisherConfig.fireProtectionLightEnabled
-                && ticker++ > FireExtinguisherConfig.fireProtectionLightRenew)
-        && !serverPlayer.hasEffect(MobEffects.FIRE_RESISTANCE)) {
-      serverPlayer.addEffect(
-          new MobEffectInstance(
-              MobEffects.FIRE_RESISTANCE, FireExtinguisherConfig.fireProtectionLightDuration));
-      ticker = 0;
-    }
   }
 
   @Override
@@ -72,7 +57,7 @@ public class FireLeggingsLightItem extends FireProtectionArmorItem {
         tooltipList,
         Component.translatable(Constants.TEXT_PREFIX + NAME + "_description")
             .withStyle(ChatFormatting.GRAY));
-    if (Boolean.TRUE.equals(FireExtinguisherConfig.fireProtectionLightEnabled)) {
+    if (FireExtinguisherConfig.fireProtectionLightEnabled) {
       ToolTips.addTooltip(
           tooltipList,
           Component.translatable(

@@ -1,9 +1,18 @@
-[![Fire Extinguisher Downloads](http://cf.way2muchnoise.eu/full_567225_downloads.svg)](https://www.curseforge.com/minecraft/mc-mods/fire-extinguisher)
+# 🧯 Fire Extinguisher and more - Stop the Fire
+
 [![Fire Extinguisher Versions](http://cf.way2muchnoise.eu/versions/Minecraft_567225_all.svg)](https://www.curseforge.com/minecraft/mc-mods/fire-extinguisher)
 
-![Fire Extinguisher][logo]
+[![Download on CurseForge](http://cf.way2muchnoise.eu/title/567225.svg)](https://www.curseforge.com/minecraft/mc-mods/fire-extinguisher)
+[![Fire Extinguisher Downloads](http://cf.way2muchnoise.eu/full_567225_downloads.svg)](https://www.curseforge.com/minecraft/mc-mods/fire-extinguisher)
 
-# 🧯 Fire Extinguisher and more - Stop the Fire
+[![Download on Modrinth](https://img.shields.io/badge/dynamic/json?labelColor=black&color=grey&label=&query=title&url=https://api.modrinth.com/v2/project/GlhPy70K&style=flat&logo=modrinth)](https://modrinth.com/mod/fire-extinguisher)
+[![Fire Extinguisher Downloads](https://img.shields.io/badge/dynamic/json?labelColor=black&color=grey&label=&suffix=%20downloads&query=downloads&url=https://api.modrinth.com/v2/project/GlhPy70K&style=flat&logo=modrinth)](https://modrinth.com/mod/fire-extinguisher)
+
+[![Report an Issue](https://img.shields.io/badge/dynamic/json?label=Report%20an%20Issue%20%2F%20Bug%20%2F%20Crash%20%2F%20Feature%20Request&labelColor=black&color=grey&query=title&url=https://api.modrinth.com/v2/project/GlhPy70K&style=flat&logo=github)][issues]
+
+[![Wiki](https://img.shields.io/badge/dynamic/json?label=Wiki&labelColor=black&color=grey&query=title&url=https://api.modrinth.com/v2/project/CgGEe1h3&style=flat&logo=github)][wiki]
+
+![Fire Extinguisher][logo]
 
 Welcome to the Fire Extinguisher and More mod, a comprehensive solution to combat the destructive
 force of fire within the Minecraft universe!
@@ -36,3 +45,7 @@ your world from the destructive power of fire?
 Please check https://github.com/MarkusBordihn/BOs-Fire-Extinguisher/wiki for additional information.
 
 [logo]: Common/src/main/resources/logo.png
+
+[wiki]: https://github.com/MarkusBordihn/BOs-Fire-Extinguisher/wiki
+
+[issues]: https://github.com/MarkusBordihn/BOs-Fire-Extinguisher/issues

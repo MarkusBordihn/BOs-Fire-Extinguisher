@@ -37,32 +37,12 @@ public class FireChestplateItem extends FireProtectionArmorItem {
 
   public static final String NAME = "fire_chestplate";
 
-  private int ticker = 0;
-
   public FireChestplateItem() {
     this(new Properties());
   }
 
   public FireChestplateItem(Properties properties) {
     super(ArmorItem.Type.CHESTPLATE, properties);
-  }
-
-  @Override
-  protected void fireArmorTick(ItemStack itemStack, Level level, ServerPlayer serverPlayer) {
-    if (Boolean.TRUE.equals(
-            FireExtinguisherConfig.fireProtectionEnabled
-                && ticker++ > FireExtinguisherConfig.fireProtectionRenew)
-        && !serverPlayer.hasEffect(MobEffects.FIRE_RESISTANCE)) {
-      serverPlayer.addEffect(
-          new MobEffectInstance(
-              MobEffects.FIRE_RESISTANCE, FireExtinguisherConfig.fireProtectionDuration));
-      if (Boolean.TRUE.equals(FireExtinguisherConfig.fireChestplateSlowDownEnabled)) {
-        serverPlayer.addEffect(
-            new MobEffectInstance(
-                MobEffects.MOVEMENT_SLOWDOWN, FireExtinguisherConfig.fireProtectionDuration));
-      }
-      ticker = 0;
-    }
   }
 
   @Override
@@ -77,7 +57,7 @@ public class FireChestplateItem extends FireProtectionArmorItem {
         tooltipList,
         Component.translatable(Constants.TEXT_PREFIX + NAME + "_description")
             .withStyle(ChatFormatting.GRAY));
-    if (Boolean.TRUE.equals(FireExtinguisherConfig.fireProtectionEnabled)) {
+    if (FireExtinguisherConfig.fireProtectionEnabled) {
       ToolTips.addTooltip(
           tooltipList,
           Component.translatable(
@@ -86,7 +66,7 @@ public class FireChestplateItem extends FireProtectionArmorItem {
                   Math.round((FireExtinguisherConfig.fireProtectionDuration / 20.0) * 10) / 10.0)
               .withStyle(ChatFormatting.GREEN));
     }
-    if (Boolean.TRUE.equals(FireExtinguisherConfig.fireChestplateSlowDownEnabled)) {
+    if (FireExtinguisherConfig.fireChestplateSlowDownEnabled) {
       ToolTips.addTooltip(
           tooltipList,
           Component.translatable(Constants.TEXT_PREFIX + "fire_armor_slow_down")
