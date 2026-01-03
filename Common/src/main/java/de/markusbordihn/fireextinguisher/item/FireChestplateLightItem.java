@@ -25,19 +25,13 @@ import de.markusbordihn.fireextinguisher.utils.ToolTips;
 import java.util.List;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.level.Level;
 
 public class FireChestplateLightItem extends FireProtectionArmorItem {
 
   public static final String NAME = "fire_chestplate_light";
-
-  private int ticker = 0;
 
   public FireChestplateLightItem() {
     this(new Properties());
@@ -48,19 +42,6 @@ public class FireChestplateLightItem extends FireProtectionArmorItem {
         ModArmorMaterials.FIRE_PROTECTION_LIGHT.getArmorMaterialHolder(),
         ArmorItem.Type.CHESTPLATE,
         properties);
-  }
-
-  @Override
-  protected void fireArmorTick(ItemStack itemStack, Level level, ServerPlayer serverPlayer) {
-    if (Boolean.TRUE.equals(
-            FireExtinguisherConfig.fireProtectionLightEnabled
-                && ticker++ > FireExtinguisherConfig.fireProtectionLightRenew)
-        && !serverPlayer.hasEffect(MobEffects.FIRE_RESISTANCE)) {
-      serverPlayer.addEffect(
-          new MobEffectInstance(
-              MobEffects.FIRE_RESISTANCE, FireExtinguisherConfig.fireProtectionLightDuration));
-      ticker = 0;
-    }
   }
 
   @Override
@@ -78,7 +59,7 @@ public class FireChestplateLightItem extends FireProtectionArmorItem {
         tooltipList,
         Component.translatable(Constants.TEXT_PREFIX + NAME + "_description")
             .withStyle(ChatFormatting.GRAY));
-    if (Boolean.TRUE.equals(FireExtinguisherConfig.fireProtectionLightEnabled)) {
+    if (FireExtinguisherConfig.fireProtectionLightEnabled) {
       ToolTips.addTooltip(
           tooltipList,
           Component.translatable(

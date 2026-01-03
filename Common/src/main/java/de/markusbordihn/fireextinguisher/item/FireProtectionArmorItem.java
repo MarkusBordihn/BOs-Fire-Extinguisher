@@ -18,15 +18,23 @@
  */
 package de.markusbordihn.fireextinguisher.item;
 
+import de.markusbordihn.fireextinguisher.config.FireExtinguisherConfig;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 import net.minecraft.core.Holder;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.EquipmentSlot.Type;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
 public class FireProtectionArmorItem extends ArmorItem {
+
+  protected static final Map<UUID, Long> lastEffectTime = new HashMap<>();
 
   public FireProtectionArmorItem(ArmorItem.Type type, Properties properties) {
     this(ModArmorMaterials.FIRE_PROTECTION.getArmorMaterialHolder(), type, properties);
@@ -37,21 +45,49 @@ public class FireProtectionArmorItem extends ArmorItem {
     super(armorMaterial, type, properties.fireResistant());
   }
 
+  protected static int countWornFireArmorPieces(ServerPlayer player, Holder<ArmorMaterial> material) {
+    int count = 0;
+    for (EquipmentSlot slot : EquipmentSlot.values()) {
+      if (slot.getType() == EquipmentSlot.Type.HUMANOID_ARMOR) {
+        ItemStack armorPiece = player.getItemBySlot(slot);
+        if (armorPiece.getItem() instanceof FireProtectionArmorItem fireArmor
+            && fireArmor.getMaterial().equals(material)) {
+          count++;
+        }
+      }
+    }
+    return count;
+  }
+
+  protected static boolean hasSlowDownArmor(ServerPlayer player) {
+    ItemStack chestplate = player.getItemBySlot(EquipmentSlot.CHEST);
+    if (chestplate.getItem() instanceof FireChestplateItem
+        && FireExtinguisherConfig.fireChestplateSlowDownEnabled) {
+      return true;
+    }
+    ItemStack leggings = player.getItemBySlot(EquipmentSlot.LEGS);
+    if (leggings.getItem() instanceof FireLeggingsItem
+        && FireExtinguisherConfig.fireLeggingsSlowDownEnabled) {
+      return true;
+    }
+    ItemStack boots = player.getItemBySlot(EquipmentSlot.FEET);
+    return boots.getItem() instanceof FireBootsItem
+        && FireExtinguisherConfig.fireBootsSlowDownEnabled;
+  }
+
   @Override
   public void inventoryTick(
       ItemStack itemStack, Level level, Entity entity, int slot, boolean selected) {
     if (!level.isClientSide
         && entity instanceof ServerPlayer serverPlayer
-        && serverPlayer.getItemBySlot(getEquipmentSlot()) == itemStack
-        && itemStack.getItem().getClass().equals(getArmorClass())) {
+        && serverPlayer.getItemBySlot(EquipmentSlot.HEAD) == itemStack
+        && itemStack.getItem() instanceof FireProtectionArmorItem) {
       fireArmorTick(itemStack, level, serverPlayer);
     }
     super.inventoryTick(itemStack, level, entity, slot, selected);
   }
 
-  protected void fireArmorTick(ItemStack itemStack, Level level, ServerPlayer serverPlayer) {
-    // Implement in sub classes.
-  }
+  protected void fireArmorTick(ItemStack itemStack, Level level, ServerPlayer serverPlayer) {}
 
   public Class<?> getArmorClass() {
     return FireProtectionArmorItem.class;

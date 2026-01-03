@@ -37,8 +37,6 @@ public class FireHelmetLightItem extends FireProtectionArmorItem {
 
   public static final String NAME = "fire_helmet_light";
 
-  private int ticker = 0;
-
   public FireHelmetLightItem() {
     this(new Properties());
   }
@@ -52,14 +50,19 @@ public class FireHelmetLightItem extends FireProtectionArmorItem {
 
   @Override
   protected void fireArmorTick(ItemStack itemStack, Level level, ServerPlayer serverPlayer) {
-    if (Boolean.TRUE.equals(
-            FireExtinguisherConfig.fireProtectionLightEnabled
-                && ticker++ > FireExtinguisherConfig.fireProtectionLightRenew)
+    if (FireExtinguisherConfig.fireProtectionLightEnabled
         && !serverPlayer.hasEffect(MobEffects.FIRE_RESISTANCE)) {
-      serverPlayer.addEffect(
-          new MobEffectInstance(
-              MobEffects.FIRE_RESISTANCE, FireExtinguisherConfig.fireProtectionLightDuration));
-      ticker = 0;
+      long currentTime = level.getGameTime();
+      long lastTime = lastEffectTime.getOrDefault(serverPlayer.getUUID(), 0L);
+      if (currentTime - lastTime > FireExtinguisherConfig.fireProtectionLightRenew) {
+        int armorCount =
+            countWornFireArmorPieces(serverPlayer, ModArmorMaterials.FIRE_PROTECTION_LIGHT.getArmorMaterialHolder());
+        int totalDuration = FireExtinguisherConfig.fireProtectionLightDuration * armorCount;
+        if (totalDuration > 0) {
+          serverPlayer.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, totalDuration));
+          lastEffectTime.put(serverPlayer.getUUID(), currentTime);
+        }
+      }
     }
   }
 
@@ -78,7 +81,7 @@ public class FireHelmetLightItem extends FireProtectionArmorItem {
         tooltipList,
         Component.translatable(Constants.TEXT_PREFIX + NAME + "_description")
             .withStyle(ChatFormatting.GRAY));
-    if (Boolean.TRUE.equals(FireExtinguisherConfig.fireProtectionLightEnabled)) {
+    if (FireExtinguisherConfig.fireProtectionLightEnabled) {
       ToolTips.addTooltip(
           tooltipList,
           Component.translatable(

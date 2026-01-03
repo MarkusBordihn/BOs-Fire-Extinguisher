@@ -105,6 +105,19 @@ public abstract class AbstractFireAlarmSignalBlock extends FaceAttachedHorizonta
   }
 
   @Override
+  public void onPlace(
+      BlockState blockState,
+      Level level,
+      BlockPos blockPos,
+      BlockState oldState,
+      boolean isMoving) {
+    if (!level.isClientSide && !blockState.is(oldState.getBlock())) {
+      level.scheduleTick(blockPos, this, 4);
+    }
+    super.onPlace(blockState, level, blockPos, oldState, isMoving);
+  }
+
+  @Override
   protected void createBlockStateDefinition(
       StateDefinition.Builder<Block, BlockState> stateDefinition) {
     stateDefinition.add(FACE, FACING, POWERED);
@@ -115,8 +128,7 @@ public abstract class AbstractFireAlarmSignalBlock extends FaceAttachedHorizonta
       BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, RandomSource random) {
 
     // Update block state, if block is powered and no neighbor signal is available.
-    if (Boolean.TRUE.equals(blockState.getValue(POWERED))
-        && !serverLevel.hasNeighborSignal(blockPos)) {
+    if (blockState.getValue(POWERED) && !serverLevel.hasNeighborSignal(blockPos)) {
       serverLevel.setBlock(blockPos, blockState.cycle(POWERED), 2);
       return;
     }

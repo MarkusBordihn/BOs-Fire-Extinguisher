@@ -5,6 +5,21 @@
 This change log includes the summarized changes.
 For the full changelog, please go to the [GitHub History][history] instead.
 
+### 9.0.0
+
+- Fixed critical thread-safety issue with fire armor cooldowns on multiplayer servers.
+- Fixed smoke detector not triggering immediately after placement.
+- Fixed fire sprinkler searching in wrong position and missing nearby fires.
+- Fixed fire extinguisher interaction returning wrong result causing unwanted actions.
+- Fixed fire axe sound only playing client-side instead of for all players.
+- Fixed missing 3d sound attenuation for sounds.
+- Removed campfire detection from smoke detectors to prevent false alarms.
+- Added config validation to prevent negative radius values causing silent failures.
+- Added armor duration stacking: wearing multiple armor pieces now multiplies fire protection
+  duration.
+- Improved code quality by simplifying boolean checks throughout codebase.
+- Code refactoring and performance improvements.
+
 ### 8.3.0
 
 - Fixed Fire Alarm Smoke Detector texture bleeding with shaders.
