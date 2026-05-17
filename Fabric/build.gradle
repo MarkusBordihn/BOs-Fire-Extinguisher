@@ -1,6 +1,6 @@
 plugins {
-  id 'net.fabricmc.fabric-loom-remap' version "${fabric_loom}"
-  id 'net.darkhax.curseforgegradle' version '1.1.28'
+  id 'net.fabricmc.fabric-loom' version "${fabric_loom}"
+  id 'net.darkhax.curseforgegradle' version '1.2.30'
   id 'nu.studer.credentials' version '3.0'
   id "com.modrinth.minotaur" version "2.+"
 }
@@ -11,25 +11,20 @@ base {
 
 dependencies {
   minecraft "com.mojang:minecraft:${minecraft_version}"
-  mappings loom.officialMojangMappings()
-  modImplementation "net.fabricmc:fabric-loader:${fabric_loader_version}"
-  modApi "net.fabricmc.fabric-api:fabric-api:${fabric_version}"
+
+  implementation "net.fabricmc:fabric-loader:${fabric_loader_version}"
+  implementation "net.fabricmc.fabric-api:fabric-api:${fabric_version}"
 
   // Include Common code
   implementation project(":Common")
 
   // Additional helpful Mods for development (runtime dependency)
   if (project.hasProperty('fabric_jei_mod') && project.fabric_jei_mod) {
-    modRuntimeOnly("curse.maven:jei-238222:${project.fabric_jei_mod}")
-  }
-  if (project.hasProperty('fabric_spark_mod') && project.fabric_spark_mod) {
-    modRuntimeOnly("curse.maven:spark-361579:${project.fabric_spark_mod}")
+    compileOnlyApi("curse.maven:jei-238222:${project.fabric_jei_mod}")
+    runtimeOnly("curse.maven:jei-238222:${project.fabric_jei_mod}")
   }
   if (project.hasProperty('fabric_xaeros_minimap_mod') && project.fabric_xaeros_minimap_mod) {
-    modRuntimeOnly("curse.maven:xaeros_minimap-263420:${project.fabric_xaeros_minimap_mod}")
-  }
-  if (project.hasProperty('fabric_jade_mod') && project.fabric_jade_mod) {
-    modRuntimeOnly("curse.maven:jade-324717:${project.fabric_jade_mod}")
+    runtimeOnly("curse.maven:xaeros_minimap-263420:${project.fabric_xaeros_minimap_mod}")
   }
 }
 
@@ -66,21 +61,36 @@ loom {
 
 processResources {
   from project(":Common").sourceSets.main.resources
-  inputs.property "version", project.version
+  def javaVersion = project.extensions
+      .getByType(org.gradle.api.plugins.JavaPluginExtension)
+      .toolchain
+      .languageVersion
+      .get()
+      .asInt()
+  def replaceProperties = [
+      version                       : project.version,
+      fabric_loader_version_range   : ">=${project.fabric_loader_version}",
+      fabric_minecraft_version_range: "~${project.minecraft_version}",
+      java_version_range            : ">=${javaVersion}"
+  ]
+  inputs.properties replaceProperties
 
   filesMatching("fabric.mod.json") {
-    expand "version": project.version
+    expand replaceProperties
   }
 }
 
 tasks.withType(JavaCompile).configureEach {
-  if (!it.name.contains("Test")) {
-    source(project(":Common").sourceSets.main.allSource)
-  }
+  source(project(":Common").sourceSets.main.allSource)
 }
 
 tasks.withType(Test).configureEach {
   failOnNoDiscoveredTests = false
+}
+
+test {
+  useJUnitPlatform()
+  exclude '**/*'
 }
 
 // CurseForge Publishing
@@ -90,7 +100,7 @@ if (project.hasProperty('curseforge_project_id') && project.curseforge_project_i
     description = 'Uploads to CurseForge'
     apiToken = "${credentials.forKey('curseforge_api_token')}"
 
-    def mainFile = upload(project.curseforge_project_id, remapJar)
+    def mainFile = upload(project.curseforge_project_id, jar)
     mainFile.changelogType = 'markdown'
     mainFile.changelog = rootProject.file("CHANGELOG.md").text
     mainFile.releaseType = "${project.curseforge_release_type}"
@@ -110,7 +120,7 @@ if (project.hasProperty('modrinth_project_id') && project.modrinth_project_id) {
     versionType = "${project.modrinth_release_type}"
     versionName = "${project.mod_name} ${project.version}"
     changelog = rootProject.file("CHANGELOG.md").text
-    uploadFile = remapJar
+    uploadFile = jar
     gameVersions = ["${minecraft_version}"]
     loaders = ["fabric", "quilt"]
     dependencies {

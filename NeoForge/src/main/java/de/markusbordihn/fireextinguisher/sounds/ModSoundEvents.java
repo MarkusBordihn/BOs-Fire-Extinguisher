@@ -47,8 +47,7 @@ public class ModSoundEvents {
           "fire_alarm_smoke_detector",
           () ->
               SoundEvent.createVariableRangeEvent(
-                  Identifier.fromNamespaceAndPath(
-                      Constants.MOD_ID, "fire_alarm_smoke_detector")));
+                  Identifier.fromNamespaceAndPath(Constants.MOD_ID, "fire_alarm_smoke_detector")));
 
   protected ModSoundEvents() {}
 }

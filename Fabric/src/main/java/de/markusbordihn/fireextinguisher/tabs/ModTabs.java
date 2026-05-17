@@ -21,23 +21,15 @@ package de.markusbordihn.fireextinguisher.tabs;
 
 import de.markusbordihn.fireextinguisher.Constants;
 import de.markusbordihn.fireextinguisher.block.FireExtinguisherBlocks;
-import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
+import net.fabricmc.fabric.api.creativetab.v1.FabricCreativeModeTab;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.Identifier;
-import net.minecraft.world.item.CreativeModeTab;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class ModTabs {
 
-  public static final ResourceKey<CreativeModeTab> CREATIVE_TABS =
-      ResourceKey.create(
-          Registries.CREATIVE_MODE_TAB,
-          Identifier.fromNamespaceAndPath(Constants.MOD_ID, "tabs"));
   private static final Logger log = LogManager.getLogger(Constants.LOG_NAME);
 
   protected ModTabs() {}
@@ -47,7 +39,7 @@ public class ModTabs {
     Registry.register(
         BuiltInRegistries.CREATIVE_MODE_TAB,
         Constants.MOD_ID + ":tab",
-        FabricItemGroup.builder()
+        FabricCreativeModeTab.builder()
             .icon(() -> FireExtinguisherBlocks.FIRE_EXTINGUISHER.asItem().getDefaultInstance())
             .title(Component.translatable("itemGroup.fire_extinguisher.tab"))
             .displayItems(new FireExtinguisherItems())

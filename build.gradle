@@ -13,7 +13,7 @@ subprojects {
 
   apply plugin: 'java'
 
-  java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+  java.toolchain.languageVersion = JavaLanguageVersion.of(25)
   java.withSourcesJar()
   java.withJavadocJar()
 
@@ -29,13 +29,13 @@ subprojects {
 
   dependencies {
     configurations.configureEach {
-      resolutionStrategy.force 'org.ow2.asm:asm-analysis:9.8'
-      resolutionStrategy.force 'org.ow2.asm:asm-util:9.8'
+      resolutionStrategy.force 'org.ow2.asm:asm:9.8'
+      resolutionStrategy.force 'org.ow2.asm:asm-commons:9.8'
     }
   }
 
   tasks.register('wrapper', Wrapper) {
-    gradleVersion = '9.2.1'
+    gradleVersion = '9.4.1'
     distributionType = Wrapper.DistributionType.BIN
   }
 

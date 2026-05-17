@@ -21,8 +21,8 @@ package de.markusbordihn.fireextinguisher.block;
 
 import de.markusbordihn.fireextinguisher.Constants;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
@@ -38,8 +38,7 @@ public class FireAlarmBlocks {
               .setId(
                   ResourceKey.create(
                       Registries.BLOCK,
-                      Identifier.fromNamespaceAndPath(
-                          Constants.MOD_ID, FireSprinklerBlock.ID)))
+                      Identifier.fromNamespaceAndPath(Constants.MOD_ID, FireSprinklerBlock.ID)))
               .mapColor(MapColor.STONE)
               .instrument(NoteBlockInstrument.BASEDRUM)
               .requiresCorrectToolForDrops()
@@ -50,8 +49,7 @@ public class FireAlarmBlocks {
               .setId(
                   ResourceKey.create(
                       Registries.BLOCK,
-                      Identifier.fromNamespaceAndPath(
-                          Constants.MOD_ID, FireAlarmSwitchBlock.ID)))
+                      Identifier.fromNamespaceAndPath(Constants.MOD_ID, FireAlarmSwitchBlock.ID)))
               .noCollision()
               .strength(0.5F)
               .sound(SoundType.STONE)
@@ -62,8 +60,7 @@ public class FireAlarmBlocks {
               .setId(
                   ResourceKey.create(
                       Registries.BLOCK,
-                      Identifier.fromNamespaceAndPath(
-                          Constants.MOD_ID, FireAlarmBellBlock.ID)))
+                      Identifier.fromNamespaceAndPath(Constants.MOD_ID, FireAlarmBellBlock.ID)))
               .mapColor(MapColor.GOLD)
               .instrument(NoteBlockInstrument.BELL)
               .requiresCorrectToolForDrops()
@@ -76,8 +73,7 @@ public class FireAlarmBlocks {
               .setId(
                   ResourceKey.create(
                       Registries.BLOCK,
-                      Identifier.fromNamespaceAndPath(
-                          Constants.MOD_ID, FireAlarmSirenBlock.ID)))
+                      Identifier.fromNamespaceAndPath(Constants.MOD_ID, FireAlarmSirenBlock.ID)))
               .mapColor(MapColor.GOLD)
               .instrument(NoteBlockInstrument.BELL)
               .requiresCorrectToolForDrops()

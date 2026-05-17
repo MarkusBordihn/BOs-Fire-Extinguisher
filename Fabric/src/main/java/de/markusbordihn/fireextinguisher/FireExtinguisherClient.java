@@ -19,13 +19,8 @@
 
 package de.markusbordihn.fireextinguisher;
 
-import de.markusbordihn.fireextinguisher.block.ExitSignBlocks;
-import de.markusbordihn.fireextinguisher.block.FireAlarmBlocks;
-import de.markusbordihn.fireextinguisher.block.FireExtinguisherBlocks;
 import de.markusbordihn.fireextinguisher.tabs.ModTabs;
 import net.fabricmc.api.ClientModInitializer;
-import net.fabricmc.fabric.api.client.rendering.v1.BlockRenderLayerMap;
-import net.minecraft.client.renderer.chunk.ChunkSectionLayer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -40,28 +35,5 @@ public class FireExtinguisherClient implements ClientModInitializer {
 
     log.info("{} Tabs ...", Constants.LOG_REGISTER_PREFIX);
     ModTabs.registerModTabs();
-
-    log.info("{} Block Layers ...", Constants.LOG_REGISTER_PREFIX);
-    BlockRenderLayerMap.putBlock(
-        FireExtinguisherBlocks.FIRE_EXTINGUISHER, ChunkSectionLayer.CUTOUT);
-    BlockRenderLayerMap.putBlock(
-        FireExtinguisherBlocks.FIRE_EXTINGUISHER_COPPER, ChunkSectionLayer.CUTOUT);
-
-    BlockRenderLayerMap.putBlock(FireAlarmBlocks.FIRE_SPRINKLER, ChunkSectionLayer.CUTOUT);
-    BlockRenderLayerMap.putBlock(FireAlarmBlocks.FIRE_ALARM_SWITCH, ChunkSectionLayer.CUTOUT);
-    BlockRenderLayerMap.putBlock(FireAlarmBlocks.FIRE_ALARM_BELL, ChunkSectionLayer.CUTOUT);
-    BlockRenderLayerMap.putBlock(FireAlarmBlocks.FIRE_ALARM_SIREN, ChunkSectionLayer.CUTOUT);
-    BlockRenderLayerMap.putBlock(
-        FireAlarmBlocks.FIRE_ALARM_SMOKE_DETECTOR, ChunkSectionLayer.CUTOUT);
-    BlockRenderLayerMap.putBlock(
-        FireAlarmBlocks.FIRE_ALARM_SMOKE_DETECTOR_SILENT, ChunkSectionLayer.CUTOUT);
-
-    BlockRenderLayerMap.putBlock(ExitSignBlocks.EXIT_SIGN, ChunkSectionLayer.CUTOUT);
-    BlockRenderLayerMap.putBlock(ExitSignBlocks.EXIT_SIGN_LEFT, ChunkSectionLayer.CUTOUT);
-    BlockRenderLayerMap.putBlock(ExitSignBlocks.EXIT_SIGN_LEFT_DOWN, ChunkSectionLayer.CUTOUT);
-    BlockRenderLayerMap.putBlock(ExitSignBlocks.EXIT_SIGN_LEFT_UP, ChunkSectionLayer.CUTOUT);
-    BlockRenderLayerMap.putBlock(ExitSignBlocks.EXIT_SIGN_RIGHT, ChunkSectionLayer.CUTOUT);
-    BlockRenderLayerMap.putBlock(ExitSignBlocks.EXIT_SIGN_RIGHT_DOWN, ChunkSectionLayer.CUTOUT);
-    BlockRenderLayerMap.putBlock(ExitSignBlocks.EXIT_SIGN_RIGHT_UP, ChunkSectionLayer.CUTOUT);
   }
 }

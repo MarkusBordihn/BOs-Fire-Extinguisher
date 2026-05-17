@@ -1,6 +1,8 @@
 plugins {
-  id 'net.minecraftforge.gradle' version '7.0.0-beta.46'
-  id 'net.darkhax.curseforgegradle' version '1.1.28'
+  id 'maven-publish'
+  id 'net.minecraftforge.accesstransformers' version '5.0.1'
+  id 'net.minecraftforge.gradle' version '[7.0.17,8)'
+  id 'net.darkhax.curseforgegradle' version '1.2.30'
   id 'nu.studer.credentials' version '3.0'
   id "com.modrinth.minotaur" version "2.+"
 }
@@ -16,7 +18,7 @@ println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getPro
 minecraft {
   mappings channel: 'official', version: "${project.minecraft_version}"
 
-   // Run configurations
+  // Run configurations
   runs {
 
     configureEach {
@@ -30,6 +32,7 @@ minecraft {
 
     server {
       workingDir = project.file('run/server')
+      args '--nogui'
     }
 
     data {
@@ -71,7 +74,7 @@ repositories {
 dependencies {
   implementation minecraft.dependency("net.minecraftforge:forge:${minecraft_version}-${forge_version}")
 
-  annotationProcessor 'net.minecraftforge:eventbus-validator:7.0-beta.12'
+  annotationProcessor 'net.minecraftforge:eventbus-validator:7.0.1'
 
   // Include Common code
   compileOnly project(":Common")
@@ -92,9 +95,7 @@ dependencies {
 }
 
 tasks.withType(JavaCompile).configureEach {
-  if (!it.name.contains("Test")) {
-    source(project(":Common").sourceSets.main.allSource)
-  }
+  source(project(":Common").sourceSets.main.allSource)
 }
 
 tasks.withType(Test).configureEach {
@@ -103,6 +104,25 @@ tasks.withType(Test).configureEach {
 
 processResources {
   from project(":Common").sourceSets.main.resources
+  def minecraftVersionParts = project.minecraft_version.tokenize('.')
+  def javaVersion = project.extensions
+      .getByType(org.gradle.api.plugins.JavaPluginExtension)
+      .toolchain
+      .languageVersion
+      .get()
+      .asInt()
+  def replaceProperties = [
+      file                      : [jarVersion: '${file.jarVersion}'],
+      forge_loader_version_range: "[${project.forge_version.tokenize('.')[0]},)",
+      forge_version_range       : "[${project.forge_version},)",
+      minecraft_version_range   : "[${project.minecraft_version},${minecraftVersionParts[0]}.${(minecraftVersionParts[1] as int) + 1})",
+      java_version_range        : "[${javaVersion},)"
+  ]
+  inputs.properties replaceProperties
+
+  filesMatching("META-INF/mods.toml") {
+    expand replaceProperties
+  }
 }
 
 // Example for how to get properties into the manifest for reading by the runtime..
@@ -157,5 +177,13 @@ if (project.hasProperty('modrinth_project_id') && project.modrinth_project_id) {
     uploadFile = jar
     gameVersions = ["${project.minecraft_version}"]
     loaders = ["forge"]
+  }
+}
+
+publishing {
+  publications {
+    mavenJava(MavenPublication) {
+      artifact jar
+    }
   }
 }

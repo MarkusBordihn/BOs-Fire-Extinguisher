@@ -1,6 +1,6 @@
 plugins {
-  id 'net.neoforged.moddev' version '2.0.126'
-  id 'net.darkhax.curseforgegradle' version '1.1.28'
+  id 'net.neoforged.moddev' version '2.0.141'
+  id 'net.darkhax.curseforgegradle' version '1.2.30'
   id 'nu.studer.credentials' version '3.0'
   id "com.modrinth.minotaur" version "2.+"
 }
@@ -20,6 +20,7 @@ neoForge {
 
     client {
       client()
+      gameDirectory = project.file('runs/client')
       systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
     }
 
@@ -31,6 +32,7 @@ neoForge {
 
     server {
       server()
+      gameDirectory = project.file('runs/server')
       systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
       programArgument '--nogui'
     }
@@ -82,6 +84,17 @@ tasks.named("sourcesJar", Jar) {
 
 tasks.withType(ProcessResources).matching(notNeoTask).configureEach {
   from project(":Common").sourceSets.main.resources
+  def minecraftVersionParts = project.minecraft_version.tokenize('.')
+  def replaceProperties = [
+      file                   : [jarVersion: '${file.jarVersion}'],
+      neoforge_version_range : "[${project.neoforge_version},)",
+      minecraft_version_range: "[${project.minecraft_version},${minecraftVersionParts[0]}.${(minecraftVersionParts[1] as int) + 1})"
+  ]
+  inputs.properties replaceProperties
+
+  filesMatching("META-INF/neoforge.mods.toml") {
+    expand replaceProperties
+  }
 }
 
 // CurseForge Publishing

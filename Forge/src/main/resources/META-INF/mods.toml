@@ -1,5 +1,5 @@
 modLoader = "javafml"
-loaderVersion = "[0,)"
+loaderVersion = "${forge_loader_version_range}"
 license = "MIT"
 issueTrackerURL = "https://github.com/MarkusBordihn/BOs-Fire-Extinguisher/issues"
 
@@ -12,17 +12,18 @@ logoFile = "logo.png"
 credits = ""
 authors = "Markus Bordihn"
 description = '''Enhance your fire safety with a straightforward and effective fire extinguisher modification that incorporates essential items for combating fires.'''
+features = { java_version = "${java_version_range}" }
 
 [[dependencies.fire_extinguisher]]
 modId = "forge"
 mandatory = true
-versionRange = "[0,)"
+versionRange = "${forge_version_range}"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.fire_extinguisher]]
 modId = "minecraft"
 mandatory = true
-versionRange = "[1.21.10,1.22)"
+versionRange = "${minecraft_version_range}"
 ordering = "NONE"
 side = "BOTH"

@@ -93,7 +93,7 @@
         "south": {"uv": [2.016, 8.516, 2.25, 9.25], "texture": "#texture"},
         "west": {"uv": [2.016, 8.516, 2.25, 9.25], "texture": "#texture"},
         "up": {"uv": [2.5, 9.25, 2.266, 9.016], "texture": "#texture"},
-        "down": {"uv": [-0.008, -0.008, -0.55, -0.55], "texture": "#texture"}
+        "down": {"uv": [0, 0, 0.55, 0.55], "texture": "#texture"}
       }
     },
     {
