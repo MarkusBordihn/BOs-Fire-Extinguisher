@@ -2,8 +2,8 @@
 
 ## Note
 
-This change log includes the summarized changes.
-For the full changelog, please go to the [GitHub History][history] instead.
+This change log includes the summarized changes. For the full changelog, please go to
+the [GitHub History][history] instead.
 
 ### 8.3.0
 

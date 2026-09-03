@@ -35,6 +35,12 @@ minecraft {
       args '--nogui'
     }
 
+    gameTestServer {
+      workingDir = project.file('run/gametest')
+      systemProperty 'forge.enableGameTest', 'true'
+      systemProperty 'forge.enabledGameTestNamespaces', project.mod_id
+    }
+
     data {
       workingDir = project.file('run/data')
       args '--mod', "${project.mod_id}", '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
@@ -159,9 +165,10 @@ if (project.hasProperty('curseforge_project_id') && project.curseforge_project_i
     def mainFile = upload(project.curseforge_project_id, jar)
     mainFile.changelogType = 'markdown'
     mainFile.changelog = rootProject.file("CHANGELOG.md").text
-    mainFile.releaseType = project.curseforge_release_type
+    mainFile.releaseType = "${project.curseforge_release_type}"
+    mainFile.addEnvironment("Client", "Server")
     mainFile.addModLoader('Forge')
-    mainFile.addGameVersion(project.minecraft_version)
+    mainFile.addGameVersion("${project.minecraft_version}")
   }
 }
 

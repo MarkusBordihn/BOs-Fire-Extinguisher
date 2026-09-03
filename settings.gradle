@@ -20,5 +20,5 @@ pluginManagement {
   }
 }
 
-rootProject.name = 'Fire Extinguisher 26.1.2'
+rootProject.name = 'Fire Extinguisher 26.2'
 include("Common", "Fabric", "Forge", "NeoForge")
