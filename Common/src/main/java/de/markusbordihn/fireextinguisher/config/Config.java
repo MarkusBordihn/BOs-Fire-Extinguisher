@@ -25,8 +25,10 @@ import java.io.FileWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.Properties;
 import java.util.Set;
+import java.util.stream.Collectors;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -39,18 +41,15 @@ public class Config {
       Paths.get("").toAbsolutePath().resolve("config").resolve(Constants.MOD_ID);
 
   public static void register() {
-    // Validate game folder path.
     if (Constants.CONFIG_DIR != null) {
       configPath = Constants.CONFIG_DIR.resolve(Constants.MOD_ID);
       log.info("{} Updated configuration path to {}", LOG_PREFIX, configPath);
     }
 
-    // Validate configuration folder
     if (!configPath.toFile().exists()) {
       log.info("{} Creating configuration folder {}", LOG_PREFIX, getConfigDirectory());
     }
 
-    // Simple reload protection
     if (isLoaded) {
       log.error("{} Configuration is already loaded", LOG_PREFIX);
       log.warn("Check if configuration is loaded multiple times!");
@@ -58,7 +57,6 @@ public class Config {
     }
     isLoaded = true;
 
-    // Register configuration files
     FireExtinguisherConfig.registerConfig();
   }
 
@@ -165,8 +163,10 @@ public class Config {
       final Properties properties, final String key, final Set<String> defaultValue) {
     if (properties.containsKey(key)) {
       try {
-        String value = properties.getProperty(key).trim();
-        return value.isEmpty() ? Set.of() : Set.of(value.split(","));
+        return Arrays.stream(properties.getProperty(key).split(","))
+            .map(String::trim)
+            .filter(entry -> !entry.isEmpty())
+            .collect(Collectors.toUnmodifiableSet());
       } catch (Exception e) {
         log.error("{} Failed to parse Set[String] for key {}: {}", LOG_PREFIX, key, e);
       }

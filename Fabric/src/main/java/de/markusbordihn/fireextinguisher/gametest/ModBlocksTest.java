@@ -23,6 +23,7 @@ import de.markusbordihn.fireextinguisher.block.ExitSignBlocks;
 import de.markusbordihn.fireextinguisher.block.FireAlarmBlocks;
 import de.markusbordihn.fireextinguisher.block.FireExtinguisherBlocks;
 import de.markusbordihn.fireextinguisher.block.FireExtinguisherSignBlocks;
+import de.markusbordihn.fireextinguisher.block.FireStationBlocks;
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
 
@@ -136,6 +137,54 @@ public class ModBlocksTest {
   @GameTest(template = "fire_extinguisher:gametest.1x1x1")
   public void testExitSignRightUpBlock(GameTestHelper helper) {
     ModBlocksTestHelper.testModBlock(helper, ExitSignBlocks.EXIT_SIGN_RIGHT_UP);
+    helper.succeed();
+  }
+
+  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  public void testExitSignPlainLeftBlock(GameTestHelper helper) {
+    ModBlocksTestHelper.testModBlock(helper, ExitSignBlocks.EXIT_SIGN_PLAIN_LEFT);
+    helper.succeed();
+  }
+
+  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  public void testExitSignPlainRightBlock(GameTestHelper helper) {
+    ModBlocksTestHelper.testModBlock(helper, ExitSignBlocks.EXIT_SIGN_PLAIN_RIGHT);
+    helper.succeed();
+  }
+
+  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  public void testFireAlarmSwitchEuBlock(GameTestHelper helper) {
+    ModBlocksTestHelper.testModBlock(helper, FireAlarmBlocks.FIRE_ALARM_SWITCH_EU);
+    helper.succeed();
+  }
+
+  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  public void testFireAlarmSwitchJpBlock(GameTestHelper helper) {
+    ModBlocksTestHelper.testModBlock(helper, FireAlarmBlocks.FIRE_ALARM_SWITCH_JP);
+    helper.succeed();
+  }
+
+  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  public void testFireAlarmControlPanelBlock(GameTestHelper helper) {
+    ModBlocksTestHelper.testModBlock(helper, FireAlarmBlocks.FIRE_ALARM_CONTROL_PANEL);
+    helper.succeed();
+  }
+
+  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  public void testFireAlarmLightBlock(GameTestHelper helper) {
+    ModBlocksTestHelper.testModBlock(helper, FireAlarmBlocks.FIRE_ALARM_LIGHT);
+    helper.succeed();
+  }
+
+  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  public void testFirePoleBlock(GameTestHelper helper) {
+    ModBlocksTestHelper.testModBlock(helper, FireStationBlocks.FIRE_POLE);
+    helper.succeed();
+  }
+
+  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  public void testFireHydrantBlock(GameTestHelper helper) {
+    ModBlocksTestHelper.testModBlock(helper, FireStationBlocks.FIRE_HYDRANT);
     helper.succeed();
   }
 }

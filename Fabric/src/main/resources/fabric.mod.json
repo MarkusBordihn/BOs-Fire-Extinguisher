@@ -26,7 +26,14 @@
       "de.markusbordihn.fireextinguisher.gametest.ModBlocksTest",
       "de.markusbordihn.fireextinguisher.gametest.ModBlockItemsTest",
       "de.markusbordihn.fireextinguisher.gametest.ModItemsTest",
-      "de.markusbordihn.fireextinguisher.gametest.LootTablesTest"
+      "de.markusbordihn.fireextinguisher.gametest.LootTablesTest",
+      "de.markusbordihn.fireextinguisher.gametest.FireDetectionTest",
+      "de.markusbordihn.fireextinguisher.gametest.FireAlarmSmokeDetectorTest",
+      "de.markusbordihn.fireextinguisher.gametest.FireSprinklerTest",
+      "de.markusbordihn.fireextinguisher.gametest.FireAlarmControlPanelTest",
+      "de.markusbordihn.fireextinguisher.gametest.FirePoleTest",
+      "de.markusbordihn.fireextinguisher.gametest.FireHydrantTest",
+      "de.markusbordihn.fireextinguisher.gametest.FireArmorTest"
     ]
   },
   "depends": {

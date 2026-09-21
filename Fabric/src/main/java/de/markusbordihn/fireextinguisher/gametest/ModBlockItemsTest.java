@@ -133,4 +133,52 @@ public class ModBlockItemsTest {
     ModItemsTestHelper.testModItem(helper, ModBlockItems.EXIT_SIGN_RIGHT_UP);
     helper.succeed();
   }
+
+  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  public void testExitSignPlainLeftItem(GameTestHelper helper) {
+    ModItemsTestHelper.testModItem(helper, ModBlockItems.EXIT_SIGN_PLAIN_LEFT);
+    helper.succeed();
+  }
+
+  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  public void testExitSignPlainRightItem(GameTestHelper helper) {
+    ModItemsTestHelper.testModItem(helper, ModBlockItems.EXIT_SIGN_PLAIN_RIGHT);
+    helper.succeed();
+  }
+
+  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  public void testFireAlarmSwitchEuItem(GameTestHelper helper) {
+    ModItemsTestHelper.testModItem(helper, ModBlockItems.FIRE_ALARM_SWITCH_EU);
+    helper.succeed();
+  }
+
+  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  public void testFireAlarmSwitchJpItem(GameTestHelper helper) {
+    ModItemsTestHelper.testModItem(helper, ModBlockItems.FIRE_ALARM_SWITCH_JP);
+    helper.succeed();
+  }
+
+  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  public void testFireAlarmControlPanelItem(GameTestHelper helper) {
+    ModItemsTestHelper.testModItem(helper, ModBlockItems.FIRE_ALARM_CONTROL_PANEL);
+    helper.succeed();
+  }
+
+  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  public void testFireAlarmLightItem(GameTestHelper helper) {
+    ModItemsTestHelper.testModItem(helper, ModBlockItems.FIRE_ALARM_LIGHT);
+    helper.succeed();
+  }
+
+  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  public void testFirePoleItem(GameTestHelper helper) {
+    ModItemsTestHelper.testModItem(helper, ModBlockItems.FIRE_POLE);
+    helper.succeed();
+  }
+
+  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  public void testFireHydrantItem(GameTestHelper helper) {
+    ModItemsTestHelper.testModItem(helper, ModBlockItems.FIRE_HYDRANT);
+    helper.succeed();
+  }
 }

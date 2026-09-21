@@ -34,7 +34,5 @@ public class FireAlarmSmokeDetectorSilentBlock extends FireAlarmSmokeDetectorBlo
 
   @Override
   protected void playPoweredSound(
-      ResourceLocation resourceLocation, ServerLevel serverLevel, BlockPos blockPos) {
-    // Silent
-  }
+      ResourceLocation resourceLocation, ServerLevel serverLevel, BlockPos blockPos) {}
 }

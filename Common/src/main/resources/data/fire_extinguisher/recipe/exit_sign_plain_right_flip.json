@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "fire_extinguisher:exit_sign_plain_left"
+    }
+  ],
+  "result": {
+    "id": "fire_extinguisher:exit_sign_plain_right",
+    "count": 1
+  }
+}

@@ -136,4 +136,52 @@ public class ModBlocksTest {
     ModBlocksTestHelper.testModBlock(helper, ModBlocks.EXIT_SIGN_RIGHT_UP.get());
     helper.succeed();
   }
+
+  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  public void testExitSignPlainLeftBlock(GameTestHelper helper) {
+    ModBlocksTestHelper.testModBlock(helper, ModBlocks.EXIT_SIGN_PLAIN_LEFT.get());
+    helper.succeed();
+  }
+
+  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  public void testExitSignPlainRightBlock(GameTestHelper helper) {
+    ModBlocksTestHelper.testModBlock(helper, ModBlocks.EXIT_SIGN_PLAIN_RIGHT.get());
+    helper.succeed();
+  }
+
+  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  public void testFireAlarmSwitchEuBlock(GameTestHelper helper) {
+    ModBlocksTestHelper.testModBlock(helper, ModBlocks.FIRE_ALARM_SWITCH_EU.get());
+    helper.succeed();
+  }
+
+  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  public void testFireAlarmSwitchJpBlock(GameTestHelper helper) {
+    ModBlocksTestHelper.testModBlock(helper, ModBlocks.FIRE_ALARM_SWITCH_JP.get());
+    helper.succeed();
+  }
+
+  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  public void testFireAlarmControlPanelBlock(GameTestHelper helper) {
+    ModBlocksTestHelper.testModBlock(helper, ModBlocks.FIRE_ALARM_CONTROL_PANEL.get());
+    helper.succeed();
+  }
+
+  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  public void testFireAlarmLightBlock(GameTestHelper helper) {
+    ModBlocksTestHelper.testModBlock(helper, ModBlocks.FIRE_ALARM_LIGHT.get());
+    helper.succeed();
+  }
+
+  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  public void testFirePoleBlock(GameTestHelper helper) {
+    ModBlocksTestHelper.testModBlock(helper, ModBlocks.FIRE_POLE.get());
+    helper.succeed();
+  }
+
+  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  public void testFireHydrantBlock(GameTestHelper helper) {
+    ModBlocksTestHelper.testModBlock(helper, ModBlocks.FIRE_HYDRANT.get());
+    helper.succeed();
+  }
 }

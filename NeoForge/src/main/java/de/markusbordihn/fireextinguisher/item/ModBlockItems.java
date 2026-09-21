@@ -20,15 +20,20 @@
 package de.markusbordihn.fireextinguisher.item;
 
 import de.markusbordihn.fireextinguisher.Constants;
+import de.markusbordihn.fireextinguisher.block.FireAlarmSwitchBlock;
 import de.markusbordihn.fireextinguisher.block.FireExtinguisherSign;
 import de.markusbordihn.fireextinguisher.block.ModBlocks;
 import de.markusbordihn.fireextinguisher.blockitem.ExitSignBlockItem;
 import de.markusbordihn.fireextinguisher.blockitem.FireAlarmBellBlockItem;
+import de.markusbordihn.fireextinguisher.blockitem.FireAlarmControlPanelBlockItem;
+import de.markusbordihn.fireextinguisher.blockitem.FireAlarmLightBlockItem;
 import de.markusbordihn.fireextinguisher.blockitem.FireAlarmSirenBlockItem;
 import de.markusbordihn.fireextinguisher.blockitem.FireAlarmSmokeDetectorBlockItem;
 import de.markusbordihn.fireextinguisher.blockitem.FireAlarmSwitchBlockItem;
 import de.markusbordihn.fireextinguisher.blockitem.FireExtinguisherBlockItem;
 import de.markusbordihn.fireextinguisher.blockitem.FireExtinguisherSignBlockItem;
+import de.markusbordihn.fireextinguisher.blockitem.FireHydrantBlockItem;
+import de.markusbordihn.fireextinguisher.blockitem.FirePoleBlockItem;
 import de.markusbordihn.fireextinguisher.blockitem.FireSprinklerBlockItem;
 import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.registries.DeferredItem;
@@ -57,6 +62,22 @@ public class ModBlockItems {
       ITEMS.register(
           FireAlarmSwitchBlockItem.NAME,
           () -> new FireAlarmSwitchBlockItem(ModBlocks.FIRE_ALARM_SWITCH.get()));
+  public static final DeferredItem<Item> FIRE_ALARM_SWITCH_EU =
+      ITEMS.register(
+          FireAlarmSwitchBlock.NAME_EU,
+          () -> new FireAlarmSwitchBlockItem(ModBlocks.FIRE_ALARM_SWITCH_EU.get()));
+  public static final DeferredItem<Item> FIRE_ALARM_SWITCH_JP =
+      ITEMS.register(
+          FireAlarmSwitchBlock.NAME_JP,
+          () -> new FireAlarmSwitchBlockItem(ModBlocks.FIRE_ALARM_SWITCH_JP.get()));
+  public static final DeferredItem<Item> FIRE_ALARM_CONTROL_PANEL =
+      ITEMS.register(
+          FireAlarmControlPanelBlockItem.NAME,
+          () -> new FireAlarmControlPanelBlockItem(ModBlocks.FIRE_ALARM_CONTROL_PANEL.get()));
+  public static final DeferredItem<Item> FIRE_ALARM_LIGHT =
+      ITEMS.register(
+          FireAlarmLightBlockItem.NAME,
+          () -> new FireAlarmLightBlockItem(ModBlocks.FIRE_ALARM_LIGHT.get()));
   public static final DeferredItem<Item> FIRE_ALARM_BELL =
       ITEMS.register(
           FireAlarmBellBlockItem.NAME,
@@ -118,6 +139,21 @@ public class ModBlockItems {
       ITEMS.register(
           ExitSignBlockItem.NAME + "_right_up",
           () -> new ExitSignBlockItem(ModBlocks.EXIT_SIGN_RIGHT_UP.get()));
+  public static final DeferredItem<Item> EXIT_SIGN_PLAIN_LEFT =
+      ITEMS.register(
+          ExitSignBlockItem.NAME + "_plain_left",
+          () -> new ExitSignBlockItem(ModBlocks.EXIT_SIGN_PLAIN_LEFT.get()));
+  public static final DeferredItem<Item> EXIT_SIGN_PLAIN_RIGHT =
+      ITEMS.register(
+          ExitSignBlockItem.NAME + "_plain_right",
+          () -> new ExitSignBlockItem(ModBlocks.EXIT_SIGN_PLAIN_RIGHT.get()));
+
+  public static final DeferredItem<Item> FIRE_POLE =
+      ITEMS.register(
+          FirePoleBlockItem.NAME, () -> new FirePoleBlockItem(ModBlocks.FIRE_POLE.get()));
+  public static final DeferredItem<Item> FIRE_HYDRANT =
+      ITEMS.register(
+          FireHydrantBlockItem.NAME, () -> new FireHydrantBlockItem(ModBlocks.FIRE_HYDRANT.get()));
 
   protected ModBlockItems() {}
 }

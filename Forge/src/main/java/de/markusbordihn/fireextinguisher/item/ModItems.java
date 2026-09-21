@@ -29,10 +29,8 @@ public class ModItems {
 
   public static final DeferredRegister<Item> ITEMS =
       DeferredRegister.create(ForgeRegistries.ITEMS, Constants.MOD_ID);
-  // Fire fight weapons
   public static final RegistryObject<Item> FIRE_AXE =
       ITEMS.register(FireAxeItem.NAME, FireAxeItem::new);
-  // Fire fight armor
   public static final RegistryObject<Item> FIRE_HELMET =
       ITEMS.register(FireHelmetItem.NAME, FireHelmetItem::new);
   public static final RegistryObject<Item> FIRE_CHESTPLATE =
@@ -41,7 +39,6 @@ public class ModItems {
       ITEMS.register(FireLeggingsItem.NAME, FireLeggingsItem::new);
   public static final RegistryObject<Item> FIRE_BOOTS =
       ITEMS.register(FireBootsItem.NAME, FireBootsItem::new);
-  // Fire fighter armor (light)
   public static final RegistryObject<Item> FIRE_HELMET_LIGHT =
       ITEMS.register(FireHelmetLightItem.NAME, FireHelmetLightItem::new);
   public static final RegistryObject<Item> FIRE_CHESTPLATE_LIGHT =

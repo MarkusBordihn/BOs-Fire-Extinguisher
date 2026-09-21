@@ -20,15 +20,20 @@
 package de.markusbordihn.fireextinguisher.item;
 
 import de.markusbordihn.fireextinguisher.Constants;
+import de.markusbordihn.fireextinguisher.block.FireAlarmSwitchBlock;
 import de.markusbordihn.fireextinguisher.block.FireExtinguisherSign;
 import de.markusbordihn.fireextinguisher.block.ModBlocks;
 import de.markusbordihn.fireextinguisher.blockitem.ExitSignBlockItem;
 import de.markusbordihn.fireextinguisher.blockitem.FireAlarmBellBlockItem;
+import de.markusbordihn.fireextinguisher.blockitem.FireAlarmControlPanelBlockItem;
+import de.markusbordihn.fireextinguisher.blockitem.FireAlarmLightBlockItem;
 import de.markusbordihn.fireextinguisher.blockitem.FireAlarmSirenBlockItem;
 import de.markusbordihn.fireextinguisher.blockitem.FireAlarmSmokeDetectorBlockItem;
 import de.markusbordihn.fireextinguisher.blockitem.FireAlarmSwitchBlockItem;
 import de.markusbordihn.fireextinguisher.blockitem.FireExtinguisherBlockItem;
 import de.markusbordihn.fireextinguisher.blockitem.FireExtinguisherSignBlockItem;
+import de.markusbordihn.fireextinguisher.blockitem.FireHydrantBlockItem;
+import de.markusbordihn.fireextinguisher.blockitem.FirePoleBlockItem;
 import de.markusbordihn.fireextinguisher.blockitem.FireSprinklerBlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.DeferredRegister;
@@ -40,7 +45,6 @@ public class ModBlockItems {
   public static final DeferredRegister<Item> ITEMS =
       DeferredRegister.create(ForgeRegistries.ITEMS, Constants.MOD_ID);
 
-  // Fire Extinguisher
   public static final RegistryObject<Item> FIRE_EXTINGUISHER =
       ITEMS.register(
           FireExtinguisherBlockItem.NAME,
@@ -50,7 +54,6 @@ public class ModBlockItems {
           FireExtinguisherBlockItem.NAME + "_copper",
           () -> new FireExtinguisherBlockItem(ModBlocks.FIRE_EXTINGUISHER_COPPER.get()));
 
-  // Fire Alarm
   public static final RegistryObject<Item> FIRE_SPRINKLER =
       ITEMS.register(
           FireSprinklerBlockItem.NAME,
@@ -59,6 +62,22 @@ public class ModBlockItems {
       ITEMS.register(
           FireAlarmSwitchBlockItem.NAME,
           () -> new FireAlarmSwitchBlockItem(ModBlocks.FIRE_ALARM_SWITCH.get()));
+  public static final RegistryObject<Item> FIRE_ALARM_SWITCH_EU =
+      ITEMS.register(
+          FireAlarmSwitchBlock.NAME_EU,
+          () -> new FireAlarmSwitchBlockItem(ModBlocks.FIRE_ALARM_SWITCH_EU.get()));
+  public static final RegistryObject<Item> FIRE_ALARM_SWITCH_JP =
+      ITEMS.register(
+          FireAlarmSwitchBlock.NAME_JP,
+          () -> new FireAlarmSwitchBlockItem(ModBlocks.FIRE_ALARM_SWITCH_JP.get()));
+  public static final RegistryObject<Item> FIRE_ALARM_CONTROL_PANEL =
+      ITEMS.register(
+          FireAlarmControlPanelBlockItem.NAME,
+          () -> new FireAlarmControlPanelBlockItem(ModBlocks.FIRE_ALARM_CONTROL_PANEL.get()));
+  public static final RegistryObject<Item> FIRE_ALARM_LIGHT =
+      ITEMS.register(
+          FireAlarmLightBlockItem.NAME,
+          () -> new FireAlarmLightBlockItem(ModBlocks.FIRE_ALARM_LIGHT.get()));
   public static final RegistryObject<Item> FIRE_ALARM_BELL =
       ITEMS.register(
           FireAlarmBellBlockItem.NAME,
@@ -78,7 +97,6 @@ public class ModBlockItems {
               new FireAlarmSmokeDetectorBlockItem(
                   ModBlocks.FIRE_ALARM_SMOKE_DETECTOR_SILENT.get()));
 
-  // Fire Extinguisher Signs
   public static final RegistryObject<Item> FIRE_EXTINGUISHER_SIGN =
       ITEMS.register(
           FireExtinguisherSign.NAME,
@@ -92,7 +110,6 @@ public class ModBlockItems {
           FireExtinguisherSign.NAME + "_right",
           () -> new FireExtinguisherSignBlockItem(ModBlocks.FIRE_EXTINGUISHER_SIGN_RIGHT.get()));
 
-  // Exit Signs
   public static final RegistryObject<Item> EXIT_SIGN =
       ITEMS.register(
           ExitSignBlockItem.NAME, () -> new ExitSignBlockItem(ModBlocks.EXIT_SIGN.get()));
@@ -120,6 +137,21 @@ public class ModBlockItems {
       ITEMS.register(
           ExitSignBlockItem.NAME + "_right_up",
           () -> new ExitSignBlockItem(ModBlocks.EXIT_SIGN_RIGHT_UP.get()));
+  public static final RegistryObject<Item> EXIT_SIGN_PLAIN_LEFT =
+      ITEMS.register(
+          ExitSignBlockItem.NAME + "_plain_left",
+          () -> new ExitSignBlockItem(ModBlocks.EXIT_SIGN_PLAIN_LEFT.get()));
+  public static final RegistryObject<Item> EXIT_SIGN_PLAIN_RIGHT =
+      ITEMS.register(
+          ExitSignBlockItem.NAME + "_plain_right",
+          () -> new ExitSignBlockItem(ModBlocks.EXIT_SIGN_PLAIN_RIGHT.get()));
+
+  public static final RegistryObject<Item> FIRE_POLE =
+      ITEMS.register(
+          FirePoleBlockItem.NAME, () -> new FirePoleBlockItem(ModBlocks.FIRE_POLE.get()));
+  public static final RegistryObject<Item> FIRE_HYDRANT =
+      ITEMS.register(
+          FireHydrantBlockItem.NAME, () -> new FireHydrantBlockItem(ModBlocks.FIRE_HYDRANT.get()));
 
   protected ModBlockItems() {}
 }

@@ -23,6 +23,7 @@ import de.markusbordihn.fireextinguisher.block.ExitSignBlocks;
 import de.markusbordihn.fireextinguisher.block.FireAlarmBlocks;
 import de.markusbordihn.fireextinguisher.block.FireExtinguisherBlocks;
 import de.markusbordihn.fireextinguisher.block.FireExtinguisherSignBlocks;
+import de.markusbordihn.fireextinguisher.block.FireStationBlocks;
 import de.markusbordihn.fireextinguisher.item.ModBlockItems;
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
@@ -163,6 +164,62 @@ public class LootTablesTest {
   public void testExitSignRightUpDrop(GameTestHelper helper) {
     LootTableTestHelper.testAxeBlockDropItem(
         helper, ExitSignBlocks.EXIT_SIGN_RIGHT_UP, ModBlockItems.EXIT_SIGN_RIGHT_UP);
+    helper.succeed();
+  }
+
+  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  public void testExitSignPlainLeftDrop(GameTestHelper helper) {
+    LootTableTestHelper.testAxeBlockDropItem(
+        helper, ExitSignBlocks.EXIT_SIGN_PLAIN_LEFT, ModBlockItems.EXIT_SIGN_PLAIN_LEFT);
+    helper.succeed();
+  }
+
+  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  public void testExitSignPlainRightDrop(GameTestHelper helper) {
+    LootTableTestHelper.testAxeBlockDropItem(
+        helper, ExitSignBlocks.EXIT_SIGN_PLAIN_RIGHT, ModBlockItems.EXIT_SIGN_PLAIN_RIGHT);
+    helper.succeed();
+  }
+
+  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  public void testFireAlarmSwitchEuDrop(GameTestHelper helper) {
+    LootTableTestHelper.testBlockDropItem(
+        helper, FireAlarmBlocks.FIRE_ALARM_SWITCH_EU, ModBlockItems.FIRE_ALARM_SWITCH_EU);
+    helper.succeed();
+  }
+
+  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  public void testFireAlarmSwitchJpDrop(GameTestHelper helper) {
+    LootTableTestHelper.testBlockDropItem(
+        helper, FireAlarmBlocks.FIRE_ALARM_SWITCH_JP, ModBlockItems.FIRE_ALARM_SWITCH_JP);
+    helper.succeed();
+  }
+
+  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  public void testFireAlarmControlPanelDrop(GameTestHelper helper) {
+    LootTableTestHelper.testBlockDropItem(
+        helper, FireAlarmBlocks.FIRE_ALARM_CONTROL_PANEL, ModBlockItems.FIRE_ALARM_CONTROL_PANEL);
+    helper.succeed();
+  }
+
+  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  public void testFireAlarmLightDrop(GameTestHelper helper) {
+    LootTableTestHelper.testBlockDropItem(
+        helper, FireAlarmBlocks.FIRE_ALARM_LIGHT, ModBlockItems.FIRE_ALARM_LIGHT);
+    helper.succeed();
+  }
+
+  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  public void testFirePoleDrop(GameTestHelper helper) {
+    LootTableTestHelper.testBlockDropItem(
+        helper, FireStationBlocks.FIRE_POLE, ModBlockItems.FIRE_POLE);
+    helper.succeed();
+  }
+
+  @GameTest(template = "fire_extinguisher:gametest.1x1x1")
+  public void testFireHydrantDrop(GameTestHelper helper) {
+    LootTableTestHelper.testBlockDropItem(
+        helper, FireStationBlocks.FIRE_HYDRANT, ModBlockItems.FIRE_HYDRANT);
     helper.succeed();
   }
 }

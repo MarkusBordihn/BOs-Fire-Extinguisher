@@ -138,4 +138,52 @@ public class ModBlockItemsTest {
     ModItemsTestHelper.testModItem(helper, ModBlockItems.EXIT_SIGN_RIGHT_UP.get());
     helper.succeed();
   }
+
+  @GameTest(template = "gametest.1x1x1")
+  public void testExitSignPlainLeftItem(GameTestHelper helper) {
+    ModItemsTestHelper.testModItem(helper, ModBlockItems.EXIT_SIGN_PLAIN_LEFT.get());
+    helper.succeed();
+  }
+
+  @GameTest(template = "gametest.1x1x1")
+  public void testExitSignPlainRightItem(GameTestHelper helper) {
+    ModItemsTestHelper.testModItem(helper, ModBlockItems.EXIT_SIGN_PLAIN_RIGHT.get());
+    helper.succeed();
+  }
+
+  @GameTest(template = "gametest.1x1x1")
+  public void testFireAlarmSwitchEuItem(GameTestHelper helper) {
+    ModItemsTestHelper.testModItem(helper, ModBlockItems.FIRE_ALARM_SWITCH_EU.get());
+    helper.succeed();
+  }
+
+  @GameTest(template = "gametest.1x1x1")
+  public void testFireAlarmSwitchJpItem(GameTestHelper helper) {
+    ModItemsTestHelper.testModItem(helper, ModBlockItems.FIRE_ALARM_SWITCH_JP.get());
+    helper.succeed();
+  }
+
+  @GameTest(template = "gametest.1x1x1")
+  public void testFireAlarmControlPanelItem(GameTestHelper helper) {
+    ModItemsTestHelper.testModItem(helper, ModBlockItems.FIRE_ALARM_CONTROL_PANEL.get());
+    helper.succeed();
+  }
+
+  @GameTest(template = "gametest.1x1x1")
+  public void testFireAlarmLightItem(GameTestHelper helper) {
+    ModItemsTestHelper.testModItem(helper, ModBlockItems.FIRE_ALARM_LIGHT.get());
+    helper.succeed();
+  }
+
+  @GameTest(template = "gametest.1x1x1")
+  public void testFirePoleItem(GameTestHelper helper) {
+    ModItemsTestHelper.testModItem(helper, ModBlockItems.FIRE_POLE.get());
+    helper.succeed();
+  }
+
+  @GameTest(template = "gametest.1x1x1")
+  public void testFireHydrantItem(GameTestHelper helper) {
+    ModItemsTestHelper.testModItem(helper, ModBlockItems.FIRE_HYDRANT.get());
+    helper.succeed();
+  }
 }

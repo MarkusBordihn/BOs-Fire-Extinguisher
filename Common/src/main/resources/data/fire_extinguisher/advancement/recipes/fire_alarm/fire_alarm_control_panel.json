@@ -1,0 +1,51 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_iron_ingot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["minecraft:iron_ingot"]
+          }
+        ]
+      }
+    },
+    "has_glass_pane": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["minecraft:glass_pane"]
+          }
+        ]
+      }
+    },
+    "has_redstone": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["minecraft:redstone"]
+          }
+        ]
+      }
+    },
+    "has_fire_alarm_control_panel": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["fire_extinguisher:fire_alarm_control_panel"]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    ["has_iron_ingot", "has_glass_pane", "has_redstone", "has_fire_alarm_control_panel"]
+  ],
+  "rewards": {
+    "recipes": ["fire_extinguisher:fire_alarm_control_panel"]
+  }
+}

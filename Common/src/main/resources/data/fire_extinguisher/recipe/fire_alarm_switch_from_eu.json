@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "fire_extinguisher:fire_alarm_switch_eu"
+    }
+  ],
+  "result": {
+    "id": "fire_extinguisher:fire_alarm_switch"
+  }
+}
