@@ -167,4 +167,62 @@ public class LootTablesTest {
         helper, ModBlocks.EXIT_SIGN_RIGHT_UP.get(), ModBlockItems.EXIT_SIGN_RIGHT_UP.get());
     helper.succeed();
   }
+
+  @GameTest(template = "gametest.1x1x1")
+  public void testExitSignPlainLeftDrop(GameTestHelper helper) {
+    LootTableTestHelper.testAxeBlockDropItem(
+        helper, ModBlocks.EXIT_SIGN_PLAIN_LEFT.get(), ModBlockItems.EXIT_SIGN_PLAIN_LEFT.get());
+    helper.succeed();
+  }
+
+  @GameTest(template = "gametest.1x1x1")
+  public void testExitSignPlainRightDrop(GameTestHelper helper) {
+    LootTableTestHelper.testAxeBlockDropItem(
+        helper, ModBlocks.EXIT_SIGN_PLAIN_RIGHT.get(), ModBlockItems.EXIT_SIGN_PLAIN_RIGHT.get());
+    helper.succeed();
+  }
+
+  @GameTest(template = "gametest.1x1x1")
+  public void testFireAlarmSwitchEuDrop(GameTestHelper helper) {
+    LootTableTestHelper.testBlockDropItem(
+        helper, ModBlocks.FIRE_ALARM_SWITCH_EU.get(), ModBlockItems.FIRE_ALARM_SWITCH_EU.get());
+    helper.succeed();
+  }
+
+  @GameTest(template = "gametest.1x1x1")
+  public void testFireAlarmSwitchJpDrop(GameTestHelper helper) {
+    LootTableTestHelper.testBlockDropItem(
+        helper, ModBlocks.FIRE_ALARM_SWITCH_JP.get(), ModBlockItems.FIRE_ALARM_SWITCH_JP.get());
+    helper.succeed();
+  }
+
+  @GameTest(template = "gametest.1x1x1")
+  public void testFireAlarmControlPanelDrop(GameTestHelper helper) {
+    LootTableTestHelper.testBlockDropItem(
+        helper,
+        ModBlocks.FIRE_ALARM_CONTROL_PANEL.get(),
+        ModBlockItems.FIRE_ALARM_CONTROL_PANEL.get());
+    helper.succeed();
+  }
+
+  @GameTest(template = "gametest.1x1x1")
+  public void testFireAlarmLightDrop(GameTestHelper helper) {
+    LootTableTestHelper.testBlockDropItem(
+        helper, ModBlocks.FIRE_ALARM_LIGHT.get(), ModBlockItems.FIRE_ALARM_LIGHT.get());
+    helper.succeed();
+  }
+
+  @GameTest(template = "gametest.1x1x1")
+  public void testFirePoleDrop(GameTestHelper helper) {
+    LootTableTestHelper.testBlockDropItem(
+        helper, ModBlocks.FIRE_POLE.get(), ModBlockItems.FIRE_POLE.get());
+    helper.succeed();
+  }
+
+  @GameTest(template = "gametest.1x1x1")
+  public void testFireHydrantDrop(GameTestHelper helper) {
+    LootTableTestHelper.testBlockDropItem(
+        helper, ModBlocks.FIRE_HYDRANT.get(), ModBlockItems.FIRE_HYDRANT.get());
+    helper.succeed();
+  }
 }

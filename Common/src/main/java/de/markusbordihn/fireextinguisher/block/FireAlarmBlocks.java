@@ -29,6 +29,18 @@ public class FireAlarmBlocks {
       new FireSprinklerBlock(BlockBehaviour.Properties.copy(Blocks.DISPENSER));
   public static final Block FIRE_ALARM_SWITCH =
       new FireAlarmSwitchBlock(BlockBehaviour.Properties.copy(Blocks.LEVER));
+  public static final Block FIRE_ALARM_SWITCH_EU =
+      new FireAlarmSwitchBlock(BlockBehaviour.Properties.copy(Blocks.LEVER), 8, 8, 2.5);
+  public static final Block FIRE_ALARM_SWITCH_JP =
+      new FireAlarmSwitchBlock(BlockBehaviour.Properties.copy(Blocks.LEVER), 5, 10, 2.65);
+  public static final Block FIRE_ALARM_CONTROL_PANEL =
+      new FireAlarmControlPanelBlock(
+          BlockBehaviour.Properties.copy(Blocks.BELL)
+              .lightLevel(FireAlarmControlPanelBlock::getLightEmission));
+  public static final Block FIRE_ALARM_LIGHT =
+      new FireAlarmLightBlock(
+          BlockBehaviour.Properties.copy(Blocks.BELL)
+              .lightLevel(FireAlarmLightBlock::getLightEmission));
   public static final Block FIRE_ALARM_BELL =
       new FireAlarmBellBlock(
           BlockBehaviour.Properties.copy(Blocks.BELL)

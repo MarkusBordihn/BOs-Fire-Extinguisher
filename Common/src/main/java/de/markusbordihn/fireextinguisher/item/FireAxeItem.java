@@ -21,6 +21,7 @@ package de.markusbordihn.fireextinguisher.item;
 
 import de.markusbordihn.fireextinguisher.Constants;
 import de.markusbordihn.fireextinguisher.config.FireExtinguisherConfig;
+import de.markusbordihn.fireextinguisher.utils.FireDetection;
 import de.markusbordihn.fireextinguisher.utils.ToolTips;
 import java.util.List;
 import net.minecraft.ChatFormatting;
@@ -39,17 +40,11 @@ import net.minecraft.world.item.Tiers;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.CampfireBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 public class FireAxeItem extends AxeItem {
 
   public static final String NAME = "fire_axe";
-
-  private static final Logger log = LogManager.getLogger(Constants.LOG_NAME);
 
   public FireAxeItem() {
     this(Tiers.IRON, 6.0F, -3.2F, new Properties());
@@ -69,28 +64,14 @@ public class FireAxeItem extends AxeItem {
       InteractionHand hand,
       BlockPos targetBlockPos,
       ItemStack itemStack) {
-    Iterable<BlockPos> blockPositions =
-        BlockPos.withinManhattan(
+    int extinguished =
+        FireDetection.extinguishWithin(
+            level,
             targetBlockPos.above(),
             FireExtinguisherConfig.fireAxtRadius,
             FireExtinguisherConfig.fireAxtRadius,
             FireExtinguisherConfig.fireAxtRadius);
-    boolean hasStoppedFire = false;
-    for (BlockPos blockPos : blockPositions) {
-      BlockState blockState = level.getBlockState(blockPos);
-      if (blockState.is(Blocks.FIRE)) {
-        log.debug("[Fire Axt] Removing Fire Block {} at {}", blockState, blockPos);
-        level.removeBlock(blockPos, false);
-        hasStoppedFire = true;
-      } else if (blockState.is(Blocks.CAMPFIRE)
-          && blockState.getBlock() instanceof CampfireBlock
-          && CampfireBlock.isLitCampfire(blockState)) {
-        log.debug("[Fire Axt] Extinguishing Campfire Block {} at {}", blockState, blockPos);
-        level.setBlockAndUpdate(blockPos, blockState.setValue(CampfireBlock.LIT, false));
-        hasStoppedFire = true;
-      }
-    }
-    if (hasStoppedFire) {
+    if (extinguished > 0) {
       if (!level.isClientSide) {
         level.playSound(
             null, targetBlockPos, SoundEvents.FIRE_EXTINGUISH, SoundSource.PLAYERS, 1.0F, 1.0F);

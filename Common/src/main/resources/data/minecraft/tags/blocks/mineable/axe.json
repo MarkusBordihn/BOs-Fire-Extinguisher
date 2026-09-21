@@ -2,6 +2,8 @@
   "replace": false,
   "values": [
     "fire_extinguisher:exit_sign",
+    "fire_extinguisher:exit_sign_plain_left",
+    "fire_extinguisher:exit_sign_plain_right",
     "fire_extinguisher:exit_sign_left",
     "fire_extinguisher:exit_sign_left_down",
     "fire_extinguisher:exit_sign_left_up",

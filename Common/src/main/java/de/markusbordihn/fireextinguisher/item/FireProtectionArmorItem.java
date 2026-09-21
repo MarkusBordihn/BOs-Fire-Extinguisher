@@ -19,20 +19,16 @@
 package de.markusbordihn.fireextinguisher.item;
 
 import de.markusbordihn.fireextinguisher.config.FireExtinguisherConfig;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
 public class FireProtectionArmorItem extends ArmorItem {
-
-  protected static final Map<UUID, Long> lastEffectTime = new HashMap<>();
 
   public FireProtectionArmorItem(ArmorItem.Type type, Properties properties) {
     this(ModArmorMaterials.FIRE_PROTECTION, type, properties);
@@ -43,7 +39,7 @@ public class FireProtectionArmorItem extends ArmorItem {
     super(armorMaterial, type, properties);
   }
 
-  protected static int countWornFireArmorPieces(ServerPlayer player, ArmorMaterial material) {
+  public static int countWornFireArmorPieces(Player player, ArmorMaterial material) {
     int count = 0;
     for (EquipmentSlot slot : EquipmentSlot.values()) {
       if (slot.getType() == EquipmentSlot.Type.ARMOR) {
@@ -55,6 +51,11 @@ public class FireProtectionArmorItem extends ArmorItem {
       }
     }
     return count;
+  }
+
+  public static int calculateProtectionDuration(
+      Player player, ArmorMaterial material, int durationPerArmorPiece) {
+    return durationPerArmorPiece * countWornFireArmorPieces(player, material);
   }
 
   protected static boolean hasSlowDownArmor(ServerPlayer player) {

@@ -14,27 +14,46 @@
 
 ![Fire Extinguisher][logo]
 
-Welcome to the Fire Extinguisher and More mod, a comprehensive solution to combat the destructive
-force of fire within the Minecraft universe!
+The Fire Extinguisher and More mod adds extinguishers, fire alarms, sprinklers and safety signs to
+fight and prevent fires.
 
 ## Features
 
-Dive into a world of fire-fighting possibilities with an array of tools and items designed to
-enhance your firefighting experience:
+Tools and blocks for fighting and preventing fires:
 
-- **Fire Extinguisher (Normal and Chrome):** Equip yourself with powerful extinguishers to swiftly
-  douse flames on various surfaces.
-- **Fire Axe:** A specialized tool for efficiently tackling fire-related challenges.
-- **Fire-Protecting Armor (Helmet, Chestplate, Leggings, Boots):** Safeguard yourself in style with
-  two distinct variants—Heavy and Light—offering different levels of protection.
-- **Fire Alarm Bell, Siren, and Switch:** Utilize these devices to raise the alarm and take control
-  in the event of a fire emergency.
-- **Fire Sprinkler and Smoke Detector:** Implement preventive measures with these tools to enhance
-  fire safety.
-- **Fire Extinguisher Location Signs and Exit Location Signs:** Strategically mark key locations for
-  easy identification during emergencies.
-- **Customization via Configuration File:** Tailor the mod to your preferences through an easily
-  configurable file, providing flexibility and control.
+- **Fire Extinguisher (Normal and Copper):** Put out fire, soul fire, campfires and modded fire
+  blocks. Both variants work the same, the copper one is a decorative alternative.
+- **Fire Hydrant:** Refill a used fire extinguisher with a simple right-click.
+- **Fire Pole:** Slide down from the top floor of your fire station without any fall damage.
+- **Fire Axe:** Remove the fire around a block by right-clicking it or breaking it.
+- **Fire-Protecting Armor (Helmet, Chestplate, Leggings, Boots):** Two variants, Heavy and Light,
+  with different protection and movement speed. Each worn piece extends the protection.
+- **Fire Alarm Control Panel:** Connect smoke detectors and alarm switches to bells, sirens, lights
+  and sprinklers within a configurable radius without any redstone wiring. Panel and light emit a
+  redstone signal while the alarm is active.
+- **Fire Alarm Bell, Siren, Light, and Switch:** Raise the alarm by redstone or by hand. Switches
+  come as classic, EU call point and Japanese push button variants.
+- **Fire Sprinkler and Smoke Detector:** Detect fire and put it out automatically.
+- **Fire Extinguisher Location Signs and Exit Location Signs:** Mark extinguishers and escape
+  routes, including emergency exit signs without a direction arrow.
+- **Customization via Configuration File:** Adjust cooldowns, ranges and toggles in the config file.
+
+## 🔥 Modded Fire Blocks
+
+Fire blocks from other mods are extinguished automatically when they extend the vanilla fire block
+or are listed in the `minecraft:fire` block tag. Other blocks can be added by a data pack via the
+`fire_extinguisher:extinguishable` block tag or by listing their ids in the `extinguishableBlocks`
+config option, e.g. `extinguishableBlocks=burnt:fire_block,minecraft:magma_block`.
+
+## ⚙️ Configuration
+
+The config file offers the following additional options:
+
+- `fireExtinguisherCooldownTicks`: Delay between two sprays of the fire extinguisher.
+- `fireAlarmControlPanelRadiusX/Y/Z`: Range of the fire alarm control panel, `0` disables it.
+- `fireAlarmControlPanelLatching`: Keep the alarm active until the control panel is reset by hand.
+- `firePoleSlideSpeed`: Sliding speed of the fire pole in blocks per second.
+- `fireHydrantRefillEnabled`: Allow refilling fire extinguishers at the fire hydrant.
 
 With a diverse range of items at your disposal, the Fire Extinguisher and More mod offers a dynamic
 firefighting experience that goes beyond the ordinary. Are you ready to face the flames and protect

@@ -29,7 +29,6 @@ public class ModBlocks {
 
   public static final DeferredRegister<Block> BLOCKS =
       DeferredRegister.create(ForgeRegistries.BLOCKS, Constants.MOD_ID);
-  // Fire Extinguisher
   public static final RegistryObject<Block> FIRE_EXTINGUISHER =
       BLOCKS.register(FireExtinguisherBlock.NAME, () -> FireExtinguisherBlocks.FIRE_EXTINGUISHER);
   public static final RegistryObject<Block> FIRE_EXTINGUISHER_COPPER =
@@ -37,11 +36,19 @@ public class ModBlocks {
           FireExtinguisherBlock.NAME + "_copper",
           () -> FireExtinguisherBlocks.FIRE_EXTINGUISHER_COPPER);
 
-  // Fire Alarm
   public static final RegistryObject<Block> FIRE_SPRINKLER =
       BLOCKS.register(FireSprinklerBlock.NAME, () -> FireAlarmBlocks.FIRE_SPRINKLER);
   public static final RegistryObject<Block> FIRE_ALARM_SWITCH =
       BLOCKS.register(FireAlarmSwitchBlock.NAME, () -> FireAlarmBlocks.FIRE_ALARM_SWITCH);
+  public static final RegistryObject<Block> FIRE_ALARM_SWITCH_EU =
+      BLOCKS.register(FireAlarmSwitchBlock.NAME_EU, () -> FireAlarmBlocks.FIRE_ALARM_SWITCH_EU);
+  public static final RegistryObject<Block> FIRE_ALARM_SWITCH_JP =
+      BLOCKS.register(FireAlarmSwitchBlock.NAME_JP, () -> FireAlarmBlocks.FIRE_ALARM_SWITCH_JP);
+  public static final RegistryObject<Block> FIRE_ALARM_CONTROL_PANEL =
+      BLOCKS.register(
+          FireAlarmControlPanelBlock.NAME, () -> FireAlarmBlocks.FIRE_ALARM_CONTROL_PANEL);
+  public static final RegistryObject<Block> FIRE_ALARM_LIGHT =
+      BLOCKS.register(FireAlarmLightBlock.NAME, () -> FireAlarmBlocks.FIRE_ALARM_LIGHT);
   public static final RegistryObject<Block> FIRE_ALARM_BELL =
       BLOCKS.register(FireAlarmBellBlock.NAME, () -> FireAlarmBlocks.FIRE_ALARM_BELL);
   public static final RegistryObject<Block> FIRE_ALARM_SIREN =
@@ -54,7 +61,6 @@ public class ModBlocks {
           FireAlarmSmokeDetectorSilentBlock.NAME,
           () -> FireAlarmBlocks.FIRE_ALARM_SMOKE_DETECTOR_SILENT);
 
-  // Fire Extinguisher Signs
   public static final RegistryObject<Block> FIRE_EXTINGUISHER_SIGN =
       BLOCKS.register(
           FireExtinguisherSign.NAME, () -> FireExtinguisherSignBlocks.FIRE_EXTINGUISHER_SIGN);
@@ -67,7 +73,6 @@ public class ModBlocks {
           FireExtinguisherSign.NAME + "_right",
           () -> FireExtinguisherSignBlocks.FIRE_EXTINGUISHER_SIGN_RIGHT);
 
-  // Exit Signs
   public static final RegistryObject<Block> EXIT_SIGN =
       BLOCKS.register(ExitSign.NAME, () -> ExitSignBlocks.EXIT_SIGN);
   public static final RegistryObject<Block> EXIT_SIGN_LEFT =
@@ -82,6 +87,15 @@ public class ModBlocks {
       BLOCKS.register(ExitSign.NAME + "_right_down", () -> ExitSignBlocks.EXIT_SIGN_RIGHT_DOWN);
   public static final RegistryObject<Block> EXIT_SIGN_RIGHT_UP =
       BLOCKS.register(ExitSign.NAME + "_right_up", () -> ExitSignBlocks.EXIT_SIGN_RIGHT_UP);
+  public static final RegistryObject<Block> EXIT_SIGN_PLAIN_LEFT =
+      BLOCKS.register(ExitSign.NAME + "_plain_left", () -> ExitSignBlocks.EXIT_SIGN_PLAIN_LEFT);
+  public static final RegistryObject<Block> EXIT_SIGN_PLAIN_RIGHT =
+      BLOCKS.register(ExitSign.NAME + "_plain_right", () -> ExitSignBlocks.EXIT_SIGN_PLAIN_RIGHT);
+
+  public static final RegistryObject<Block> FIRE_POLE =
+      BLOCKS.register(FirePoleBlock.NAME, () -> FireStationBlocks.FIRE_POLE);
+  public static final RegistryObject<Block> FIRE_HYDRANT =
+      BLOCKS.register(FireHydrantBlock.NAME, () -> FireStationBlocks.FIRE_HYDRANT);
 
   protected ModBlocks() {}
 }

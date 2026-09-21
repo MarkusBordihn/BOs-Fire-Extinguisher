@@ -25,9 +25,6 @@ import de.markusbordihn.fireextinguisher.utils.ToolTips;
 import java.util.List;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -61,7 +58,7 @@ public class FireLeggingsLightItem extends FireProtectionArmorItem {
       ToolTips.addTooltip(
           tooltipList,
           Component.translatable(
-                  Constants.TEXT_PREFIX + "fire_armor_config",
+                  Constants.TEXT_PREFIX + "fire_armor_light_config",
                   Math.round((FireExtinguisherConfig.fireProtectionLightRenew / 20.0) * 10) / 10.0,
                   Math.round((FireExtinguisherConfig.fireProtectionLightDuration / 20.0) * 10)
                       / 10.0)

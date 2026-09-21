@@ -19,9 +19,8 @@
 
 package de.markusbordihn.fireextinguisher.block;
 
-import de.markusbordihn.fireextinguisher.Constants;
 import de.markusbordihn.fireextinguisher.config.FireExtinguisherConfig;
-import java.util.Random;
+import de.markusbordihn.fireextinguisher.utils.FireDetection;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -33,63 +32,63 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.CampfireBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.AttachFace;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 public class FireSprinklerBlock extends AbstractFireAlarmSignalBlock {
 
   public static final String NAME = "fire_sprinkler";
 
-  protected static final Logger log = LogManager.getLogger(Constants.LOG_NAME);
-
   protected static final VoxelShape UP_AABB = Block.box(7, 13.325, 7, 9, 16, 9);
-  private static final Random random = new Random();
 
   public FireSprinklerBlock(Properties properties) {
     super(properties);
   }
 
   public static void stopFire(ServerLevel serverLevel, BlockPos targetBlockPos) {
-    Iterable<BlockPos> blockPositions =
-        BlockPos.withinManhattan(
+    int extinguished =
+        FireDetection.extinguishWithin(
+            serverLevel,
             targetBlockPos,
             FireExtinguisherConfig.fireSprinklerRadiusX,
             FireExtinguisherConfig.fireSprinklerRadiusY,
             FireExtinguisherConfig.fireSprinklerRadiusZ);
-    for (BlockPos blockPos : blockPositions) {
-      BlockState blockState = serverLevel.getBlockState(blockPos);
-
-      // Remove fire block
-      if (blockState.is(Blocks.FIRE)) {
-        log.debug("[Fire Sprinkler] Remove fire block at {}", blockPos);
-        serverLevel.removeBlock(blockPos, false);
-        serverLevel.playSound(
-            null, blockPos, SoundEvents.FIRE_EXTINGUISH, SoundSource.BLOCKS, 1.0f, 1.0f);
-      } else if (blockState.is(Blocks.CAMPFIRE)
-          && blockState.getBlock() instanceof CampfireBlock
-          && CampfireBlock.isLitCampfire(blockState)) {
-        log.debug("[Fire Sprinkler] Extinguish campfire block at {}", blockPos);
-        serverLevel.setBlockAndUpdate(blockPos, blockState.setValue(CampfireBlock.LIT, false));
-      }
+    if (extinguished > 0) {
+      serverLevel.playSound(
+          null, targetBlockPos, SoundEvents.FIRE_EXTINGUISH, SoundSource.BLOCKS, 1.0f, 1.0f);
     }
+  }
+
+  private static void addSpreadParticles(
+      Level level, double x, double y, double z, double spread, int count, RandomSource random) {
+    for (int i = 0; i < count; i++) {
+      level.addParticle(ParticleTypes.CLOUD, x, y, z, randomSpread(random, spread), 0, 0);
+      level.addParticle(ParticleTypes.CLOUD, x, y, z, 0, 0, randomSpread(random, spread));
+      level.addParticle(
+          ParticleTypes.CLOUD,
+          x,
+          y,
+          z,
+          randomSpread(random, spread),
+          0,
+          randomSpread(random, spread));
+    }
+  }
+
+  private static double randomSpread(RandomSource random, double spread) {
+    return (random.nextDouble() * 2 - 1) * spread;
   }
 
   @Override
   public BlockState getStateForPlacement(BlockPlaceContext context) {
     BlockPos blockPos = context.getClickedPos();
     Level level = context.getLevel();
-    // Allow only to place the block on the ceiling
     if (context.getClickedFace() != Direction.DOWN) {
       return null;
     }
 
-    // Make sure that the block is not placed below an air block.
     if (blockPos.getY() < level.getMaxBuildHeight() - 1
         && !level.getBlockState(blockPos.above()).isAir()) {
       return this.defaultBlockState()
@@ -112,72 +111,21 @@ public class FireSprinklerBlock extends AbstractFireAlarmSignalBlock {
   @Override
   public void animateTick(
       BlockState blockState, Level level, BlockPos blockPos, RandomSource random) {
-    boolean isPowered = blockState.getValue(POWERED);
-    if (isPowered) {
-      double x = blockPos.getX();
-      double y = blockPos.getY();
-      double z = blockPos.getZ();
+    if (!blockState.getValue(POWERED)) {
+      return;
+    }
 
-      // Cloud particles to simulate fire extinguisher effect
-      for (int i = 0; i < 8; i++) {
-        y -= FireSprinklerBlock.random.nextDouble(1);
-        if (y == blockPos.getY() - 2) {
-          for (int j = 0; j < 4; j++) {
-            level.addParticle(
-                ParticleTypes.CLOUD,
-                x + 0.5,
-                y + 0.5,
-                z + 0.5,
-                FireSprinklerBlock.random.nextDouble(-0.2, 0.2),
-                0,
-                0);
-            level.addParticle(
-                ParticleTypes.CLOUD,
-                x + 0.5,
-                y + 0.5,
-                z + 0.5,
-                0,
-                0,
-                FireSprinklerBlock.random.nextDouble(-0.2, 0.2));
-            level.addParticle(
-                ParticleTypes.CLOUD,
-                x + 0.5,
-                y + 0.5,
-                z + 0.5,
-                FireSprinklerBlock.random.nextDouble(-0.2, 0.2),
-                0,
-                FireSprinklerBlock.random.nextDouble(-0.2, 0.1));
-          }
-        } else if (y <= blockPos.getY() - 3) {
-          for (int j = 0; j < 8; j++) {
-            level.addParticle(
-                ParticleTypes.CLOUD,
-                x + 0.5,
-                y + 0.5,
-                z + 0.5,
-                FireSprinklerBlock.random.nextDouble(-0.5, 0.5),
-                0,
-                0);
-            level.addParticle(
-                ParticleTypes.CLOUD,
-                x + 0.5,
-                y + 0.5,
-                z + 0.5,
-                0,
-                0,
-                FireSprinklerBlock.random.nextDouble(-0.5, 0.5));
-            level.addParticle(
-                ParticleTypes.CLOUD,
-                x + 0.5,
-                y + 0.5,
-                z + 0.5,
-                FireSprinklerBlock.random.nextDouble(-0.5, 0.5),
-                0,
-                FireSprinklerBlock.random.nextDouble(-0.5, 0.5));
-          }
-        }
-        level.addParticle(ParticleTypes.CLOUD, x + 0.5, y + 0.5, z + 0.5, 0, 0, 0);
+    double x = blockPos.getX() + 0.5;
+    double y = blockPos.getY();
+    double z = blockPos.getZ() + 0.5;
+    for (int i = 0; i < 8; i++) {
+      y -= random.nextDouble();
+      if (y <= blockPos.getY() - 3) {
+        addSpreadParticles(level, x, y + 0.5, z, 0.5, 8, random);
+      } else if (y <= blockPos.getY() - 2) {
+        addSpreadParticles(level, x, y + 0.5, z, 0.2, 4, random);
       }
+      level.addParticle(ParticleTypes.CLOUD, x, y + 0.5, z, 0, 0, 0);
     }
   }
 

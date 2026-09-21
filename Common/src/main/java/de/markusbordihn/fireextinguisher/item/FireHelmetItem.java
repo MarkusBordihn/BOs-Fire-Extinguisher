@@ -47,23 +47,26 @@ public class FireHelmetItem extends FireProtectionArmorItem {
 
   @Override
   protected void fireArmorTick(ItemStack itemStack, Level level, ServerPlayer serverPlayer) {
-    if (FireExtinguisherConfig.fireProtectionEnabled
-        && !serverPlayer.hasEffect(MobEffects.FIRE_RESISTANCE)) {
-      long currentTime = level.getGameTime();
-      long lastTime = lastEffectTime.getOrDefault(serverPlayer.getUUID(), 0L);
-      if (currentTime - lastTime > FireExtinguisherConfig.fireProtectionRenew) {
-        int armorCount = countWornFireArmorPieces(serverPlayer, ModArmorMaterials.FIRE_PROTECTION);
-        int totalDuration = FireExtinguisherConfig.fireProtectionDuration * armorCount;
-        if (totalDuration > 0) {
-          serverPlayer.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, totalDuration));
-          if (hasSlowDownArmor(serverPlayer)) {
-            serverPlayer.addEffect(
-                new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, totalDuration));
-          }
-          lastEffectTime.put(serverPlayer.getUUID(), currentTime);
-        }
-      }
+    if (!FireExtinguisherConfig.fireProtectionEnabled
+        || serverPlayer.hasEffect(MobEffects.FIRE_RESISTANCE)
+        || serverPlayer.getCooldowns().isOnCooldown(this)) {
+      return;
     }
+
+    int totalDuration =
+        calculateProtectionDuration(
+            serverPlayer,
+            ModArmorMaterials.FIRE_PROTECTION,
+            FireExtinguisherConfig.fireProtectionDuration);
+    if (totalDuration <= 0) {
+      return;
+    }
+
+    serverPlayer.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, totalDuration));
+    if (hasSlowDownArmor(serverPlayer)) {
+      serverPlayer.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, totalDuration));
+    }
+    serverPlayer.getCooldowns().addCooldown(this, FireExtinguisherConfig.fireProtectionRenew);
   }
 
   @Override

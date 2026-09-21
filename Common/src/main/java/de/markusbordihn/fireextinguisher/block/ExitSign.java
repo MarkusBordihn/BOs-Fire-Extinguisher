@@ -33,17 +33,14 @@ import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import org.jetbrains.annotations.NotNull;
 
 public class ExitSign extends Block {
 
   public static final String NAME = "exit_sign";
 
-  // Defines if we need to rotate the Object based on the click position and player pov
   public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
   public static final EnumProperty<AttachFace> ATTACH_FACE = BlockStateProperties.ATTACH_FACE;
 
-  // We need a VoxelShape for each side to cover all faces and possibilities
   protected static final VoxelShape CEILING_NORTH_SOUTH_AABB = Block.box(0D, 4D, 7D, 16D, 12D, 9D);
   protected static final VoxelShape CEILING_EAST_WEST_AABB = Block.box(7D, 4, 0D, 9D, 12D, 16D);
 
@@ -64,7 +61,6 @@ public class ExitSign extends Block {
             .setValue(ATTACH_FACE, AttachFace.FLOOR));
   }
 
-  @NotNull
   private static AttachFace getAttachFace(BlockPlaceContext context, Direction faceDirection) {
     AttachFace attachFace = AttachFace.FLOOR;
     if (faceDirection == Direction.DOWN) {
@@ -91,7 +87,6 @@ public class ExitSign extends Block {
     AttachFace attachFace = blockState.getValue(ATTACH_FACE);
     Direction facing = blockState.getValue(FireExtinguisherSignPosition.FACING);
 
-    // Handle ceiling positions
     if (attachFace == AttachFace.CEILING) {
       if (facing == Direction.NORTH || facing == Direction.SOUTH) {
         return CEILING_NORTH_SOUTH_AABB;
@@ -100,7 +95,6 @@ public class ExitSign extends Block {
       }
     }
 
-    // Handle floor positions
     if (attachFace == AttachFace.FLOOR) {
       if (facing == Direction.NORTH || facing == Direction.SOUTH) {
         return FLOOR_NORTH_SOUTH_AABB;
@@ -109,7 +103,6 @@ public class ExitSign extends Block {
       }
     }
 
-    // Handle wall positions
     return switch (facing) {
       case EAST -> SHAPE_EAST_AABB;
       case SOUTH -> SHAPE_SOUTH_AABB;
@@ -133,7 +126,6 @@ public class ExitSign extends Block {
             ? direction.getOpposite()
             : direction;
 
-    // Calculate attach face based on clicked face and relative click location.
     AttachFace attachFace = getAttachFace(context, faceDirection);
     return this.defaultBlockState()
         .setValue(ATTACH_FACE, attachFace)

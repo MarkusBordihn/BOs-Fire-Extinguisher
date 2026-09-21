@@ -47,20 +47,23 @@ public class FireHelmetLightItem extends FireProtectionArmorItem {
 
   @Override
   protected void fireArmorTick(ItemStack itemStack, Level level, ServerPlayer serverPlayer) {
-    if (FireExtinguisherConfig.fireProtectionLightEnabled
-        && !serverPlayer.hasEffect(MobEffects.FIRE_RESISTANCE)) {
-      long currentTime = level.getGameTime();
-      long lastTime = lastEffectTime.getOrDefault(serverPlayer.getUUID(), 0L);
-      if (currentTime - lastTime > FireExtinguisherConfig.fireProtectionLightRenew) {
-        int armorCount =
-            countWornFireArmorPieces(serverPlayer, ModArmorMaterials.FIRE_PROTECTION_LIGHT);
-        int totalDuration = FireExtinguisherConfig.fireProtectionLightDuration * armorCount;
-        if (totalDuration > 0) {
-          serverPlayer.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, totalDuration));
-          lastEffectTime.put(serverPlayer.getUUID(), currentTime);
-        }
-      }
+    if (!FireExtinguisherConfig.fireProtectionLightEnabled
+        || serverPlayer.hasEffect(MobEffects.FIRE_RESISTANCE)
+        || serverPlayer.getCooldowns().isOnCooldown(this)) {
+      return;
     }
+
+    int totalDuration =
+        calculateProtectionDuration(
+            serverPlayer,
+            ModArmorMaterials.FIRE_PROTECTION_LIGHT,
+            FireExtinguisherConfig.fireProtectionLightDuration);
+    if (totalDuration <= 0) {
+      return;
+    }
+
+    serverPlayer.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, totalDuration));
+    serverPlayer.getCooldowns().addCooldown(this, FireExtinguisherConfig.fireProtectionLightRenew);
   }
 
   @Override
@@ -79,7 +82,7 @@ public class FireHelmetLightItem extends FireProtectionArmorItem {
       ToolTips.addTooltip(
           tooltipList,
           Component.translatable(
-                  Constants.TEXT_PREFIX + "fire_armor_config",
+                  Constants.TEXT_PREFIX + "fire_armor_light_config",
                   Math.round((FireExtinguisherConfig.fireProtectionLightRenew / 20.0) * 10) / 10.0,
                   Math.round((FireExtinguisherConfig.fireProtectionLightDuration / 20.0) * 10)
                       / 10.0)

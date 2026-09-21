@@ -22,6 +22,7 @@ package de.markusbordihn.fireextinguisher;
 import de.markusbordihn.fireextinguisher.block.ExitSignBlocks;
 import de.markusbordihn.fireextinguisher.block.FireAlarmBlocks;
 import de.markusbordihn.fireextinguisher.block.FireExtinguisherBlocks;
+import de.markusbordihn.fireextinguisher.block.FireStationBlocks;
 import de.markusbordihn.fireextinguisher.tabs.ModTabs;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
@@ -35,7 +36,6 @@ public class FireExtinguisherClient implements ClientModInitializer {
 
   @Override
   public void onInitializeClient() {
-    // Use Fabric to bootstrap the Common mod.
     log.info("Initializing {} (Fabric-Client) ...", Constants.MOD_NAME);
 
     log.info("{} Tabs ...", Constants.LOG_REGISTER_PREFIX);
@@ -51,6 +51,14 @@ public class FireExtinguisherClient implements ClientModInitializer {
         FireAlarmBlocks.FIRE_SPRINKLER, RenderType.cutoutMipped());
     BlockRenderLayerMap.INSTANCE.putBlock(
         FireAlarmBlocks.FIRE_ALARM_SWITCH, RenderType.cutoutMipped());
+    BlockRenderLayerMap.INSTANCE.putBlock(
+        FireAlarmBlocks.FIRE_ALARM_SWITCH_EU, RenderType.cutoutMipped());
+    BlockRenderLayerMap.INSTANCE.putBlock(
+        FireAlarmBlocks.FIRE_ALARM_SWITCH_JP, RenderType.cutoutMipped());
+    BlockRenderLayerMap.INSTANCE.putBlock(
+        FireAlarmBlocks.FIRE_ALARM_CONTROL_PANEL, RenderType.cutoutMipped());
+    BlockRenderLayerMap.INSTANCE.putBlock(
+        FireAlarmBlocks.FIRE_ALARM_LIGHT, RenderType.translucent());
     BlockRenderLayerMap.INSTANCE.putBlock(
         FireAlarmBlocks.FIRE_ALARM_BELL, RenderType.cutoutMipped());
     BlockRenderLayerMap.INSTANCE.putBlock(
@@ -72,5 +80,13 @@ public class FireExtinguisherClient implements ClientModInitializer {
         ExitSignBlocks.EXIT_SIGN_RIGHT_DOWN, RenderType.cutoutMipped());
     BlockRenderLayerMap.INSTANCE.putBlock(
         ExitSignBlocks.EXIT_SIGN_RIGHT_UP, RenderType.cutoutMipped());
+    BlockRenderLayerMap.INSTANCE.putBlock(
+        ExitSignBlocks.EXIT_SIGN_PLAIN_LEFT, RenderType.cutoutMipped());
+    BlockRenderLayerMap.INSTANCE.putBlock(
+        ExitSignBlocks.EXIT_SIGN_PLAIN_RIGHT, RenderType.cutoutMipped());
+
+    BlockRenderLayerMap.INSTANCE.putBlock(FireStationBlocks.FIRE_POLE, RenderType.cutoutMipped());
+    BlockRenderLayerMap.INSTANCE.putBlock(
+        FireStationBlocks.FIRE_HYDRANT, RenderType.cutoutMipped());
   }
 }

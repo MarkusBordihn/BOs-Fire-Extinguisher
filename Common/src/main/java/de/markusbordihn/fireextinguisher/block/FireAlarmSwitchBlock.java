@@ -19,9 +19,11 @@
 
 package de.markusbordihn.fireextinguisher.block;
 
+import de.markusbordihn.fireextinguisher.alarm.FireAlarmNetwork;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.DustParticleOptions;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
@@ -46,18 +48,36 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 public class FireAlarmSwitchBlock extends FaceAttachedHorizontalDirectionalBlock {
 
   public static final String NAME = "fire_alarm_switch";
+  public static final String NAME_EU = "fire_alarm_switch_eu";
+  public static final String NAME_JP = "fire_alarm_switch_jp";
   public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
-  protected static final VoxelShape NORTH_AABB = Block.box(4, 3, 13, 12, 13, 16);
-  protected static final VoxelShape EAST_AABB = Block.box(0, 3, 4, 3, 13, 12);
-  protected static final VoxelShape SOUTH_AABB = Block.box(4, 3, 0, 12, 13, 3);
-  protected static final VoxelShape WEST_AABB = Block.box(13, 3, 4, 16, 13, 12);
-  protected static final VoxelShape UP_AABB_Z = Block.box(4, 13, 3, 12, 16, 13);
-  protected static final VoxelShape UP_AABB_X = Block.box(3, 13, 4, 13, 16, 12);
-  protected static final VoxelShape DOWN_AABB_Z = Block.box(4, 0, 3, 12, 3, 13);
-  protected static final VoxelShape DOWN_AABB_X = Block.box(3, 0, 4, 13, 3, 12);
+  private final VoxelShape northShape;
+  private final VoxelShape eastShape;
+  private final VoxelShape southShape;
+  private final VoxelShape westShape;
+  private final VoxelShape ceilingShapeZ;
+  private final VoxelShape ceilingShapeX;
+  private final VoxelShape floorShapeZ;
+  private final VoxelShape floorShapeX;
 
   public FireAlarmSwitchBlock(Properties properties) {
+    this(properties, 8, 10, 3);
+  }
+
+  public FireAlarmSwitchBlock(Properties properties, double width, double height, double depth) {
     super(properties);
+    double minX = (16 - width) / 2;
+    double maxX = (16 + width) / 2;
+    double minY = (16 - height) / 2;
+    double maxY = (16 + height) / 2;
+    this.northShape = Block.box(minX, minY, 16 - depth, maxX, maxY, 16);
+    this.eastShape = Block.box(0, minY, minX, depth, maxY, maxX);
+    this.southShape = Block.box(minX, minY, 0, maxX, maxY, depth);
+    this.westShape = Block.box(16 - depth, minY, minX, 16, maxY, maxX);
+    this.ceilingShapeZ = Block.box(minX, 16 - depth, minY, maxX, 16, maxY);
+    this.ceilingShapeX = Block.box(minY, 16 - depth, minX, maxY, 16, maxX);
+    this.floorShapeZ = Block.box(minX, 0, minY, maxX, depth, maxY);
+    this.floorShapeX = Block.box(minY, 0, minX, maxY, depth, maxX);
     this.registerDefaultState(
         this.stateDefinition
             .any()
@@ -104,20 +124,20 @@ public class FireAlarmSwitchBlock extends FaceAttachedHorizontalDirectionalBlock
     return switch (blockState.getValue(FACE)) {
       case FLOOR ->
           switch (blockState.getValue(FACING).getAxis()) {
-            case X -> DOWN_AABB_X;
-            default -> DOWN_AABB_Z;
+            case X -> this.floorShapeX;
+            default -> this.floorShapeZ;
           };
       case WALL ->
           switch (blockState.getValue(FACING)) {
-            case EAST -> EAST_AABB;
-            case WEST -> WEST_AABB;
-            case SOUTH -> SOUTH_AABB;
-            default -> NORTH_AABB;
+            case EAST -> this.eastShape;
+            case WEST -> this.westShape;
+            case SOUTH -> this.southShape;
+            default -> this.northShape;
           };
       default ->
           switch (blockState.getValue(FACING).getAxis()) {
-            case X -> UP_AABB_X;
-            default -> UP_AABB_Z;
+            case X -> this.ceilingShapeX;
+            default -> this.ceilingShapeZ;
           };
     };
   }
@@ -158,7 +178,49 @@ public class FireAlarmSwitchBlock extends FaceAttachedHorizontalDirectionalBlock
     blockState = blockState.cycle(POWERED);
     level.setBlock(blockPos, blockState, 3);
     this.updateNeighbours(blockState, level, blockPos);
+    if (level instanceof ServerLevel serverLevel) {
+      if (blockState.getValue(POWERED)) {
+        FireAlarmNetwork.activateSource(serverLevel, blockPos);
+        serverLevel.scheduleTick(blockPos, this, AbstractFireAlarmSignalBlock.ACTION_TICK_INTERVAL);
+      } else {
+        FireAlarmNetwork.deactivateSource(serverLevel, blockPos);
+      }
+    }
     return blockState;
+  }
+
+  public void release(ServerLevel serverLevel, BlockPos blockPos, BlockState blockState) {
+    if (!blockState.getValue(POWERED)) {
+      return;
+    }
+
+    this.pull(blockState, serverLevel, blockPos);
+    serverLevel.playSound(null, blockPos, SoundEvents.LEVER_CLICK, SoundSource.BLOCKS, 0.3F, 0.5F);
+    serverLevel.gameEvent(null, GameEvent.BLOCK_DEACTIVATE, blockPos);
+  }
+
+  @Override
+  public void tick(
+      BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, RandomSource random) {
+    if (blockState.getValue(POWERED)) {
+      FireAlarmNetwork.activateSource(serverLevel, blockPos);
+      serverLevel.scheduleTick(blockPos, this, AbstractFireAlarmSignalBlock.ACTION_TICK_INTERVAL);
+    }
+  }
+
+  @Override
+  public void onPlace(
+      BlockState blockState,
+      Level level,
+      BlockPos blockPos,
+      BlockState oldState,
+      boolean isMoving) {
+    if (!level.isClientSide
+        && !blockState.is(oldState.getBlock())
+        && blockState.getValue(POWERED)) {
+      level.scheduleTick(blockPos, this, AbstractFireAlarmSignalBlock.SIGNAL_TICK_DELAY);
+    }
+    super.onPlace(blockState, level, blockPos, oldState, isMoving);
   }
 
   @Override
@@ -174,13 +236,16 @@ public class FireAlarmSwitchBlock extends FaceAttachedHorizontalDirectionalBlock
       BlockState blockState,
       Level level,
       BlockPos blockPos,
-      BlockState formerBlockState,
-      boolean removed) {
-    if (!removed && !blockState.is(blockState.getBlock())) {
+      BlockState newBlockState,
+      boolean isMoving) {
+    if (!blockState.is(newBlockState.getBlock())) {
       if (blockState.getValue(POWERED)) {
         this.updateNeighbours(blockState, level, blockPos);
+        if (level instanceof ServerLevel serverLevel) {
+          FireAlarmNetwork.deactivateSource(serverLevel, blockPos);
+        }
       }
-      super.onRemove(blockState, level, blockPos, formerBlockState, removed);
+      super.onRemove(blockState, level, blockPos, newBlockState, isMoving);
     }
   }
 

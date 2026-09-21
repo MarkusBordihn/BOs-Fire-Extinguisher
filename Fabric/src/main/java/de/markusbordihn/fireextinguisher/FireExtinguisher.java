@@ -38,7 +38,6 @@ public class FireExtinguisher implements ModInitializer {
 
   @Override
   public void onInitialize() {
-    // Use Fabric to bootstrap the Common mod.
     log.info("Initializing {} (Fabric) ...", Constants.MOD_NAME);
 
     log.info("{} Debug Manager ...", Constants.LOG_REGISTER_PREFIX);

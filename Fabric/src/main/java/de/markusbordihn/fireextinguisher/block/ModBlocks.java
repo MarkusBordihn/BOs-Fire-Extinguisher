@@ -53,6 +53,22 @@ public class ModBlocks {
         FireAlarmBlocks.FIRE_ALARM_SWITCH);
     Registry.register(
         BuiltInRegistries.BLOCK,
+        Constants.MOD_ID_PREFIX + FireAlarmSwitchBlock.NAME_EU,
+        FireAlarmBlocks.FIRE_ALARM_SWITCH_EU);
+    Registry.register(
+        BuiltInRegistries.BLOCK,
+        Constants.MOD_ID_PREFIX + FireAlarmSwitchBlock.NAME_JP,
+        FireAlarmBlocks.FIRE_ALARM_SWITCH_JP);
+    Registry.register(
+        BuiltInRegistries.BLOCK,
+        Constants.MOD_ID_PREFIX + FireAlarmControlPanelBlock.NAME,
+        FireAlarmBlocks.FIRE_ALARM_CONTROL_PANEL);
+    Registry.register(
+        BuiltInRegistries.BLOCK,
+        Constants.MOD_ID_PREFIX + FireAlarmLightBlock.NAME,
+        FireAlarmBlocks.FIRE_ALARM_LIGHT);
+    Registry.register(
+        BuiltInRegistries.BLOCK,
         Constants.MOD_ID_PREFIX + FireAlarmBellBlock.NAME,
         FireAlarmBlocks.FIRE_ALARM_BELL);
     Registry.register(
@@ -109,5 +125,23 @@ public class ModBlocks {
         BuiltInRegistries.BLOCK,
         Constants.MOD_ID_PREFIX + ExitSign.NAME + "_right_up",
         ExitSignBlocks.EXIT_SIGN_RIGHT_UP);
+    Registry.register(
+        BuiltInRegistries.BLOCK,
+        Constants.MOD_ID_PREFIX + ExitSign.NAME + "_plain_left",
+        ExitSignBlocks.EXIT_SIGN_PLAIN_LEFT);
+    Registry.register(
+        BuiltInRegistries.BLOCK,
+        Constants.MOD_ID_PREFIX + ExitSign.NAME + "_plain_right",
+        ExitSignBlocks.EXIT_SIGN_PLAIN_RIGHT);
+
+    log.info("{} Fire Station Blocks ...", Constants.LOG_SUB_REGISTER_PREFIX);
+    Registry.register(
+        BuiltInRegistries.BLOCK,
+        Constants.MOD_ID_PREFIX + FirePoleBlock.NAME,
+        FireStationBlocks.FIRE_POLE);
+    Registry.register(
+        BuiltInRegistries.BLOCK,
+        Constants.MOD_ID_PREFIX + FireHydrantBlock.NAME,
+        FireStationBlocks.FIRE_HYDRANT);
   }
 }
