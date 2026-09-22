@@ -21,6 +21,7 @@ package de.markusbordihn.fireextinguisher.config;
 
 import java.io.File;
 import java.util.Properties;
+import java.util.Set;
 
 public class FireExtinguisherConfig extends Config {
   public static final String CONFIG_FILE_NAME = "fire_extinguisher.cfg";
@@ -29,6 +30,9 @@ public class FireExtinguisherConfig extends Config {
   public static int fireExtinguisherRadiusX = 1;
   public static int fireExtinguisherRadiusY = 2;
   public static int fireExtinguisherRadiusZ = 1;
+  public static int fireExtinguisherCooldownTicks = 10;
+
+  public static Set<String> extinguishableBlocks = Set.of();
 
   public static int fireAxtRadius = 1;
 
@@ -52,6 +56,15 @@ public class FireExtinguisherConfig extends Config {
   public static boolean fireChestplateSlowDownEnabled = true;
   public static boolean fireLeggingsSlowDownEnabled = true;
 
+  public static int fireAlarmControlPanelRadiusX = 16;
+  public static int fireAlarmControlPanelRadiusY = 8;
+  public static int fireAlarmControlPanelRadiusZ = 16;
+  public static boolean fireAlarmControlPanelLatching = false;
+
+  public static int firePoleSlideSpeed = 10;
+
+  public static boolean fireHydrantRefillEnabled = true;
+
   public static void registerConfig() {
     registerConfigFile(CONFIG_FILE_NAME, CONFIG_FILE_HEADER);
     parseConfigFile();
@@ -62,13 +75,18 @@ public class FireExtinguisherConfig extends Config {
     Properties properties = readConfigFile(configFile);
     Properties unmodifiedProperties = (Properties) properties.clone();
 
-    // Config entries
     fireExtinguisherRadiusX =
         parseConfigValue(properties, "fireExtinguisherRadiusX", fireExtinguisherRadiusX);
     fireExtinguisherRadiusY =
         parseConfigValue(properties, "fireExtinguisherRadiusY", fireExtinguisherRadiusY);
     fireExtinguisherRadiusZ =
         parseConfigValue(properties, "fireExtinguisherRadiusZ", fireExtinguisherRadiusZ);
+    fireExtinguisherCooldownTicks =
+        parseConfigValue(
+            properties, "fireExtinguisherCooldownTicks", fireExtinguisherCooldownTicks);
+
+    extinguishableBlocks =
+        parseConfigValue(properties, "extinguishableBlocks", extinguishableBlocks);
 
     fireAxtRadius = parseConfigValue(properties, "fireAxtRadius", fireAxtRadius);
 
@@ -107,7 +125,41 @@ public class FireExtinguisherConfig extends Config {
     fireLeggingsSlowDownEnabled =
         parseConfigValue(properties, "fireLeggingsSlowDownEnabled", fireLeggingsSlowDownEnabled);
 
-    // Update config file if needed
+    fireAlarmControlPanelRadiusX =
+        parseConfigValue(properties, "fireAlarmControlPanelRadiusX", fireAlarmControlPanelRadiusX);
+    fireAlarmControlPanelRadiusY =
+        parseConfigValue(properties, "fireAlarmControlPanelRadiusY", fireAlarmControlPanelRadiusY);
+    fireAlarmControlPanelRadiusZ =
+        parseConfigValue(properties, "fireAlarmControlPanelRadiusZ", fireAlarmControlPanelRadiusZ);
+    fireAlarmControlPanelLatching =
+        parseConfigValue(
+            properties, "fireAlarmControlPanelLatching", fireAlarmControlPanelLatching);
+
+    firePoleSlideSpeed = parseConfigValue(properties, "firePoleSlideSpeed", firePoleSlideSpeed);
+
+    fireHydrantRefillEnabled =
+        parseConfigValue(properties, "fireHydrantRefillEnabled", fireHydrantRefillEnabled);
+
+    fireExtinguisherRadiusX = Math.max(0, fireExtinguisherRadiusX);
+    fireExtinguisherRadiusY = Math.max(0, fireExtinguisherRadiusY);
+    fireExtinguisherRadiusZ = Math.max(0, fireExtinguisherRadiusZ);
+    fireExtinguisherCooldownTicks = Math.max(0, fireExtinguisherCooldownTicks);
+    fireAxtRadius = Math.max(0, fireAxtRadius);
+    fireSprinklerRadiusX = Math.max(0, fireSprinklerRadiusX);
+    fireSprinklerRadiusY = Math.max(0, fireSprinklerRadiusY);
+    fireSprinklerRadiusZ = Math.max(0, fireSprinklerRadiusZ);
+    smokeDetectorRadiusX = Math.max(0, smokeDetectorRadiusX);
+    smokeDetectorRadiusY = Math.max(0, smokeDetectorRadiusY);
+    smokeDetectorRadiusZ = Math.max(0, smokeDetectorRadiusZ);
+    fireProtectionDuration = Math.max(0, fireProtectionDuration);
+    fireProtectionRenew = Math.max(0, fireProtectionRenew);
+    fireProtectionLightDuration = Math.max(0, fireProtectionLightDuration);
+    fireProtectionLightRenew = Math.max(0, fireProtectionLightRenew);
+    fireAlarmControlPanelRadiusX = Math.max(0, fireAlarmControlPanelRadiusX);
+    fireAlarmControlPanelRadiusY = Math.max(0, fireAlarmControlPanelRadiusY);
+    fireAlarmControlPanelRadiusZ = Math.max(0, fireAlarmControlPanelRadiusZ);
+    firePoleSlideSpeed = Math.min(40, Math.max(1, firePoleSlideSpeed));
+
     updateConfigFileIfChanged(configFile, CONFIG_FILE_HEADER, properties, unmodifiedProperties);
   }
 }

@@ -23,6 +23,7 @@ import de.markusbordihn.fireextinguisher.block.ExitSignBlocks;
 import de.markusbordihn.fireextinguisher.block.FireAlarmBlocks;
 import de.markusbordihn.fireextinguisher.block.FireExtinguisherBlocks;
 import de.markusbordihn.fireextinguisher.block.FireExtinguisherSignBlocks;
+import de.markusbordihn.fireextinguisher.block.FireStationBlocks;
 import de.markusbordihn.fireextinguisher.item.ModItems;
 import net.minecraft.world.item.CreativeModeTab.DisplayItemsGenerator;
 import net.minecraft.world.item.CreativeModeTab.ItemDisplayParameters;
@@ -39,10 +40,17 @@ public class FireExtinguisherItems implements DisplayItemsGenerator {
 
     output.accept(FireAlarmBlocks.FIRE_SPRINKLER.asItem().getDefaultInstance());
     output.accept(FireAlarmBlocks.FIRE_ALARM_SWITCH.asItem().getDefaultInstance());
+    output.accept(FireAlarmBlocks.FIRE_ALARM_SWITCH_EU.asItem().getDefaultInstance());
+    output.accept(FireAlarmBlocks.FIRE_ALARM_SWITCH_JP.asItem().getDefaultInstance());
     output.accept(FireAlarmBlocks.FIRE_ALARM_BELL.asItem().getDefaultInstance());
     output.accept(FireAlarmBlocks.FIRE_ALARM_SIREN.asItem().getDefaultInstance());
+    output.accept(FireAlarmBlocks.FIRE_ALARM_LIGHT.asItem().getDefaultInstance());
+    output.accept(FireAlarmBlocks.FIRE_ALARM_CONTROL_PANEL.asItem().getDefaultInstance());
     output.accept(FireAlarmBlocks.FIRE_ALARM_SMOKE_DETECTOR.asItem().getDefaultInstance());
     output.accept(FireAlarmBlocks.FIRE_ALARM_SMOKE_DETECTOR_SILENT.asItem().getDefaultInstance());
+
+    output.accept(FireStationBlocks.FIRE_POLE.asItem().getDefaultInstance());
+    output.accept(FireStationBlocks.FIRE_HYDRANT.asItem().getDefaultInstance());
 
     output.accept(ModItems.FIRE_AXE.getDefaultInstance());
 
@@ -69,5 +77,7 @@ public class FireExtinguisherItems implements DisplayItemsGenerator {
     output.accept(ExitSignBlocks.EXIT_SIGN_RIGHT.asItem().getDefaultInstance());
     output.accept(ExitSignBlocks.EXIT_SIGN_RIGHT_DOWN.asItem().getDefaultInstance());
     output.accept(ExitSignBlocks.EXIT_SIGN_RIGHT_UP.asItem().getDefaultInstance());
+    output.accept(ExitSignBlocks.EXIT_SIGN_PLAIN_LEFT.asItem().getDefaultInstance());
+    output.accept(ExitSignBlocks.EXIT_SIGN_PLAIN_RIGHT.asItem().getDefaultInstance());
   }
 }

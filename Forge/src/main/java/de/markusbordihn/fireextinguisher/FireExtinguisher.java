@@ -24,6 +24,7 @@ import cpw.mods.modlauncher.api.IEnvironment;
 import de.markusbordihn.fireextinguisher.block.ModBlocks;
 import de.markusbordihn.fireextinguisher.config.Config;
 import de.markusbordihn.fireextinguisher.debug.DebugManager;
+import de.markusbordihn.fireextinguisher.gametest.ModGameTests;
 import de.markusbordihn.fireextinguisher.item.ModBlockItems;
 import de.markusbordihn.fireextinguisher.item.ModItems;
 import de.markusbordihn.fireextinguisher.sounds.ModSoundEvents;
@@ -73,5 +74,8 @@ public class FireExtinguisher {
 
     log.info("{} Creative Tabs ...", Constants.LOG_REGISTER_PREFIX);
     ModTabs.CREATIVE_TABS.register(modBusGroup);
+
+    log.debug("{} Game Test Functions ...", Constants.LOG_REGISTER_PREFIX);
+    ModGameTests.register(modBusGroup);
   }
 }

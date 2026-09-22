@@ -1,0 +1,41 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_fire_alarm_switch": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["fire_extinguisher:fire_alarm_switch"]
+          }
+        ]
+      }
+    },
+    "has_stone_button": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["minecraft:stone_button"]
+          }
+        ]
+      }
+    },
+    "has_fire_alarm_switch_jp": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["fire_extinguisher:fire_alarm_switch_jp"]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [["has_fire_alarm_switch", "has_stone_button", "has_fire_alarm_switch_jp"]],
+  "rewards": {
+    "recipes": [
+      "fire_extinguisher:fire_alarm_switch_jp", "fire_extinguisher:fire_alarm_switch_from_jp"
+    ]
+  }
+}

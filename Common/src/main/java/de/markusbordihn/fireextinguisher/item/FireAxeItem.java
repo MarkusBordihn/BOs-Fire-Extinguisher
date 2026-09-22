@@ -21,15 +21,17 @@ package de.markusbordihn.fireextinguisher.item;
 
 import de.markusbordihn.fireextinguisher.Constants;
 import de.markusbordihn.fireextinguisher.config.FireExtinguisherConfig;
+import de.markusbordihn.fireextinguisher.utils.FireDetection;
 import de.markusbordihn.fireextinguisher.utils.ToolTips;
 import java.util.function.Consumer;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -43,17 +45,11 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.CampfireBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 public class FireAxeItem extends AxeItem {
 
   public static final String ID = "fire_axe";
-
-  protected static final Logger log = LogManager.getLogger(Constants.LOG_NAME);
 
   public FireAxeItem() {
     this(
@@ -75,40 +71,18 @@ public class FireAxeItem extends AxeItem {
       InteractionHand hand,
       BlockPos targetBlockPos,
       ItemStack itemStack) {
-    Iterable<BlockPos> blockPositions =
-        BlockPos.withinManhattan(
+    int extinguished =
+        FireDetection.extinguishWithin(
+            level,
             targetBlockPos.above(),
             FireExtinguisherConfig.fireAxtRadius,
             FireExtinguisherConfig.fireAxtRadius,
             FireExtinguisherConfig.fireAxtRadius);
-    boolean hasStoppedFire = false;
-    for (BlockPos blockPos : blockPositions) {
-      BlockState blockState = level.getBlockState(blockPos);
-      if (blockState.is(Blocks.FIRE)) {
-
-        // Remove block on client and server.
-        log.debug("[Fire Axt] Removing Fire Block {} at {}", blockState, blockPos);
-        level.removeBlock(blockPos, false);
-
-        // Play fire extinguish sound on the client
-        stopFireSound(level, player);
-
-        hasStoppedFire = true;
-      } else if (blockState.is(Blocks.CAMPFIRE)
-          && blockState.getBlock() instanceof CampfireBlock
-          && CampfireBlock.isLitCampfire(blockState)) {
-
-        // Remove block on client and server.
-        log.debug("[Fire Axt] Extinguishing Campfire Block {} at {}", blockState, blockPos);
-        level.setBlockAndUpdate(blockPos, blockState.setValue(CampfireBlock.LIT, false));
-
-        // Play fire extinguish sound on the client
-        stopFireSound(level, player);
-
-        hasStoppedFire = true;
+    if (extinguished > 0) {
+      if (!level.isClientSide()) {
+        level.playSound(
+            null, targetBlockPos, SoundEvents.FIRE_EXTINGUISH, SoundSource.PLAYERS, 1.0F, 1.0F);
       }
-    }
-    if (hasStoppedFire) {
       hurtAndBreak(level, itemStack, player, hand);
     }
   }

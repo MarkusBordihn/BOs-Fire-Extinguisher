@@ -22,17 +22,16 @@ package de.markusbordihn.fireextinguisher.blockitem;
 import de.markusbordihn.fireextinguisher.Constants;
 import de.markusbordihn.fireextinguisher.block.FireExtinguisherBlock;
 import de.markusbordihn.fireextinguisher.config.FireExtinguisherConfig;
+import de.markusbordihn.fireextinguisher.utils.FireDetection;
 import de.markusbordihn.fireextinguisher.utils.ToolTips;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.function.Consumer;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -52,19 +51,16 @@ import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.CampfireBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import net.minecraft.world.phys.Vec3;
 
 public class FireExtinguisherBlockItem extends BlockItem {
 
   public static final String ID = "fire_extinguisher";
   public static final String ID_COPPER = "fire_extinguisher_copper";
-  private static final Logger log = LogManager.getLogger(Constants.LOG_NAME);
-  private static final double Y_SHIFT = 1.6;
-  private static final int PARTICLE_FRAMES = 8;
+  private static final double NOZZLE_OFFSET = 1.2;
+  private static final int TRAIL_PARTICLES = 12;
+  private static final int BURST_PARTICLES = 24;
   private static final int ATTACK_EFFECT_DURATION = 200;
 
   public FireExtinguisherBlockItem(Block block, String id) {
@@ -85,33 +81,41 @@ public class FireExtinguisherBlockItem extends BlockItem {
   }
 
   public static void stopFireAnimation(Player player, Level level, BlockPos blockPos) {
-    // Calculate source and target position
-    double x = player.getX();
-    double y = player.getY();
-    double z = player.getZ();
-
-    // Correct position to item position.
-    y = (y >= 0) ? y + Y_SHIFT : y - Y_SHIFT;
-
-    // Show particle in targeted block direction.
-    if (blockPos != null) {
-      double targetX = blockPos.getX() + 0.5;
-      double targetY = blockPos.getY() + 0.5;
-      double targetZ = blockPos.getZ() + 0.5;
-      double targetXRatio = (targetX - x) / PARTICLE_FRAMES;
-      double targetYRatio = (targetY - y) / PARTICLE_FRAMES;
-      double targetZRatio = (targetZ - z) / PARTICLE_FRAMES;
-      for (int i = 0; i < PARTICLE_FRAMES; ++i) {
-        x += targetXRatio;
-        y += targetYRatio;
-        z += targetZRatio;
-        if (level instanceof ServerLevel serverLevel) {
-          serverLevel.sendParticles(ParticleTypes.CLOUD, x, y, z, 1, 0.2, 0.5, 0.2, 0.01);
-        } else {
-          level.addParticle(ParticleTypes.CLOUD, x, y, z, 0D, 0D, 0D);
-        }
-      }
+    if (blockPos == null || !(level instanceof ServerLevel serverLevel)) {
+      return;
     }
+
+    Vec3 eyePosition = player.getEyePosition();
+    Vec3 targetPosition = Vec3.atCenterOf(blockPos);
+    Vec3 nozzlePosition =
+        eyePosition.add(
+            player
+                .getLookAngle()
+                .scale(Math.min(NOZZLE_OFFSET, eyePosition.distanceTo(targetPosition) * 0.5)));
+
+    for (int i = 1; i <= TRAIL_PARTICLES; i++) {
+      Vec3 trailPosition = nozzlePosition.lerp(targetPosition, i / (double) TRAIL_PARTICLES);
+      serverLevel.sendParticles(
+          ParticleTypes.CLOUD,
+          trailPosition.x,
+          trailPosition.y,
+          trailPosition.z,
+          1,
+          0.1,
+          0.1,
+          0.1,
+          0.01);
+    }
+    serverLevel.sendParticles(
+        ParticleTypes.CLOUD,
+        targetPosition.x,
+        targetPosition.y,
+        targetPosition.z,
+        BURST_PARTICLES,
+        0.4,
+        0.4,
+        0.4,
+        0.02);
   }
 
   public static void stopFire(
@@ -120,34 +124,26 @@ public class FireExtinguisherBlockItem extends BlockItem {
       InteractionHand hand,
       BlockPos targetBlockPos,
       ItemStack itemStack) {
-    Iterable<BlockPos> blockPositions =
-        BlockPos.withinManhattan(
+    int extinguished =
+        FireDetection.extinguishWithin(
+            serverLevel,
             targetBlockPos.above(),
             FireExtinguisherConfig.fireExtinguisherRadiusX,
             FireExtinguisherConfig.fireExtinguisherRadiusY,
             FireExtinguisherConfig.fireExtinguisherRadiusZ);
-    Set<BlockPos> affectedPositions = new HashSet<>();
-    for (BlockPos blockPos : blockPositions) {
-      BlockState blockState = serverLevel.getBlockState(blockPos);
-      if (blockState.is(Blocks.FIRE)) {
-        log.debug("[FireExtinguisher] Removing Fire Block {} at {}", blockState, blockPos);
-        serverLevel.removeBlock(blockPos, false);
-        serverLevel.sendBlockUpdated(blockPos, Blocks.AIR.defaultBlockState(), blockState, 3);
-        affectedPositions.add(blockPos);
-      } else if (blockState.is(Blocks.CAMPFIRE)
-          && blockState.getBlock() instanceof CampfireBlock
-          && CampfireBlock.isLitCampfire(blockState)) {
-        log.debug("[FireExtinguisher] Extinguish Campfire Block {} at {}", blockState, blockPos);
-        BlockState newBlockState = blockState.setValue(CampfireBlock.LIT, false);
-        serverLevel.setBlock(blockPos, newBlockState, 3);
-        serverLevel.sendBlockUpdated(blockPos, newBlockState, blockState, 3);
-        affectedPositions.add(blockPos);
-      }
-    }
-    if (!affectedPositions.isEmpty()) {
+    if (extinguished > 0) {
       hurtAndBreak(serverLevel, itemStack, player, hand);
       serverLevel.playSound(
           null, targetBlockPos, SoundEvents.FIRE_EXTINGUISH, SoundSource.BLOCKS, 1.0f, 1.0f);
+    }
+    addUseCooldown(player, itemStack);
+  }
+
+  private static void addUseCooldown(Player player, ItemStack itemStack) {
+    if (FireExtinguisherConfig.fireExtinguisherCooldownTicks > 0) {
+      player
+          .getCooldowns()
+          .addCooldown(itemStack, FireExtinguisherConfig.fireExtinguisherCooldownTicks);
     }
   }
 
@@ -188,23 +184,24 @@ public class FireExtinguisherBlockItem extends BlockItem {
     ItemStack itemStack = context.getItemInHand();
     InteractionHand interactionHand = context.getHand();
 
-    // Place block if shift key is down.
-    if (player != null && player.isShiftKeyDown()) {
-      return super.useOn(context);
-    }
-    stopFireAnimation(player, level, blockPos);
-    if (level instanceof ServerLevel serverLevel) {
-      stopFire(serverLevel, player, interactionHand, blockPos, itemStack);
+    if (player == null) {
+      return InteractionResult.PASS;
     }
 
-    return InteractionResult.FAIL;
+    if (player.isSecondaryUseActive()) {
+      return super.useOn(context);
+    }
+
+    if (level instanceof ServerLevel serverLevel) {
+      stopFireAnimation(player, serverLevel, blockPos.above());
+      stopFire(serverLevel, player, interactionHand, blockPos, itemStack);
+    }
+    return InteractionResult.SUCCESS;
   }
 
   @Override
   public InteractionResult use(Level level, Player player, InteractionHand hand) {
     ItemStack itemStack = player.getItemInHand(hand);
-
-    // Let player stop fire on them self, if he is not targeting any block.
     if (player.isOnFire()) {
       if (player.getRemainingFireTicks() > 2) {
         player.setRemainingFireTicks(2);
@@ -212,6 +209,9 @@ public class FireExtinguisherBlockItem extends BlockItem {
       stopFireAnimation(player, level, player.blockPosition());
       stopFireSound(level, player);
       hurtAndBreak(level, itemStack, player, hand);
+      if (!level.isClientSide()) {
+        addUseCooldown(player, itemStack);
+      }
     }
     return InteractionResult.PASS;
   }
@@ -221,24 +221,18 @@ public class FireExtinguisherBlockItem extends BlockItem {
       ItemStack itemStack, Player player, LivingEntity livingEntity, InteractionHand hand) {
     BlockPos blockPos = livingEntity.getOnPos();
     Level level = player.level();
+
     stopFireAnimation(player, player.level(), blockPos.above());
-
-    // Set frozen
     livingEntity.setTicksFrozen(ATTACK_EFFECT_DURATION * 5);
-
-    // Remove fire if needed
     if (livingEntity.isOnFire()) {
       livingEntity.setRemainingFireTicks(2);
     }
 
     if (!level.isClientSide()) {
-      // Add slowness effect for movement and jump
       livingEntity.addEffect(
           new MobEffectInstance(MobEffects.SLOWNESS, ATTACK_EFFECT_DURATION, 10));
       livingEntity.addEffect(
           new MobEffectInstance(MobEffects.SLOW_FALLING, ATTACK_EFFECT_DURATION, 10));
-
-      // Hurt Mob Entity
       if (!(livingEntity instanceof Player)) {
         float attackDamage = 0.5F;
         if (livingEntity instanceof Blaze) {
@@ -246,9 +240,8 @@ public class FireExtinguisherBlockItem extends BlockItem {
         }
         livingEntity.hurt(level.damageSources().magic(), attackDamage);
       }
-
-      // Damage item
       hurtAndBreak(level, itemStack, player, hand);
+      addUseCooldown(player, itemStack);
     } else {
       stopFireSound(level, player);
     }

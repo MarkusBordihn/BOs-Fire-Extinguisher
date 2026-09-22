@@ -25,8 +25,8 @@ import java.util.function.Consumer;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -42,6 +42,8 @@ public class ExitSignBlockItem extends BlockItem {
   public static final String ID_RIGHT = "exit_sign_right";
   public static final String ID_RIGHT_DOWN = "exit_sign_right_down";
   public static final String ID_RIGHT_UP = "exit_sign_right_up";
+  public static final String ID_PLAIN_LEFT = "exit_sign_plain_left";
+  public static final String ID_PLAIN_RIGHT = "exit_sign_plain_right";
 
   public ExitSignBlockItem(Block block, String id) {
     this(

@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    "fire_extinguisher:fire_alarm_switch",
+    "minecraft:stone_button"
+  ],
+  "result": {
+    "id": "fire_extinguisher:fire_alarm_switch_jp"
+  }
+}

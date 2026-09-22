@@ -22,6 +22,8 @@ package de.markusbordihn.fireextinguisher;
 import de.markusbordihn.fireextinguisher.block.ExitSignBlocks;
 import de.markusbordihn.fireextinguisher.block.FireAlarmBlocks;
 import de.markusbordihn.fireextinguisher.block.FireExtinguisherBlocks;
+import de.markusbordihn.fireextinguisher.block.FireExtinguisherSignBlocks;
+import de.markusbordihn.fireextinguisher.block.FireStationBlocks;
 import de.markusbordihn.fireextinguisher.tabs.ModTabs;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.rendering.v1.BlockRenderLayerMap;
@@ -35,7 +37,6 @@ public class FireExtinguisherClient implements ClientModInitializer {
 
   @Override
   public void onInitializeClient() {
-    // Use Fabric to bootstrap the Common mod.
     log.info("Initializing {} (Fabric-Client) ...", Constants.MOD_NAME);
 
     log.info("{} Tabs ...", Constants.LOG_REGISTER_PREFIX);
@@ -49,6 +50,11 @@ public class FireExtinguisherClient implements ClientModInitializer {
 
     BlockRenderLayerMap.putBlock(FireAlarmBlocks.FIRE_SPRINKLER, ChunkSectionLayer.CUTOUT);
     BlockRenderLayerMap.putBlock(FireAlarmBlocks.FIRE_ALARM_SWITCH, ChunkSectionLayer.CUTOUT);
+    BlockRenderLayerMap.putBlock(FireAlarmBlocks.FIRE_ALARM_SWITCH_EU, ChunkSectionLayer.CUTOUT);
+    BlockRenderLayerMap.putBlock(FireAlarmBlocks.FIRE_ALARM_SWITCH_JP, ChunkSectionLayer.CUTOUT);
+    BlockRenderLayerMap.putBlock(
+        FireAlarmBlocks.FIRE_ALARM_CONTROL_PANEL, ChunkSectionLayer.CUTOUT);
+    BlockRenderLayerMap.putBlock(FireAlarmBlocks.FIRE_ALARM_LIGHT, ChunkSectionLayer.TRANSLUCENT);
     BlockRenderLayerMap.putBlock(FireAlarmBlocks.FIRE_ALARM_BELL, ChunkSectionLayer.CUTOUT);
     BlockRenderLayerMap.putBlock(FireAlarmBlocks.FIRE_ALARM_SIREN, ChunkSectionLayer.CUTOUT);
     BlockRenderLayerMap.putBlock(
@@ -63,5 +69,17 @@ public class FireExtinguisherClient implements ClientModInitializer {
     BlockRenderLayerMap.putBlock(ExitSignBlocks.EXIT_SIGN_RIGHT, ChunkSectionLayer.CUTOUT);
     BlockRenderLayerMap.putBlock(ExitSignBlocks.EXIT_SIGN_RIGHT_DOWN, ChunkSectionLayer.CUTOUT);
     BlockRenderLayerMap.putBlock(ExitSignBlocks.EXIT_SIGN_RIGHT_UP, ChunkSectionLayer.CUTOUT);
+    BlockRenderLayerMap.putBlock(ExitSignBlocks.EXIT_SIGN_PLAIN_LEFT, ChunkSectionLayer.CUTOUT);
+    BlockRenderLayerMap.putBlock(ExitSignBlocks.EXIT_SIGN_PLAIN_RIGHT, ChunkSectionLayer.CUTOUT);
+
+    BlockRenderLayerMap.putBlock(
+        FireExtinguisherSignBlocks.FIRE_EXTINGUISHER_SIGN, ChunkSectionLayer.CUTOUT);
+    BlockRenderLayerMap.putBlock(
+        FireExtinguisherSignBlocks.FIRE_EXTINGUISHER_SIGN_LEFT, ChunkSectionLayer.CUTOUT);
+    BlockRenderLayerMap.putBlock(
+        FireExtinguisherSignBlocks.FIRE_EXTINGUISHER_SIGN_RIGHT, ChunkSectionLayer.CUTOUT);
+
+    BlockRenderLayerMap.putBlock(FireStationBlocks.FIRE_POLE, ChunkSectionLayer.CUTOUT);
+    BlockRenderLayerMap.putBlock(FireStationBlocks.FIRE_HYDRANT, ChunkSectionLayer.CUTOUT);
   }
 }

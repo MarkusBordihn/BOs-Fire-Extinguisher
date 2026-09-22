@@ -1,0 +1,29 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_copper_ingot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["minecraft:copper_ingot"]
+          }
+        ]
+      }
+    },
+    "has_fire_pole": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["fire_extinguisher:fire_pole"]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [["has_copper_ingot", "has_fire_pole"]],
+  "rewards": {
+    "recipes": ["fire_extinguisher:fire_pole"]
+  }
+}

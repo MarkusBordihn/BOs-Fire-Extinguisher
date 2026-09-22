@@ -24,13 +24,18 @@ import de.markusbordihn.fireextinguisher.block.ExitSignBlocks;
 import de.markusbordihn.fireextinguisher.block.FireAlarmBlocks;
 import de.markusbordihn.fireextinguisher.block.FireExtinguisherBlocks;
 import de.markusbordihn.fireextinguisher.block.FireExtinguisherSignBlocks;
+import de.markusbordihn.fireextinguisher.block.FireStationBlocks;
 import de.markusbordihn.fireextinguisher.blockitem.ExitSignBlockItem;
 import de.markusbordihn.fireextinguisher.blockitem.FireAlarmBellBlockItem;
+import de.markusbordihn.fireextinguisher.blockitem.FireAlarmControlPanelBlockItem;
+import de.markusbordihn.fireextinguisher.blockitem.FireAlarmLightBlockItem;
 import de.markusbordihn.fireextinguisher.blockitem.FireAlarmSirenBlockItem;
 import de.markusbordihn.fireextinguisher.blockitem.FireAlarmSmokeDetectorBlockItem;
 import de.markusbordihn.fireextinguisher.blockitem.FireAlarmSwitchBlockItem;
 import de.markusbordihn.fireextinguisher.blockitem.FireExtinguisherBlockItem;
 import de.markusbordihn.fireextinguisher.blockitem.FireExtinguisherSignBlockItem;
+import de.markusbordihn.fireextinguisher.blockitem.FireHydrantBlockItem;
+import de.markusbordihn.fireextinguisher.blockitem.FirePoleBlockItem;
 import de.markusbordihn.fireextinguisher.blockitem.FireSprinklerBlockItem;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -46,6 +51,10 @@ public class ModBlockItems {
   public static Item FIRE_EXTINGUISHER_COPPER;
   public static Item FIRE_SPRINKLER;
   public static Item FIRE_ALARM_SWITCH;
+  public static Item FIRE_ALARM_SWITCH_EU;
+  public static Item FIRE_ALARM_SWITCH_JP;
+  public static Item FIRE_ALARM_CONTROL_PANEL;
+  public static Item FIRE_ALARM_LIGHT;
   public static Item FIRE_ALARM_BELL;
   public static Item FIRE_ALARM_SIREN;
   public static Item FIRE_ALARM_SMOKE_DETECTOR;
@@ -60,6 +69,10 @@ public class ModBlockItems {
   public static Item EXIT_SIGN_RIGHT;
   public static Item EXIT_SIGN_RIGHT_DOWN;
   public static Item EXIT_SIGN_RIGHT_UP;
+  public static Item EXIT_SIGN_PLAIN_LEFT;
+  public static Item EXIT_SIGN_PLAIN_RIGHT;
+  public static Item FIRE_POLE;
+  public static Item FIRE_HYDRANT;
 
   protected ModBlockItems() {}
 
@@ -91,6 +104,28 @@ public class ModBlockItems {
             BuiltInRegistries.ITEM,
             Constants.MOD_ID_PREFIX + FireAlarmSwitchBlockItem.ID,
             new FireAlarmSwitchBlockItem(FireAlarmBlocks.FIRE_ALARM_SWITCH));
+    FIRE_ALARM_SWITCH_EU =
+        Registry.register(
+            BuiltInRegistries.ITEM,
+            Constants.MOD_ID_PREFIX + FireAlarmSwitchBlockItem.ID_EU,
+            new FireAlarmSwitchBlockItem(
+                FireAlarmBlocks.FIRE_ALARM_SWITCH_EU, FireAlarmSwitchBlockItem.ID_EU));
+    FIRE_ALARM_SWITCH_JP =
+        Registry.register(
+            BuiltInRegistries.ITEM,
+            Constants.MOD_ID_PREFIX + FireAlarmSwitchBlockItem.ID_JP,
+            new FireAlarmSwitchBlockItem(
+                FireAlarmBlocks.FIRE_ALARM_SWITCH_JP, FireAlarmSwitchBlockItem.ID_JP));
+    FIRE_ALARM_CONTROL_PANEL =
+        Registry.register(
+            BuiltInRegistries.ITEM,
+            Constants.MOD_ID_PREFIX + FireAlarmControlPanelBlockItem.ID,
+            new FireAlarmControlPanelBlockItem(FireAlarmBlocks.FIRE_ALARM_CONTROL_PANEL));
+    FIRE_ALARM_LIGHT =
+        Registry.register(
+            BuiltInRegistries.ITEM,
+            Constants.MOD_ID_PREFIX + FireAlarmLightBlockItem.ID,
+            new FireAlarmLightBlockItem(FireAlarmBlocks.FIRE_ALARM_LIGHT));
     FIRE_ALARM_BELL =
         Registry.register(
             BuiltInRegistries.ITEM,
@@ -177,5 +212,29 @@ public class ModBlockItems {
             Constants.MOD_ID_PREFIX + ExitSignBlockItem.ID_RIGHT_UP,
             new ExitSignBlockItem(
                 ExitSignBlocks.EXIT_SIGN_RIGHT_UP, ExitSignBlockItem.ID_RIGHT_UP));
+    EXIT_SIGN_PLAIN_LEFT =
+        Registry.register(
+            BuiltInRegistries.ITEM,
+            Constants.MOD_ID_PREFIX + ExitSignBlockItem.ID_PLAIN_LEFT,
+            new ExitSignBlockItem(
+                ExitSignBlocks.EXIT_SIGN_PLAIN_LEFT, ExitSignBlockItem.ID_PLAIN_LEFT));
+    EXIT_SIGN_PLAIN_RIGHT =
+        Registry.register(
+            BuiltInRegistries.ITEM,
+            Constants.MOD_ID_PREFIX + ExitSignBlockItem.ID_PLAIN_RIGHT,
+            new ExitSignBlockItem(
+                ExitSignBlocks.EXIT_SIGN_PLAIN_RIGHT, ExitSignBlockItem.ID_PLAIN_RIGHT));
+
+    log.info("{} Fire Station Block Items ...", Constants.LOG_SUB_REGISTER_PREFIX);
+    FIRE_POLE =
+        Registry.register(
+            BuiltInRegistries.ITEM,
+            Constants.MOD_ID_PREFIX + FirePoleBlockItem.ID,
+            new FirePoleBlockItem(FireStationBlocks.FIRE_POLE));
+    FIRE_HYDRANT =
+        Registry.register(
+            BuiltInRegistries.ITEM,
+            Constants.MOD_ID_PREFIX + FireHydrantBlockItem.ID,
+            new FireHydrantBlockItem(FireStationBlocks.FIRE_HYDRANT));
   }
 }

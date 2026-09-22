@@ -36,10 +36,17 @@ public class FireExtinguisherItems implements DisplayItemsGenerator {
 
     output.accept(ModBlockItems.FIRE_SPRINKLER.get());
     output.accept(ModBlockItems.FIRE_ALARM_SWITCH.get());
+    output.accept(ModBlockItems.FIRE_ALARM_SWITCH_EU.get());
+    output.accept(ModBlockItems.FIRE_ALARM_SWITCH_JP.get());
     output.accept(ModBlockItems.FIRE_ALARM_BELL.get());
     output.accept(ModBlockItems.FIRE_ALARM_SIREN.get());
+    output.accept(ModBlockItems.FIRE_ALARM_LIGHT.get());
+    output.accept(ModBlockItems.FIRE_ALARM_CONTROL_PANEL.get());
     output.accept(ModBlockItems.FIRE_ALARM_SMOKE_DETECTOR.get());
     output.accept(ModBlockItems.FIRE_ALARM_SMOKE_DETECTOR_SILENT.get());
+
+    output.accept(ModBlockItems.FIRE_POLE.get());
+    output.accept(ModBlockItems.FIRE_HYDRANT.get());
 
     output.accept(ModItems.FIRE_AXE.get());
     output.accept(ModItems.FIRE_HELMET.get());
@@ -63,5 +70,7 @@ public class FireExtinguisherItems implements DisplayItemsGenerator {
     output.accept(ModBlockItems.EXIT_SIGN_RIGHT.get());
     output.accept(ModBlockItems.EXIT_SIGN_RIGHT_DOWN.get());
     output.accept(ModBlockItems.EXIT_SIGN_RIGHT_UP.get());
+    output.accept(ModBlockItems.EXIT_SIGN_PLAIN_LEFT.get());
+    output.accept(ModBlockItems.EXIT_SIGN_PLAIN_RIGHT.get());
   }
 }

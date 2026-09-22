@@ -21,8 +21,8 @@ package de.markusbordihn.fireextinguisher.block;
 
 import de.markusbordihn.fireextinguisher.Constants;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
@@ -38,8 +38,7 @@ public class FireAlarmBlocks {
               .setId(
                   ResourceKey.create(
                       Registries.BLOCK,
-                      Identifier.fromNamespaceAndPath(
-                          Constants.MOD_ID, FireSprinklerBlock.ID)))
+                      Identifier.fromNamespaceAndPath(Constants.MOD_ID, FireSprinklerBlock.ID)))
               .mapColor(MapColor.STONE)
               .instrument(NoteBlockInstrument.BASEDRUM)
               .requiresCorrectToolForDrops()
@@ -50,20 +49,75 @@ public class FireAlarmBlocks {
               .setId(
                   ResourceKey.create(
                       Registries.BLOCK,
-                      Identifier.fromNamespaceAndPath(
-                          Constants.MOD_ID, FireAlarmSwitchBlock.ID)))
+                      Identifier.fromNamespaceAndPath(Constants.MOD_ID, FireAlarmSwitchBlock.ID)))
               .noCollision()
               .strength(0.5F)
               .sound(SoundType.STONE)
               .pushReaction(PushReaction.DESTROY));
+  public static final Block FIRE_ALARM_SWITCH_EU =
+      new FireAlarmSwitchBlock(
+          Properties.of()
+              .setId(
+                  ResourceKey.create(
+                      Registries.BLOCK,
+                      Identifier.fromNamespaceAndPath(
+                          Constants.MOD_ID, FireAlarmSwitchBlock.ID_EU)))
+              .noCollision()
+              .strength(0.5F)
+              .sound(SoundType.STONE)
+              .pushReaction(PushReaction.DESTROY),
+          8,
+          8,
+          2.5);
+  public static final Block FIRE_ALARM_SWITCH_JP =
+      new FireAlarmSwitchBlock(
+          Properties.of()
+              .setId(
+                  ResourceKey.create(
+                      Registries.BLOCK,
+                      Identifier.fromNamespaceAndPath(
+                          Constants.MOD_ID, FireAlarmSwitchBlock.ID_JP)))
+              .noCollision()
+              .strength(0.5F)
+              .sound(SoundType.STONE)
+              .pushReaction(PushReaction.DESTROY),
+          5,
+          10,
+          2.65);
+  public static final Block FIRE_ALARM_CONTROL_PANEL =
+      new FireAlarmControlPanelBlock(
+          Properties.of()
+              .setId(
+                  ResourceKey.create(
+                      Registries.BLOCK,
+                      Identifier.fromNamespaceAndPath(
+                          Constants.MOD_ID, FireAlarmControlPanelBlock.ID)))
+              .mapColor(MapColor.GOLD)
+              .instrument(NoteBlockInstrument.BELL)
+              .requiresCorrectToolForDrops()
+              .strength(3.0F, 6.0F)
+              .sound(SoundType.METAL)
+              .lightLevel(FireAlarmControlPanelBlock::getLightEmission));
+  public static final Block FIRE_ALARM_LIGHT =
+      new FireAlarmLightBlock(
+          Properties.of()
+              .setId(
+                  ResourceKey.create(
+                      Registries.BLOCK,
+                      Identifier.fromNamespaceAndPath(Constants.MOD_ID, FireAlarmLightBlock.ID)))
+              .mapColor(MapColor.GOLD)
+              .instrument(NoteBlockInstrument.BELL)
+              .requiresCorrectToolForDrops()
+              .strength(3.0F, 6.0F)
+              .sound(SoundType.METAL)
+              .lightLevel(FireAlarmLightBlock::getLightEmission));
   public static final Block FIRE_ALARM_BELL =
       new FireAlarmBellBlock(
           Properties.of()
               .setId(
                   ResourceKey.create(
                       Registries.BLOCK,
-                      Identifier.fromNamespaceAndPath(
-                          Constants.MOD_ID, FireAlarmBellBlock.ID)))
+                      Identifier.fromNamespaceAndPath(Constants.MOD_ID, FireAlarmBellBlock.ID)))
               .mapColor(MapColor.GOLD)
               .instrument(NoteBlockInstrument.BELL)
               .requiresCorrectToolForDrops()
@@ -76,8 +130,7 @@ public class FireAlarmBlocks {
               .setId(
                   ResourceKey.create(
                       Registries.BLOCK,
-                      Identifier.fromNamespaceAndPath(
-                          Constants.MOD_ID, FireAlarmSirenBlock.ID)))
+                      Identifier.fromNamespaceAndPath(Constants.MOD_ID, FireAlarmSirenBlock.ID)))
               .mapColor(MapColor.GOLD)
               .instrument(NoteBlockInstrument.BELL)
               .requiresCorrectToolForDrops()

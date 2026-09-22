@@ -21,8 +21,8 @@ package de.markusbordihn.fireextinguisher.block;
 
 import de.markusbordihn.fireextinguisher.Constants;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -58,8 +58,7 @@ public class ExitSignBlocks {
               .setId(
                   ResourceKey.create(
                       Registries.BLOCK,
-                      Identifier.fromNamespaceAndPath(
-                          Constants.MOD_ID, ExitSign.ID_LEFT_DOWN)))
+                      Identifier.fromNamespaceAndPath(Constants.MOD_ID, ExitSign.ID_LEFT_DOWN)))
               .mapColor(MapColor.STONE)
               .requiresCorrectToolForDrops()
               .strength(3.0F, 6.0F)
@@ -92,8 +91,7 @@ public class ExitSignBlocks {
               .setId(
                   ResourceKey.create(
                       Registries.BLOCK,
-                      Identifier.fromNamespaceAndPath(
-                          Constants.MOD_ID, ExitSign.ID_RIGHT_DOWN)))
+                      Identifier.fromNamespaceAndPath(Constants.MOD_ID, ExitSign.ID_RIGHT_DOWN)))
               .mapColor(MapColor.STONE)
               .requiresCorrectToolForDrops()
               .strength(3.0F, 6.0F)
@@ -104,8 +102,29 @@ public class ExitSignBlocks {
               .setId(
                   ResourceKey.create(
                       Registries.BLOCK,
-                      Identifier.fromNamespaceAndPath(
-                          Constants.MOD_ID, ExitSign.ID_RIGHT_UP)))
+                      Identifier.fromNamespaceAndPath(Constants.MOD_ID, ExitSign.ID_RIGHT_UP)))
+              .mapColor(MapColor.STONE)
+              .requiresCorrectToolForDrops()
+              .strength(3.0F, 6.0F)
+              .sound(SoundType.METAL));
+  public static final Block EXIT_SIGN_PLAIN_LEFT =
+      new ExitSign(
+          BlockBehaviour.Properties.of()
+              .setId(
+                  ResourceKey.create(
+                      Registries.BLOCK,
+                      Identifier.fromNamespaceAndPath(Constants.MOD_ID, ExitSign.ID_PLAIN_LEFT)))
+              .mapColor(MapColor.STONE)
+              .requiresCorrectToolForDrops()
+              .strength(3.0F, 6.0F)
+              .sound(SoundType.METAL));
+  public static final Block EXIT_SIGN_PLAIN_RIGHT =
+      new ExitSign(
+          BlockBehaviour.Properties.of()
+              .setId(
+                  ResourceKey.create(
+                      Registries.BLOCK,
+                      Identifier.fromNamespaceAndPath(Constants.MOD_ID, ExitSign.ID_PLAIN_RIGHT)))
               .mapColor(MapColor.STONE)
               .requiresCorrectToolForDrops()
               .strength(3.0F, 6.0F)

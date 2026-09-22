@@ -27,8 +27,8 @@ import java.util.function.Consumer;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -41,8 +41,6 @@ import net.minecraft.world.level.Level;
 public class FireHelmetLightItem extends FireProtectionArmorItem {
 
   public static final String ID = "fire_helmet_light";
-
-  private int ticker = 0;
 
   public FireHelmetLightItem() {
     this(
@@ -58,15 +56,25 @@ public class FireHelmetLightItem extends FireProtectionArmorItem {
 
   @Override
   protected void fireArmorTick(ItemStack itemStack, Level level, ServerPlayer serverPlayer) {
-    if (Boolean.TRUE.equals(
-            FireExtinguisherConfig.fireProtectionLightEnabled
-                && ticker++ > FireExtinguisherConfig.fireProtectionLightRenew)
-        && !serverPlayer.hasEffect(MobEffects.FIRE_RESISTANCE)) {
-      serverPlayer.addEffect(
-          new MobEffectInstance(
-              MobEffects.FIRE_RESISTANCE, FireExtinguisherConfig.fireProtectionLightDuration));
-      ticker = 0;
+    if (!FireExtinguisherConfig.fireProtectionLightEnabled
+        || serverPlayer.hasEffect(MobEffects.FIRE_RESISTANCE)
+        || serverPlayer.getCooldowns().isOnCooldown(itemStack)) {
+      return;
     }
+
+    int totalDuration =
+        calculateProtectionDuration(
+            serverPlayer,
+            ModArmorMaterials.FIRE_PROTECTION_LIGHT.getArmorMaterial(),
+            FireExtinguisherConfig.fireProtectionLightDuration);
+    if (totalDuration <= 0) {
+      return;
+    }
+
+    serverPlayer.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, totalDuration));
+    serverPlayer
+        .getCooldowns()
+        .addCooldown(itemStack, FireExtinguisherConfig.fireProtectionLightRenew);
   }
 
   @Override
@@ -89,7 +97,7 @@ public class FireHelmetLightItem extends FireProtectionArmorItem {
       ToolTips.addTooltip(
           tooltipConsumer,
           Component.translatable(
-                  Constants.TEXT_PREFIX + "fire_armor_config",
+                  Constants.TEXT_PREFIX + "fire_armor_light_config",
                   Math.round((FireExtinguisherConfig.fireProtectionLightRenew / 20.0) * 10) / 10.0,
                   Math.round((FireExtinguisherConfig.fireProtectionLightDuration / 20.0) * 10)
                       / 10.0)
