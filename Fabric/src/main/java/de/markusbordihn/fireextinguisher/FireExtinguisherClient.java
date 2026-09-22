@@ -22,6 +22,7 @@ package de.markusbordihn.fireextinguisher;
 import de.markusbordihn.fireextinguisher.block.ExitSignBlocks;
 import de.markusbordihn.fireextinguisher.block.FireAlarmBlocks;
 import de.markusbordihn.fireextinguisher.block.FireExtinguisherBlocks;
+import de.markusbordihn.fireextinguisher.block.FireExtinguisherSignBlocks;
 import de.markusbordihn.fireextinguisher.block.FireStationBlocks;
 import de.markusbordihn.fireextinguisher.tabs.ModTabs;
 import net.fabricmc.api.ClientModInitializer;
@@ -84,6 +85,13 @@ public class FireExtinguisherClient implements ClientModInitializer {
         ExitSignBlocks.EXIT_SIGN_PLAIN_LEFT, RenderType.cutoutMipped());
     BlockRenderLayerMap.INSTANCE.putBlock(
         ExitSignBlocks.EXIT_SIGN_PLAIN_RIGHT, RenderType.cutoutMipped());
+
+    BlockRenderLayerMap.INSTANCE.putBlock(
+        FireExtinguisherSignBlocks.FIRE_EXTINGUISHER_SIGN, RenderType.cutoutMipped());
+    BlockRenderLayerMap.INSTANCE.putBlock(
+        FireExtinguisherSignBlocks.FIRE_EXTINGUISHER_SIGN_LEFT, RenderType.cutoutMipped());
+    BlockRenderLayerMap.INSTANCE.putBlock(
+        FireExtinguisherSignBlocks.FIRE_EXTINGUISHER_SIGN_RIGHT, RenderType.cutoutMipped());
 
     BlockRenderLayerMap.INSTANCE.putBlock(FireStationBlocks.FIRE_POLE, RenderType.cutoutMipped());
     BlockRenderLayerMap.INSTANCE.putBlock(
