@@ -19,7 +19,6 @@
 
 package de.markusbordihn.fireextinguisher.block;
 
-import com.mojang.serialization.MapCodec;
 import de.markusbordihn.fireextinguisher.Constants;
 import de.markusbordihn.fireextinguisher.blockitem.FireExtinguisherBlockItem;
 import de.markusbordihn.fireextinguisher.config.FireExtinguisherConfig;
@@ -49,7 +48,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class FireHydrantBlock extends HorizontalDirectionalBlock {
 
-  public static final MapCodec<FireHydrantBlock> CODEC = simpleCodec(FireHydrantBlock::new);
   public static final String ID = "fire_hydrant";
   public static final int REFILL_COOLDOWN_TICKS = 20;
   protected static final VoxelShape SHAPE = Block.box(4, 0, 4, 12, 14, 12);
@@ -57,11 +55,6 @@ public class FireHydrantBlock extends HorizontalDirectionalBlock {
   public FireHydrantBlock(BlockBehaviour.Properties properties) {
     super(properties);
     this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
-  }
-
-  @Override
-  protected MapCodec<? extends HorizontalDirectionalBlock> codec() {
-    return CODEC;
   }
 
   @Override

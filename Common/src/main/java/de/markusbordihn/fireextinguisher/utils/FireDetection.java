@@ -75,7 +75,8 @@ public class FireDetection {
   public static int extinguishWithin(
       Level level, BlockPos center, int radiusX, int radiusY, int radiusZ) {
     int extinguished = 0;
-    for (BlockPos blockPos : BlockPos.withinManhattan(center, radiusX, radiusY, radiusZ)) {
+    for (BlockPos blockPos :
+        BlockPos.withinBoxByManhattanDistance(center, radiusX, radiusY, radiusZ)) {
       if (extinguish(level, blockPos, level.getBlockState(blockPos))) {
         extinguished++;
       }
@@ -85,7 +86,8 @@ public class FireDetection {
 
   public static boolean hasFireWithin(
       Level level, BlockPos center, int radiusX, int radiusY, int radiusZ) {
-    for (BlockPos blockPos : BlockPos.withinManhattan(center, radiusX, radiusY, radiusZ)) {
+    for (BlockPos blockPos :
+        BlockPos.withinBoxByManhattanDistance(center, radiusX, radiusY, radiusZ)) {
       if (isFireBlock(level.getBlockState(blockPos))) {
         return true;
       }

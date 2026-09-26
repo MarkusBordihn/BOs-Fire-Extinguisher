@@ -53,7 +53,7 @@ public class FireAlarmBlocks {
               .noCollision()
               .strength(0.5F)
               .sound(SoundType.STONE)
-              .pushReaction(PushReaction.DESTROY));
+              .pushReaction(PushReaction.POPPED));
   public static final Block FIRE_ALARM_SWITCH_EU =
       new FireAlarmSwitchBlock(
           Properties.of()
@@ -65,7 +65,7 @@ public class FireAlarmBlocks {
               .noCollision()
               .strength(0.5F)
               .sound(SoundType.STONE)
-              .pushReaction(PushReaction.DESTROY),
+              .pushReaction(PushReaction.POPPED),
           8,
           8,
           2.5);
@@ -80,7 +80,7 @@ public class FireAlarmBlocks {
               .noCollision()
               .strength(0.5F)
               .sound(SoundType.STONE)
-              .pushReaction(PushReaction.DESTROY),
+              .pushReaction(PushReaction.POPPED),
           5,
           10,
           2.65);

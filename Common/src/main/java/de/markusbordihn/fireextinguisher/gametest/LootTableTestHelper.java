@@ -22,8 +22,8 @@ package de.markusbordihn.fireextinguisher.gametest;
 import de.markusbordihn.fireextinguisher.Constants;
 import net.minecraft.core.BlockPos;
 import net.minecraft.gametest.framework.GameTestHelper;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -56,7 +56,7 @@ public class LootTableTestHelper {
   public static void testBlockDropItem(
       GameTestHelper helper, Block block, Item item, Item miningTool, BlockPos blockPos) {
     ItemStack itemStack = new ItemStack(miningTool);
-    Player player = helper.makeMockPlayer(GameType.SURVIVAL);
+    ServerPlayer player = (ServerPlayer) helper.makeMockServerPlayer(GameType.SURVIVAL);
     player.setItemInHand(InteractionHand.MAIN_HAND, itemStack);
 
     helper.setBlock(blockPos, block);

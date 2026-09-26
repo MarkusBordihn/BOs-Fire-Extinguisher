@@ -37,7 +37,6 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ToolMaterial;
@@ -47,7 +46,7 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class FireAxeItem extends AxeItem {
+public class FireAxeItem extends Item {
 
   public static final String ID = "fire_axe";
 
@@ -62,7 +61,7 @@ public class FireAxeItem extends AxeItem {
   }
 
   public FireAxeItem(ToolMaterial tier, Properties properties) {
-    super(tier, 6.0F, -3.2F, properties);
+    super(properties.axe(tier, 6.0F, -3.2F));
   }
 
   public static void stopFire(
