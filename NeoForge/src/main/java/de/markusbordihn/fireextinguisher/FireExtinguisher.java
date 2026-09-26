@@ -22,6 +22,7 @@ package de.markusbordihn.fireextinguisher;
 import de.markusbordihn.fireextinguisher.block.ModBlocks;
 import de.markusbordihn.fireextinguisher.config.Config;
 import de.markusbordihn.fireextinguisher.debug.DebugManager;
+import de.markusbordihn.fireextinguisher.gametest.ModGameTests;
 import de.markusbordihn.fireextinguisher.item.ModBlockItems;
 import de.markusbordihn.fireextinguisher.item.ModItems;
 import de.markusbordihn.fireextinguisher.sounds.ModSoundEvents;
@@ -62,5 +63,8 @@ public class FireExtinguisher {
 
     log.info("{} Sound Events ...", Constants.LOG_REGISTER_PREFIX);
     ModSoundEvents.SOUNDS.register(modEventBus);
+
+    log.debug("{} Game Test Functions ...", Constants.LOG_REGISTER_PREFIX);
+    ModGameTests.register(modEventBus);
   }
 }

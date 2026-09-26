@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:function",
+  "function": "fire_extinguisher:mod_blocks_exit_sign_left_block",
+  "environment": "minecraft:default",
+  "structure": "fire_extinguisher:gametest.1x1x1",
+  "max_ticks": 100
+}

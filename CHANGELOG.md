@@ -5,6 +5,31 @@
 This change log includes the summarized changes. For the full changelog, please go to
 the [GitHub History][history] instead.
 
+### 8.4.1
+
+- Fixed #16 by extinguishing soul fire, soul campfires and modded fire blocks via tag or config.
+- Fixed #3 by adding a fire alarm control panel that triggers nearby alarms without redstone wiring.
+- Fixed #10 by adding an EU style fire alarm call point.
+- Fixed #17 by adding a Japanese fire alarm push button and exit signs without a direction arrow.
+- Fixed #13 by adding the Turkish translation from PR #14.
+- Fixed exit sign and fire extinguisher sign drops, recipes and recipe book unlocks.
+- Fixed smoke detector alarm turning off too early and triggering right after placement.
+- Fixed light fire armor showing the tooltip text of the heavy fire armor.
+- Fixed fire extinguisher spray particles staying invisible when spraying at close range.
+- Fixed distorted textures and edge bleeding on signs, fire pole, hydrant and copper extinguisher.
+- Fixed a possible dedicated server crash caused by item tooltip handling.
+- Changed fire extinguisher spraying to use the item cooldown (`fireExtinguisherCooldownTicks`).
+- Changed exit sign and fire extinguisher sign recipe ids; old recipe book unlocks are re-granted.
+- Added fire pole to slide down without fall damage; sneak to hold on (`firePoleSlideSpeed`).
+- Added fire hydrant to refill used fire extinguishers (`fireHydrantRefillEnabled`).
+- Added fire alarm light that flashes red when powered or triggered by the control panel.
+- Added redstone output and config options to the fire alarm control panel and light.
+- Added `extinguishable` block tag and `extinguishableBlocks` config for custom fire blocks.
+- Added Turkish and Chinese translations for the new blocks, tooltips and messages.
+- Improved fire alarm tooltips to be shorter and fixed their wording.
+- Improved fire armor and fire extinguisher cooldowns to be tracked per player.
+- Improved tooltip line breaks to follow the real text width instead of the character count.
+
 ### 8.3.0
 
 - Fixed Fire Alarm Smoke Detector texture bleeding with shaders.

@@ -42,12 +42,13 @@ public class ExitSign extends Block {
   public static final String ID_RIGHT = "exit_sign_right";
   public static final String ID_RIGHT_DOWN = "exit_sign_right_down";
   public static final String ID_RIGHT_UP = "exit_sign_right_up";
+  public static final String ID_PLAIN_LEFT = "exit_sign_plain_left";
+  public static final String ID_PLAIN_RIGHT = "exit_sign_plain_right";
 
   // Defines if we need to rotate the Object based on the click position and player pov
   public static final EnumProperty<Direction> FACING = HorizontalDirectionalBlock.FACING;
   public static final EnumProperty<AttachFace> ATTACH_FACE = BlockStateProperties.ATTACH_FACE;
 
-  // We need a VoxelShape for each side to cover all faces and possibilities
   protected static final VoxelShape CEILING_NORTH_SOUTH_AABB = Block.box(0D, 4D, 7D, 16D, 12D, 9D);
   protected static final VoxelShape CEILING_EAST_WEST_AABB = Block.box(7D, 4, 0D, 9D, 12D, 16D);
 
@@ -94,7 +95,6 @@ public class ExitSign extends Block {
     AttachFace attachFace = blockState.getValue(ATTACH_FACE);
     Direction facing = blockState.getValue(FireExtinguisherSignPosition.FACING);
 
-    // Handle ceiling positions
     if (attachFace == AttachFace.CEILING) {
       if (facing == Direction.NORTH || facing == Direction.SOUTH) {
         return CEILING_NORTH_SOUTH_AABB;
@@ -103,7 +103,6 @@ public class ExitSign extends Block {
       }
     }
 
-    // Handle floor positions
     if (attachFace == AttachFace.FLOOR) {
       if (facing == Direction.NORTH || facing == Direction.SOUTH) {
         return FLOOR_NORTH_SOUTH_AABB;
@@ -112,7 +111,6 @@ public class ExitSign extends Block {
       }
     }
 
-    // Handle wall positions
     return switch (facing) {
       case EAST -> SHAPE_EAST_AABB;
       case SOUTH -> SHAPE_SOUTH_AABB;
@@ -136,7 +134,6 @@ public class ExitSign extends Block {
             ? direction.getOpposite()
             : direction;
 
-    // Calculate attach face based on clicked face and relative click location.
     AttachFace attachFace = getAttachFace(context, faceDirection);
     return this.defaultBlockState()
         .setValue(ATTACH_FACE, attachFace)

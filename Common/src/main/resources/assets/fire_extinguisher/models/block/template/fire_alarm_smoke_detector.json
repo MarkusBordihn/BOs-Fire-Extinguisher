@@ -1,6 +1,5 @@
 {
   "credit": "Made with Blockbench by Markus Bordihn",
-  "texture_size": [2, 2],
   "render_type": "cutout",
   "textures": {
     "particle": "fire_alarm_smoke_detector",

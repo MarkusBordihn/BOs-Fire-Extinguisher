@@ -55,12 +55,10 @@ public class LootTableTestHelper {
 
   public static void testBlockDropItem(
       GameTestHelper helper, Block block, Item item, Item miningTool, BlockPos blockPos) {
-    // Define itemStack and mock player
     ItemStack itemStack = new ItemStack(miningTool);
     Player player = helper.makeMockPlayer(GameType.SURVIVAL);
     player.setItemInHand(InteractionHand.MAIN_HAND, itemStack);
 
-    // Set block and prepare for drop
     helper.setBlock(blockPos, block);
     helper.assertBlockPresent(block, blockPos);
     BlockState blockState = helper.getBlockState(blockPos);
@@ -69,7 +67,6 @@ public class LootTableTestHelper {
         "Expected block " + block + " but found " + blockState.getBlock(),
         blockState.getBlock() == block);
 
-    // Check if the item can mine the block
     GameTestHelpers.assertTrue(
         helper,
         itemStack.getItem() + " can't mine " + blockState.getBlock(),
@@ -86,7 +83,6 @@ public class LootTableTestHelper {
             + blockState.getBlock(),
         player.hasCorrectToolForDrops(blockState));
 
-    // Destroy block and check for item drop
     blockState
         .getBlock()
         .playerDestroy(

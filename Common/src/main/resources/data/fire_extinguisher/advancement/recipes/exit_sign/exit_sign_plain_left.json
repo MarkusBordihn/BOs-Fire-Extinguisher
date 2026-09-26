@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_exit_sign_left": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["fire_extinguisher:exit_sign_left"]
+          }
+        ]
+      }
+    },
+    "has_lime_dye": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["minecraft:lime_dye"]
+          }
+        ]
+      }
+    },
+    "has_exit_sign_plain_left": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["fire_extinguisher:exit_sign_plain_left"]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    ["has_exit_sign_left", "has_lime_dye", "has_exit_sign_plain_left"]
+  ],
+  "rewards": {
+    "recipes": [
+      "fire_extinguisher:exit_sign_plain_left", "fire_extinguisher:exit_sign_plain_right_flip"
+    ]
+  }
+}

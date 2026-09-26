@@ -20,7 +20,9 @@
 package de.markusbordihn.fireextinguisher.block;
 
 import de.markusbordihn.fireextinguisher.Constants;
+import de.markusbordihn.fireextinguisher.alarm.FireAlarmNetwork;
 import de.markusbordihn.fireextinguisher.config.FireExtinguisherConfig;
+import de.markusbordihn.fireextinguisher.utils.FireDetection;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.Identifier;
@@ -29,8 +31,6 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.CampfireBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -38,8 +38,6 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.redstone.Orientation;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 public class FireAlarmSmokeDetectorBlock extends AbstractFireAlarmSignalBlock {
 
@@ -54,11 +52,10 @@ public class FireAlarmSmokeDetectorBlock extends AbstractFireAlarmSignalBlock {
   protected static final VoxelShape WEST_AABB = Block.box(14, 5, 5, 16, 11, 11);
   protected static final VoxelShape UP_AABB = Block.box(5, 14, 5, 11, 16, 11);
   protected static final VoxelShape DOWN_AABB = Block.box(5, 0, 5, 11, 2, 11);
-  private static final Logger log = LogManager.getLogger(Constants.LOG_NAME);
 
   public FireAlarmSmokeDetectorBlock(Properties properties) {
     super(properties);
-    this.registerDefaultState(this.stateDefinition.any().setValue(DISARMED, true));
+    this.registerDefaultState(this.defaultBlockState().setValue(DISARMED, true));
   }
 
   public static int getLightEmission(BlockState blockState) {
@@ -90,10 +87,20 @@ public class FireAlarmSmokeDetectorBlock extends AbstractFireAlarmSignalBlock {
     };
   }
 
-  private void updateNeighbours(BlockState blockState, Level level, BlockPos blockPos) {
-    level.updateNeighborsAt(blockPos, this);
-    level.updateNeighborsAt(
-        blockPos.relative(getConnectedDirection(blockState).getOpposite()), this);
+  @Override
+  public boolean isAlarmTarget() {
+    return false;
+  }
+
+  @Override
+  protected boolean ticksWhileIdle() {
+    return true;
+  }
+
+  @Override
+  protected boolean hasActiveSignal(
+      ServerLevel serverLevel, BlockPos blockPos, BlockState blockState) {
+    return blockState.getValue(POWERED);
   }
 
   @Override
@@ -114,55 +121,42 @@ public class FireAlarmSmokeDetectorBlock extends AbstractFireAlarmSignalBlock {
       BlockPos blockPos,
       boolean isPowered,
       RandomSource random) {
+    BlockState armedState = blockState;
+    if (Boolean.TRUE.equals(blockState.getValue(DISARMED))) {
+      armedState = blockState.setValue(DISARMED, false);
+      serverLevel.setBlock(blockPos, armedState, 3);
+    }
 
-    // Check block within Manhattan distance for fire.
-    Iterable<BlockPos> blockPositions =
-        BlockPos.withinManhattan(
+    boolean detectedFire =
+        FireDetection.hasFireWithin(
+            serverLevel,
             blockPos.above(),
             FireExtinguisherConfig.smokeDetectorRadiusX,
             FireExtinguisherConfig.smokeDetectorRadiusY,
             FireExtinguisherConfig.smokeDetectorRadiusZ);
-    boolean detectedFire = false;
-    for (BlockPos blockBlockPosition : blockPositions) {
-      BlockState blockBlockState = serverLevel.getBlockState(blockBlockPosition);
-      // Check for fire block and lit campfire block
-      if (blockBlockState.is(Blocks.FIRE)
-          || (blockBlockState.is(Blocks.CAMPFIRE)
-              && blockBlockState.getBlock() instanceof CampfireBlock
-              && CampfireBlock.isLitCampfire(blockState))) {
-        detectedFire = true;
-        break;
-      }
-    }
+    this.setPowered(serverLevel, blockPos, armedState, detectedFire);
+  }
 
-    // Arm smoke detector
-    if (Boolean.TRUE.equals(blockState.getValue(DISARMED))) {
-      serverLevel.setBlockAndUpdate(blockPos, blockState.setValue(DISARMED, false));
-      log.debug("[Smoke Detector] At {} is armed and ready.", blockPos);
-    }
+  @Override
+  protected void onPowered(ServerLevel serverLevel, BlockPos blockPos, BlockState blockState) {
+    this.updateNeighbours(serverLevel, blockPos, blockState);
+    FireAlarmNetwork.activateSource(serverLevel, blockPos);
+  }
 
-    // Update powered state, if fire is detected.
-    if (Boolean.TRUE.equals(blockState.getValue(POWERED)) != detectedFire) {
-      log.debug("[Smoke Detector] Fire detected at {} with state {}", blockPos, blockState);
-      BlockState newBlockState =
-          blockState.setValue(POWERED, detectedFire).setValue(DISARMED, false);
-      serverLevel.setBlockAndUpdate(blockPos, newBlockState);
-      this.updateNeighbours(newBlockState, serverLevel, blockPos);
-    }
+  @Override
+  protected void onUnpowered(ServerLevel serverLevel, BlockPos blockPos, BlockState blockState) {
+    this.updateNeighbours(serverLevel, blockPos, blockState);
+    FireAlarmNetwork.deactivateSource(serverLevel, blockPos);
   }
 
   @Override
   public void affectNeighborsAfterRemoval(
-      BlockState blockState, ServerLevel level, BlockPos blockPos, boolean removed) {
-    if (!removed && !blockState.is(blockState.getBlock())) {
-      if (Boolean.TRUE.equals(blockState.getValue(POWERED))) {
-        this.updateNeighbours(blockState, level, blockPos);
-      }
-      super.affectNeighborsAfterRemoval(blockState, level, blockPos, removed);
+      BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, boolean movedByPiston) {
+    if (Boolean.TRUE.equals(blockState.getValue(POWERED))) {
+      this.updateNeighbours(serverLevel, blockPos, blockState);
+      FireAlarmNetwork.deactivateSource(serverLevel, blockPos);
     }
-    if (removed && !level.isClientSide()) {
-      log.debug("[Smoke Detector] At {} is removed.", blockPos);
-    }
+    super.affectNeighborsAfterRemoval(blockState, serverLevel, blockPos, movedByPiston);
   }
 
   @Override

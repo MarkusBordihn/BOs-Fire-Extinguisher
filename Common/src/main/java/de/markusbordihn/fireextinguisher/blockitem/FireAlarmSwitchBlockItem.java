@@ -36,15 +36,21 @@ import net.minecraft.world.level.block.Block;
 public class FireAlarmSwitchBlockItem extends BlockItem {
 
   public static final String ID = "fire_alarm_switch";
+  public static final String ID_EU = "fire_alarm_switch_eu";
+  public static final String ID_JP = "fire_alarm_switch_jp";
 
   public FireAlarmSwitchBlockItem(Block block) {
+    this(block, ID);
+  }
+
+  public FireAlarmSwitchBlockItem(Block block, String id) {
     this(
         block,
         new Properties()
             .useBlockDescriptionPrefix()
             .setId(
                 ResourceKey.create(
-                    Registries.ITEM, Identifier.fromNamespaceAndPath(Constants.MOD_ID, ID))));
+                    Registries.ITEM, Identifier.fromNamespaceAndPath(Constants.MOD_ID, id))));
   }
 
   public FireAlarmSwitchBlockItem(Block block, Properties properties) {

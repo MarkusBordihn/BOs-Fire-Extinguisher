@@ -92,7 +92,7 @@ public class FireChestplateLightItem extends FireProtectionArmorItem {
       ToolTips.addTooltip(
           tooltipConsumer,
           Component.translatable(
-                  Constants.TEXT_PREFIX + "fire_armor_config",
+                  Constants.TEXT_PREFIX + "fire_armor_light_config",
                   Math.round((FireExtinguisherConfig.fireProtectionLightRenew / 20.0) * 10) / 10.0,
                   Math.round((FireExtinguisherConfig.fireProtectionLightDuration / 20.0) * 10)
                       / 10.0)
