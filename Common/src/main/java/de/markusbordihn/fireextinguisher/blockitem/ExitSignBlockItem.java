@@ -42,6 +42,8 @@ public class ExitSignBlockItem extends BlockItem {
   public static final String ID_RIGHT = "exit_sign_right";
   public static final String ID_RIGHT_DOWN = "exit_sign_right_down";
   public static final String ID_RIGHT_UP = "exit_sign_right_up";
+  public static final String ID_PLAIN_LEFT = "exit_sign_plain_left";
+  public static final String ID_PLAIN_RIGHT = "exit_sign_plain_right";
 
   public ExitSignBlockItem(Block block, String id) {
     this(

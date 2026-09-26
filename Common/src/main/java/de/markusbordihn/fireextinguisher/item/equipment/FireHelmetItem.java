@@ -21,6 +21,7 @@ package de.markusbordihn.fireextinguisher.item.equipment;
 
 import de.markusbordihn.fireextinguisher.Constants;
 import de.markusbordihn.fireextinguisher.config.FireExtinguisherConfig;
+import de.markusbordihn.fireextinguisher.item.ModArmorMaterials;
 import de.markusbordihn.fireextinguisher.utils.ToolTips;
 import java.util.function.Consumer;
 import net.minecraft.ChatFormatting;
@@ -41,8 +42,6 @@ public class FireHelmetItem extends FireProtectionArmorItem {
 
   public static final String ID = "fire_helmet";
 
-  private int ticker = 0;
-
   public FireHelmetItem() {
     this(
         new Properties()
@@ -57,15 +56,26 @@ public class FireHelmetItem extends FireProtectionArmorItem {
 
   @Override
   protected void fireArmorTick(ItemStack itemStack, Level level, ServerPlayer serverPlayer) {
-    if (Boolean.TRUE.equals(
-            FireExtinguisherConfig.fireProtectionEnabled
-                && ticker++ > FireExtinguisherConfig.fireProtectionRenew)
-        && !serverPlayer.hasEffect(MobEffects.FIRE_RESISTANCE)) {
-      serverPlayer.addEffect(
-          new MobEffectInstance(
-              MobEffects.FIRE_RESISTANCE, FireExtinguisherConfig.fireProtectionDuration));
-      ticker = 0;
+    if (!FireExtinguisherConfig.fireProtectionEnabled
+        || serverPlayer.hasEffect(MobEffects.FIRE_RESISTANCE)
+        || serverPlayer.getCooldowns().isOnCooldown(itemStack)) {
+      return;
     }
+
+    int totalDuration =
+        calculateProtectionDuration(
+            serverPlayer,
+            ModArmorMaterials.FIRE_PROTECTION.getArmorMaterial(),
+            FireExtinguisherConfig.fireProtectionDuration);
+    if (totalDuration <= 0) {
+      return;
+    }
+
+    serverPlayer.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, totalDuration));
+    if (hasSlowDownArmor(serverPlayer)) {
+      serverPlayer.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, totalDuration));
+    }
+    serverPlayer.getCooldowns().addCooldown(itemStack, FireExtinguisherConfig.fireProtectionRenew);
   }
 
   @Override

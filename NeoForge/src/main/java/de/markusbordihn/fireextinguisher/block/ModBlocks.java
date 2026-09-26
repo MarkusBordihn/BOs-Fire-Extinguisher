@@ -28,18 +28,25 @@ public class ModBlocks {
 
   public static final DeferredRegister.Blocks BLOCKS =
       DeferredRegister.createBlocks(Constants.MOD_ID);
-  // Fire Extinguisher
   public static final DeferredBlock<Block> FIRE_EXTINGUISHER =
       BLOCKS.register(FireExtinguisherBlock.ID, () -> FireExtinguisherBlocks.FIRE_EXTINGUISHER);
   public static final DeferredBlock<Block> FIRE_EXTINGUISHER_COPPER =
       BLOCKS.register(
           FireExtinguisherBlock.ID_COPPER, () -> FireExtinguisherBlocks.FIRE_EXTINGUISHER_COPPER);
 
-  // Fire Alarm
   public static final DeferredBlock<Block> FIRE_SPRINKLER =
       BLOCKS.register(FireSprinklerBlock.ID, () -> FireAlarmBlocks.FIRE_SPRINKLER);
   public static final DeferredBlock<Block> FIRE_ALARM_SWITCH =
       BLOCKS.register(FireAlarmSwitchBlock.ID, () -> FireAlarmBlocks.FIRE_ALARM_SWITCH);
+  public static final DeferredBlock<Block> FIRE_ALARM_SWITCH_EU =
+      BLOCKS.register(FireAlarmSwitchBlock.ID_EU, () -> FireAlarmBlocks.FIRE_ALARM_SWITCH_EU);
+  public static final DeferredBlock<Block> FIRE_ALARM_SWITCH_JP =
+      BLOCKS.register(FireAlarmSwitchBlock.ID_JP, () -> FireAlarmBlocks.FIRE_ALARM_SWITCH_JP);
+  public static final DeferredBlock<Block> FIRE_ALARM_CONTROL_PANEL =
+      BLOCKS.register(
+          FireAlarmControlPanelBlock.ID, () -> FireAlarmBlocks.FIRE_ALARM_CONTROL_PANEL);
+  public static final DeferredBlock<Block> FIRE_ALARM_LIGHT =
+      BLOCKS.register(FireAlarmLightBlock.ID, () -> FireAlarmBlocks.FIRE_ALARM_LIGHT);
   public static final DeferredBlock<Block> FIRE_ALARM_BELL =
       BLOCKS.register(FireAlarmBellBlock.ID, () -> FireAlarmBlocks.FIRE_ALARM_BELL);
   public static final DeferredBlock<Block> FIRE_ALARM_SIREN =
@@ -52,7 +59,6 @@ public class ModBlocks {
           FireAlarmSmokeDetectorSilentBlock.ID,
           () -> FireAlarmBlocks.FIRE_ALARM_SMOKE_DETECTOR_SILENT);
 
-  // Fire Extinguisher Signs
   public static final DeferredBlock<Block> FIRE_EXTINGUISHER_SIGN =
       BLOCKS.register(
           FireExtinguisherSign.ID, () -> FireExtinguisherSignBlocks.FIRE_EXTINGUISHER_SIGN);
@@ -65,7 +71,6 @@ public class ModBlocks {
           FireExtinguisherSign.ID_RIGHT,
           () -> FireExtinguisherSignBlocks.FIRE_EXTINGUISHER_SIGN_RIGHT);
 
-  // Exit Signs
   public static final DeferredBlock<Block> EXIT_SIGN =
       BLOCKS.register(ExitSign.ID, () -> ExitSignBlocks.EXIT_SIGN);
   public static final DeferredBlock<Block> EXIT_SIGN_LEFT =
@@ -80,6 +85,15 @@ public class ModBlocks {
       BLOCKS.register(ExitSign.ID_RIGHT_DOWN, () -> ExitSignBlocks.EXIT_SIGN_RIGHT_DOWN);
   public static final DeferredBlock<Block> EXIT_SIGN_RIGHT_UP =
       BLOCKS.register(ExitSign.ID_RIGHT_UP, () -> ExitSignBlocks.EXIT_SIGN_RIGHT_UP);
+  public static final DeferredBlock<Block> EXIT_SIGN_PLAIN_LEFT =
+      BLOCKS.register(ExitSign.ID_PLAIN_LEFT, () -> ExitSignBlocks.EXIT_SIGN_PLAIN_LEFT);
+  public static final DeferredBlock<Block> EXIT_SIGN_PLAIN_RIGHT =
+      BLOCKS.register(ExitSign.ID_PLAIN_RIGHT, () -> ExitSignBlocks.EXIT_SIGN_PLAIN_RIGHT);
+
+  public static final DeferredBlock<Block> FIRE_POLE =
+      BLOCKS.register(FirePoleBlock.ID, () -> FireStationBlocks.FIRE_POLE);
+  public static final DeferredBlock<Block> FIRE_HYDRANT =
+      BLOCKS.register(FireHydrantBlock.ID, () -> FireStationBlocks.FIRE_HYDRANT);
 
   protected ModBlocks() {}
 }

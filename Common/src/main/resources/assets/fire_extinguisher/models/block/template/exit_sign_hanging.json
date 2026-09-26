@@ -1,12 +1,11 @@
 {
   "credit": "Made with Blockbench by Markus Bordihn",
-  "texture_size": [32, 16],
   "render_type": "cutout",
   "textures": {
     "particle": "fire_extinguisher:block/exit_sign",
     "sign": "fire_extinguisher:block/exit_sign",
     "background": "fire_extinguisher:block/exit_background",
-    "chains": "minecraft:block/chain"
+    "chains": "minecraft:block/iron_chain"
   },
   "elements": [
     {

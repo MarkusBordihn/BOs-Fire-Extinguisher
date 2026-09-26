@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [" G ", "GRG", " I "],
+  "key": {
+    "G": "minecraft:red_stained_glass_pane",
+    "R": "minecraft:redstone_lamp",
+    "I": "minecraft:iron_ingot"
+  },
+  "result": {
+    "id": "fire_extinguisher:fire_alarm_light"
+  }
+}

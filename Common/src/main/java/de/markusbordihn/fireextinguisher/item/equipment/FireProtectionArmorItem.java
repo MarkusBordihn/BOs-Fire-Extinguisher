@@ -18,11 +18,13 @@
  */
 package de.markusbordihn.fireextinguisher.item.equipment;
 
+import de.markusbordihn.fireextinguisher.config.FireExtinguisherConfig;
 import de.markusbordihn.fireextinguisher.item.ModArmorMaterials;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.equipment.ArmorMaterial;
@@ -31,6 +33,8 @@ import net.minecraft.world.level.Level;
 
 public class FireProtectionArmorItem extends Item {
 
+  private final ArmorMaterial armorMaterial;
+
   public FireProtectionArmorItem(ArmorType type, Properties properties) {
     this(ModArmorMaterials.FIRE_PROTECTION.getArmorMaterial(), type, properties);
   }
@@ -38,6 +42,44 @@ public class FireProtectionArmorItem extends Item {
   public FireProtectionArmorItem(
       ArmorMaterial armorMaterial, ArmorType armorType, Properties properties) {
     super(properties.humanoidArmor(armorMaterial, armorType).fireResistant());
+    this.armorMaterial = armorMaterial;
+  }
+
+  public static int countWornFireArmorPieces(Player player, ArmorMaterial armorMaterial) {
+    int count = 0;
+    for (EquipmentSlot equipmentSlot : EquipmentSlot.values()) {
+      if (equipmentSlot.getType() == EquipmentSlot.Type.HUMANOID_ARMOR
+          && player.getItemBySlot(equipmentSlot).getItem()
+              instanceof FireProtectionArmorItem fireArmor
+          && fireArmor.getArmorMaterial().equals(armorMaterial)) {
+        count++;
+      }
+    }
+    return count;
+  }
+
+  public static int calculateProtectionDuration(
+      Player player, ArmorMaterial armorMaterial, int durationPerArmorPiece) {
+    return durationPerArmorPiece * countWornFireArmorPieces(player, armorMaterial);
+  }
+
+  protected static boolean hasSlowDownArmor(ServerPlayer serverPlayer) {
+    if (serverPlayer.getItemBySlot(EquipmentSlot.CHEST).getItem() instanceof FireChestplateItem
+        && FireExtinguisherConfig.fireChestplateSlowDownEnabled) {
+      return true;
+    }
+
+    if (serverPlayer.getItemBySlot(EquipmentSlot.LEGS).getItem() instanceof FireLeggingsItem
+        && FireExtinguisherConfig.fireLeggingsSlowDownEnabled) {
+      return true;
+    }
+
+    return serverPlayer.getItemBySlot(EquipmentSlot.FEET).getItem() instanceof FireBootsItem
+        && FireExtinguisherConfig.fireBootsSlowDownEnabled;
+  }
+
+  public ArmorMaterial getArmorMaterial() {
+    return this.armorMaterial;
   }
 
   @Override

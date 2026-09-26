@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:function",
+  "function": "fire_extinguisher:loot_tables_exit_sign_plain_right_drop",
+  "environment": "minecraft:default",
+  "structure": "fire_extinguisher:gametest.1x1x1",
+  "max_ticks": 100
+}

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "fire_station",
+  "pattern": ["C", "C", "C"],
+  "key": {
+    "C": "minecraft:copper_ingot"
+  },
+  "result": {
+    "id": "fire_extinguisher:fire_pole",
+    "count": 4
+  }
+}

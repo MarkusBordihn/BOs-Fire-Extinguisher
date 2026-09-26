@@ -20,6 +20,20 @@
     ],
     "client": [
       "de.markusbordihn.fireextinguisher.FireExtinguisherClient"
+    ],
+    "fabric-gametest": [
+      "de.markusbordihn.fireextinguisher.gametest.SmokeTest",
+      "de.markusbordihn.fireextinguisher.gametest.ModBlocksTest",
+      "de.markusbordihn.fireextinguisher.gametest.ModBlockItemsTest",
+      "de.markusbordihn.fireextinguisher.gametest.ModItemsTest",
+      "de.markusbordihn.fireextinguisher.gametest.LootTablesTest",
+      "de.markusbordihn.fireextinguisher.gametest.FireDetectionTest",
+      "de.markusbordihn.fireextinguisher.gametest.FireSprinklerTest",
+      "de.markusbordihn.fireextinguisher.gametest.FireAlarmSmokeDetectorTest",
+      "de.markusbordihn.fireextinguisher.gametest.FireAlarmControlPanelTest",
+      "de.markusbordihn.fireextinguisher.gametest.FireArmorTest",
+      "de.markusbordihn.fireextinguisher.gametest.FireHydrantTest",
+      "de.markusbordihn.fireextinguisher.gametest.FirePoleTest"
     ]
   },
   "depends": {

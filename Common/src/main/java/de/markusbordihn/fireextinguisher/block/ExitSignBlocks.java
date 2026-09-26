@@ -107,6 +107,28 @@ public class ExitSignBlocks {
               .requiresCorrectToolForDrops()
               .strength(3.0F, 6.0F)
               .sound(SoundType.METAL));
+  public static final Block EXIT_SIGN_PLAIN_LEFT =
+      new ExitSign(
+          BlockBehaviour.Properties.of()
+              .setId(
+                  ResourceKey.create(
+                      Registries.BLOCK,
+                      Identifier.fromNamespaceAndPath(Constants.MOD_ID, ExitSign.ID_PLAIN_LEFT)))
+              .mapColor(MapColor.STONE)
+              .requiresCorrectToolForDrops()
+              .strength(3.0F, 6.0F)
+              .sound(SoundType.METAL));
+  public static final Block EXIT_SIGN_PLAIN_RIGHT =
+      new ExitSign(
+          BlockBehaviour.Properties.of()
+              .setId(
+                  ResourceKey.create(
+                      Registries.BLOCK,
+                      Identifier.fromNamespaceAndPath(Constants.MOD_ID, ExitSign.ID_PLAIN_RIGHT)))
+              .mapColor(MapColor.STONE)
+              .requiresCorrectToolForDrops()
+              .strength(3.0F, 6.0F)
+              .sound(SoundType.METAL));
 
   protected ExitSignBlocks() {}
 }

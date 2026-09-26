@@ -51,6 +51,9 @@
     ]
   ],
   "rewards": {
-    "recipes": ["fire_extinguisher:fire_extinguisher_sign_left"]
+    "recipes": [
+      "fire_extinguisher:fire_extinguisher_sign_left",
+      "fire_extinguisher:fire_extinguisher_sign_right_flip"
+    ]
   }
 }
