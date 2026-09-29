@@ -1,7 +1,13 @@
-tasks.register('runAllGameTests') {
+tasks.register('allGameTests') {
   group = 'verification'
   description = 'Runs both Fabric and Forge game tests.'
   dependsOn ':Fabric:runGameTest', ':Forge:runGameTestServer'
+}
+
+tasks.register('fullCheck') {
+  group = 'verification'
+  description = 'Runs the standard checks and Fabric and Forge game tests.'
+  dependsOn ':Common:check', ':Fabric:check', ':Forge:check', 'allGameTests'
 }
 
 subprojects {

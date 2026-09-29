@@ -50,7 +50,6 @@ public class FireExtinguisher implements ModInitializer {
     Constants.GAME_DIR = FabricLoader.getInstance().getGameDir();
     Constants.CONFIG_DIR = FabricLoader.getInstance().getConfigDir();
     Constants.IS_FABRIC = true;
-    Constants.HAS_FABRIC_TOOLTIPFIX_MOD = FabricLoader.getInstance().isModLoaded("tooltipfix");
 
     log.info("{} Config ...", Constants.LOG_REGISTER_PREFIX);
     Config.register();

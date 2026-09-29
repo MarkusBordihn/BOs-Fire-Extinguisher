@@ -19,24 +19,22 @@ fight and prevent fires.
 
 ## Features
 
-Tools and blocks for fighting and preventing fires:
-
 - **Fire Extinguisher (Normal and Copper):** Put out fire, soul fire, campfires and modded fire
   blocks. Both variants work the same, the copper one is a decorative alternative.
-- **Fire Hydrant:** Refill a used fire extinguisher with a simple right-click.
-- **Fire Pole:** Slide down from the top floor of your fire station without any fall damage.
+- **Fire Hydrant:** Refill a used fire extinguisher with a right-click.
+- **Fire Pole:** Slide down from the top floor of your fire station without fall damage.
 - **Fire Axe:** Remove the fire around a block by right-clicking it or breaking it.
 - **Fire-Protecting Armor (Helmet, Chestplate, Leggings, Boots):** Two variants, Heavy and Light,
   with different protection and movement speed. Each worn piece extends the protection.
 - **Fire Alarm Control Panel:** Connect smoke detectors and alarm switches to bells, sirens, lights
-  and sprinklers within a configurable radius without any redstone wiring. Panel and light emit a
+  and sprinklers within a configurable radius without redstone wiring. Panel and light emit a
   redstone signal while the alarm is active.
 - **Fire Alarm Bell, Siren, Light, and Switch:** Raise the alarm by redstone or by hand. Switches
   come as classic, EU call point and Japanese push button variants.
 - **Fire Sprinkler and Smoke Detector:** Detect fire and put it out automatically.
 - **Fire Extinguisher Location Signs and Exit Location Signs:** Mark extinguishers and escape
   routes, including emergency exit signs without a direction arrow.
-- **Customization via Configuration File:** Adjust cooldowns, ranges and toggles in the config file.
+- **Configuration File:** Adjust cooldowns, ranges and toggles.
 
 ## 🔥 Modded Fire Blocks
 
@@ -47,7 +45,7 @@ config option, e.g. `extinguishableBlocks=burnt:fire_block,minecraft:magma_block
 
 ## ⚙️ Configuration
 
-The config file offers the following additional options:
+The config file offers these additional options:
 
 - `fireExtinguisherCooldownTicks`: Delay between two sprays of the fire extinguisher.
 - `fireAlarmControlPanelRadiusX/Y/Z`: Range of the fire alarm control panel, `0` disables it.
@@ -55,13 +53,9 @@ The config file offers the following additional options:
 - `firePoleSlideSpeed`: Sliding speed of the fire pole in blocks per second.
 - `fireHydrantRefillEnabled`: Allow refilling fire extinguishers at the fire hydrant.
 
-With a diverse range of items at your disposal, the Fire Extinguisher and More mod offers a dynamic
-firefighting experience that goes beyond the ordinary. Are you ready to face the flames and protect
-your world from the destructive power of fire?
-
 ## ℹ️ More Information
 
-Please check https://github.com/MarkusBordihn/BOs-Fire-Extinguisher/wiki for additional information.
+See the [wiki] for details on every item and block.
 
 [logo]: Common/src/main/resources/logo.png
 

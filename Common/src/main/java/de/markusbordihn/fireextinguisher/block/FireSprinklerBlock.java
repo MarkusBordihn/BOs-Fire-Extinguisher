@@ -83,12 +83,12 @@ public class FireSprinklerBlock extends AbstractFireAlarmSignalBlock {
 
   @Override
   public BlockState getStateForPlacement(BlockPlaceContext context) {
-    BlockPos blockPos = context.getClickedPos();
-    Level level = context.getLevel();
     if (context.getClickedFace() != Direction.DOWN) {
       return null;
     }
 
+    BlockPos blockPos = context.getClickedPos();
+    Level level = context.getLevel();
     if (blockPos.getY() < level.getMaxBuildHeight() - 1
         && !level.getBlockState(blockPos.above()).isAir()) {
       return this.defaultBlockState()

@@ -19,7 +19,6 @@
 
 package de.markusbordihn.fireextinguisher.gametest;
 
-import de.markusbordihn.fireextinguisher.Constants;
 import net.minecraft.core.BlockPos;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.world.InteractionHand;
@@ -29,12 +28,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 public class LootTableTestHelper {
-
-  private static final Logger log = LogManager.getLogger(Constants.LOG_NAME);
 
   private LootTableTestHelper() {}
 

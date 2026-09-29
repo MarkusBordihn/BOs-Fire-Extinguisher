@@ -18,6 +18,16 @@ minecraft {
 
 dependencies {
   compileOnly group: 'org.spongepowered', name: 'mixin', version: '0.8.5'
+
+  testImplementation platform('org.junit:junit-bom:5.11.4')
+  testImplementation 'org.junit.jupiter:junit-jupiter'
+  testImplementation 'com.google.code.gson:gson:2.10'
+  testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+test {
+  useJUnitPlatform()
+  inputs.file(rootProject.file('Fabric/src/main/java/de/markusbordihn/fireextinguisher/FireExtinguisherClient.java'))
 }
 
 processResources {

@@ -58,8 +58,34 @@ public class FireAlarmControlPanelTest {
         helper, FireAlarmBlocks.FIRE_ALARM_CONTROL_PANEL, FireAlarmBlocks.FIRE_ALARM_BELL);
   }
 
+  @GameTest(
+      template = "fire_extinguisher:gametest.3x3x3",
+      batch = FireAlarmControlPanelTestHelper.BATCH,
+      timeoutTicks = FireAlarmControlPanelTestHelper.TIMEOUT_TICKS)
+  public void testResetReleasesSwitchAndAlarms(GameTestHelper helper) {
+    FireAlarmControlPanelTestHelper.testResetReleasesSwitchAndAlarms(
+        helper,
+        FireAlarmBlocks.FIRE_ALARM_CONTROL_PANEL,
+        FireAlarmBlocks.FIRE_ALARM_BELL,
+        FireAlarmBlocks.FIRE_ALARM_SWITCH);
+  }
+
+  @GameTest(
+      template = "fire_extinguisher:gametest.3x3x3",
+      batch = FireAlarmControlPanelTestHelper.LATCHING_BATCH,
+      timeoutTicks = FireAlarmControlPanelTestHelper.TIMEOUT_TICKS)
+  public void testLatchingKeepsAlarmsUntilReset(GameTestHelper helper) {
+    FireAlarmControlPanelTestHelper.testLatchingKeepsAlarmsUntilReset(
+        helper, FireAlarmBlocks.FIRE_ALARM_CONTROL_PANEL, FireAlarmBlocks.FIRE_ALARM_BELL);
+  }
+
   @AfterBatch(batch = FireAlarmControlPanelTestHelper.BATCH)
-  public void restoreConfiguredPanelRadius(ServerLevel serverLevel) {
-    FireAlarmControlPanelTestHelper.restoreConfiguredPanelRadius();
+  public void restoreConfiguredPanelSettings(ServerLevel serverLevel) {
+    FireAlarmControlPanelTestHelper.restoreConfiguredPanelSettings();
+  }
+
+  @AfterBatch(batch = FireAlarmControlPanelTestHelper.LATCHING_BATCH)
+  public void restoreConfiguredLatchingSettings(ServerLevel serverLevel) {
+    FireAlarmControlPanelTestHelper.restoreConfiguredPanelSettings();
   }
 }

@@ -87,29 +87,29 @@ public class FireAlarmSwitchBlock extends FaceAttachedHorizontalDirectionalBlock
   }
 
   private static void makeParticle(
-      BlockState blockState, LevelAccessor levelAccessor, BlockPos blockPos, float particleTicks) {
-    Direction facingBlockState = blockState.getValue(FACING).getOpposite();
-    Direction connectedBlockState = getConnectedDirection(blockState).getOpposite();
-    double posX =
+      BlockState blockState, LevelAccessor levelAccessor, BlockPos blockPos, float particleScale) {
+    Direction facingDirection = blockState.getValue(FACING).getOpposite();
+    Direction connectedDirection = getConnectedDirection(blockState).getOpposite();
+    double particleX =
         blockPos.getX()
             + 0.5
-            + 0.1 * facingBlockState.getStepX()
-            + 0.2 * connectedBlockState.getStepX();
-    double posY =
+            + 0.1 * facingDirection.getStepX()
+            + 0.2 * connectedDirection.getStepX();
+    double particleY =
         blockPos.getY()
             + 0.5
-            + 0.1 * facingBlockState.getStepY()
-            + 0.2 * connectedBlockState.getStepY();
-    double posZ =
+            + 0.1 * facingDirection.getStepY()
+            + 0.2 * connectedDirection.getStepY();
+    double particleZ =
         blockPos.getZ()
             + 0.5
-            + 0.1 * facingBlockState.getStepZ()
-            + 0.2 * connectedBlockState.getStepZ();
+            + 0.1 * facingDirection.getStepZ()
+            + 0.2 * connectedDirection.getStepZ();
     levelAccessor.addParticle(
-        new DustParticleOptions(DustParticleOptions.REDSTONE_PARTICLE_COLOR, particleTicks),
-        posX,
-        posY,
-        posZ,
+        new DustParticleOptions(DustParticleOptions.REDSTONE_PARTICLE_COLOR, particleScale),
+        particleX,
+        particleY,
+        particleZ,
         0.0,
         0.0,
         0.0);
@@ -157,19 +157,15 @@ public class FireAlarmSwitchBlock extends FaceAttachedHorizontalDirectionalBlock
       }
       return InteractionResult.SUCCESS;
     } else {
-      BlockState powerBlockState = this.pull(blockState, level, blockPos);
-      float poweredValue = Boolean.TRUE.equals(powerBlockState.getValue(POWERED)) ? 0.6F : 0.5F;
-      if (Boolean.TRUE.equals(powerBlockState.getValue(POWERED))) {
+      boolean isPowered = this.pull(blockState, level, blockPos).getValue(POWERED);
+      if (isPowered) {
         level.playSound(null, blockPos, SoundEvents.GLASS_BREAK, SoundSource.BLOCKS, 0.3F, 0.6F);
       }
+      float clickPitch = isPowered ? 0.6F : 0.5F;
       level.playSound(
-          null, blockPos, SoundEvents.LEVER_CLICK, SoundSource.BLOCKS, 0.3F, poweredValue);
+          null, blockPos, SoundEvents.LEVER_CLICK, SoundSource.BLOCKS, 0.3F, clickPitch);
       level.gameEvent(
-          player,
-          Boolean.TRUE.equals(powerBlockState.getValue(POWERED))
-              ? GameEvent.BLOCK_ACTIVATE
-              : GameEvent.BLOCK_DEACTIVATE,
-          blockPos);
+          player, isPowered ? GameEvent.BLOCK_ACTIVATE : GameEvent.BLOCK_DEACTIVATE, blockPos);
       return InteractionResult.CONSUME;
     }
   }

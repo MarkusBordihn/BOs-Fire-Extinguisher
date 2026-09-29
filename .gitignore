@@ -28,7 +28,7 @@ npm-debug.log
 forge*changelog.txt
 
 # VSCode
-.vscode/launch.json
+.vscode
 
 # Template placeholder files
 put_your_*_here

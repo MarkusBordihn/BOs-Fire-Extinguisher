@@ -73,7 +73,7 @@ public class FireAlarmSirenBlock extends AbstractFireAlarmSignalBlock {
       boolean isPowered,
       RandomSource random) {
     if (isPowered) {
-      playPoweredSound(SOUND_EVENT, serverLevel, blockPos);
+      this.playPoweredSound(SOUND_EVENT, serverLevel, blockPos);
     }
   }
 }
