@@ -19,6 +19,7 @@
 
 package de.markusbordihn.fireextinguisher.gametest;
 
+import de.markusbordihn.fireextinguisher.config.FireExtinguisherConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.gametest.framework.GameTestHelper;
@@ -49,6 +50,27 @@ public class FireHydrantTestHelper {
     ItemInteractionResult result = useHydrant(helper, player, itemStack);
     helper.assertTrue(result.consumesAction(), "Fire hydrant ignored the fire extinguisher");
     helper.assertTrue(itemStack.getDamageValue() == 0, "Fire extinguisher was not refilled");
+  }
+
+  public static void testRefillCanBeDisabled(
+      GameTestHelper helper, Block fireHydrant, Item fireExtinguisher) {
+    boolean refillEnabled = FireExtinguisherConfig.fireHydrantRefillEnabled;
+    try {
+      FireExtinguisherConfig.fireHydrantRefillEnabled = false;
+      helper.setBlock(HYDRANT_POS, fireHydrant);
+      ItemStack itemStack = new ItemStack(fireExtinguisher);
+      itemStack.setDamageValue(USED_DAMAGE_VALUE);
+      Player player = playerHolding(helper, itemStack);
+      ItemInteractionResult result = useHydrant(helper, player, itemStack);
+      helper.assertTrue(
+          result == ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION,
+          "Disabled fire hydrant still reacted");
+      helper.assertTrue(
+          itemStack.getDamageValue() == USED_DAMAGE_VALUE,
+          "Disabled fire hydrant still refilled the fire extinguisher");
+    } finally {
+      FireExtinguisherConfig.fireHydrantRefillEnabled = refillEnabled;
+    }
   }
 
   public static void testIgnoresOtherItems(GameTestHelper helper, Block fireHydrant) {

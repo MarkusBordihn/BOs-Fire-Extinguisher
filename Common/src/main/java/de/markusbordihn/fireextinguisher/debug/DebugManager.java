@@ -39,6 +39,7 @@ public final class DebugManager {
     if (logLevel == null || logLevel == logger.getLevel()) {
       return;
     }
+
     String loggerName = logger.getName();
     LoggerContext context = (LoggerContext) LogManager.getContext(false);
     Configuration config = context.getConfiguration();

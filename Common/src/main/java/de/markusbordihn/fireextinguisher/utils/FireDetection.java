@@ -52,9 +52,11 @@ public class FireDetection {
         || blockState.is(EXTINGUISHABLE)) {
       return true;
     }
+
     if (FireExtinguisherConfig.extinguishableBlocks.isEmpty()) {
       return false;
     }
+
     ResourceLocation blockId = BuiltInRegistries.BLOCK.getKey(blockState.getBlock());
     return FireExtinguisherConfig.extinguishableBlocks.contains(blockId.toString());
   }
@@ -67,9 +69,11 @@ public class FireDetection {
     if (isLitCampfire(blockState)) {
       return level.setBlock(blockPos, blockState.setValue(CampfireBlock.LIT, false), 3);
     }
+
     if (isFireBlock(blockState)) {
       return level.removeBlock(blockPos, false);
     }
+
     return false;
   }
 

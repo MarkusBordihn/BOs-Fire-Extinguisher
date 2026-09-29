@@ -67,7 +67,7 @@ public class FireExtinguisherBlockItem extends BlockItem {
   }
 
   public static void stopFireAnimation(Player player, Level level, BlockPos blockPos) {
-    if (blockPos == null || !(level instanceof ServerLevel serverLevel)) {
+    if (!(level instanceof ServerLevel serverLevel)) {
       return;
     }
 
@@ -160,12 +160,7 @@ public class FireExtinguisherBlockItem extends BlockItem {
 
   @Override
   public InteractionResult useOn(UseOnContext context) {
-    Level level = context.getLevel();
-    BlockPos blockPos = context.getClickedPos();
     Player player = context.getPlayer();
-    ItemStack itemStack = context.getItemInHand();
-    InteractionHand interactionHand = context.getHand();
-
     if (player == null) {
       return InteractionResult.PASS;
     }
@@ -174,9 +169,11 @@ public class FireExtinguisherBlockItem extends BlockItem {
       return super.useOn(context);
     }
 
+    Level level = context.getLevel();
     if (level instanceof ServerLevel serverLevel) {
+      BlockPos blockPos = context.getClickedPos();
       stopFireAnimation(player, serverLevel, blockPos.above());
-      stopFire(serverLevel, player, interactionHand, blockPos, itemStack);
+      stopFire(serverLevel, player, context.getHand(), blockPos, context.getItemInHand());
     }
     return InteractionResult.sidedSuccess(level.isClientSide());
   }
@@ -201,10 +198,8 @@ public class FireExtinguisherBlockItem extends BlockItem {
   @Override
   public InteractionResult interactLivingEntity(
       ItemStack itemStack, Player player, LivingEntity livingEntity, InteractionHand hand) {
-    BlockPos blockPos = livingEntity.getOnPos();
     Level level = player.level();
-
-    stopFireAnimation(player, player.level(), blockPos.above());
+    stopFireAnimation(player, level, livingEntity.getOnPos().above());
     livingEntity.setTicksFrozen(ATTACK_EFFECT_DURATION * 5);
     if (livingEntity.isOnFire()) {
       livingEntity.setRemainingFireTicks(2);

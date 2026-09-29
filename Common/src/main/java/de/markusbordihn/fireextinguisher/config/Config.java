@@ -55,6 +55,7 @@ public class Config {
       log.warn("Check if configuration is loaded multiple times!");
       return;
     }
+
     isLoaded = true;
 
     FireExtinguisherConfig.registerConfig();
@@ -64,7 +65,7 @@ public class Config {
       final String configFileName, final String configFileHeader) {
     File configFile = getConfigFile(configFileName.trim());
     if (configFile == null || !configFile.exists()) {
-      createConfigFile(getConfigFile(configFileName.trim()), configFileHeader.trim());
+      createConfigFile(configFile, configFileHeader.trim());
     }
   }
 

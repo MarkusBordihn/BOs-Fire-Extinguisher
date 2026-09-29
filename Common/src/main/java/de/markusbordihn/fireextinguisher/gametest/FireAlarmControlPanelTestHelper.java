@@ -22,24 +22,26 @@ package de.markusbordihn.fireextinguisher.gametest;
 import de.markusbordihn.fireextinguisher.block.AbstractFireAlarmSignalBlock;
 import de.markusbordihn.fireextinguisher.config.FireExtinguisherConfig;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.gametest.framework.GameTestHelper;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FaceAttachedHorizontalDirectionalBlock;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.AttachFace;
 
 public class FireAlarmControlPanelTestHelper {
 
   public static final int TIMEOUT_TICKS = 300;
-  public static final String BATCH = "fireAlarmControlPanel";
+  public static final String BATCH = "fire_alarm_control_panel";
+  public static final String LATCHING_BATCH = "fire_alarm_control_panel_latching";
   private static final int ISOLATED_PANEL_RADIUS = 1;
   private static final BlockPos PANEL_POS = new BlockPos(1, 2, 1);
   private static final BlockPos BELL_POS = new BlockPos(0, 2, 1);
   private static final BlockPos REDSTONE_POS = new BlockPos(2, 2, 1);
   private static final BlockPos DETECTOR_POS = new BlockPos(1, 1, 2);
   private static final BlockPos FIRE_POS = new BlockPos(2, 1, 2);
+  private static final BlockPos SWITCH_POS = new BlockPos(2, 1, 1);
   private static final BlockPos OUT_OF_RANGE_PANEL_POS = new BlockPos(0, 2, 1);
   private static final BlockPos OUT_OF_RANGE_BELL_POS = new BlockPos(2, 2, 1);
   private static final BlockPos OUT_OF_RANGE_REDSTONE_POS = new BlockPos(0, 2, 0);
@@ -48,6 +50,8 @@ public class FireAlarmControlPanelTestHelper {
   private static int defaultRadiusX;
   private static int defaultRadiusY;
   private static int defaultRadiusZ;
+  private static boolean latchingEnabled = false;
+  private static boolean defaultLatching;
 
   private FireAlarmControlPanelTestHelper() {}
 
@@ -62,6 +66,7 @@ public class FireAlarmControlPanelTestHelper {
         .thenExecuteAfter(30, () -> helper.destroyBlock(REDSTONE_POS))
         .thenExecuteAfter(20, () -> assertPanelAndBellPowered(helper, false))
         .thenExecuteAfter(190, () -> assertPanelAndBellPowered(helper, false))
+        .thenExecute(() -> removePanelBeforeRadiusIsRestored(helper, PANEL_POS))
         .thenSucceed();
   }
 
@@ -92,6 +97,7 @@ public class FireAlarmControlPanelTestHelper {
               assertPowered(helper, DETECTOR_POS, false);
               assertPanelAndBellPowered(helper, false);
             })
+        .thenExecute(() -> removePanelBeforeRadiusIsRestored(helper, PANEL_POS))
         .thenSucceed();
   }
 
@@ -100,8 +106,8 @@ public class FireAlarmControlPanelTestHelper {
     isolatePanelFromNeighbourTests();
     helper.setBlock(OUT_OF_RANGE_PANEL_POS.south(), Blocks.STONE);
     helper.setBlock(OUT_OF_RANGE_BELL_POS.south(), Blocks.STONE);
-    helper.setBlock(OUT_OF_RANGE_PANEL_POS, wallMountedFacingNorth(controlPanel));
-    helper.setBlock(OUT_OF_RANGE_BELL_POS, wallMountedFacingNorth(alarmBell));
+    helper.setBlock(OUT_OF_RANGE_PANEL_POS, GameTestHelpers.wallMountedFacingNorth(controlPanel));
+    helper.setBlock(OUT_OF_RANGE_BELL_POS, GameTestHelpers.wallMountedFacingNorth(alarmBell));
     assertPowered(helper, OUT_OF_RANGE_PANEL_POS, false);
     assertPowered(helper, OUT_OF_RANGE_BELL_POS, false);
     helper.setBlock(OUT_OF_RANGE_REDSTONE_POS, Blocks.REDSTONE_BLOCK);
@@ -114,7 +120,59 @@ public class FireAlarmControlPanelTestHelper {
               assertPowered(helper, OUT_OF_RANGE_BELL_POS, false);
             })
         .thenExecuteAfter(60, () -> assertPowered(helper, OUT_OF_RANGE_BELL_POS, false))
+        .thenExecute(() -> removePanelBeforeRadiusIsRestored(helper, OUT_OF_RANGE_PANEL_POS))
         .thenSucceed();
+  }
+
+  public static void testResetReleasesSwitchAndAlarms(
+      GameTestHelper helper, Block controlPanel, Block alarmBell, Block alarmSwitch) {
+    isolatePanelFromNeighbourTests();
+    placePanelAndBell(helper, controlPanel, alarmBell);
+    helper.setBlock(SWITCH_POS.south(), Blocks.STONE);
+    helper.setBlock(SWITCH_POS, GameTestHelpers.wallMountedFacingNorth(alarmSwitch));
+    Player player = helper.makeMockPlayer(GameType.CREATIVE);
+    helper
+        .startSequence()
+        .thenExecute(() -> helper.useBlock(SWITCH_POS, player))
+        .thenExecuteAfter(
+            10,
+            () -> {
+              assertPowered(helper, SWITCH_POS, true);
+              assertPanelAndBellPowered(helper, true);
+            })
+        .thenExecute(() -> helper.useBlock(PANEL_POS, player))
+        .thenExecuteAfter(
+            10,
+            () -> {
+              assertPowered(helper, SWITCH_POS, false);
+              assertPanelAndBellPowered(helper, false);
+            })
+        .thenExecuteAfter(100, () -> assertPanelAndBellPowered(helper, false))
+        .thenExecute(() -> removePanelBeforeRadiusIsRestored(helper, PANEL_POS))
+        .thenSucceed();
+  }
+
+  public static void testLatchingKeepsAlarmsUntilReset(
+      GameTestHelper helper, Block controlPanel, Block alarmBell) {
+    isolatePanelFromNeighbourTests();
+    enableLatching();
+    placePanelAndBell(helper, controlPanel, alarmBell);
+    helper.setBlock(REDSTONE_POS, Blocks.REDSTONE_BLOCK);
+    Player player = helper.makeMockPlayer(GameType.CREATIVE);
+    helper
+        .startSequence()
+        .thenExecuteAfter(10, () -> assertPanelAndBellPowered(helper, true))
+        .thenExecute(() -> helper.destroyBlock(REDSTONE_POS))
+        .thenExecuteAfter(100, () -> assertPanelAndBellPowered(helper, true))
+        .thenExecute(() -> helper.useBlock(PANEL_POS, player))
+        .thenExecuteAfter(10, () -> assertPanelAndBellPowered(helper, false))
+        .thenExecuteAfter(100, () -> assertPanelAndBellPowered(helper, false))
+        .thenExecute(() -> removePanelBeforeRadiusIsRestored(helper, PANEL_POS))
+        .thenSucceed();
+  }
+
+  private static void removePanelBeforeRadiusIsRestored(GameTestHelper helper, BlockPos panelPos) {
+    helper.setBlock(panelPos, Blocks.AIR);
   }
 
   private static void isolatePanelFromNeighbourTests() {
@@ -129,30 +187,34 @@ public class FireAlarmControlPanelTestHelper {
     FireExtinguisherConfig.fireAlarmControlPanelRadiusZ = ISOLATED_PANEL_RADIUS;
   }
 
-  public static void restoreConfiguredPanelRadius() {
-    if (!panelRadiusIsolated) {
-      return;
+  private static void enableLatching() {
+    if (!latchingEnabled) {
+      defaultLatching = FireExtinguisherConfig.fireAlarmControlPanelLatching;
+      latchingEnabled = true;
     }
-    FireExtinguisherConfig.fireAlarmControlPanelRadiusX = defaultRadiusX;
-    FireExtinguisherConfig.fireAlarmControlPanelRadiusY = defaultRadiusY;
-    FireExtinguisherConfig.fireAlarmControlPanelRadiusZ = defaultRadiusZ;
-    panelRadiusIsolated = false;
+    FireExtinguisherConfig.fireAlarmControlPanelLatching = true;
+  }
+
+  public static void restoreConfiguredPanelSettings() {
+    if (panelRadiusIsolated) {
+      FireExtinguisherConfig.fireAlarmControlPanelRadiusX = defaultRadiusX;
+      FireExtinguisherConfig.fireAlarmControlPanelRadiusY = defaultRadiusY;
+      FireExtinguisherConfig.fireAlarmControlPanelRadiusZ = defaultRadiusZ;
+      panelRadiusIsolated = false;
+    }
+    if (latchingEnabled) {
+      FireExtinguisherConfig.fireAlarmControlPanelLatching = defaultLatching;
+      latchingEnabled = false;
+    }
   }
 
   private static void placePanelAndBell(
       GameTestHelper helper, Block controlPanel, Block alarmBell) {
     helper.setBlock(PANEL_POS.south(), Blocks.STONE);
     helper.setBlock(BELL_POS.south(), Blocks.STONE);
-    helper.setBlock(PANEL_POS, wallMountedFacingNorth(controlPanel));
-    helper.setBlock(BELL_POS, wallMountedFacingNorth(alarmBell));
+    helper.setBlock(PANEL_POS, GameTestHelpers.wallMountedFacingNorth(controlPanel));
+    helper.setBlock(BELL_POS, GameTestHelpers.wallMountedFacingNorth(alarmBell));
     assertPanelAndBellPowered(helper, false);
-  }
-
-  private static BlockState wallMountedFacingNorth(Block block) {
-    return block
-        .defaultBlockState()
-        .setValue(FaceAttachedHorizontalDirectionalBlock.FACE, AttachFace.WALL)
-        .setValue(FaceAttachedHorizontalDirectionalBlock.FACING, Direction.NORTH);
   }
 
   private static void assertPanelAndBellPowered(GameTestHelper helper, boolean powered) {

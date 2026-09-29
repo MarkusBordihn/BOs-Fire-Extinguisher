@@ -38,6 +38,7 @@ public class ModBlocksTestHelper {
       helper.fail("Block or block position is not defined!");
       return;
     }
+
     helper.setBlock(blockPos, block);
     helper.assertBlockPresent(block, blockPos);
   }

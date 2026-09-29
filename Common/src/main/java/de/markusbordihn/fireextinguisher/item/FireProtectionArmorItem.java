@@ -65,11 +65,13 @@ public class FireProtectionArmorItem extends ArmorItem {
         && FireExtinguisherConfig.fireChestplateSlowDownEnabled) {
       return true;
     }
+
     ItemStack leggings = player.getItemBySlot(EquipmentSlot.LEGS);
     if (leggings.getItem() instanceof FireLeggingsItem
         && FireExtinguisherConfig.fireLeggingsSlowDownEnabled) {
       return true;
     }
+
     ItemStack boots = player.getItemBySlot(EquipmentSlot.FEET);
     return boots.getItem() instanceof FireBootsItem
         && FireExtinguisherConfig.fireBootsSlowDownEnabled;

@@ -68,6 +68,6 @@
   "tooltip.fire_extinguisher.fire_extinguisher": "The fire extinguisher is able to remove fire from a %1$s block radius and can freeze mobs for a small amount of time.",
   "tooltip.fire_extinguisher.fire_extinguisher_sign": "The fire extinguisher sign can be placed on the wall or ceiling to show the way to the next fire extinguisher.",
   "tooltip.fire_extinguisher.fire_hydrant": "Right-click the fire hydrant with a used fire extinguisher to refill it.",
-  "tooltip.fire_extinguisher.fire_pole": "Slide down the fire pole without any fall damage. Sneak to hold on.",
+  "tooltip.fire_extinguisher.fire_pole": "Slide down the fire pole without fall damage. Sneak to hold on.",
   "tooltip.fire_extinguisher.fire_sprinkler": "The fire sprinkler puts out fire when turned on by a switch, smoke detector, control panel or redstone."
 }

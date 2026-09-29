@@ -32,4 +32,16 @@ public class FirePoleTest {
   public void testSlidesDownWithoutFallDamage(GameTestHelper helper) {
     FirePoleTestHelper.testSlidesDownWithoutFallDamage(helper, FireStationBlocks.FIRE_POLE);
   }
+
+  @GameTest(template = "fire_extinguisher:gametest.3x3x3")
+  public void testSlideSpeedIsLimited(GameTestHelper helper) {
+    FirePoleTestHelper.testSlideSpeedIsLimited(helper, FireStationBlocks.FIRE_POLE);
+    helper.succeed();
+  }
+
+  @GameTest(template = "fire_extinguisher:gametest.3x3x3")
+  public void testSneakingHoldsOnToPole(GameTestHelper helper) {
+    FirePoleTestHelper.testSneakingHoldsOnToPole(helper, FireStationBlocks.FIRE_POLE);
+    helper.succeed();
+  }
 }

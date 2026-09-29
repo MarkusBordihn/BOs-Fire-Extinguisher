@@ -61,8 +61,35 @@ public class FireAlarmControlPanelTest {
         helper, ModBlocks.FIRE_ALARM_CONTROL_PANEL.get(), ModBlocks.FIRE_ALARM_BELL.get());
   }
 
-  @AfterBatch(batch = FireAlarmControlPanelTestHelper.BATCH)
-  public void restoreConfiguredPanelRadius(ServerLevel serverLevel) {
-    FireAlarmControlPanelTestHelper.restoreConfiguredPanelRadius();
+  @GameTest(
+      template = "fire_extinguisher:gametest.3x3x3",
+      batch = FireAlarmControlPanelTestHelper.BATCH,
+      timeoutTicks = FireAlarmControlPanelTestHelper.TIMEOUT_TICKS)
+  public void testResetReleasesSwitchAndAlarms(GameTestHelper helper) {
+    FireAlarmControlPanelTestHelper.testResetReleasesSwitchAndAlarms(
+        helper,
+        ModBlocks.FIRE_ALARM_CONTROL_PANEL.get(),
+        ModBlocks.FIRE_ALARM_BELL.get(),
+        ModBlocks.FIRE_ALARM_SWITCH.get());
+  }
+
+  @GameTest(
+      template = "fire_extinguisher:gametest.3x3x3",
+      batch = FireAlarmControlPanelTestHelper.LATCHING_BATCH,
+      timeoutTicks = FireAlarmControlPanelTestHelper.TIMEOUT_TICKS)
+  public void testLatchingKeepsAlarmsUntilReset(GameTestHelper helper) {
+    FireAlarmControlPanelTestHelper.testLatchingKeepsAlarmsUntilReset(
+        helper, ModBlocks.FIRE_ALARM_CONTROL_PANEL.get(), ModBlocks.FIRE_ALARM_BELL.get());
+  }
+
+  // Forge runs batches as "<namespace>.<lowercase batch>" but keys @AfterBatch by the raw name.
+  @AfterBatch(batch = Constants.MOD_ID + "." + FireAlarmControlPanelTestHelper.BATCH)
+  public void restoreConfiguredPanelSettings(ServerLevel serverLevel) {
+    FireAlarmControlPanelTestHelper.restoreConfiguredPanelSettings();
+  }
+
+  @AfterBatch(batch = Constants.MOD_ID + "." + FireAlarmControlPanelTestHelper.LATCHING_BATCH)
+  public void restoreConfiguredLatchingSettings(ServerLevel serverLevel) {
+    FireAlarmControlPanelTestHelper.restoreConfiguredPanelSettings();
   }
 }

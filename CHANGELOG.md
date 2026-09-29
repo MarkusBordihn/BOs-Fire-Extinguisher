@@ -5,6 +5,12 @@
 This change log includes the summarized changes.
 For the full changelog, please go to the [GitHub History][history] instead.
 
+### 9.1.1
+
+- Fixed item tooltips crashing dedicated Fabric servers.
+- Fixed fire extinguisher signs rendering without transparency on Fabric.
+- Added additional unit and game tests.
+
 ### 9.1.0
 
 - Fixed #16 by extinguishing soul fire, soul campfires and modded fire blocks via tag or config.

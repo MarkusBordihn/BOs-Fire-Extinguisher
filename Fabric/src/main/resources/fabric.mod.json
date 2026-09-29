@@ -33,7 +33,12 @@
       "de.markusbordihn.fireextinguisher.gametest.FireAlarmControlPanelTest",
       "de.markusbordihn.fireextinguisher.gametest.FirePoleTest",
       "de.markusbordihn.fireextinguisher.gametest.FireHydrantTest",
-      "de.markusbordihn.fireextinguisher.gametest.FireArmorTest"
+      "de.markusbordihn.fireextinguisher.gametest.FireArmorTest",
+      "de.markusbordihn.fireextinguisher.gametest.FireExtinguisherTest",
+      "de.markusbordihn.fireextinguisher.gametest.FireAxeTest",
+      "de.markusbordihn.fireextinguisher.gametest.FireAlarmSignalTest",
+      "de.markusbordihn.fireextinguisher.gametest.RecipesTest",
+      "de.markusbordihn.fireextinguisher.gametest.TooltipTest"
     ]
   },
   "depends": {
