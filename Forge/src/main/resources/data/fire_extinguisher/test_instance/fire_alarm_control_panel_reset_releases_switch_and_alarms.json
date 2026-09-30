@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:function",
+  "function": "fire_extinguisher:fire_alarm_control_panel_reset_releases_switch_and_alarms",
+  "environment": "minecraft:default",
+  "structure": "fire_extinguisher:gametest.3x3x3",
+  "max_ticks": 300
+}

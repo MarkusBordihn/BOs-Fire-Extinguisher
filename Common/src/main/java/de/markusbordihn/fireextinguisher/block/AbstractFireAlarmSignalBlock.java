@@ -211,8 +211,8 @@ public abstract class AbstractFireAlarmSignalBlock extends FaceAttachedHorizonta
       Level level,
       BlockPos blockPos,
       Block block,
-      Orientation unused,
-      boolean unused2) {
+      Orientation orientation,
+      boolean movedByPiston) {
     if (!(level instanceof ServerLevel serverLevel)) {
       return;
     }

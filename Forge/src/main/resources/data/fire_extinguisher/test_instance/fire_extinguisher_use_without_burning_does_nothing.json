@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:function",
+  "function": "fire_extinguisher:fire_extinguisher_use_without_burning_does_nothing",
+  "environment": "minecraft:default",
+  "structure": "fire_extinguisher:gametest.3x3x3",
+  "max_ticks": 100
+}

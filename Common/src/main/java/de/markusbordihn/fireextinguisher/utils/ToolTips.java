@@ -34,9 +34,7 @@ public class ToolTips {
   private ToolTips() {}
 
   public static void addTooltip(Consumer<Component> tooltip, final Component component) {
-    if (Constants.IS_FABRIC
-        && !Constants.HAS_FABRIC_TOOLTIPFIX_MOD
-        && Minecraft.getInstance().isSameThread()) {
+    if (Constants.SPLIT_TOOLTIP_LINES && Minecraft.getInstance().isSameThread()) {
       String componentString = component.getString();
       Style style = component.getStyle();
       List<FormattedText> lines =

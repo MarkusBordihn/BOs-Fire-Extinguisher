@@ -28,4 +28,14 @@ public class FirePoleTest {
   public void testSlidesDownWithoutFallDamage(GameTestHelper helper) {
     FirePoleTestHelper.testSlidesDownWithoutFallDamage(helper, ModBlocks.FIRE_POLE.get());
   }
+
+  public void testSlideSpeedIsLimited(GameTestHelper helper) {
+    FirePoleTestHelper.testSlideSpeedIsLimited(helper, ModBlocks.FIRE_POLE.get());
+    helper.succeed();
+  }
+
+  public void testSneakingHoldsOnToPole(GameTestHelper helper) {
+    FirePoleTestHelper.testSneakingHoldsOnToPole(helper, ModBlocks.FIRE_POLE.get());
+    helper.succeed();
+  }
 }

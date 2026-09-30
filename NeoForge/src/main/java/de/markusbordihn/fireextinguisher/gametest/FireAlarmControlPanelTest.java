@@ -42,4 +42,17 @@ public class FireAlarmControlPanelTest {
     FireAlarmControlPanelTestHelper.testDoesNotPowerAlarmsOutOfRange(
         helper, ModBlocks.FIRE_ALARM_CONTROL_PANEL.get(), ModBlocks.FIRE_ALARM_BELL.get());
   }
+
+  public void testResetReleasesSwitchAndAlarms(GameTestHelper helper) {
+    FireAlarmControlPanelTestHelper.testResetReleasesSwitchAndAlarms(
+        helper,
+        ModBlocks.FIRE_ALARM_CONTROL_PANEL.get(),
+        ModBlocks.FIRE_ALARM_BELL.get(),
+        ModBlocks.FIRE_ALARM_SWITCH.get());
+  }
+
+  public void testLatchingKeepsAlarmsUntilReset(GameTestHelper helper) {
+    FireAlarmControlPanelTestHelper.testLatchingKeepsAlarmsUntilReset(
+        helper, ModBlocks.FIRE_ALARM_CONTROL_PANEL.get(), ModBlocks.FIRE_ALARM_BELL.get());
+  }
 }

@@ -21,7 +21,9 @@ package de.markusbordihn.fireextinguisher.gametest;
 
 import de.markusbordihn.fireextinguisher.Constants;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Consumer;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -53,13 +55,20 @@ public final class ModGameTests {
       Identifier.fromNamespaceAndPath(Constants.MOD_ID, "gametest.1x1x1");
   private static final Identifier STRUCTURE_3X3X3 =
       Identifier.fromNamespaceAndPath(Constants.MOD_ID, "gametest.3x3x3");
+  private static final Identifier DEFAULT_ENVIRONMENT =
+      Identifier.fromNamespaceAndPath(Constants.MOD_ID, "default");
+  private static final Identifier CONTROL_PANEL_LATCHING_ENVIRONMENT =
+      Identifier.parse(FireAlarmControlPanelTestHelper.LATCHING_ENVIRONMENT);
 
   private static final FireAlarmControlPanelTest FIRE_ALARM_CONTROL_PANEL_TESTS =
       new FireAlarmControlPanelTest();
+  private static final FireAlarmSignalTest FIRE_ALARM_SIGNAL_TESTS = new FireAlarmSignalTest();
   private static final FireAlarmSmokeDetectorTest FIRE_ALARM_SMOKE_DETECTOR_TESTS =
       new FireAlarmSmokeDetectorTest();
   private static final FireArmorTest FIRE_ARMOR_TESTS = new FireArmorTest();
+  private static final FireAxeTest FIRE_AXE_TESTS = new FireAxeTest();
   private static final FireDetectionTest FIRE_DETECTION_TESTS = new FireDetectionTest();
+  private static final FireExtinguisherTest FIRE_EXTINGUISHER_TESTS = new FireExtinguisherTest();
   private static final FireHydrantTest FIRE_HYDRANT_TESTS = new FireHydrantTest();
   private static final FirePoleTest FIRE_POLE_TESTS = new FirePoleTest();
   private static final FireSprinklerTest FIRE_SPRINKLER_TESTS = new FireSprinklerTest();
@@ -67,7 +76,9 @@ public final class ModGameTests {
   private static final ModBlockItemsTest MOD_BLOCK_ITEMS_TESTS = new ModBlockItemsTest();
   private static final ModBlocksTest MOD_BLOCKS_TESTS = new ModBlocksTest();
   private static final ModItemsTest MOD_ITEMS_TESTS = new ModItemsTest();
+  private static final RecipesTest RECIPES_TESTS = new RecipesTest();
   private static final SmokeTest SMOKE_TESTS = new SmokeTest();
+  private static final TooltipTest TOOLTIP_TESTS = new TooltipTest();
 
   static {
     register(
@@ -85,6 +96,52 @@ public final class ModGameTests {
         FIRE_ALARM_CONTROL_PANEL_TESTS::testDoesNotPowerAlarmsOutOfRange,
         STRUCTURE_3X3X3,
         FireAlarmControlPanelTestHelper.TIMEOUT_TICKS);
+    register(
+        "fire_alarm_control_panel_reset_releases_switch_and_alarms",
+        FIRE_ALARM_CONTROL_PANEL_TESTS::testResetReleasesSwitchAndAlarms,
+        STRUCTURE_3X3X3,
+        FireAlarmControlPanelTestHelper.TIMEOUT_TICKS);
+    register(
+        "fire_alarm_control_panel_latching_keeps_alarms_until_reset",
+        FIRE_ALARM_CONTROL_PANEL_TESTS::testLatchingKeepsAlarmsUntilReset,
+        STRUCTURE_3X3X3,
+        FireAlarmControlPanelTestHelper.TIMEOUT_TICKS,
+        CONTROL_PANEL_LATCHING_ENVIRONMENT);
+    register(
+        "fire_alarm_signal_bell_follows_redstone_signal",
+        FIRE_ALARM_SIGNAL_TESTS::testBellFollowsRedstoneSignal,
+        STRUCTURE_3X3X3,
+        FireAlarmSignalTestHelper.TIMEOUT_TICKS);
+    register(
+        "fire_alarm_signal_siren_follows_redstone_signal",
+        FIRE_ALARM_SIGNAL_TESTS::testSirenFollowsRedstoneSignal,
+        STRUCTURE_3X3X3,
+        FireAlarmSignalTestHelper.TIMEOUT_TICKS);
+    register(
+        "fire_alarm_signal_light_follows_redstone_signal",
+        FIRE_ALARM_SIGNAL_TESTS::testLightFollowsRedstoneSignal,
+        STRUCTURE_3X3X3,
+        FireAlarmSignalTestHelper.TIMEOUT_TICKS);
+    register(
+        "fire_alarm_signal_light_forwards_redstone_signal",
+        FIRE_ALARM_SIGNAL_TESTS::testLightForwardsRedstoneSignal,
+        STRUCTURE_3X3X3,
+        FireAlarmSignalTestHelper.TIMEOUT_TICKS);
+    register(
+        "fire_alarm_signal_switch_toggles_redstone_signal",
+        FIRE_ALARM_SIGNAL_TESTS::testSwitchTogglesRedstoneSignal,
+        STRUCTURE_3X3X3,
+        FireAlarmSignalTestHelper.TIMEOUT_TICKS);
+    register(
+        "fire_alarm_signal_switch_eu_toggles_redstone_signal",
+        FIRE_ALARM_SIGNAL_TESTS::testSwitchEuTogglesRedstoneSignal,
+        STRUCTURE_3X3X3,
+        FireAlarmSignalTestHelper.TIMEOUT_TICKS);
+    register(
+        "fire_alarm_signal_switch_jp_toggles_redstone_signal",
+        FIRE_ALARM_SIGNAL_TESTS::testSwitchJpTogglesRedstoneSignal,
+        STRUCTURE_3X3X3,
+        FireAlarmSignalTestHelper.TIMEOUT_TICKS);
     register(
         "fire_alarm_smoke_detector_detects_fire",
         FIRE_ALARM_SMOKE_DETECTOR_TESTS::testDetectsFire,
@@ -126,6 +183,21 @@ public final class ModGameTests {
         STRUCTURE_1X1X1,
         DEFAULT_MAX_TICKS);
     register(
+        "fire_axe_extinguishes_fire",
+        FIRE_AXE_TESTS::testExtinguishesFire,
+        STRUCTURE_3X3X3,
+        DEFAULT_MAX_TICKS);
+    register(
+        "fire_axe_extinguishes_lit_campfire",
+        FIRE_AXE_TESTS::testExtinguishesLitCampfire,
+        STRUCTURE_3X3X3,
+        DEFAULT_MAX_TICKS);
+    register(
+        "fire_axe_without_fire_keeps_durability",
+        FIRE_AXE_TESTS::testWithoutFireKeepsDurability,
+        STRUCTURE_3X3X3,
+        DEFAULT_MAX_TICKS);
+    register(
         "fire_detection_extinguish_fire",
         FIRE_DETECTION_TESTS::testExtinguishFire,
         STRUCTURE_3X3X3,
@@ -146,6 +218,41 @@ public final class ModGameTests {
         STRUCTURE_3X3X3,
         DEFAULT_MAX_TICKS);
     register(
+        "fire_detection_extinguish_configured_block",
+        FIRE_DETECTION_TESTS::testExtinguishConfiguredBlock,
+        STRUCTURE_3X3X3,
+        DEFAULT_MAX_TICKS);
+    register(
+        "fire_extinguisher_spray_extinguishes_fire",
+        FIRE_EXTINGUISHER_TESTS::testSprayExtinguishesFire,
+        STRUCTURE_3X3X3,
+        DEFAULT_MAX_TICKS);
+    register(
+        "fire_extinguisher_spray_without_fire_keeps_durability",
+        FIRE_EXTINGUISHER_TESTS::testSprayWithoutFireKeepsDurability,
+        STRUCTURE_3X3X3,
+        DEFAULT_MAX_TICKS);
+    register(
+        "fire_extinguisher_sneaking_places_fire_extinguisher",
+        FIRE_EXTINGUISHER_TESTS::testSneakingPlacesFireExtinguisher,
+        STRUCTURE_3X3X3,
+        DEFAULT_MAX_TICKS);
+    register(
+        "fire_extinguisher_use_extinguishes_burning_player",
+        FIRE_EXTINGUISHER_TESTS::testUseExtinguishesBurningPlayer,
+        STRUCTURE_3X3X3,
+        DEFAULT_MAX_TICKS);
+    register(
+        "fire_extinguisher_use_without_burning_does_nothing",
+        FIRE_EXTINGUISHER_TESTS::testUseWithoutBurningDoesNothing,
+        STRUCTURE_3X3X3,
+        DEFAULT_MAX_TICKS);
+    register(
+        "fire_extinguisher_spray_on_burning_mob",
+        FIRE_EXTINGUISHER_TESTS::testSprayOnBurningMob,
+        STRUCTURE_3X3X3,
+        DEFAULT_MAX_TICKS);
+    register(
         "fire_hydrant_refills_used_fire_extinguisher",
         FIRE_HYDRANT_TESTS::testRefillsUsedFireExtinguisher,
         STRUCTURE_3X3X3,
@@ -156,10 +263,25 @@ public final class ModGameTests {
         STRUCTURE_3X3X3,
         DEFAULT_MAX_TICKS);
     register(
+        "fire_hydrant_refill_can_be_disabled",
+        FIRE_HYDRANT_TESTS::testRefillCanBeDisabled,
+        STRUCTURE_3X3X3,
+        DEFAULT_MAX_TICKS);
+    register(
         "fire_pole_slides_down_without_fall_damage",
         FIRE_POLE_TESTS::testSlidesDownWithoutFallDamage,
         STRUCTURE_3X3X3,
         FirePoleTestHelper.TIMEOUT_TICKS);
+    register(
+        "fire_pole_slide_speed_is_limited",
+        FIRE_POLE_TESTS::testSlideSpeedIsLimited,
+        STRUCTURE_3X3X3,
+        DEFAULT_MAX_TICKS);
+    register(
+        "fire_pole_sneaking_holds_on_to_pole",
+        FIRE_POLE_TESTS::testSneakingHoldsOnToPole,
+        STRUCTURE_3X3X3,
+        DEFAULT_MAX_TICKS);
     register(
         "fire_sprinkler_extinguishes_fire_below",
         FIRE_SPRINKLER_TESTS::testExtinguishesFireBelow,
@@ -606,7 +728,22 @@ public final class ModGameTests {
         STRUCTURE_1X1X1,
         DEFAULT_MAX_TICKS);
     register(
+        "recipes_all_recipes_load",
+        RECIPES_TESTS::testAllRecipesLoad,
+        STRUCTURE_3X3X3,
+        DEFAULT_MAX_TICKS);
+    register(
+        "recipes_recipe_advancements_unlock_loaded_recipes",
+        RECIPES_TESTS::testRecipeAdvancementsUnlockLoadedRecipes,
+        STRUCTURE_3X3X3,
+        DEFAULT_MAX_TICKS);
+    register(
         "smoke_mod_registered", SMOKE_TESTS::testModRegistered, STRUCTURE_1X1X1, DEFAULT_MAX_TICKS);
+    register(
+        "tooltip_all_item_tooltips",
+        TOOLTIP_TESTS::testAllItemTooltips,
+        STRUCTURE_1X1X1,
+        DEFAULT_MAX_TICKS);
   }
 
   private ModGameTests() {}
@@ -621,12 +758,14 @@ public final class ModGameTests {
 
   @SubscribeEvent
   public static void registerGameTests(RegisterGameTestsEvent event) {
-    Holder<TestEnvironmentDefinition> environment =
-        event.registerEnvironment(
-            Identifier.fromNamespaceAndPath(Constants.MOD_ID, "default"),
-            new TestEnvironmentDefinition.AllOf(List.of()));
-
+    Map<Identifier, Holder<TestEnvironmentDefinition>> environments = new HashMap<>();
     for (TestEntry testEntry : TEST_ENTRIES) {
+      Holder<TestEnvironmentDefinition> environment =
+          environments.computeIfAbsent(
+              testEntry.environment(),
+              environmentId ->
+                  event.registerEnvironment(
+                      environmentId, new TestEnvironmentDefinition.AllOf(List.of())));
       event.registerTest(
           testEntry.testFunction().getId(),
           new FunctionGameTestInstance(
@@ -637,12 +776,23 @@ public final class ModGameTests {
 
   private static void register(
       String name, Consumer<GameTestHelper> testFunction, Identifier structure, int maxTicks) {
+    register(name, testFunction, structure, maxTicks, DEFAULT_ENVIRONMENT);
+  }
+
+  private static void register(
+      String name,
+      Consumer<GameTestHelper> testFunction,
+      Identifier structure,
+      int maxTicks,
+      Identifier environment) {
     TEST_ENTRIES.add(
-        new TestEntry(TEST_FUNCTIONS.register(name, () -> testFunction), structure, maxTicks));
+        new TestEntry(
+            TEST_FUNCTIONS.register(name, () -> testFunction), structure, maxTicks, environment));
   }
 
   private record TestEntry(
       DeferredHolder<Consumer<GameTestHelper>, Consumer<GameTestHelper>> testFunction,
       Identifier structure,
-      int maxTicks) {}
+      int maxTicks,
+      Identifier environment) {}
 }

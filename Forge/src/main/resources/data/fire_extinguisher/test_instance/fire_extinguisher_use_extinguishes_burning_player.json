@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:function",
+  "function": "fire_extinguisher:fire_extinguisher_use_extinguishes_burning_player",
+  "environment": "minecraft:default",
+  "structure": "fire_extinguisher:gametest.3x3x3",
+  "max_ticks": 100
+}

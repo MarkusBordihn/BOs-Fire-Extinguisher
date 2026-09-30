@@ -19,9 +19,11 @@
 
 package de.markusbordihn.fireextinguisher.gametest;
 
+import de.markusbordihn.fireextinguisher.config.FireExtinguisherConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.InsideBlockEffectApplier;
 import net.minecraft.world.entity.animal.pig.Pig;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -32,6 +34,8 @@ public class FirePoleTestHelper {
   private static final BlockPos FLOOR_POS = new BlockPos(1, 0, 1);
   private static final int POLE_HEIGHT = 4;
   private static final float LETHAL_FALL_DISTANCE = 20.0F;
+  private static final double FAST_FALL_SPEED = -3.0;
+  private static final double TICKS_PER_SECOND = 20.0;
 
   private FirePoleTestHelper() {}
 
@@ -49,5 +53,43 @@ public class FirePoleTestHelper {
           helper.assertTrue(pig.onGround(), "Pig is still sliding down the fire pole");
           helper.assertTrue(pig.getHealth() >= fullHealth, "Pig took fall damage");
         });
+  }
+
+  public static void testSlideSpeedIsLimited(GameTestHelper helper, Block firePole) {
+    Pig pig = pigFallingThroughPole(helper, firePole);
+    applyPole(helper, pig);
+    double expectedSlideSpeed = -FireExtinguisherConfig.firePoleSlideSpeed / TICKS_PER_SECOND;
+    helper.assertTrue(
+        Math.abs(pig.getDeltaMovement().y - expectedSlideSpeed) < 1.0E-6,
+        "Slide speed " + pig.getDeltaMovement().y + " is not limited to " + expectedSlideSpeed);
+    helper.assertTrue(pig.fallDistance == 0.0F, "Fire pole did not reset the fall distance");
+  }
+
+  public static void testSneakingHoldsOnToPole(GameTestHelper helper, Block firePole) {
+    Pig pig = pigFallingThroughPole(helper, firePole);
+    pig.setShiftKeyDown(true);
+    applyPole(helper, pig);
+    helper.assertTrue(pig.getDeltaMovement().y == 0.0, "Sneaking mob still slides down");
+  }
+
+  private static Pig pigFallingThroughPole(GameTestHelper helper, Block firePole) {
+    helper.setBlock(FLOOR_POS.above(), firePole);
+    Pig pig = helper.spawn(EntityType.PIG, FLOOR_POS.above());
+    pig.setOnGround(false);
+    pig.fallDistance = LETHAL_FALL_DISTANCE;
+    pig.setDeltaMovement(0.0, FAST_FALL_SPEED, 0.0);
+    return pig;
+  }
+
+  private static void applyPole(GameTestHelper helper, Pig pig) {
+    BlockPos polePos = FLOOR_POS.above();
+    helper
+        .getBlockState(polePos)
+        .entityInside(
+            helper.getLevel(),
+            helper.absolutePos(polePos),
+            pig,
+            InsideBlockEffectApplier.NOOP,
+            true);
   }
 }

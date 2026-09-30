@@ -62,7 +62,7 @@
   "tooltip.fire_extinguisher.fire_alarm_smoke_detector": "Sendet ein Redstone-Signal, sobald Feuer erkannt wird, und löst eine Brandmeldezentrale in Reichweite aus.",
   "tooltip.fire_extinguisher.fire_alarm_smoke_detector.status": "Der Rauchmelder hat den folgenden Status:",
   "tooltip.fire_extinguisher.fire_alarm_smoke_detector.status.green": "Bereit. Kein Feuer entdeckt.",
-  "tooltip.fire_extinguisher.fire_alarm_smoke_detector.status.orange": "Setup in progress...",
+  "tooltip.fire_extinguisher.fire_alarm_smoke_detector.status.orange": "Kalibrierung läuft ...",
   "tooltip.fire_extinguisher.fire_alarm_smoke_detector.status.red": "Feuer entdeckt!",
   "tooltip.fire_extinguisher.fire_alarm_switch": "Schaltet Feueralarm, Sprinkleranlage oder ein anderes Redstone-Gerät ein und aus und löst eine Brandmeldezentrale in Reichweite aus.",
   "tooltip.fire_extinguisher.fire_extinguisher": "Der Feuerlöscher ist in der Lage, Feuer in einem Radius von %1$s Blöcken zu entfernen und kann Mobs für eine kurze Zeitspanne einfrieren.",

@@ -168,9 +168,11 @@ public class FireAlarmNetwork {
       if (!isWithinPanelRadius(entryPos, blockPos)) {
         continue;
       }
+
       if (!serverLevel.isLoaded(entryPos)) {
         return true;
       }
+
       BlockState entryState = serverLevel.getBlockState(entryPos);
       if (expectedBlock.test(entryState) && entryState.getValue(BlockStateProperties.POWERED)) {
         return true;

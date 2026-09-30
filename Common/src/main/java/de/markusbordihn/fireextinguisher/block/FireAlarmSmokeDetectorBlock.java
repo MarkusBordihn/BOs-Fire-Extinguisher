@@ -109,10 +109,8 @@ public class FireAlarmSmokeDetectorBlock extends AbstractFireAlarmSignalBlock {
       Level level,
       BlockPos blockPos,
       Block block,
-      Orientation unused,
-      boolean unused2) {
-    // Not accepting any neighbor changes
-  }
+      Orientation orientation,
+      boolean movedByPiston) {}
 
   @Override
   protected void checkConditionTick(
@@ -167,15 +165,14 @@ public class FireAlarmSmokeDetectorBlock extends AbstractFireAlarmSignalBlock {
   @Override
   public int getSignal(
       BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, Direction direction) {
-    return Boolean.TRUE.equals(blockState.getValue(POWERED) && !blockState.getValue(DISARMED))
-        ? 15
-        : 0;
+    return blockState.getValue(POWERED) && !blockState.getValue(DISARMED) ? 15 : 0;
   }
 
   @Override
   public int getDirectSignal(
       BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, Direction direction) {
-    return Boolean.TRUE.equals(blockState.getValue(POWERED) && !blockState.getValue(DISARMED))
+    return blockState.getValue(POWERED)
+            && !blockState.getValue(DISARMED)
             && getConnectedDirection(blockState) == direction
         ? 15
         : 0;
@@ -188,8 +185,8 @@ public class FireAlarmSmokeDetectorBlock extends AbstractFireAlarmSignalBlock {
       BlockPos blockPos,
       boolean isPowered,
       RandomSource random) {
-    if (Boolean.TRUE.equals(blockState.getValue(POWERED))) {
-      playPoweredSound(SOUND_EVENT, serverLevel, blockPos);
+    if (blockState.getValue(POWERED)) {
+      this.playPoweredSound(SOUND_EVENT, serverLevel, blockPos);
     }
   }
 
