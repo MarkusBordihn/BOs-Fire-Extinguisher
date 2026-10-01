@@ -87,12 +87,6 @@ public class FireAxeItem extends AxeItem {
     }
   }
 
-  public static void stopFireSound(Level level, Player player) {
-    if (level.isClientSide()) {
-      player.playSound(SoundEvents.FIRE_EXTINGUISH, 1.0F, 1.0F);
-    }
-  }
-
   public static void hurtAndBreak(
       Level level, ItemStack itemStack, Player player, InteractionHand interactionHand) {
     if (!level.isClientSide()) {

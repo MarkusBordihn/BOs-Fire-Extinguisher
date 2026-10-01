@@ -150,7 +150,7 @@ public class FireAlarmSmokeDetectorBlock extends AbstractFireAlarmSignalBlock {
   @Override
   public void affectNeighborsAfterRemoval(
       BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, boolean movedByPiston) {
-    if (Boolean.TRUE.equals(blockState.getValue(POWERED))) {
+    if (blockState.getValue(POWERED)) {
       this.updateNeighbours(serverLevel, blockPos, blockState);
       FireAlarmNetwork.deactivateSource(serverLevel, blockPos);
     }

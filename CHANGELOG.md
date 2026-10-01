@@ -1,17 +1,17 @@
-# Changelog for Fire Extinguisher (1.21.8)
+# Changelog for Fire Extinguisher (1.21.11)
 
 ## Note
 
 This change log includes the summarized changes.
 For the full changelog, please go to the [GitHub History][history] instead.
 
-### 8.4.2
+### 9.1.1
 
 - Fixed item tooltips crashing dedicated Fabric servers.
 - Fixed fire extinguisher signs rendering without transparency on Fabric.
 - Added additional unit and game tests.
 
-### 8.4.1
+### 9.1.0
 
 - Fixed #16 by extinguishing soul fire, soul campfires and modded fire blocks via tag or config.
 - Fixed #3 by adding a fire alarm control panel that triggers nearby alarms without redstone wiring.
@@ -35,6 +35,21 @@ For the full changelog, please go to the [GitHub History][history] instead.
 - Improved fire alarm tooltips to be shorter and fixed their wording.
 - Improved fire armor and fire extinguisher cooldowns to be tracked per player.
 - Improved tooltip line breaks to follow the real text width instead of the character count.
+
+### 9.0.0
+
+- Fixed critical thread-safety issue with fire armor cooldowns on multiplayer servers.
+- Fixed smoke detector not triggering immediately after placement.
+- Fixed fire sprinkler searching in wrong position and missing nearby fires.
+- Fixed fire extinguisher interaction returning wrong result causing unwanted actions.
+- Fixed fire axe sound only playing client-side instead of for all players.
+- Fixed missing 3d sound attenuation for sounds.
+- Removed campfire detection from smoke detectors to prevent false alarms.
+- Added config validation to prevent negative radius values causing silent failures.
+- Added armor duration stacking: wearing multiple armor pieces now multiplies fire protection
+  duration.
+- Improved code quality by simplifying boolean checks throughout codebase.
+- Code refactoring and performance improvements.
 
 ### 8.3.0
 
