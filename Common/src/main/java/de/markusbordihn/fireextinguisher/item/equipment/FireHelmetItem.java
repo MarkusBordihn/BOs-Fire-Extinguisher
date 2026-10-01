@@ -94,7 +94,7 @@ public class FireHelmetItem extends FireProtectionArmorItem {
         tooltipConsumer,
         Component.translatable(Constants.TEXT_PREFIX + ID + "_description")
             .withStyle(ChatFormatting.GRAY));
-    if (Boolean.TRUE.equals(FireExtinguisherConfig.fireProtectionEnabled)) {
+    if (FireExtinguisherConfig.fireProtectionEnabled) {
       ToolTips.addTooltip(
           tooltipConsumer,
           Component.translatable(

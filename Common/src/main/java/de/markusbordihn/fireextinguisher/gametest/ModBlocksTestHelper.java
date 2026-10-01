@@ -39,6 +39,7 @@ public class ModBlocksTestHelper {
       helper.fail(Component.literal("Block or block position is not defined!"));
       return;
     }
+
     helper.setBlock(blockPos, block);
     helper.assertBlockPresent(block, blockPos);
   }

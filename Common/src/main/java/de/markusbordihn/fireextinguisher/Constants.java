@@ -46,7 +46,7 @@ public final class Constants {
   public static boolean IS_FORGE = false;
   public static boolean IS_NEOFORGE = false;
 
-  public static boolean HAS_FABRIC_TOOLTIPFIX_MOD = false;
+  public static boolean SPLIT_TOOLTIP_LINES = false;
 
   private Constants() {}
 }

@@ -19,7 +19,9 @@
 
 package de.markusbordihn.fireextinguisher.gametest;
 
+import de.markusbordihn.fireextinguisher.config.FireExtinguisherConfig;
 import de.markusbordihn.fireextinguisher.utils.FireDetection;
+import java.util.Set;
 import net.minecraft.core.BlockPos;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.world.level.block.Blocks;
@@ -69,6 +71,20 @@ public class FireDetectionTestHelper {
     extinguishAroundFire(helper);
     helper.assertBlockPresent(Blocks.CAMPFIRE, FIRE_POS);
     helper.assertBlockProperty(FIRE_POS, CampfireBlock.LIT, false);
+  }
+
+  public static void testExtinguishConfiguredBlock(GameTestHelper helper) {
+    Set<String> configuredBlocks = FireExtinguisherConfig.extinguishableBlocks;
+    try {
+      FireExtinguisherConfig.extinguishableBlocks = Set.of("minecraft:magma_block");
+      helper.setBlock(BASE_POS, Blocks.NETHERRACK);
+      helper.setBlock(FIRE_POS, Blocks.MAGMA_BLOCK);
+      extinguishAroundFire(helper);
+      helper.assertBlockNotPresent(Blocks.MAGMA_BLOCK, FIRE_POS);
+      helper.assertBlockPresent(Blocks.NETHERRACK, BASE_POS);
+    } finally {
+      FireExtinguisherConfig.extinguishableBlocks = configuredBlocks;
+    }
   }
 
   private static void extinguishAroundFire(GameTestHelper helper) {

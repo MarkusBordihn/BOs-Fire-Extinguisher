@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:function",
+  "function": "fire_extinguisher:fire_pole_sneaking_holds_on_to_pole",
+  "environment": "minecraft:default",
+  "structure": "fire_extinguisher:gametest.3x3x3",
+  "max_ticks": 100
+}

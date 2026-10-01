@@ -19,15 +19,15 @@
 
 package de.markusbordihn.fireextinguisher.gametest;
 
-import de.markusbordihn.fireextinguisher.Constants;
+import net.minecraft.core.Direction;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.network.chat.Component;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.FaceAttachedHorizontalDirectionalBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.AttachFace;
 
 public class GameTestHelpers {
-
-  private static final Logger log = LogManager.getLogger(Constants.LOG_NAME);
 
   private GameTestHelpers() {}
 
@@ -41,5 +41,12 @@ public class GameTestHelpers {
 
   public static void assertNotNull(GameTestHelper helper, String message, Object object) {
     assertTrue(helper, message, object != null);
+  }
+
+  public static BlockState wallMountedFacingNorth(Block block) {
+    return block
+        .defaultBlockState()
+        .setValue(FaceAttachedHorizontalDirectionalBlock.FACE, AttachFace.WALL)
+        .setValue(FaceAttachedHorizontalDirectionalBlock.FACING, Direction.NORTH);
   }
 }

@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:function",
+  "function": "fire_extinguisher:fire_alarm_control_panel_latching_keeps_alarms_until_reset",
+  "environment": "fire_extinguisher:fire_alarm_control_panel_latching",
+  "structure": "fire_extinguisher:gametest.3x3x3",
+  "max_ticks": 300
+}
