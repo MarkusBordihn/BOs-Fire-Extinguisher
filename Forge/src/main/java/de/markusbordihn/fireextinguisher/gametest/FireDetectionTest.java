@@ -48,4 +48,10 @@ public class FireDetectionTest {
     FireDetectionTestHelper.testLitCampfireIsNoFireSource(helper);
     helper.succeed();
   }
+
+  @GameTest(structure = "fire_extinguisher:gametest.3x3x3")
+  public void testExtinguishConfiguredBlock(GameTestHelper helper) {
+    FireDetectionTestHelper.testExtinguishConfiguredBlock(helper);
+    helper.succeed();
+  }
 }

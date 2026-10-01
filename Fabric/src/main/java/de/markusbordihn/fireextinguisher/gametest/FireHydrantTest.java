@@ -39,4 +39,11 @@ public class FireHydrantTest {
     FireHydrantTestHelper.testIgnoresOtherItems(helper, FireStationBlocks.FIRE_HYDRANT);
     helper.succeed();
   }
+
+  @GameTest(structure = "fire_extinguisher:gametest.3x3x3")
+  public void testRefillCanBeDisabled(GameTestHelper helper) {
+    FireHydrantTestHelper.testRefillCanBeDisabled(
+        helper, FireStationBlocks.FIRE_HYDRANT, ModBlockItems.FIRE_EXTINGUISHER);
+    helper.succeed();
+  }
 }

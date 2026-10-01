@@ -38,6 +38,7 @@ public class ModItemsTestHelper {
       helper.fail(Component.literal("Item or block position is not defined!"));
       return;
     }
+
     helper.spawnItem(item, blockPos.getX(), blockPos.getY(), blockPos.getZ());
     helper.assertItemEntityPresent(item, blockPos, 0D);
   }

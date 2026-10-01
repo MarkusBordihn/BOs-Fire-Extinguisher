@@ -8,8 +8,14 @@ if (ghostRefScript.exists()) apply from: ghostRefScript
 
 tasks.register('allGameTests') {
   group = 'verification'
-  description = 'Runs both Fabric and Forge game tests.'
+  description = 'Runs the Fabric, Forge and NeoForge game tests.'
   dependsOn ':Fabric:runGameTest', ':Forge:runGameTestServer', ':NeoForge:runGameTestServer'
+}
+
+tasks.register('fullCheck') {
+  group = 'verification'
+  description = 'Runs the standard checks and the Fabric, Forge and NeoForge game tests.'
+  dependsOn ':Common:check', ':Fabric:check', ':Forge:check', ':NeoForge:check', 'allGameTests'
 }
 
 subprojects {

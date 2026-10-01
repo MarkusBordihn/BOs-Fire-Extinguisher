@@ -43,4 +43,9 @@ public class FireDetectionTest {
     FireDetectionTestHelper.testLitCampfireIsNoFireSource(helper);
     helper.succeed();
   }
+
+  public void testExtinguishConfiguredBlock(GameTestHelper helper) {
+    FireDetectionTestHelper.testExtinguishConfiguredBlock(helper);
+    helper.succeed();
+  }
 }
