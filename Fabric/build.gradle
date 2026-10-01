@@ -15,10 +15,8 @@ dependencies {
   implementation "net.fabricmc:fabric-loader:${fabric_loader_version}"
   implementation "net.fabricmc.fabric-api:fabric-api:${fabric_version}"
 
-  // Include Common code
   implementation project(":Common")
 
-  // Additional helpful Mods for development (runtime dependency)
   if (project.hasProperty('fabric_jei_mod') && project.fabric_jei_mod) {
     compileOnlyApi("curse.maven:jei-238222:${project.fabric_jei_mod}")
     runtimeOnly("curse.maven:jei-238222:${project.fabric_jei_mod}")
@@ -29,7 +27,6 @@ dependencies {
 }
 
 loom {
-  // Run configurations
   runs {
     client {
       client()
@@ -93,7 +90,6 @@ test {
   exclude '**/*'
 }
 
-// CurseForge Publishing
 if (project.hasProperty('curseforge_project_id') && project.curseforge_project_id) {
   tasks.register('curseforge', net.darkhax.curseforgegradle.TaskPublishCurseForge) {
     group = 'publishing'
@@ -112,7 +108,6 @@ if (project.hasProperty('curseforge_project_id') && project.curseforge_project_i
   }
 }
 
-// Modrinth Publishing
 if (project.hasProperty('modrinth_project_id') && project.modrinth_project_id) {
   modrinth {
     token = "${credentials.forKey('modrinth_api_token')}"

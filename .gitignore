@@ -30,7 +30,7 @@ npm-debug.log
 forge*changelog.txt
 
 # VSCode
-.vscode/launch.json
+.vscode
 
 # Ghost Reference Index (local knowledge base sync)
 .ghost-reference-index

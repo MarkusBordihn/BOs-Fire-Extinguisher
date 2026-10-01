@@ -52,4 +52,24 @@ public class FireAlarmControlPanelTest {
     FireAlarmControlPanelTestHelper.testDoesNotPowerAlarmsOutOfRange(
         helper, FireAlarmBlocks.FIRE_ALARM_CONTROL_PANEL, FireAlarmBlocks.FIRE_ALARM_BELL);
   }
+
+  @GameTest(
+      structure = "fire_extinguisher:gametest.3x3x3",
+      maxTicks = FireAlarmControlPanelTestHelper.TIMEOUT_TICKS)
+  public void testResetReleasesSwitchAndAlarms(GameTestHelper helper) {
+    FireAlarmControlPanelTestHelper.testResetReleasesSwitchAndAlarms(
+        helper,
+        FireAlarmBlocks.FIRE_ALARM_CONTROL_PANEL,
+        FireAlarmBlocks.FIRE_ALARM_BELL,
+        FireAlarmBlocks.FIRE_ALARM_SWITCH);
+  }
+
+  @GameTest(
+      structure = "fire_extinguisher:gametest.3x3x3",
+      maxTicks = FireAlarmControlPanelTestHelper.TIMEOUT_TICKS,
+      environment = FireAlarmControlPanelTestHelper.LATCHING_ENVIRONMENT)
+  public void testLatchingKeepsAlarmsUntilReset(GameTestHelper helper) {
+    FireAlarmControlPanelTestHelper.testLatchingKeepsAlarmsUntilReset(
+        helper, FireAlarmBlocks.FIRE_ALARM_CONTROL_PANEL, FireAlarmBlocks.FIRE_ALARM_BELL);
+  }
 }

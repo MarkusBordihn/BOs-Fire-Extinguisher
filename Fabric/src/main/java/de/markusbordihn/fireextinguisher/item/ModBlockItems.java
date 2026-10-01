@@ -77,7 +77,6 @@ public class ModBlockItems {
   protected ModBlockItems() {}
 
   public static void registerModBlockItems() {
-
     log.info("- {} Fire Extinguisher Block Items ...", Constants.LOG_REGISTER_PREFIX);
     FIRE_EXTINGUISHER =
         Registry.register(

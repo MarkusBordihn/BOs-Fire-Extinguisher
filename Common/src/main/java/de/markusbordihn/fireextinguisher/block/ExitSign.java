@@ -93,7 +93,7 @@ public class ExitSign extends Block {
       BlockPos blockPos,
       CollisionContext collisionContext) {
     AttachFace attachFace = blockState.getValue(ATTACH_FACE);
-    Direction facing = blockState.getValue(FireExtinguisherSignPosition.FACING);
+    Direction facing = blockState.getValue(FACING);
 
     if (attachFace == AttachFace.CEILING) {
       if (facing == Direction.NORTH || facing == Direction.SOUTH) {
